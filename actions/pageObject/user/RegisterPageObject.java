@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import io.qameta.allure.Step;
 import nopcommerce.user.BasePage;
+import nopcommerce.user.PageGeneraterManager;
 import pageUI.user.RegisterPageUI;
 
 public class RegisterPageObject extends BasePage {
@@ -83,7 +84,7 @@ public class RegisterPageObject extends BasePage {
 	public HomePageObject clickToLoginLink() {
 		waitForElementClickable(driver, RegisterPageUI.LOGIN_LINK);
 		clickToElement(driver, RegisterPageUI.LOGIN_LINK);
-		return PageGeneraterManager.getUserHomePage(driver);
+		return PageGeneraterManager.getHomePage(driver);
 	}
 
 	public String getErrorExistingEmailMessage() {

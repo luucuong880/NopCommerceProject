@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import io.qameta.allure.Step;
 import nopcommerce.user.BasePage;
+import nopcommerce.user.PageGeneraterManager;
 import pageUI.user.HomePageUI;
 
 public class HomePageObject extends BasePage {

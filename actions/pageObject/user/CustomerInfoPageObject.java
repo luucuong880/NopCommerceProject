@@ -3,6 +3,7 @@ package pageObject.user;
 import org.openqa.selenium.WebDriver;
 
 import nopcommerce.user.BasePage;
+import nopcommerce.user.PageGeneraterManager;
 import pageUI.user.CustomerInfoPageUI;
 
 public class CustomerInfoPageObject extends BasePage {

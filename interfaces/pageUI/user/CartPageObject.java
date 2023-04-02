@@ -3,6 +3,9 @@ package pageUI.user;
 import org.openqa.selenium.WebDriver;
 
 import nopcommerce.user.BasePage;
+import nopcommerce.user.PageGeneraterManager;
+import pageObject.user.CheckoutPageObject;
+import pageObject.user.DesktopPageObject;
 
 public class CartPageObject extends BasePage {
 	private WebDriver driver;

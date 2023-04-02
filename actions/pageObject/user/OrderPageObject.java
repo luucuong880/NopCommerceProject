@@ -3,6 +3,8 @@ package pageObject.user;
 import org.openqa.selenium.WebDriver;
 
 import nopcommerce.user.BasePage;
+import nopcommerce.user.PageGeneraterManager;
+import pageUI.user.CartPageObject;
 import pageUI.user.OrderPageUI;
 
 public class OrderPageObject extends BasePage {
