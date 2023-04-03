@@ -41,18 +41,34 @@ public class Register extends BaseTest {
 
 		log.info("Register Step - 02: Click to 'Register' button");
 		registerPage.clickToRegisterButton("register-button");
-	}
 
-	@AfterClass
-	public void afterClass() {
+		log.info("Register Step - 03: Get Error Message At 'First Name' field");
+		verifyEquals(registerPage.getErrorMessageWithDynamicValue("FirstName-error"), "First name is required.");
 
-		driver.quit();
+		log.info("Register Step - 04: Get Error Message At 'Last Name' field");
+		verifyEquals(registerPage.getErrorMessageWithDynamicValue("LastName-error"), "Last name is required.");
+
+		log.info("Register Step - 05: Get Error Message At 'Email' field");
+		verifyEquals(registerPage.getErrorMessageWithDynamicValue("Email-error"), "Email is required.");
+
+		log.info("Register Step - 06: Get Error Message At 'Password' field");
+		verifyEquals(registerPage.getErrorMessageWithDynamicValue("Password-error"), "Password is required.");
+
+		log.info("Register Step - 07: Get Error Message At 'Cofirm Password' field");
+		verifyEquals(registerPage.getErrorMessageWithDynamicValue("ConfirmPassword-error"), "Password is required.");
+
 	}
 
 	public int generateFakeNumber() {
 		Random rand = new Random();
 		return rand.nextInt(99999);
 
+	}
+
+	@AfterClass
+	public void afterClass() {
+
+		driver.quit();
 	}
 
 	private WebDriver driver;

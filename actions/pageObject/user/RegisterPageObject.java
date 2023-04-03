@@ -45,6 +45,11 @@ public class RegisterPageObject extends BasePage {
 		return getElementText(driver, RegisterPageUI.CONFIRM_PASSWORD_MESSAGE_ERROR);
 	}
 
+	public String getErrorMessageWithDynamicValue(String errorMessage) {
+		waitForElementVisible(driver, RegisterPageUI.DYNAMIC_ERROR_MESSAGE_BY_ID, errorMessage);
+		return getElementText(driver, RegisterPageUI.DYNAMIC_ERROR_MESSAGE_BY_ID, errorMessage);
+	}
+
 	@Step("Enter to Firstname textbox with value is {0}")
 	public void inputToFirstnameTextbox(String firstName) {
 		waitForElementVisible(driver, RegisterPageUI.FIRST_NAME_TEXTBOX);

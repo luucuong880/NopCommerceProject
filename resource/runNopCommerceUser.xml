@@ -11,7 +11,7 @@
 	<parameter name="serverName" value="testing" />
 	
 
-	<test name="Run on CHROME">
+	<test name="Run on Chrome">
 		<parameter name="browser" value="chrome" />
 		<classes>
 			<class name="nopcommerce.user.Register" />

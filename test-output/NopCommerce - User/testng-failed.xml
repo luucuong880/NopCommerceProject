@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [NopCommerce - User]">
+  <parameter name="envName" value="local"/>
+  <parameter name="serverName" value="testing"/>
+  <listeners>
+    <listener class-name="nopcommerce.user.MethodListener"/>
+    <listener class-name="reportConfig.AllureTestListener"/>
+  </listeners>
+  <test thread-count="5" name="Run on Chrome(failed)">
+    <parameter name="browser" value="chrome"/>
+    <classes>
+      <class name="nopcommerce.user.Register">
+        <methods>
+          <include name="Input_Without_Info"/>
+          <include name="beforeClass"/>
+          <include name="afterClass"/>
+          <include name="initBeforeSuit"/>
+        </methods>
+      </class> <!-- nopcommerce.user.Register -->
+    </classes>
+  </test> <!-- Run on Chrome(failed) -->
+</suite> <!-- Failed suite [NopCommerce - User] -->
