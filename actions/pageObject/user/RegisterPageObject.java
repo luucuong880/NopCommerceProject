@@ -15,9 +15,9 @@ public class RegisterPageObject extends BasePage {
 	}
 
 	@Step("Click to Register button")
-	public void clickToRegisterButton() {
-		waitForElementClickable(driver, RegisterPageUI.REGISTER_BUTTON);
-		clickToElement(driver, RegisterPageUI.REGISTER_BUTTON);
+	public void clickToRegisterButton(String valueItem) {
+		waitForElementClickable(driver, RegisterPageUI.DYNAMIC_BUTTON_BY_ID, valueItem);
+		clickToElement(driver, RegisterPageUI.DYNAMIC_BUTTON_BY_ID, valueItem);
 	}
 
 	public String getErrorMessageAtFirstnameTextbox() {

@@ -12,6 +12,8 @@ public class RegisterPageUI {
 	public static final String EMAIL_MESSAGE_ERROR = "id=Email-error";
 	public static final String PASSWORD_MESSAGE_ERROR = "id=Password-error";
 	public static final String CONFIRM_PASSWORD_MESSAGE_ERROR = "id=ConfirmPassword-error";
+	public static final String DYNAMIC_BUTTON_BY_ID = "xpath=//button[@id='%s']";
+	public static final String DYNAMIC_TEXTOBX_BY_ID = "xpath=//input[@id='%s']";
 	public static final String REGISTER_SUCCESS_MESSAGE = "class=result";
 	public static final String LOGIN_LINK = "xpath=//a[@class='ico-login']";
 	public static final String EXISTING_EMAIL_MESSAGE_ERROR = "xpath=//div[contains(@class,'message-error')]//li";

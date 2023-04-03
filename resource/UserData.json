@@ -1,0 +1,13 @@
+{
+	"firstName": "Lilcoln",
+	"lastName" : "Burrows",
+	"emailAddress": "lincolnburrows",
+	"password" : "123456",
+	"date" : "20",
+	"month" : "January",
+	"year" : "1996",
+	"login" : {
+		"username" : "Lilcoln",	
+		"password" : "123456"
+	}
+}
