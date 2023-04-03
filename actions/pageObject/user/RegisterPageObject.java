@@ -20,70 +20,34 @@ public class RegisterPageObject extends BasePage {
 		clickToElement(driver, RegisterPageUI.DYNAMIC_BUTTON_BY_ID, valueItem);
 	}
 
-	public String getErrorMessageAtFirstnameTextbox() {
-		waitForElementVisible(driver, RegisterPageUI.FIRST_NAME_MESSAGE_ERROR);
-		return getElementText(driver, RegisterPageUI.FIRST_NAME_MESSAGE_ERROR);
-	}
-
-	public String getErrorMessageAtLastnameTextbox() {
-		waitForElementVisible(driver, RegisterPageUI.LAST_NAME_MESSAGE_ERROR);
-		return getElementText(driver, RegisterPageUI.LAST_NAME_MESSAGE_ERROR);
-	}
-
-	public String getErrorMessageAtEmailTextbox() {
-		waitForElementVisible(driver, RegisterPageUI.EMAIL_MESSAGE_ERROR);
-		return getElementText(driver, RegisterPageUI.EMAIL_MESSAGE_ERROR);
-	}
-
-	public String getErrorMessageAtPasswordTextbox() {
-		waitForElementVisible(driver, RegisterPageUI.PASSWORD_MESSAGE_ERROR);
-		return getElementText(driver, RegisterPageUI.PASSWORD_MESSAGE_ERROR);
-	}
-
-	public String getErrorMessageAtConfirmPasswordTextbox() {
-		waitForElementVisible(driver, RegisterPageUI.CONFIRM_PASSWORD_MESSAGE_ERROR);
-		return getElementText(driver, RegisterPageUI.CONFIRM_PASSWORD_MESSAGE_ERROR);
-	}
-
+	@Step("Get Error Message At Fields")
 	public String getErrorMessageWithDynamicValue(String errorMessage) {
 		waitForElementVisible(driver, RegisterPageUI.DYNAMIC_ERROR_MESSAGE_BY_ID, errorMessage);
 		return getElementText(driver, RegisterPageUI.DYNAMIC_ERROR_MESSAGE_BY_ID, errorMessage);
 	}
 
-	@Step("Enter to Firstname textbox with value is {0}")
-	public void inputToFirstnameTextbox(String firstName) {
-		waitForElementVisible(driver, RegisterPageUI.FIRST_NAME_TEXTBOX);
-		sendkeyToElement(driver, RegisterPageUI.FIRST_NAME_TEXTBOX, firstName);
+	@Step("Enter to Fields textbox with value is {0}")
+	public void inputToTextboxByID(String textboxID, String value) {
+		waitForElementVisible(driver, RegisterPageUI.DYNAMIC_TEXTOBX_BY_ID, textboxID);
+		sendkeyToElement(driver, RegisterPageUI.DYNAMIC_TEXTOBX_BY_ID, value, textboxID);
 	}
 
-	@Step("Enter to Lastname textbox with value is {0}")
-	public void inputToLastNameTextbox(String lastName) {
-		waitForElementVisible(driver, RegisterPageUI.LAST_NAME_TEXTBOX);
-		sendkeyToElement(driver, RegisterPageUI.LAST_NAME_TEXTBOX, lastName);
+	@Step("Click to Radio Button with value is {0}")
+	public void clickToRadioButtonByID(String radioButtonByID) {
+		waitForElementClickable(driver, RegisterPageUI.DYNAMIC_TEXTOBX_BY_ID, radioButtonByID);
+		checkToDefaultCheckboxOrRadio(driver, RegisterPageUI.DYNAMIC_TEXTOBX_BY_ID, radioButtonByID);
 	}
 
-	@Step("Enter to Email Address textbox with value is {0}")
-	public void inputToEmailTextbox(String emailAddress) {
-		waitForElementVisible(driver, RegisterPageUI.EMAIL_TEXTBOX);
-		sendkeyToElement(driver, RegisterPageUI.EMAIL_TEXTBOX, emailAddress);
-	}
-
-	@Step("Enter to Password textbox with value is {0}")
-	public void inputToPasswordTextbox(String password) {
-		waitForElementVisible(driver, RegisterPageUI.PASSWORD_TEXTBOX);
-		sendkeyToElement(driver, RegisterPageUI.PASSWORD_TEXTBOX, password);
-	}
-
-	@Step("Enter to Confirm Password textbox with value is {0}")
-	public void inputToConfirmPasswordTextbox(String confirmPassword) {
-		waitForElementVisible(driver, RegisterPageUI.CONFIRM_PASSWORD_TEXTBOX);
-		sendkeyToElement(driver, RegisterPageUI.CONFIRM_PASSWORD_TEXTBOX, confirmPassword);
+	@Step("Click to Radio Button with value is {0}")
+	public void selectToDropdownByName(String dropdownAttributeName, String itemValue) {
+		waitForElementClickable(driver, RegisterPageUI.DYNAMIC_DROPDOWN_BY_NAME, dropdownAttributeName);
+		selectItemInDefaultDropdown(driver, RegisterPageUI.DYNAMIC_DROPDOWN_BY_NAME, itemValue, dropdownAttributeName);
 	}
 
 	@Step("Verify Register success message is displayed")
-	public String getRegisterSuccessMessage() {
+	public boolean registerSuccessMessage() {
 		waitForElementVisible(driver, RegisterPageUI.REGISTER_SUCCESS_MESSAGE);
-		return getElementText(driver, RegisterPageUI.REGISTER_SUCCESS_MESSAGE);
+		return isElementDisplayed(driver, RegisterPageUI.REGISTER_SUCCESS_MESSAGE);
 	}
 
 	public HomePageObject clickToLoginLink() {

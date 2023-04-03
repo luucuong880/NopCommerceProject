@@ -35,7 +35,7 @@ public class Register extends BaseTest {
 	}
 
 	@Test
-	public void Input_Without_Info() {
+	public void Input_01_Without_Info() {
 		log.info("Register Step - 01: Navigate to 'Register' page");
 		registerPage = homePage.openRegisterPage();
 
@@ -60,8 +60,47 @@ public class Register extends BaseTest {
 	}
 
 	@Test
-	public void Input_Full_Info() {
+	public void Input_02_Full_Info() {
 
+		registerPage.refreshCurrentPage(driver);
+
+		registerPage = PageGeneraterManager.getRegisterPage(driver);
+
+		log.info("Register Step - 08: Click to 'Gender' Radio button");
+		registerPage.clickToRadioButtonByID("gender-male");
+
+		log.info("Register Step - 09: Input to 'First Name' textbox");
+		registerPage.inputToTextboxByID("FirstName", userData.getFirstName());
+
+		registerPage.inputToTextboxByID("FirstName", userData.getLoginUsername());
+		registerPage.inputToTextboxByID("Password", userData.getLoginPassword());
+
+		log.info("Register Step - 10: Input to 'Last Name' textbox");
+		registerPage.inputToTextboxByID("LastName", userData.getLastName());
+
+		log.info("Register Step - 11: Select 'Date of birth Day' value");
+		registerPage.selectToDropdownByName("DateOfBirthDay", userData.getDate());
+
+		log.info("Register Step - 12: Select 'Date of birth Month' value");
+		registerPage.selectToDropdownByName("DateOfBirthMonth", userData.getMonth());
+
+		log.info("Register Step - 13: Select 'Date of birth Year' value");
+		registerPage.selectToDropdownByName("DateOfBirthYear", userData.getYear());
+
+		log.info("Register Step - 14: Input to 'Email' textbox");
+		registerPage.inputToTextboxByID("Email", emailAddress);
+
+		log.info("Register Step - 15: Input to 'Password' textbox");
+		registerPage.inputToTextboxByID("Password", userData.getPassword());
+
+		log.info("Register Step - 16: Input to 'Confirmpassword' textbox");
+		registerPage.inputToTextboxByID("ConfirmPassword", userData.getPassword());
+
+		log.info("Register Step - 17: Click to 'Register' button");
+		registerPage.clickToRegisterButton("register-button");
+
+		log.info("Register Step - 18: Verify Register success message is displayed");
+		verifyTrue(registerPage.registerSuccessMessage());
 	}
 
 	public int generateFakeNumber() {
