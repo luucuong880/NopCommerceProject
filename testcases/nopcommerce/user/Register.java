@@ -59,6 +59,11 @@ public class Register extends BaseTest {
 
 	}
 
+	@Test
+	public void Input_Full_Info() {
+
+	}
+
 	public int generateFakeNumber() {
 		Random rand = new Random();
 		return rand.nextInt(99999);
