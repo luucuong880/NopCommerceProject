@@ -3,7 +3,7 @@ package pageUI.user;
 import org.openqa.selenium.WebDriver;
 
 import nopcommerce.user.BasePage;
-import nopcommerce.user.PageGeneraterManager;
+import nopcommerce.user.PageGeneratorManager;
 import pageObject.user.CheckoutPageObject;
 import pageObject.user.DesktopPageObject;
 
@@ -22,7 +22,7 @@ public class CartPageObject extends BasePage {
 	public DesktopPageObject clickToEditButton() {
 		waitForElementClickable(driver, CartPageUI.EDIT_BUTTON);
 		clickToElement(driver, CartPageUI.EDIT_BUTTON);
-		return PageGeneraterManager.getDesktopPage(driver);
+		return PageGeneratorManager.getPageGeneratorManager().getDesktopPage(driver);
 	}
 
 	public String getProductsName() {
@@ -63,7 +63,7 @@ public class CartPageObject extends BasePage {
 	public CheckoutPageObject clickToCheckoutButton() {
 		waitForElementClickable(driver, CartPageUI.CHECKOUT_BUTTON);
 		clickToElement(driver, CartPageUI.CHECKOUT_BUTTON);
-		return PageGeneraterManager.getCheckoutPage(driver);
+		return PageGeneratorManager.getPageGeneratorManager().getCheckoutPage(driver);
 	}
 
 	public void selectGiftWrapping(String string) {

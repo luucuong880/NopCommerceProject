@@ -17,6 +17,7 @@
 			<class name="nopcommerce.user.Register" />
 		</classes>
 	</test>
+	
 
 
 </suite> 

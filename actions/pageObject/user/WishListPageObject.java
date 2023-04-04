@@ -3,7 +3,7 @@ package pageObject.user;
 import org.openqa.selenium.WebDriver;
 
 import nopcommerce.user.BasePage;
-import nopcommerce.user.PageGeneraterManager;
+import nopcommerce.user.PageGeneratorManager;
 import pageUI.user.CartPageObject;
 import pageUI.user.WishListPageUI;
 
@@ -56,7 +56,7 @@ public class WishListPageObject extends BasePage {
 	public CartPageObject clickToAddCartButton() {
 		waitForElementClickable(driver, WishListPageUI.ADD_CART_BUTTON);
 		clickToElement(driver, WishListPageUI.ADD_CART_BUTTON);
-		return PageGeneraterManager.getCartPage(driver);
+		return PageGeneratorManager.getPageGeneratorManager().getCartPage(driver);
 	}
 
 }

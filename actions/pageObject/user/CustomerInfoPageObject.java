@@ -3,7 +3,7 @@ package pageObject.user;
 import org.openqa.selenium.WebDriver;
 
 import nopcommerce.user.BasePage;
-import nopcommerce.user.PageGeneraterManager;
+import nopcommerce.user.PageGeneratorManager;
 import pageUI.user.CustomerInfoPageUI;
 
 public class CustomerInfoPageObject extends BasePage {
@@ -77,7 +77,7 @@ public class CustomerInfoPageObject extends BasePage {
 	public OrderPageObject clickToOrdersButton() {
 		waitForElementClickable(driver, CustomerInfoPageUI.ORDER_BUTTON);
 		clickToElement(driver, CustomerInfoPageUI.ORDER_BUTTON);
-		return PageGeneraterManager.getOrderPage(driver);
+		return PageGeneratorManager.getPageGeneratorManager().getOrderPage(driver);
 	}
 
 }

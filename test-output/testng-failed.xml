@@ -7,17 +7,18 @@
     <listener class-name="nopcommerce.user.MethodListener"/>
     <listener class-name="reportConfig.AllureTestListener"/>
   </listeners>
-  <test thread-count="5" name="Run on Chrome(failed)">
-    <parameter name="browser" value="chrome"/>
+  <test thread-count="5" name="Run on Firefox(failed)">
+    <parameter name="browser" value="firefox"/>
     <classes>
       <class name="nopcommerce.user.Register">
         <methods>
-          <include name="Input_Without_Info"/>
+          <include name="Input_02_Full_Info"/>
           <include name="beforeClass"/>
+          <include name="Input_01_Without_Info"/>
           <include name="afterClass"/>
           <include name="initBeforeSuit"/>
         </methods>
       </class> <!-- nopcommerce.user.Register -->
     </classes>
-  </test> <!-- Run on Chrome(failed) -->
+  </test> <!-- Run on Firefox(failed) -->
 </suite> <!-- Failed suite [NopCommerce - User] -->

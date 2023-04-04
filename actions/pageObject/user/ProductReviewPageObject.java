@@ -3,7 +3,7 @@ package pageObject.user;
 import org.openqa.selenium.WebDriver;
 
 import nopcommerce.user.BasePage;
-import nopcommerce.user.PageGeneraterManager;
+import nopcommerce.user.PageGeneratorManager;
 import pageUI.user.ProductReviewPageUI;
 
 public class ProductReviewPageObject extends BasePage {
@@ -37,6 +37,6 @@ public class ProductReviewPageObject extends BasePage {
 	public CustomerInfoPageObject clickToMyAccountButton() {
 		waitForElementClickable(driver, ProductReviewPageUI.MY_ACCOUNT_BUTTON);
 		clickToElement(driver, ProductReviewPageUI.MY_ACCOUNT_BUTTON);
-		return PageGeneraterManager.getCustomerInfoPage(driver);
+		return PageGeneratorManager.getPageGeneratorManager().getCustomerInfoPage(driver);
 	}
 }

@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import io.qameta.allure.Step;
 import nopcommerce.user.BasePage;
-import nopcommerce.user.PageGeneraterManager;
+import nopcommerce.user.PageGeneratorManager;
 import pageUI.user.HomePageUI;
 
 public class HomePageObject extends BasePage {
@@ -18,14 +18,14 @@ public class HomePageObject extends BasePage {
 	public RegisterPageObject openRegisterPage() {
 		waitForElementClickable(driver, HomePageUI.REGISTER_LINK);
 		clickToElement(driver, HomePageUI.REGISTER_LINK);
-		return PageGeneraterManager.getRegisterPage(driver);
+		return PageGeneratorManager.getPageGeneratorManager().getRegisterPage(driver);
 	}
 
 	@Step("Navigate to Login page")
 	public LoginPageObject openLoginPage() {
 		waitForElementClickable(driver, HomePageUI.LOG_IN_LINK);
 		clickToElement(driver, HomePageUI.LOG_IN_LINK);
-		return PageGeneraterManager.getLoginPage(driver);
+		return PageGeneratorManager.getPageGeneratorManager().getLoginPage(driver);
 	}
 
 	@Step("Verify 'My Account' link is displayed")
@@ -38,7 +38,7 @@ public class HomePageObject extends BasePage {
 	public CustomerInfoPageObject clickToMyAccountLink() {
 		waitForElementClickable(driver, HomePageUI.MY_ACCOUNT_LINK);
 		clickToElement(driver, HomePageUI.MY_ACCOUNT_LINK);
-		return PageGeneraterManager.getCustomerInfoPage(driver);
+		return PageGeneratorManager.getPageGeneratorManager().getCustomerInfoPage(driver);
 	}
 
 }

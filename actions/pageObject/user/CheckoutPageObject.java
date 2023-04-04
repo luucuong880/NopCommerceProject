@@ -3,7 +3,7 @@ package pageObject.user;
 import org.openqa.selenium.WebDriver;
 
 import nopcommerce.user.BasePage;
-import nopcommerce.user.PageGeneraterManager;
+import nopcommerce.user.PageGeneratorManager;
 import pageUI.user.CheckoutPageUI;
 
 public class CheckoutPageObject extends BasePage {
@@ -236,7 +236,7 @@ public class CheckoutPageObject extends BasePage {
 	public CustomerInfoPageObject clickToMyAccountLink() {
 		waitForElementClickable(driver, CheckoutPageUI.MY_ACCOUNT_LINK);
 		clickToElement(driver, CheckoutPageUI.MY_ACCOUNT_LINK);
-		return PageGeneraterManager.getCustomerInfoPage(driver);
+		return PageGeneratorManager.getPageGeneratorManager().getCustomerInfoPage(driver);
 	}
 
 }

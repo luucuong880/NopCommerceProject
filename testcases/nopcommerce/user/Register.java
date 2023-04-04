@@ -20,16 +20,16 @@ public class Register extends BaseTest {
 
 	Environment environment;
 
-	@Parameters({ "envName", "browserName", "serverName", "ipAddress", "portNumber", "osName", "osVersion" })
+	@Parameters({ "envName", "serverName", "browser", "ipAddress", "portNumber", "osName", "osVersion" })
 	@BeforeClass
-	public void beforeClass(@Optional("local") String envName, @Optional("chrome") String browserName, @Optional("testing") String serverName, @Optional("Windows") String osName, @Optional("10") String osVersion,
+	public void beforeClass(@Optional("local") String envName, @Optional("testing") String serverName, @Optional("chrome") String browserName, @Optional("Windows") String osName, @Optional("10") String osVersion,
 			@Optional("localhost") String ipAddress, @Optional("4444") String portNumber) {
 		ConfigFactory.setProperty("env", envName);
 		environment = ConfigFactory.create(Environment.class);
 
 		driver = getBrowserDriver(envName, serverName, browserName, ipAddress, portNumber, osName, osVersion);
 
-		homePage = PageGeneraterManager.getHomePage(driver);
+		homePage = PageGeneratorManager.getPageGeneratorManager().getHomePage(driver);
 		userData = UserDataMapper.getUserData();
 		emailAddress = userData.getEmailAddress() + generateFakeNumber() + "@fakermail.com";
 	}
@@ -64,7 +64,7 @@ public class Register extends BaseTest {
 
 		registerPage.refreshCurrentPage(driver);
 
-		registerPage = PageGeneraterManager.getRegisterPage(driver);
+		registerPage = PageGeneratorManager.getPageGeneratorManager().getRegisterPage(driver);
 
 		log.info("Register Step - 08: Click to 'Gender' Radio button");
 		registerPage.clickToRadioButtonByID("gender-male");
@@ -109,13 +109,14 @@ public class Register extends BaseTest {
 
 	}
 
+	@Parameters({ "browser" })
 	@AfterClass
 	public void afterClass() {
 
 		driver.quit();
 	}
 
-	private WebDriver driver;
+	WebDriver driver;
 	private String emailAddress;
 	private HomePageObject homePage;
 	private RegisterPageObject registerPage;

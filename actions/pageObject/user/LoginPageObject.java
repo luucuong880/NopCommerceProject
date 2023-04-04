@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import io.qameta.allure.Step;
 import nopcommerce.user.BasePage;
-import nopcommerce.user.PageGeneraterManager;
+import nopcommerce.user.PageGeneratorManager;
 import pageUI.user.LoginPageUI;
 
 public class LoginPageObject extends BasePage {
@@ -33,7 +33,7 @@ public class LoginPageObject extends BasePage {
 	public HomePageObject clickToLogInButton() {
 		waitForElementClickable(driver, LoginPageUI.LOG_IN_BUTTON);
 		clickToElement(driver, LoginPageUI.LOG_IN_BUTTON);
-		return PageGeneraterManager.getHomePage(driver);
+		return PageGeneratorManager.getPageGeneratorManager().getHomePage(driver);
 	}
 
 	@Step("Enter to Email Address textbox with value is {0}")

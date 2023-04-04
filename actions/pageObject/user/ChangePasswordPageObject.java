@@ -3,7 +3,7 @@ package pageObject.user;
 import org.openqa.selenium.WebDriver;
 
 import nopcommerce.user.BasePage;
-import nopcommerce.user.PageGeneraterManager;
+import nopcommerce.user.PageGeneratorManager;
 import pageUI.user.ChangePasswordPageUI;
 
 public class ChangePasswordPageObject extends BasePage {
@@ -52,6 +52,6 @@ public class ChangePasswordPageObject extends BasePage {
 	public HomePageObject clickToLogoutLink() {
 		waitForElementVisible(driver, ChangePasswordPageUI.LOGOUT_LINK);
 		clickToElement(driver, ChangePasswordPageUI.LOGOUT_LINK);
-		return PageGeneraterManager.getHomePage(driver);
+		return PageGeneratorManager.getPageGeneratorManager().getHomePage(driver);
 	}
 }
