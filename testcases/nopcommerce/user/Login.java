@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import com.nopcommerce.data.UserDataMapper;
 
 import pageObject.user.HomePageObject;
+import pageObject.user.LoginPageObject;
 import pageObject.user.RegisterPageObject;
 import utilities.Environment;
 
@@ -34,17 +35,32 @@ public class Login extends BaseTest {
 
 		registerPage = homePage.openRegisterPage();
 
-		registerPage.inputToTextboxByID("FirstName", userData.getLoginPassword());
+		registerPage.clickToRadioButtonByID("gender-male");
+		registerPage.inputToTextboxByID("FirstName", userData.getLoginUsername());
 		registerPage.inputToTextboxByID("LastName", userData.getLastName());
+		registerPage.selectToDropdownByName("DateOfBirthDay", userData.getDate());
+		registerPage.selectToDropdownByName("DateOfBirthMonth", userData.getMonth());
+		registerPage.selectToDropdownByName("DateOfBirthYear", userData.getYear());
 		registerPage.inputToTextboxByID("Email", emailAddress);
 		registerPage.inputToTextboxByID("Password", userData.getLoginPassword());
 		registerPage.inputToTextboxByID("ConfirmPassword", userData.getLoginPassword());
+
+		registerPage.clickToRegisterButton("register-button");
 
 	}
 
 	@Test
 	public void Login_01_Empty_Data() {
+		loginPage = registerPage.openLoginPage();
 
+		log.info("Login Step - 01: Verify 'Login' page title");
+		verifyEquals(loginPage.getMessagePageTitle(), "Welcome, Please Sign In!");
+
+		log.info("Login Step - 02: Click To 'Login' button");
+		loginPage.clickToButtonByText("Log in");
+
+		log.info("Login Step - 03: Get Error Email Message");
+		verifyEquals(loginPage.getErrorEmailMessage(), "Please enter your email");
 	}
 
 	public int generateFakeNumber() {
@@ -64,5 +80,6 @@ public class Login extends BaseTest {
 	private String emailAddress;
 	private HomePageObject homePage;
 	private RegisterPageObject registerPage;
+	private LoginPageObject loginPage;
 	UserDataMapper userData;
 }

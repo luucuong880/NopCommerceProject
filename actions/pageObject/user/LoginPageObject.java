@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 
 import io.qameta.allure.Step;
 import nopcommerce.user.BasePage;
-import nopcommerce.user.PageGeneratorManager;
 import pageUI.user.LoginPageUI;
 
 public class LoginPageObject extends BasePage {
@@ -14,14 +13,19 @@ public class LoginPageObject extends BasePage {
 		this.driver = driver;
 	}
 
-	public String getErrorMessageAtEmailTextbox() {
+	public String getErrorEmailMessage() {
 		waitForElementVisible(driver, LoginPageUI.EMAIL_MESSAGE_ERROR);
 		return getElementText(driver, LoginPageUI.EMAIL_MESSAGE_ERROR);
 	}
 
-	public String getErrorMessageUnsuccessfull() {
+	public String getMessageUnsuccessfull() {
 		waitForElementVisible(driver, LoginPageUI.UNSUCCESS_MESSAGE_ERROR);
 		return getElementText(driver, LoginPageUI.UNSUCCESS_MESSAGE_ERROR);
+	}
+
+	public String getMessagePageTitle() {
+		waitForElementVisible(driver, LoginPageUI.MESSAGE_PAGE_TITLE);
+		return getElementText(driver, LoginPageUI.MESSAGE_PAGE_TITLE);
 	}
 
 	public void clickToRegisterLink() {
@@ -30,28 +34,15 @@ public class LoginPageObject extends BasePage {
 	}
 
 	@Step("Click to Login button")
-	public HomePageObject clickToLogInButton() {
-		waitForElementClickable(driver, LoginPageUI.LOG_IN_BUTTON);
-		clickToElement(driver, LoginPageUI.LOG_IN_BUTTON);
-		return PageGeneratorManager.getPageGeneratorManager().getHomePage(driver);
+	public void clickToButtonByText(String buttonByText) {
+		waitForElementClickable(driver, LoginPageUI.BUTTON_BY_TEXT, buttonByText);
+		clickToElement(driver, LoginPageUI.BUTTON_BY_TEXT, buttonByText);
 	}
 
-	@Step("Enter to Email Address textbox with value is {0}")
-	public void inputToEmailTextbox(String emailAddress) {
-		waitForElementVisible(driver, LoginPageUI.EMAIL_TEXTBOX);
-		sendkeyToElement(driver, LoginPageUI.EMAIL_TEXTBOX, emailAddress);
-	}
-
-	@Step("Enter to Password textbox with value is {0}")
-	public void inputToPasswordTextbox(String password) {
-		waitForElementVisible(driver, LoginPageUI.PASSWORD_TEXTBOX);
-		sendkeyToElement(driver, LoginPageUI.PASSWORD_TEXTBOX, password);
-	}
-
-	public HomePageObject loginAsUser(String emailAddress, String password) {
-		inputToEmailTextbox(emailAddress);
-		inputToPasswordTextbox(password);
-		return clickToLogInButton();
+	@Step("Enter to Textbox with value is {0}")
+	public void inputToTextboxByID(String textboxID, String value) {
+		waitForElementVisible(driver, LoginPageUI.TEXTBOX_BY_ID, textboxID);
+		sendkeyToElement(driver, LoginPageUI.TEXTBOX_BY_ID, value, textboxID);
 	}
 
 }
