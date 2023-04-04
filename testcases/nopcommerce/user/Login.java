@@ -8,6 +8,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 import com.nopcommerce.data.UserDataMapper;
 
@@ -30,6 +31,20 @@ public class Login extends BaseTest {
 		homePage = PageGeneratorManager.getPageGeneratorManager().getHomePage(driver);
 		userData = UserDataMapper.getUserData();
 		emailAddress = userData.getEmailAddress() + generateFakeNumber() + "@fakermail.com";
+
+		registerPage = homePage.openRegisterPage();
+
+		registerPage.inputToTextboxByID("FirstName", userData.getLoginPassword());
+		registerPage.inputToTextboxByID("LastName", userData.getLastName());
+		registerPage.inputToTextboxByID("Email", emailAddress);
+		registerPage.inputToTextboxByID("Password", userData.getLoginPassword());
+		registerPage.inputToTextboxByID("ConfirmPassword", userData.getLoginPassword());
+
+	}
+
+	@Test
+	public void Login_01_Empty_Data() {
+
 	}
 
 	public int generateFakeNumber() {
