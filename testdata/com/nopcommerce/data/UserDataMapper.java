@@ -61,25 +61,6 @@ public class UserDataMapper {
 		return login.password;
 	}
 
-	@JsonProperty("loginInvalid")
-	private Login loginInvalid;
-
-	static class LoginInvalid {
-		@JsonProperty("username")
-		private String username;
-
-		@JsonProperty("password")
-		private String password;
-	}
-
-	public String getLoginInvalidUsername() {
-		return login.username;
-	}
-
-	public String getLoginInvalidPassword() {
-		return login.password;
-	}
-
 	public String getFirstName() {
 		return firstName;
 	}

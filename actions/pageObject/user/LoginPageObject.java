@@ -18,7 +18,7 @@ public class LoginPageObject extends BasePage {
 		return getElementText(driver, LoginPageUI.EMAIL_MESSAGE_ERROR);
 	}
 
-	public String getMessageUnsuccessfull() {
+	public String getMessageUnsuccessful() {
 		waitForElementVisible(driver, LoginPageUI.UNSUCCESS_MESSAGE_ERROR);
 		return getElementText(driver, LoginPageUI.UNSUCCESS_MESSAGE_ERROR);
 	}
