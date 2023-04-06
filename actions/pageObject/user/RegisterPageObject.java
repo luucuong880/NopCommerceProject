@@ -56,6 +56,12 @@ public class RegisterPageObject extends BasePage {
 		return PageGeneratorManager.getPageGeneratorManager().getLoginPage(driver);
 	}
 
+	public RegisterPageObject openRegisterPage() {
+		waitForElementClickable(driver, RegisterPageUI.REGISTER_LINK);
+		clickToElement(driver, RegisterPageUI.REGISTER_LINK);
+		return PageGeneratorManager.getPageGeneratorManager().getRegisterPage(driver);
+	}
+
 	public String getErrorExistingEmailMessage() {
 		waitForElementVisible(driver, RegisterPageUI.EXISTING_EMAIL_MESSAGE_ERROR);
 		return getElementText(driver, RegisterPageUI.EXISTING_EMAIL_MESSAGE_ERROR);
