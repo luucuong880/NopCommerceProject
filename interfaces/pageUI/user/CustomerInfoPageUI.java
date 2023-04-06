@@ -1,8 +1,7 @@
 package pageUI.user;
 
 public class CustomerInfoPageUI {
-	public static final String GENDER_MALE_CHECKBOX = "id=gender-male";
-	public static final String GENDER_FEMALE_CHECKBOX = "xpath=//input[@id='gender-female']";
+	public static final String GENDER_RADIO_BY_ID = "xpath=//input[@id='%s']";
 	public static final String FIRSTNAME_TEXTOBOX = "xpath=//input[@id='FirstName']";
 	public static final String LASTNAME_TEXTBOX = "xpath=//input[@id='LastName']";
 	public static final String EMAIL_TEXTBOX = "xpath=//input[@id='Email']";

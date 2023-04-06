@@ -13,14 +13,9 @@ public class CustomerInfoPageObject extends BasePage {
 		this.driver = driver;
 	}
 
-	public void checkToGenderMale() {
-		waitForElementVisible(driver, CustomerInfoPageUI.GENDER_MALE_CHECKBOX);
-		checkToDefaultCheckboxOrRadio(driver, CustomerInfoPageUI.GENDER_MALE_CHECKBOX);
-	}
-
-	public void checkToGenderFeMale() {
-		waitForElementVisible(driver, CustomerInfoPageUI.GENDER_FEMALE_CHECKBOX);
-		checkToDefaultCheckboxOrRadio(driver, CustomerInfoPageUI.GENDER_FEMALE_CHECKBOX);
+	public void checkToGenderTextbox(String textID) {
+		waitForElementVisible(driver, CustomerInfoPageUI.GENDER_RADIO_BY_ID, textID);
+		checkToDefaultCheckboxOrRadio(driver, CustomerInfoPageUI.GENDER_RADIO_BY_ID, textID);
 	}
 
 	public void inputToFirstNameTextbox(String firstName) {
