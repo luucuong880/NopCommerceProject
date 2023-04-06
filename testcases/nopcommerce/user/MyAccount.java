@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 
 import com.nopcommerce.data.UserDataMapper;
 
+import pageObject.user.CustomerInfoPageObject;
 import pageObject.user.HomePageObject;
 import pageObject.user.LoginPageObject;
 import pageObject.user.RegisterPageObject;
@@ -39,12 +40,8 @@ public class MyAccount extends BaseTest {
 
 		registerPage = homePage.openRegisterPage();
 
-		registerPage.clickToRadioButtonByID("gender-male");
 		registerPage.inputToTextboxByID("FirstName", userData.getLoginUsername());
 		registerPage.inputToTextboxByID("LastName", userData.getLastName());
-		registerPage.selectToDropdownByName("DateOfBirthDay", userData.getDate());
-		registerPage.selectToDropdownByName("DateOfBirthMonth", userData.getMonth());
-		registerPage.selectToDropdownByName("DateOfBirthYear", userData.getYear());
 		registerPage.inputToTextboxByID("Email", emailAddress);
 		registerPage.inputToTextboxByID("Password", userData.getLoginPassword());
 		registerPage.inputToTextboxByID("ConfirmPassword", userData.getLoginPassword());
@@ -59,11 +56,14 @@ public class MyAccount extends BaseTest {
 		loginPage.clickToButtonByText("Log in");
 
 		homePage = PageGeneratorManager.getPageGeneratorManager().getHomePage(driver);
+
+		customerInfoPage = homePage.openMyAccountPage();
 	}
 
 	@Test
-	public void Login_01_Empty_Data() {
-
+	public void My_Account_01_Customer_Info() {
+		log.info("Customer Info - 01: Check to 'Gender' Radio textbox");
+		customerInfoPage.checkToGenderTextbox("gender-male");
 	}
 
 	@Test
@@ -105,5 +105,6 @@ public class MyAccount extends BaseTest {
 	private HomePageObject homePage;
 	private RegisterPageObject registerPage;
 	private LoginPageObject loginPage;
+	private CustomerInfoPageObject customerInfoPage;
 	UserDataMapper userData;
 }
