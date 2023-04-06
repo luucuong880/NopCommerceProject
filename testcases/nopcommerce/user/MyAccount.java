@@ -55,6 +55,10 @@ public class MyAccount extends BaseTest {
 
 		loginPage.inputToTextboxByID("Email", emailAddress);
 		loginPage.inputToTextboxByID("Password", userData.getLoginPassword());
+
+		loginPage.clickToButtonByText("Log in");
+
+		homePage = PageGeneratorManager.getPageGeneratorManager().getHomePage(driver);
 	}
 
 	@Test
