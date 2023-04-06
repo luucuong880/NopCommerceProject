@@ -64,26 +64,33 @@ public class MyAccount extends BaseTest {
 	public void My_Account_01_Customer_Info() {
 		log.info("Customer Info - 01: Check to 'Gender' Radio textbox");
 		customerInfoPage.checkToGenderTextbox("gender-male");
+
+		log.info("Customer Info - 02: Select Day Of Birth");
+		customerInfoPage.selectDropDownByName("DateOfBirthDay", userData.getDate());
+
+		log.info("Customer Info - 03: Select Month Of Birth");
+		customerInfoPage.selectDropDownByName("DateOfBirthMonth", userData.getMonth());
+
+		log.info("Customer Info - 04: Select Year Of Birth");
+		customerInfoPage.selectDropDownByName("DateOfBirthYear", userData.getYear());
+
+		log.info("Customer Info - 05: Input to 'Company' textbox");
+		customerInfoPage.inputToTextboxByID("Company", "AutomationFC");
 	}
 
-	@Test
 	public void Login_02_Invalid_Email() {
 	}
 
-	@Test
 	public void Login_03_Unregister_Email() {
 
 	}
 
-	@Test
 	public void Login_04_Not_Entered_Password() {
 	}
 
-	@Test
 	public void Login_05_Wrong_Entered_Password() {
 	}
 
-	@Test
 	public void Login_06_Login_Success() {
 	}
 

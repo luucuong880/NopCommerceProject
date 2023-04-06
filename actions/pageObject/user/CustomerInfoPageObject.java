@@ -18,39 +18,14 @@ public class CustomerInfoPageObject extends BasePage {
 		checkToDefaultCheckboxOrRadio(driver, CustomerInfoPageUI.GENDER_RADIO_BY_ID, textID);
 	}
 
-	public void inputToFirstNameTextbox(String firstName) {
-		waitForElementVisible(driver, CustomerInfoPageUI.FIRSTNAME_TEXTOBOX);
-		sendkeyToElement(driver, CustomerInfoPageUI.FIRSTNAME_TEXTOBOX, firstName);
+	public void inputToTextboxByID(String textID, String textValue) {
+		waitForElementVisible(driver, CustomerInfoPageUI.DYNAMIC_TEXTBOX_BY_ID, textID);
+		sendkeyToElement(driver, CustomerInfoPageUI.DYNAMIC_TEXTBOX_BY_ID, textValue, textID);
 	}
 
-	public void inputToLastNameTextbox(String lasttName) {
-		waitForElementVisible(driver, CustomerInfoPageUI.LASTNAME_TEXTBOX);
-		sendkeyToElement(driver, CustomerInfoPageUI.LASTNAME_TEXTBOX, lasttName);
-	}
-
-	public void inputToEmailTextbox(String emailAddress) {
-		waitForElementVisible(driver, CustomerInfoPageUI.EMAIL_TEXTBOX);
-		sendkeyToElement(driver, CustomerInfoPageUI.EMAIL_TEXTBOX, emailAddress);
-	}
-
-	public void inputToCompanyTextbox(String companyName) {
-		waitForElementVisible(driver, CustomerInfoPageUI.COMPANY_TEXTBOX);
-		sendkeyToElement(driver, CustomerInfoPageUI.COMPANY_TEXTBOX, companyName);
-	}
-
-	public void selectDayDropdownList(String textItem) {
-		waitForElementVisible(driver, CustomerInfoPageUI.DAY_SELECT);
-		selectItemInCustomDropdown(driver, CustomerInfoPageUI.DAY_SELECT, "xpath=//option", textItem);
-	}
-
-	public void selectMonthDropdownList(String textItem) {
-		waitForElementVisible(driver, CustomerInfoPageUI.MONTH_SELECT);
-		selectItemInCustomDropdown(driver, CustomerInfoPageUI.MONTH_SELECT, "xpath=//option", textItem);
-	}
-
-	public void selectYearDropdownList(String textItem) {
-		waitForElementVisible(driver, CustomerInfoPageUI.YEAR_SELECT);
-		selectItemInCustomDropdown(driver, CustomerInfoPageUI.YEAR_SELECT, "xpath=//option", textItem);
+	public void selectDropDownByName(String textName, String itemValue) {
+		waitForElementVisible(driver, CustomerInfoPageUI.DYNAMIC_DROPDOWN_BY_NAME, textName);
+		selectItemInDefaultDropdown(driver, CustomerInfoPageUI.DYNAMIC_DROPDOWN_BY_NAME, itemValue, textName);
 	}
 
 	public void clickToSaveButton() {
