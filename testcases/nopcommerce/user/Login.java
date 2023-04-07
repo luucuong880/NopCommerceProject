@@ -39,15 +39,15 @@ public class Login extends BaseTest {
 
 		registerPage = homePage.openRegisterPage();
 
-		registerPage.clickToRadioButtonByID("gender-male");
-		registerPage.inputToTextboxByID("FirstName", userData.getLoginUsername());
-		registerPage.inputToTextboxByID("LastName", userData.getLastName());
-		registerPage.selectToDropdownByName("DateOfBirthDay", userData.getDate());
-		registerPage.selectToDropdownByName("DateOfBirthMonth", userData.getMonth());
-		registerPage.selectToDropdownByName("DateOfBirthYear", userData.getYear());
-		registerPage.inputToTextboxByID("Email", emailAddress);
-		registerPage.inputToTextboxByID("Password", userData.getLoginPassword());
-		registerPage.inputToTextboxByID("ConfirmPassword", userData.getLoginPassword());
+		registerPage.clickToRadioButtonByID(driver, "gender-male");
+		registerPage.inputToTextboxByID(driver, "FirstName", userData.getLoginUsername());
+		registerPage.inputToTextboxByID(driver, "LastName", userData.getLastName());
+		registerPage.selectToDropdownByName(driver, "DateOfBirthDay", userData.getDate());
+		registerPage.selectToDropdownByName(driver, "DateOfBirthMonth", userData.getMonth());
+		registerPage.selectToDropdownByName(driver, "DateOfBirthYear", userData.getYear());
+		registerPage.inputToTextboxByID(driver, "Email", emailAddress);
+		registerPage.inputToTextboxByID(driver, "Password", userData.getLoginPassword());
+		registerPage.inputToTextboxByID(driver, "ConfirmPassword", userData.getLoginPassword());
 
 		registerPage.clickToRegisterButton("register-button");
 
