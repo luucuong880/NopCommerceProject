@@ -11,8 +11,8 @@
 	<parameter name="serverName" value="testing" />
 	
 
-	<test name="Run on Chrome">
-		<parameter name="browser" value="chrome" />
+	<test name="Run on H_CHROME">
+		<parameter name="browser" value="h_chrome" />
 		<classes>
 			<class name="nopcommerce.user.MyAccount" />
 		</classes>

@@ -6,6 +6,11 @@
 	"date" : "20",
 	"month" : "January",
 	"year" : "1996",
+	"country" : "Viet Nam",
+	"city"	  : "Ho Chi Minh",
+	"address" : "321 Le Lai",
+	"zipcode" : "700000",
+	"phone"  : "0987546234",		
 	"login" : {
 		"username" : "Lilcoln",	
 		"password" : "123456"
