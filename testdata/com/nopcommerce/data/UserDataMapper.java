@@ -45,6 +45,21 @@ public class UserDataMapper {
 	@JsonProperty("login")
 	private Login login;
 
+	@JsonProperty("country")
+	private String country;
+
+	@JsonProperty("city")
+	private String city;
+
+	@JsonProperty("address")
+	private String address;
+
+	@JsonProperty("zipcode")
+	private String zipcode;
+
+	@JsonProperty("phone")
+	private String phone;
+
 	static class Login {
 		@JsonProperty("username")
 		private String username;
@@ -87,6 +102,26 @@ public class UserDataMapper {
 
 	public String getYear() {
 		return year;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public String getPhone() {
+		return phone;
 	}
 
 }

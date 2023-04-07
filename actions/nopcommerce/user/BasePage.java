@@ -19,7 +19,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import io.qameta.allure.Step;
 import pageUI.jQuery.uploadFile.BasePageJQueryUI;
+import pageUI.user.BasePageUI;
 
 public class BasePage {
 
@@ -557,13 +559,74 @@ public class BasePage {
 	}
 
 	public void uploadMultipleFiles(WebDriver driver, String... fileNames) {
-		String filePath = System.getProperty("user.dir") + "\\uploadFiles\\";
+		String filePath = System.getProperty(".dir") + "\\uploadFiles\\";
 		String fullFileName = "";
 		for (String file : fileNames) {
 			fullFileName = fullFileName + filePath + file + "\n";
 		}
 		fullFileName = fullFileName.trim();
 		getWebElement(driver, BasePageJQueryUI.UPLOAD_FILE).sendKeys(fullFileName);
+	}
+
+	public BasePage openPageAtMyAccountByName(WebDriver driver, String pageName) {
+		waitForElementClickable(driver, BasePageUI.DYNAMIC_PAGE_AT_MY_ACCOUNT_AREA, pageName);
+		clickToElement(driver, BasePageUI.DYNAMIC_PAGE_AT_MY_ACCOUNT_AREA, pageName);
+		switch (pageName) {
+		case "Customer info":
+			return PageGeneratorManager.getPageGeneratorManager().getCustomerInfoPage(driver);
+		case "Addresses":
+			return PageGeneratorManager.getPageGeneratorManager().getAddressPage(driver);
+		case "My product reviews":
+			return PageGeneratorManager.getPageGeneratorManager().getMyProductReviewPage(driver);
+		case "Reward points":
+			return PageGeneratorManager.getPageGeneratorManager().getRewardPointPage(driver);
+		default:
+			throw new RuntimeException("Invalid page name at My Account are.");
+		}
+
+	}
+
+	public boolean isPageTitleByTextDisplayed(WebDriver driver, String textValue) {
+		waitForElementVisible(driver, BasePageUI.DYNAMIC_PAGE_TITLE, textValue);
+		return isElementDisplayed(driver, BasePageUI.DYNAMIC_PAGE_TITLE, textValue);
+	}
+
+	public void clickToSaveButton(WebDriver driver) {
+		waitForElementVisible(driver, BasePageUI.SAVE_BUTTON);
+		clickToElement(driver, BasePageUI.SAVE_BUTTON);
+	}
+
+	@Step("Get Error Message At Fields")
+	public String getErrorMessageWithDynamicValue(WebDriver driver, String errorMessage) {
+		waitForElementVisible(driver, BasePageUI.DYNAMIC_ERROR_MESSAGE_BY_ID, errorMessage);
+		return getElementText(driver, BasePageUI.DYNAMIC_ERROR_MESSAGE_BY_ID, errorMessage);
+	}
+
+	@Step("Click to Radio Button with value is {0}")
+	public void selectToDropdownByName(WebDriver driver, String dropdownAttributeName, String itemValue) {
+		waitForElementClickable(driver, BasePageUI.DYNAMIC_DROPDOWN_BY_NAME, dropdownAttributeName);
+		selectItemInDefaultDropdown(driver, BasePageUI.DYNAMIC_DROPDOWN_BY_NAME, itemValue, dropdownAttributeName);
+	}
+
+	public void inputToTextboxByID(WebDriver driver, String textID, String textValue) {
+		waitForElementVisible(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID, textID);
+		sendkeyToElement(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID, textValue, textID);
+	}
+
+	@Step("Click to Radio Button with value is {0}")
+	public void clickToRadioButtonByID(WebDriver driver, String radioButtonByID) {
+		waitForElementClickable(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID, radioButtonByID);
+		checkToDefaultCheckboxOrRadio(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID, radioButtonByID);
+	}
+
+	public String getSuccessSaveMessage(WebDriver driver) {
+		waitForElementVisible(driver, BasePageUI.SAVE_SUCCESS_MESSAGE);
+		return getElementText(driver, BasePageUI.SAVE_SUCCESS_MESSAGE);
+	}
+
+	public void closeSuccessMessage(WebDriver driver) {
+		waitForElementClickable(driver, BasePageUI.CLOSE_BUTTON);
+		clickToElement(driver, BasePageUI.CLOSE_BUTTON);
 	}
 
 	private long longtimeout = 30;
