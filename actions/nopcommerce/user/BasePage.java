@@ -629,6 +629,11 @@ public class BasePage {
 		clickToElement(driver, BasePageUI.CLOSE_BUTTON);
 	}
 
+	public String getTextboxValueByID(WebDriver driver, String textboxID) {
+		waitForElementVisible(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID, textboxID);
+		return getElementAttribute(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID, "value", textboxID);
+	}
+
 	private long longtimeout = 30;
 	private short shorttimeout = 5;
 }

@@ -18,4 +18,9 @@ public class AddressPageObject extends BasePage {
 
 	}
 
+	public String getTextboxValueByClass(String textboxClass) {
+		waitForElementVisible(driver, AddressPageUI.DYNAMIC_TEXTBOX_BY_CLASS, textboxClass);
+		return getElementText(driver, AddressPageUI.DYNAMIC_TEXTBOX_BY_CLASS, textboxClass);
+	}
+
 }

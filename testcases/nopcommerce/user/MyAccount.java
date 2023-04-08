@@ -4,7 +4,7 @@ import java.util.Random;
 
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -24,7 +24,7 @@ public class MyAccount extends BaseTest {
 
 	@Parameters({ "envName", "serverName", "browser", "ipAddress", "portNumber", "osName", "osVersion" })
 	@BeforeClass
-	public void beforeClass(@Optional("local") String envName, @Optional("testing") String serverName, @Optional("h_chrome") String browserName, @Optional("Windows") String osName, @Optional("10") String osVersion,
+	public void beforeClass(@Optional("local") String envName, @Optional("testing") String serverName, @Optional("chrome") String browserName, @Optional("Windows") String osName, @Optional("10") String osVersion,
 			@Optional("localhost") String ipAddress, @Optional("4444") String portNumber) {
 		ConfigFactory.setProperty("env", envName);
 		environment = ConfigFactory.create(Environment.class);
@@ -60,31 +60,40 @@ public class MyAccount extends BaseTest {
 
 	@Test
 	public void My_Account_01_Customer_Info() {
-		log.info("Customer Info Step- 01: Verify Customer Info Steppage title is Displayed");
+		log.info("Customer Info Step - 01: Verify Customer Info Steppage title is Displayed");
 		verifyTrue(customerInfoPage.isPageTitleByTextDisplayed(driver, "Customer info"));
 
-		log.info("Customer Info Step- 02: Check to 'Gender' Radio textbox");
+		log.info("Customer Info Step - 02: Verify 'First Name' value is correctly");
+		Assert.assertEquals(customerInfoPage.getTextboxValueByID(driver, "FirstName"), userData.getFirstName());
+
+		log.info("Customer Info Step - 03: Verify 'Last Name' value is correctly");
+		Assert.assertEquals(customerInfoPage.getTextboxValueByID(driver, "LastName"), userData.getLastName());
+
+		log.info("Customer Info Step - 04: Verify 'Email' value is correctly");
+		Assert.assertEquals(customerInfoPage.getTextboxValueByID(driver, "Email"), emailAddress);
+
+		log.info("Customer Info Step - 05: Check to 'Gender' Radio textbox");
 		customerInfoPage.checkToGenderTextbox("gender-male");
 
-		log.info("Customer Info Step- 03: Select Day Of Birth");
+		log.info("Customer Info Step - 06: Select Day Of Birth");
 		customerInfoPage.selectToDropdownByName(driver, "DateOfBirthDay", userData.getDate());
 
-		log.info("Customer Info Step- 04: Select Month Of Birth");
+		log.info("Customer Info Step - 07: Select Month Of Birth");
 		customerInfoPage.selectToDropdownByName(driver, "DateOfBirthMonth", userData.getMonth());
 
-		log.info("Customer Info Step- 05: Select Year Of Birth");
+		log.info("Customer Info Step - 08: Select Year Of Birth");
 		customerInfoPage.selectToDropdownByName(driver, "DateOfBirthYear", userData.getYear());
 
-		log.info("Customer Info Step- 06: Input to 'Company' textbox");
+		log.info("Customer Info Step - 09: Input to 'Company' textbox");
 		customerInfoPage.inputToTextboxByID(driver, "Company", "AutomationFC");
 
-		log.info("Customer Info Step- 07: Click to 'Save' button");
+		log.info("Customer Info Step - 10: Click to 'Save' button");
 		customerInfoPage.clickToSaveButton(driver);
 
-		log.info("Customer Info Step- 08: Get Success Save Message");
+		log.info("Customer Info Step - 11: Get Success Save Message");
 		verifyEquals(customerInfoPage.getSuccessSaveMessage(driver), "The customer info has been updated successfully.");
 
-		log.info("Customer Info Step- 09: Close Success Save Message");
+		log.info("Customer Info Step - 12: Close Success Save Message");
 		customerInfoPage.closeSuccessMessage(driver);
 	}
 
@@ -169,6 +178,26 @@ public class MyAccount extends BaseTest {
 		log.info("Address Step - 25: Close Success Message");
 		addressPage.closeSuccessMessage(driver);
 
+		log.info("Address Step - 26: Verify 'Name' value is correctly");
+		verifyEquals(addressPage.getTextboxValueByClass("name"), userData.getFirstName() + userData.getLastName());
+
+		log.info("Address Step - 26: Verify 'Email' value is correctly");
+		verifyEquals(addressPage.getTextboxValueByClass("email"), "Email: " + emailAddress);
+
+		log.info("Address Step - 27: Verify 'Phone' value is correctly");
+		verifyEquals(addressPage.getTextboxValueByClass("phone"), "Phone number: 0987546234");
+
+		log.info("Address Step - 28: Verify 'Company' value is correctly");
+		verifyEquals(addressPage.getTextboxValueByClass("company"), "Automation FC");
+
+		log.info("Address Step - 29: Verify 'Address' value is correctly");
+		verifyEquals(addressPage.getTextboxValueByClass("address1"), userData.getAddress());
+
+		log.info("Address Step - 30: Verify 'City' and 'Zip/code' value is correctly");
+		verifyEquals(addressPage.getTextboxValueByClass("city-state-zip"), "Ho Chi Minh, 700000");
+
+		log.info("Address Step - 31: Verify 'Country' value is correctly");
+		verifyEquals(addressPage.getTextboxValueByClass("country"), userData.getCountry());
 	}
 
 	public void Login_04_Not_Entered_Password() {
@@ -186,12 +215,12 @@ public class MyAccount extends BaseTest {
 
 	}
 
-	@Parameters({ "browser" })
-	@AfterClass
-	public void afterClass() {
-
-		driver.quit();
-	}
+	// @Parameters({ "browser" })
+	// @AfterClass
+	// public void afterClass() {
+	//
+	// driver.quit();
+	// }
 
 	WebDriver driver;
 	private String emailAddress;

@@ -17,4 +17,5 @@ public class AddressPageUI {
 	public static final String COUNTRY_MESSAGE = "xpath=//ul[@class='info']//li[@class='country']";
 	public static final String SAVE_ADDRESS_BUTTON = "xpath=//div[@class='buttons']//button";
 	public static final String ADD_NEW_BUTTON = "xpath=//div[@class='add-button']//button";
+	public static final String DYNAMIC_TEXTBOX_BY_CLASS = "xpath=//li[@class='%s']";
 }
