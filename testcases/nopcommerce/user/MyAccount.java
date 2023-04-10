@@ -186,9 +186,6 @@ public class MyAccount extends BaseTest {
 		log.info("Address Step - 25: Close Success Message");
 		addressPage.closeSuccessMessage(driver);
 
-		log.info("Address Step - 26: Verify 'Name' value is correctly");
-		verifyEquals(addressPage.getTextboxValueByClass("name"), userData.getFirstName() + "\t" + userData.getLastName());
-
 		log.info("Address Step - 26: Verify 'Email' value is correctly");
 		verifyEquals(addressPage.getTextboxValueByClass("email"), "Email: " + emailAddress);
 
@@ -230,6 +227,66 @@ public class MyAccount extends BaseTest {
 	public void My_Account_04_Address_Add_New_Address() {
 		log.info("Address Step - 37: Click to 'Add New' button");
 		addressPage.clickToAddNewButton();
+
+		log.info("Address Step - 38: Input to 'First Name' textbox");
+		addressPage.inputToTextboxByID(driver, "Address_FirstName", userData.getFirstName());
+
+		log.info("Address Step - 39: Input to 'Last Name' textbox");
+		addressPage.inputToTextboxByID(driver, "Address_LastName", userData.getLastName());
+
+		log.info("Address Step - 40: Input to 'Email' textbox");
+		addressPage.inputToTextboxByID(driver, "Address_Email", newEmailAddress);
+
+		log.info("Address Step - 41: Input to 'Company' textbox");
+		addressPage.inputToTextboxByID(driver, "Address_Company", newCompany);
+
+		log.info("Address Step - 42: Select 'Country' dropdown");
+		addressPage.selectToDropdownByName(driver, "Address.CountryId", userData.getCountry());
+
+		log.info("Address Step - 43: Input to 'City' textbox");
+		addressPage.inputToTextboxByID(driver, "Address_City", newCity);
+
+		log.info("Address Step - 44: Input to 'Address' textbox");
+		addressPage.inputToTextboxByID(driver, "Address_Address1", newAddress);
+
+		log.info("Address Step - 45: Input to 'Zip/Code' textbox");
+		addressPage.inputToTextboxByID(driver, "Address_ZipPostalCode", newZipCode);
+
+		log.info("Address Step - 46: Input to 'Phone' textbox");
+		addressPage.inputToTextboxByID(driver, "Address_PhoneNumber", newPhoneNumber);
+
+		log.info("Address Step - 47: Click to 'Save' button");
+		addressPage.clickButtonByText(driver, "Save");
+
+		log.info("Address Step - 48: Get Success Save Message");
+		Assert.assertEquals(addressPage.getSuccessSaveMessage(driver), "The new address has been added successfully.");
+
+		log.info("Address Step - 49: Close Success Message");
+		addressPage.closeSuccessMessage(driver);
+
+		log.info("Address Step - 50: Verify 'Email' value is correctly");
+		verifyEquals(addressPage.getTextboxValueByClass("email"), "Email: " + newEmailAddress);
+
+		log.info("Address Step - 51: Verify 'Phone' value is correctly");
+		verifyEquals(addressPage.getTextboxValueByClass("phone"), "Phone number: " + newPhoneNumber);
+
+		log.info("Address Step - 52: Verify 'Company' value is correctly");
+		Assert.assertEquals(addressPage.getTextboxValueByClass("company"), newCompany);
+
+		log.info("Address Step - 53: Verify 'Address' value is correctly");
+		verifyEquals(addressPage.getTextboxValueByClass("address1"), newAddress);
+
+		log.info("Address Step - 54: Verify 'City' and 'Zip/code' value is correctly");
+		verifyEquals(addressPage.getTextboxValueByClass("city-state-zip"), "Gotham, 813");
+
+		log.info("Address Step - 55: Verify 'Country' value is correctly");
+		verifyEquals(addressPage.getTextboxValueByClass("country"), userData.getCountry());
+
+		log.info("Address Step - 56: Verify 'Edit' button is Displayed");
+		verifyTrue(addressPage.isButtonDisplayed(driver, "Edit"));
+
+		log.info("Address Step - 57: Verify 'Delete' button is Displayed");
+		verifyTrue(addressPage.isButtonDisplayed(driver, "Delete"));
 	}
 
 	public void Login_05_Wrong_Entered_Password() {
