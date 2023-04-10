@@ -5,6 +5,7 @@ import java.util.Random;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -35,6 +36,13 @@ public class MyAccount extends BaseTest {
 
 		userData = UserDataMapper.getUserData();
 		emailAddress = userData.getEmailAddress() + generateFakeNumber() + "@fakermail.com";
+
+		newEmailAddress = userData.getEmailAddress() + generateFakeNumber() + "@gmail.play";
+		newCompany = "RedSkull";
+		newCity = "Gotham";
+		newAddress = "325 Lightning";
+		newZipCode = "813";
+		newPhoneNumber = "0789654213";
 
 		registerPage = homePage.openRegisterPage();
 
@@ -88,7 +96,7 @@ public class MyAccount extends BaseTest {
 		customerInfoPage.inputToTextboxByID(driver, "Company", "AutomationFC");
 
 		log.info("Customer Info Step - 10: Click to 'Save' button");
-		customerInfoPage.clickToSaveButton(driver);
+		customerInfoPage.clickButtonByText(driver, "Save");
 
 		log.info("Customer Info Step - 11: Get Success Save Message");
 		verifyEquals(customerInfoPage.getSuccessSaveMessage(driver), "The customer info has been updated successfully.");
@@ -112,7 +120,7 @@ public class MyAccount extends BaseTest {
 		verifyTrue(addressPage.isPageTitleByTextDisplayed(driver, "Add new address"));
 
 		log.info("Address Step - 05: Click to 'Save' button");
-		addressPage.clickToSaveButton(driver);
+		addressPage.clickButtonByText(driver, "Save");
 
 		log.info("Address Step - 06: Get Error Message at 'First Name' field");
 		verifyEquals(addressPage.getErrorMessageWithDynamicValue(driver, "Address_FirstName-error"), "First name is required.");
@@ -138,7 +146,7 @@ public class MyAccount extends BaseTest {
 	}
 
 	@Test
-	public void My_Account_03_Address_Add_New_Full_Data() {
+	public void My_Account_03_Address_Add_New_Full_Data_And_Delete() {
 		log.info("Address Step - 13: Reload 'Add New Address' page");
 		addressPage.refreshCurrentPage(driver);
 
@@ -170,16 +178,16 @@ public class MyAccount extends BaseTest {
 		addressPage.inputToTextboxByID(driver, "Address_PhoneNumber", userData.getPhone());
 
 		log.info("Address Step - 23: Click to 'Save' button");
-		addressPage.clickToSaveButton(driver);
+		addressPage.clickButtonByText(driver, "Save");
 
 		log.info("Address Step - 24: Get Success Save Message");
-		verifyEquals(addressPage.getSuccessSaveMessage(driver), "The new address has been added successfully.");
+		Assert.assertEquals(addressPage.getSuccessSaveMessage(driver), "The new address has been added successfully.");
 
 		log.info("Address Step - 25: Close Success Message");
 		addressPage.closeSuccessMessage(driver);
 
 		log.info("Address Step - 26: Verify 'Name' value is correctly");
-		verifyEquals(addressPage.getTextboxValueByClass("name"), userData.getFirstName() + userData.getLastName());
+		verifyEquals(addressPage.getTextboxValueByClass("name"), userData.getFirstName() + "\t" + userData.getLastName());
 
 		log.info("Address Step - 26: Verify 'Email' value is correctly");
 		verifyEquals(addressPage.getTextboxValueByClass("email"), "Email: " + emailAddress);
@@ -188,7 +196,7 @@ public class MyAccount extends BaseTest {
 		verifyEquals(addressPage.getTextboxValueByClass("phone"), "Phone number: 0987546234");
 
 		log.info("Address Step - 28: Verify 'Company' value is correctly");
-		verifyEquals(addressPage.getTextboxValueByClass("company"), "Automation FC");
+		Assert.assertEquals(addressPage.getTextboxValueByClass("company"), "AutomationFC");
 
 		log.info("Address Step - 29: Verify 'Address' value is correctly");
 		verifyEquals(addressPage.getTextboxValueByClass("address1"), userData.getAddress());
@@ -198,9 +206,30 @@ public class MyAccount extends BaseTest {
 
 		log.info("Address Step - 31: Verify 'Country' value is correctly");
 		verifyEquals(addressPage.getTextboxValueByClass("country"), userData.getCountry());
+
+		log.info("Address Step - 32: Verify 'Edit' button is Displayed");
+		verifyTrue(addressPage.isButtonDisplayed(driver, "Edit"));
+
+		log.info("Address Step - 32: Verify 'Delete' button is Displayed");
+		verifyTrue(addressPage.isButtonDisplayed(driver, "Delete"));
+
+		log.info("Address Step - 33: Click to 'Delete' button");
+		addressPage.clickButtonByText(driver, "Delete");
+
+		log.info("Address Step - 34: Verify Alert text message is Displayed");
+		verifyEquals(addressPage.getAlertMessageDisplayed(), "Are you sure?");
+
+		log.info("Address Step - 35: Accept Alert Message");
+		addressPage.acceptAlert();
+
+		log.info("Address Step - 36: Get Message body text");
+		verifyEquals(addressPage.getBodyMessageText(), "No addresses");
 	}
 
-	public void Login_04_Not_Entered_Password() {
+	@Test
+	public void My_Account_04_Address_Add_New_Address() {
+		log.info("Address Step - 37: Click to 'Add New' button");
+		addressPage.clickToAddNewButton();
 	}
 
 	public void Login_05_Wrong_Entered_Password() {
@@ -215,15 +244,15 @@ public class MyAccount extends BaseTest {
 
 	}
 
-	// @Parameters({ "browser" })
-	// @AfterClass
-	// public void afterClass() {
-	//
-	// driver.quit();
-	// }
+	@Parameters({ "browser" })
+	@AfterClass
+	public void afterClass() {
+
+		driver.quit();
+	}
 
 	WebDriver driver;
-	private String emailAddress;
+	private String emailAddress, newEmailAddress, newCompany, newCity, newAddress, newZipCode, newPhoneNumber;
 	private HomePageObject homePage;
 	private RegisterPageObject registerPage;
 	private LoginPageObject loginPage;

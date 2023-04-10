@@ -591,9 +591,14 @@ public class BasePage {
 		return isElementDisplayed(driver, BasePageUI.DYNAMIC_PAGE_TITLE, textValue);
 	}
 
-	public void clickToSaveButton(WebDriver driver) {
-		waitForElementVisible(driver, BasePageUI.SAVE_BUTTON);
-		clickToElement(driver, BasePageUI.SAVE_BUTTON);
+	public void clickButtonByText(WebDriver driver, String textValue) {
+		waitForElementVisible(driver, BasePageUI.BUTTON_TEXT, textValue);
+		clickToElement(driver, BasePageUI.BUTTON_TEXT, textValue);
+	}
+
+	public boolean isButtonDisplayed(WebDriver driver, String textValue) {
+		waitForElementVisible(driver, BasePageUI.BUTTON_TEXT, textValue);
+		return isElementDisplayed(driver, BasePageUI.BUTTON_TEXT, textValue);
 	}
 
 	@Step("Get Error Message At Fields")

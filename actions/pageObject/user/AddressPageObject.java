@@ -23,4 +23,18 @@ public class AddressPageObject extends BasePage {
 		return getElementText(driver, AddressPageUI.DYNAMIC_TEXTBOX_BY_CLASS, textboxClass);
 	}
 
+	public String getAlertMessageDisplayed() {
+		waitForAlertPresence(driver);
+		return getAlertText(driver);
+	}
+
+	public void acceptAlert() {
+		acceptAlert(driver);
+	}
+
+	public String getBodyMessageText() {
+		waitForElementVisible(driver, AddressPageUI.BODY_MESSAGE);
+		return getElementText(driver, AddressPageUI.BODY_MESSAGE);
+	}
+
 }
