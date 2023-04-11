@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import com.nopcommerce.data.UserDataMapper;
 
 import pageObject.user.AddressPageObject;
+import pageObject.user.ChangePasswordPageObject;
 import pageObject.user.CustomerInfoPageObject;
 import pageObject.user.HomePageObject;
 import pageObject.user.LoginPageObject;
@@ -109,6 +110,7 @@ public class MyAccount extends BaseTest {
 	public void My_Account_02_Address_Add_New_Empty_Data() {
 		log.info("Address Step - 01: Open 'Address' page ");
 		addressPage = (AddressPageObject) customerInfoPage.openPageAtMyAccountByName(driver, "Addresses");
+		addressPage = PageGeneratorManager.getPageGeneratorManager().getAddressPage(driver);
 
 		log.info("Address Step - 02: Verify Address page title is Displayed");
 		verifyTrue(addressPage.isPageTitleByTextDisplayed(driver, "Addresses"));
@@ -291,7 +293,18 @@ public class MyAccount extends BaseTest {
 
 	@Test
 	public void My_Account_04_Change_Password() {
+		log.info("Change Password Step - 01: Open 'Change Password' page");
+		changePasswordPage = (ChangePasswordPageObject) addressPage.openPageAtMyAccountByName(driver, "Change password");
+		changePasswordPage = PageGeneratorManager.getPageGeneratorManager().getChangePasswordPage(driver);
 
+		log.info("Change Password Step - 02: Click to 'Change Password' button");
+		changePasswordPage.clickButtonByText(driver, "Change password");
+
+		log.info("Change Password Step - 03: Get Error Message at 'New Password' field");
+		verifyEquals(addressPage.getErrorMessageWithDynamicValue(driver, "NewPassword-error"), "Email is required.");
+
+		log.info("Change Password Step - 04: Get Error Message at 'Cofirm Password' field");
+		verifyEquals(addressPage.getErrorMessageWithDynamicValue(driver, "ConfirmNewPassword-error"), "Email is required.");
 	}
 
 	public void Login_06_Login_Success() {
@@ -317,5 +330,6 @@ public class MyAccount extends BaseTest {
 	private LoginPageObject loginPage;
 	private CustomerInfoPageObject customerInfoPage;
 	private AddressPageObject addressPage;
+	private ChangePasswordPageObject changePasswordPage;
 	UserDataMapper userData;
 }
