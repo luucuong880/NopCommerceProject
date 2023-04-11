@@ -289,7 +289,9 @@ public class MyAccount extends BaseTest {
 		verifyTrue(addressPage.isButtonDisplayed(driver, "Delete"));
 	}
 
-	public void Login_05_Wrong_Entered_Password() {
+	@Test
+	public void My_Account_04_Change_Password() {
+
 	}
 
 	public void Login_06_Login_Success() {

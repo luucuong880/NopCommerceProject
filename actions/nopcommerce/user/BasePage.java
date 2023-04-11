@@ -580,6 +580,10 @@ public class BasePage {
 			return PageGeneratorManager.getPageGeneratorManager().getMyProductReviewPage(driver);
 		case "Reward points":
 			return PageGeneratorManager.getPageGeneratorManager().getRewardPointPage(driver);
+		case "Change password":
+			return PageGeneratorManager.getPageGeneratorManager().getChangePasswordPage(driver);
+		case "Orders":
+			return PageGeneratorManager.getPageGeneratorManager().getOrderPage(driver);
 		default:
 			throw new RuntimeException("Invalid page name at My Account are.");
 		}

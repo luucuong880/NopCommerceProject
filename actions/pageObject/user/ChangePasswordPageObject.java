@@ -45,10 +45,6 @@ public class ChangePasswordPageObject extends BasePage {
 		clickToElement(driver, ChangePasswordPageUI.CLOSE_CONTENT);
 	}
 
-	public void waitForContentInvisible() {
-		waitForElementInVisible(driver, ChangePasswordPageUI.SUCCESS_CHANGE_PASS_MESSAGE);
-	}
-
 	public HomePageObject clickToLogoutLink() {
 		waitForElementVisible(driver, ChangePasswordPageUI.LOGOUT_LINK);
 		clickToElement(driver, ChangePasswordPageUI.LOGOUT_LINK);
