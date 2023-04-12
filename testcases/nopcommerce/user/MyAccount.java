@@ -151,6 +151,7 @@ public class MyAccount extends BaseTest {
 	public void My_Account_03_Address_Add_New_Full_Data_And_Delete() {
 		log.info("Address Step - 13: Reload 'Add New Address' page");
 		addressPage.refreshCurrentPage(driver);
+		addressPage = PageGeneratorManager.getPageGeneratorManager().getAddressPage(driver);
 
 		log.info("Address Step - 14: Input to 'First Name' textbox");
 		addressPage.inputToTextboxByID(driver, "Address_FirstName", userData.getFirstName());
@@ -229,6 +230,7 @@ public class MyAccount extends BaseTest {
 	public void My_Account_04_Address_Add_New_Address() {
 		log.info("Address Step - 37: Click to 'Add New' button");
 		addressPage.clickToAddNewButton();
+		addressPage = PageGeneratorManager.getPageGeneratorManager().getAddressPage(driver);
 
 		log.info("Address Step - 38: Input to 'First Name' textbox");
 		addressPage.inputToTextboxByID(driver, "Address_FirstName", userData.getFirstName());
@@ -292,7 +294,7 @@ public class MyAccount extends BaseTest {
 	}
 
 	@Test
-	public void My_Account_04_Change_Password() {
+	public void My_Account_05_Change_Password() {
 		log.info("Change Password Step - 01: Open 'Change Password' page");
 		changePasswordPage = (ChangePasswordPageObject) addressPage.openPageAtMyAccountByName(driver, "Change password");
 		changePasswordPage = PageGeneratorManager.getPageGeneratorManager().getChangePasswordPage(driver);
@@ -301,10 +303,39 @@ public class MyAccount extends BaseTest {
 		changePasswordPage.clickButtonByText(driver, "Change password");
 
 		log.info("Change Password Step - 03: Get Error Message at 'New Password' field");
-		verifyEquals(addressPage.getErrorMessageWithDynamicValue(driver, "NewPassword-error"), "Email is required.");
+		verifyEquals(changePasswordPage.getErrorMessageWithDynamicValue(driver, "NewPassword-error"), "Email is required.");
 
 		log.info("Change Password Step - 04: Get Error Message at 'Cofirm Password' field");
-		verifyEquals(addressPage.getErrorMessageWithDynamicValue(driver, "ConfirmNewPassword-error"), "Email is required.");
+		verifyEquals(changePasswordPage.getErrorMessageWithDynamicValue(driver, "ConfirmNewPassword-error"), "Email is required.");
+
+		log.info("Change Password Step - 05: Input to 'New Password' textbox");
+		changePasswordPage.inputToTextboxByID(driver, "NewPassword", "123");
+
+		log.info("Change Password Step - 06: Input to 'Confirm New Password' textbox");
+		changePasswordPage.inputToTextboxByID(driver, "ConfirmNewPassword", "123");
+
+		log.info("Change Password Step - 07: Get Error Message at 'New Password' field");
+		verifyEquals(changePasswordPage.getErrorMessageWithDynamicValue(driver, "NewPassword-error"), "Password must meet the following rules: must have at least 6 characters");
+
+		log.info("Change Password Step - 08: Reload 'Change Password' page");
+		changePasswordPage.refreshCurrentPage(driver);
+		changePasswordPage = PageGeneratorManager.getPageGeneratorManager().getChangePasswordPage(driver);
+
+		log.info("Change Password Step - 09: Input to 'Old Passwrod' textbox");
+		changePasswordPage.inputToTextboxByID(driver, "OldPassword", "789456");
+
+		log.info("Change Password Step - 10: Input to 'New Password' textbox");
+		changePasswordPage.inputToTextboxByID(driver, "NewPassword", "123456");
+
+		log.info("Change Password Step - 11: Input to 'Confirm New Password' textbox");
+		changePasswordPage.inputToTextboxByID(driver, "ConfirmNewPassword", "123456");
+
+		log.info("Change Password Step - 12: Click to 'Change Password' button");
+		changePasswordPage.clickButtonByText(driver, "Change password");
+
+		log.info("Change Password Step - 13: Get Error Message At 'Change Password' page");
+		verifyEquals(changePasswordPage.getErrorMessageAtPage(), "Old password doesn't match");
+
 	}
 
 	public void Login_06_Login_Success() {
