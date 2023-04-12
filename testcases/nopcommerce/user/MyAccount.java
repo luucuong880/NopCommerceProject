@@ -100,7 +100,7 @@ public class MyAccount extends BaseTest {
 		customerInfoPage.clickButtonByText(driver, "Save");
 
 		log.info("Customer Info Step - 11: Get Success Save Message");
-		verifyEquals(customerInfoPage.getSuccessSaveMessage(driver), "The customer info has been updated successfully.");
+		verifyEquals(customerInfoPage.getSuccessMessage(driver), "The customer info has been updated successfully.");
 
 		log.info("Customer Info Step - 12: Close Success Save Message");
 		customerInfoPage.closeSuccessMessage(driver);
@@ -184,7 +184,7 @@ public class MyAccount extends BaseTest {
 		addressPage.clickButtonByText(driver, "Save");
 
 		log.info("Address Step - 24: Get Success Save Message");
-		Assert.assertEquals(addressPage.getSuccessSaveMessage(driver), "The new address has been added successfully.");
+		Assert.assertEquals(addressPage.getSuccessMessage(driver), "The new address has been added successfully.");
 
 		log.info("Address Step - 25: Close Success Message");
 		addressPage.closeSuccessMessage(driver);
@@ -263,7 +263,7 @@ public class MyAccount extends BaseTest {
 		addressPage.clickButtonByText(driver, "Save");
 
 		log.info("Address Step - 48: Get Success Save Message");
-		Assert.assertEquals(addressPage.getSuccessSaveMessage(driver), "The new address has been added successfully.");
+		Assert.assertEquals(addressPage.getSuccessMessage(driver), "The new address has been added successfully.");
 
 		log.info("Address Step - 49: Close Success Message");
 		addressPage.closeSuccessMessage(driver);
@@ -302,43 +302,63 @@ public class MyAccount extends BaseTest {
 		log.info("Change Password Step - 02: Click to 'Change Password' button");
 		changePasswordPage.clickButtonByText(driver, "Change password");
 
-		log.info("Change Password Step - 03: Get Error Message at 'New Password' field");
-		verifyEquals(changePasswordPage.getErrorMessageWithDynamicValue(driver, "NewPassword-error"), "Email is required.");
+		log.info("Change Password Step - 03: Get Error Message at 'Old Password' field");
+		Assert.assertEquals(changePasswordPage.getErrorMessageWithDynamicValue(driver, "OldPassword-error"), "Old password is required.");
 
-		log.info("Change Password Step - 04: Get Error Message at 'Cofirm Password' field");
-		verifyEquals(changePasswordPage.getErrorMessageWithDynamicValue(driver, "ConfirmNewPassword-error"), "Email is required.");
+		log.info("Change Password Step - 04: Get Error Message at 'New Password' field");
+		Assert.assertEquals(changePasswordPage.getErrorMessageWithDynamicValue(driver, "NewPassword-error"), "Password is required.");
+
+		log.info("Change Password Step - 05: Get Error Message at 'Cofirm Password' field");
+		Assert.assertEquals(changePasswordPage.getErrorMessageWithDynamicValue(driver, "ConfirmNewPassword-error"), "Password is required.");
+
+		log.info("Change Password Step - 06: Click to 'Change Password' button");
+		changePasswordPage.clickButtonByText(driver, "Change password");
 
 		log.info("Change Password Step - 05: Input to 'New Password' textbox");
 		changePasswordPage.inputToTextboxByID(driver, "NewPassword", "123");
 
-		log.info("Change Password Step - 06: Input to 'Confirm New Password' textbox");
+		log.info("Change Password Step - 07: Input to 'Confirm New Password' textbox");
 		changePasswordPage.inputToTextboxByID(driver, "ConfirmNewPassword", "123");
 
-		log.info("Change Password Step - 07: Get Error Message at 'New Password' field");
-		verifyEquals(changePasswordPage.getErrorMessageWithDynamicValue(driver, "NewPassword-error"), "Password must meet the following rules: must have at least 6 characters");
+		log.info("Change Password Step - 08: Get Error Message at 'New Password' field");
+		Assert.assertEquals(changePasswordPage.getErrorMessageWithDynamicValue(driver, "NewPassword-error"), "Password must meet the following rules:\n" + "must have at least 6 characters");
 
-		log.info("Change Password Step - 08: Reload 'Change Password' page");
+		log.info("Change Password Step - 09: Reload 'Change Password' page");
 		changePasswordPage.refreshCurrentPage(driver);
 		changePasswordPage = PageGeneratorManager.getPageGeneratorManager().getChangePasswordPage(driver);
 
-		log.info("Change Password Step - 09: Input to 'Old Passwrod' textbox");
+		log.info("Change Password Step - 10: Input to 'Old Passwrod' textbox");
 		changePasswordPage.inputToTextboxByID(driver, "OldPassword", "789456");
 
-		log.info("Change Password Step - 10: Input to 'New Password' textbox");
+		log.info("Change Password Step - 11: Input to 'New Password' textbox");
 		changePasswordPage.inputToTextboxByID(driver, "NewPassword", "123456");
 
-		log.info("Change Password Step - 11: Input to 'Confirm New Password' textbox");
+		log.info("Change Password Step - 12: Input to 'Confirm New Password' textbox");
 		changePasswordPage.inputToTextboxByID(driver, "ConfirmNewPassword", "123456");
 
-		log.info("Change Password Step - 12: Click to 'Change Password' button");
+		log.info("Change Password Step - 13: Click to 'Change Password' button");
 		changePasswordPage.clickButtonByText(driver, "Change password");
 
-		log.info("Change Password Step - 13: Get Error Message At 'Change Password' page");
-		verifyEquals(changePasswordPage.getErrorMessageAtPage(), "Old password doesn't match");
+		log.info("Change Password Step - 14: Get Error Message At 'Change Password' page");
+		Assert.assertEquals(changePasswordPage.getErrorMessageAtPage(), "Old password doesn't match");
 
-	}
+		log.info("Change Password Step - 15: Input to 'Old Password' textbox");
+		changePasswordPage.inputToTextboxByID(driver, "OldPassword", userData.getLoginPassword());
 
-	public void Login_06_Login_Success() {
+		log.info("Change Password Step - 16: Input to 'New Password' textbox");
+		changePasswordPage.inputToTextboxByID(driver, "NewPassword", "456789");
+
+		log.info("Change Password Step - 17: Input to 'Confirm New Password' textbox");
+		changePasswordPage.inputToTextboxByID(driver, "ConfirmNewPassword", "456789");
+
+		log.info("Change Password Step - 18: Click to 'Change Password' button");
+		changePasswordPage.clickButtonByText(driver, "Change password");
+
+		log.info("Change Password Step - 19: Get Success Save Message");
+		Assert.assertEquals(addressPage.getSuccessMessage(driver), "Password was changed");
+
+		log.info("Change Password Step - 20: Close Success Message");
+		addressPage.closeSuccessMessage(driver);
 	}
 
 	public int generateFakeNumber() {

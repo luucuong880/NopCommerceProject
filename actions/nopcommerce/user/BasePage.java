@@ -628,9 +628,9 @@ public class BasePage {
 		checkToDefaultCheckboxOrRadio(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID, radioButtonByID);
 	}
 
-	public String getSuccessSaveMessage(WebDriver driver) {
-		waitForElementVisible(driver, BasePageUI.SAVE_SUCCESS_MESSAGE);
-		return getElementText(driver, BasePageUI.SAVE_SUCCESS_MESSAGE);
+	public String getSuccessMessage(WebDriver driver) {
+		waitForElementVisible(driver, BasePageUI.SUCCESS_MESSAGE);
+		return getElementText(driver, BasePageUI.SUCCESS_MESSAGE);
 	}
 
 	public void closeSuccessMessage(WebDriver driver) {
