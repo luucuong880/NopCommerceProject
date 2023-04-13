@@ -57,7 +57,8 @@ public class Computers extends BaseTest {
 
 	@Test
 	public void Computers_01_Desktop() {
-		log.info("");
+		log.info("Desktop Step - 01: Open 'Computers' page");
+
 	}
 
 	@Test
