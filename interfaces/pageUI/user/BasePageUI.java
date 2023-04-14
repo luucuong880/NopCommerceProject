@@ -9,5 +9,7 @@ public class BasePageUI {
 	public static final String DYNAMIC_TEXTBOX_BY_ID = "xpath=//input[@id='%s']";
 	public static final String SUCCESS_MESSAGE = "xpath=//p[@class='content']";
 	public static final String CLOSE_BUTTON = "xpath=//span[@class='close']";
+	public static final String DYNAMIC_PAGE_AT_TOP_MENU_AREA = "xpath=//ul[@class='top-menu notmobile']//a[contains(text(),'%s')]";
+	public static final String LINK_BY_TEXT = "xpath=//div[@class='item-grid']//a[contains(text(),'%s')]";
 
 }

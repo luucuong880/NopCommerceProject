@@ -590,6 +590,28 @@ public class BasePage {
 
 	}
 
+	public BasePage openPageAtTopMenuByText(WebDriver driver, String pageName) {
+		waitForElementClickable(driver, BasePageUI.DYNAMIC_PAGE_AT_TOP_MENU_AREA, pageName);
+		clickToElement(driver, BasePageUI.DYNAMIC_PAGE_AT_TOP_MENU_AREA, pageName);
+		switch (pageName) {
+		case "Computers":
+			return PageGeneratorManager.getPageGeneratorManager().getComputersPage(driver);
+		case "Electronics":
+			return PageGeneratorManager.getPageGeneratorManager().getElectronicsPage(driver);
+		case "Apparel":
+			return PageGeneratorManager.getPageGeneratorManager().getApparelPage(driver);
+		case "Digital downloads":
+			return PageGeneratorManager.getPageGeneratorManager().getDigitalPage(driver);
+		case "Books":
+			return PageGeneratorManager.getPageGeneratorManager().getBooksPage(driver);
+		case "Gift Cards":
+			return PageGeneratorManager.getPageGeneratorManager().getGiftCardPage(driver);
+		default:
+			throw new RuntimeException("Invalid page name at My Account are.");
+		}
+
+	}
+
 	public boolean isPageTitleByTextDisplayed(WebDriver driver, String textValue) {
 		waitForElementVisible(driver, BasePageUI.DYNAMIC_PAGE_TITLE, textValue);
 		return isElementDisplayed(driver, BasePageUI.DYNAMIC_PAGE_TITLE, textValue);
@@ -641,6 +663,11 @@ public class BasePage {
 	public String getTextboxValueByID(WebDriver driver, String textboxID) {
 		waitForElementVisible(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID, textboxID);
 		return getElementAttribute(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID, "value", textboxID);
+	}
+
+	public boolean isLinkByTextDisplayed(WebDriver driver, String textboxID) {
+		waitForElementVisible(driver, BasePageUI.LINK_BY_TEXT, textboxID);
+		return isElementDisplayed(driver, BasePageUI.LINK_BY_TEXT, textboxID);
 	}
 
 	private long longtimeout = 30;

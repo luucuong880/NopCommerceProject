@@ -12,6 +12,8 @@ import org.testng.annotations.Test;
 
 import com.nopcommerce.data.UserDataMapper;
 
+import pageObject.user.ComputersPageObject;
+import pageObject.user.DesktopPageObject;
 import pageObject.user.HomePageObject;
 import pageObject.user.LoginPageObject;
 import pageObject.user.RegisterPageObject;
@@ -58,23 +60,31 @@ public class Computers extends BaseTest {
 	@Test
 	public void Computers_01_Desktop() {
 		log.info("Desktop Step - 01: Open 'Computers' page");
+		computersPage = (ComputersPageObject) homePage.openPageAtTopMenuByText(driver, "Computers");
+		computersPage = PageGeneratorManager.getPageGeneratorManager().getComputersPage(driver);
 
+		log.info("Desktop Step - 02: Verify 'Desktop' link is Displayed");
+		verifyTrue(computersPage.isLinkByTextDisplayed(driver, "Desktop"));
+
+		log.info("Desktop Step - 02: Verify 'Notebooks' link is Displayed");
+		verifyTrue(computersPage.isLinkByTextDisplayed(driver, "Notebooks"));
+
+		log.info("Desktop Step - 02: Verify 'Software' link is Displayed");
+		verifyTrue(computersPage.isLinkByTextDisplayed(driver, "Software"));
+
+		log.info("Desktop Step - 03: Open 'Desktop' page");
 	}
 
-	@Test
 	public void My_Account_02_Address_Add_New_Empty_Data() {
 
 	}
 
-	@Test
 	public void My_Account_03_Address_Add_New_Full_Data_And_Delete() {
 	}
 
-	@Test
 	public void My_Account_04_Address_Add_New_Address() {
 	}
 
-	@Test
 	public void My_Account_05_Change_Password() {
 	}
 
@@ -96,5 +106,7 @@ public class Computers extends BaseTest {
 	private HomePageObject homePage;
 	private RegisterPageObject registerPage;
 	private LoginPageObject loginPage;
+	private DesktopPageObject desktopPage;
+	private ComputersPageObject computersPage;
 	UserDataMapper userData;
 }

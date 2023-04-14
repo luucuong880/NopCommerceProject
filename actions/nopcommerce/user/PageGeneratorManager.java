@@ -3,13 +3,19 @@ package nopcommerce.user;
 import org.openqa.selenium.WebDriver;
 
 import pageObject.user.AddressPageObject;
+import pageObject.user.ApparelPageObject;
+import pageObject.user.BooksPageObject;
 import pageObject.user.ChangePasswordPageObject;
 import pageObject.user.CheckoutPageObject;
 import pageObject.user.CompareProductPageObject;
 import pageObject.user.ComputersPageObject;
 import pageObject.user.CustomerInfoPageObject;
 import pageObject.user.DesktopPageObject;
+import pageObject.user.DigitalPageObject;
+import pageObject.user.ElectronicsPageObject;
+import pageObject.user.GiftCardPageObject;
 import pageObject.user.HomePageObject;
+import pageObject.user.JewelryPageObject;
 import pageObject.user.LoginPageObject;
 import pageObject.user.MyProductReviewPageObject;
 import pageObject.user.NotebooksPageObject;
@@ -102,6 +108,30 @@ public class PageGeneratorManager {
 
 	public CheckoutPageObject getCheckoutPage(WebDriver driver) {
 		return new CheckoutPageObject(driver);
+	}
+
+	public ElectronicsPageObject getElectronicsPage(WebDriver driver) {
+		return new ElectronicsPageObject(driver);
+	}
+
+	public ApparelPageObject getApparelPage(WebDriver driver) {
+		return new ApparelPageObject(driver);
+	}
+
+	public DigitalPageObject getDigitalPage(WebDriver driver) {
+		return new DigitalPageObject(driver);
+	}
+
+	public BooksPageObject getBooksPage(WebDriver driver) {
+		return new BooksPageObject(driver);
+	}
+
+	public JewelryPageObject getJewelryPage(WebDriver driver) {
+		return new JewelryPageObject(driver);
+	}
+
+	public GiftCardPageObject getGiftCardPage(WebDriver driver) {
+		return new GiftCardPageObject(driver);
 	}
 
 }
