@@ -25,6 +25,7 @@ import pageObject.user.RecentlyViewedProductsPageObject;
 import pageObject.user.RegisterPageObject;
 import pageObject.user.RewardPointPageObject;
 import pageObject.user.SearchPageObject;
+import pageObject.user.SoftwarePageObject;
 import pageObject.user.WishListPageObject;
 import pageUI.user.CartPageObject;
 
@@ -132,6 +133,10 @@ public class PageGeneratorManager {
 
 	public GiftCardPageObject getGiftCardPage(WebDriver driver) {
 		return new GiftCardPageObject(driver);
+	}
+
+	public SoftwarePageObject getSoftwarePage(WebDriver driver) {
+		return new SoftwarePageObject(driver);
 	}
 
 }

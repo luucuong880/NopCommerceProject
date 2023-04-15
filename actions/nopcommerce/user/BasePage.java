@@ -504,8 +504,7 @@ public class BasePage {
 
 	public boolean isImageLoaded(WebDriver driver, String locatorType, String... dynamicValues) {
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-		boolean status = (boolean) jsExecutor.executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0",
-				getWebElement(driver, getDynamicXpath(locatorType, dynamicValues)));
+		boolean status = (boolean) jsExecutor.executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", getWebElement(driver, getDynamicXpath(locatorType, dynamicValues)));
 		return status;
 	}
 
@@ -621,7 +620,12 @@ public class BasePage {
 			return PageGeneratorManager.getPageGeneratorManager().getDesktopPage(driver);
 		case "Notebooks":
 			return PageGeneratorManager.getPageGeneratorManager().getNotebooksPage(driver);
+		case "Software":
+			return PageGeneratorManager.getPageGeneratorManager().getSoftwarePage(driver);
+		default:
+			throw new RuntimeException("Invalid page name at Top Menu are.");
 		}
+
 	}
 
 	public boolean isPageTitleByTextDisplayed(WebDriver driver, String textValue) {

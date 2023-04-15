@@ -73,6 +73,17 @@ public class Computers extends BaseTest {
 		verifyTrue(computersPage.isLinkByTextDisplayed(driver, "Software"));
 
 		log.info("Desktop Step - 03: Open 'Desktop' page");
+		desktopPage = (DesktopPageObject) computersPage.openCategoriesOfComputerPage(driver, "Desktop");
+
+		log.info("Desktop Step - 04: Verify page title is Displayed");
+		verifyTrue(desktopPage.isPageTitleByTextDisplayed(driver, "Desktops"));
+
+		log.info("Desktop Step - 05: Click to 'List' button");
+		desktopPage.clickToViewModButton("List");
+
+		log.info("Desktop Step - 06: Click to 'Grid' button");
+		desktopPage.clickToViewModButton("Grid");
+
 	}
 
 	public void My_Account_02_Address_Add_New_Empty_Data() {
