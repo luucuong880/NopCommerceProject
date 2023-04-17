@@ -83,6 +83,7 @@ public class Computers extends BaseTest {
 
 		log.info("Desktop Step - 06: Click to 'Grid' button");
 		desktopPage.clickToViewModButton("Grid");
+		log.info("Desktop Step - 07: Open ");
 
 	}
 
