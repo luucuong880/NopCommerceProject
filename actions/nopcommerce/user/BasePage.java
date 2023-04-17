@@ -638,6 +638,11 @@ public class BasePage {
 		clickToElement(driver, BasePageUI.BUTTON_TEXT, textValue);
 	}
 
+	public void clickAddToCartButtonByText(WebDriver driver, String textValue) {
+		waitForElementVisible(driver, BasePageUI.ADD_TO_CART_BUTTON, textValue);
+		clickToElementByJS(driver, BasePageUI.ADD_TO_CART_BUTTON, textValue);
+	}
+
 	public boolean isButtonDisplayed(WebDriver driver, String textValue) {
 		waitForElementVisible(driver, BasePageUI.BUTTON_TEXT, textValue);
 		return isElementDisplayed(driver, BasePageUI.BUTTON_TEXT, textValue);
