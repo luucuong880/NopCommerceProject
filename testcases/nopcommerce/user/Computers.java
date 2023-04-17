@@ -83,7 +83,52 @@ public class Computers extends BaseTest {
 
 		log.info("Desktop Step - 06: Click to 'Grid' button");
 		desktopPage.clickToViewModButton("Grid");
-		log.info("Desktop Step - 07: Open ");
+
+		log.info("Desktop Step - 07: Click to 'Build your own computer' add to cart button");
+		desktopPage.clickAddToCartButtonByText(driver, "Build your own computer");
+		desktopPage = PageGeneratorManager.getPageGeneratorManager().getDesktopPage(driver);
+
+		log.info("Desktop Step - 08: Select 'Processor' item");
+		desktopPage.selectItemByDynamicsValue("Processor", "product_attribute_1", "2.2 GHz Intel Pentium Dual-Core E2200");
+
+		log.info("Desktop Step - 09: Verify Item Selected");
+		verifyFalse(desktopPage.isItemSelected("Processor", "product_attribute_1", "2.2 GHz Intel Pentium Dual-Core E2200"));
+
+		log.info("Desktop Step - 10: Select 'Processor' item");
+		desktopPage.selectItemByDynamicsValue("RAM", "product_attribute_2", "2 GB");
+
+		log.info("Desktop Step - 11: Verify Item Selected");
+		verifyFalse(desktopPage.isItemSelected("RAM", "product_attribute_2", "2 GB"));
+
+		log.info("Desktop Step - 12: Check 'HDD' radio button");
+		desktopPage.checkToRadioOrCheckboxButton("HDD", "320 GB");
+
+		log.info("Desktop Step - 13: Verify 'HDD' radio button is Displayed");
+		verifyTrue(desktopPage.isItemChecked("HDD", "320 GB"));
+
+		log.info("Desktop Step - 14: Check 'OS' radio button");
+		desktopPage.checkToRadioOrCheckboxButton("OS", "Vista Home [+$50.00]");
+
+		log.info("Desktop Step - 15: Verify 'OS' radio button is Displayed");
+		verifyTrue(desktopPage.isItemChecked("OS", "Vista Home [+$50.00]"));
+
+		log.info("Desktop Step - 16: Check 'Software' radio button");
+		desktopPage.checkToRadioOrCheckboxButton("Software", "Microsoft Office [+$50.00]");
+
+		log.info("Desktop Step - 17: Verify 'Software' radio button is Displayed");
+		verifyTrue(desktopPage.isItemChecked("Software", "Microsoft Office [+$50.00]"));
+
+		log.info("Desktop Step - 18: Verify Total prices");
+		verifyEquals(desktopPage.totalPrices(), "$1,300.00");
+
+		log.info("Desktop Step - 19: Click to 'Add to cart' button");
+		desktopPage.clickButtonByText(driver, "Add to cart");
+
+		log.info("Desktop Step - 20: Verify Success Message Added");
+		verifyEquals(desktopPage.getSuccessMessage(driver), "The product has been added to your shopping cart");
+
+		log.info("Desktop Step - 21: Close The title Message");
+		desktopPage.closeSuccessMessage(driver);
 
 	}
 
