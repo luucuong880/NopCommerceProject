@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 
 import com.nopcommerce.data.UserDataMapper;
 
+import pageObject.user.CartPageObject;
 import pageObject.user.ComputersPageObject;
 import pageObject.user.DesktopPageObject;
 import pageObject.user.HomePageObject;
@@ -36,7 +37,7 @@ public class Computers extends BaseTest {
 		userData = UserDataMapper.getUserData();
 		emailAddress = userData.getEmailAddress() + generateFakeNumber() + "@fakermail.com";
 
-		registerPage = homePage.openRegisterPage();
+		registerPage = (RegisterPageObject) homePage.openPageAtHeaderLinks(driver, "ico-register");
 
 		registerPage.inputToTextboxByID(driver, "FirstName", userData.getLoginUsername());
 		registerPage.inputToTextboxByID(driver, "LastName", userData.getLastName());
@@ -46,7 +47,7 @@ public class Computers extends BaseTest {
 
 		registerPage.clickToRegisterButton("register-button");
 
-		loginPage = registerPage.openLoginPage();
+		loginPage = (LoginPageObject) registerPage.openPageAtHeaderLinks(driver, "ico-login");
 
 		loginPage.inputToTextboxByID("Email", emailAddress);
 		loginPage.inputToTextboxByID("Password", userData.getLoginPassword());
@@ -61,7 +62,6 @@ public class Computers extends BaseTest {
 	public void Computers_01_Desktop() {
 		log.info("Desktop Step - 01: Open 'Computers' page");
 		computersPage = (ComputersPageObject) homePage.openPageAtTopMenuByText(driver, "Computers");
-		computersPage = PageGeneratorManager.getPageGeneratorManager().getComputersPage(driver);
 
 		log.info("Desktop Step - 02: Verify 'Desktop' link is Displayed");
 		verifyTrue(computersPage.isLinkByTextDisplayed(driver, "Desktop"));
@@ -132,8 +132,31 @@ public class Computers extends BaseTest {
 
 	}
 
-	public void My_Account_02_Address_Add_New_Empty_Data() {
+	@Test
+	public void Computers_02_Shopping_Cart() {
+		log.info("Shopping Cart Step - 01: Open 'Shopping Cart' page");
+		cartPage = (CartPageObject) desktopPage.openPageAtHeaderLinks(driver, "ico-cart");
 
+		log.info("Shoping Cart Step - 02: Verify 'Product' name is Displayed");
+		verifyEquals(cartPage.getProductsName(), "Build your own computer");
+
+		log.info("Shoping Cart Step - 03: Verify 'Processor' name is Displayed");
+		verifyTrue(cartPage.isProductsAttributeDisplayed("Processor: 2.2 GHz Intel Pentium Dual-Core E2200"));
+
+		log.info("Shoping Cart Step - 04: Verify 'RAM' name is Displayed");
+		verifyTrue(cartPage.isProductsAttributeDisplayed("RAM: 2 GB"));
+
+		log.info("Shoping Cart Step - 05: Verify 'HDD' name is Displayed");
+		verifyTrue(cartPage.isProductsAttributeDisplayed("HDD: 320 GB"));
+
+		log.info("Shoping Cart Step - 06: Verify 'OS' name is Displayed");
+		verifyTrue(cartPage.isProductsAttributeDisplayed("OS: Vista Home [+$50.00]"));
+
+		log.info("Shoping Cart Step - 07: Verify 'Software' name is Displayed");
+		verifyTrue(cartPage.isProductsAttributeDisplayed("Software: Microsoft Office [+$50.00]"));
+
+		log.info("Shoping Cart Step - 08: Verify 'Edit' button is displayed");
+		verifyTrue(cartPage.isEditButtonDisplayed());
 	}
 
 	public void My_Account_03_Address_Add_New_Full_Data_And_Delete() {
@@ -165,5 +188,6 @@ public class Computers extends BaseTest {
 	private LoginPageObject loginPage;
 	private DesktopPageObject desktopPage;
 	private ComputersPageObject computersPage;
+	private CartPageObject cartPage;
 	UserDataMapper userData;
 }

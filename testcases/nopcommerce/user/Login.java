@@ -37,7 +37,7 @@ public class Login extends BaseTest {
 		invalidEmail = userData.getEmailAddress() + generateFakeNumber() + "@kfc@kfc.com";
 		incorrectPassword = "789654";
 
-		registerPage = homePage.openRegisterPage();
+		registerPage = (RegisterPageObject) homePage.openPageAtHeaderLinks(driver, "ico-register");
 
 		registerPage.clickToRadioButtonByID(driver, "gender-male");
 		registerPage.inputToTextboxByID(driver, "FirstName", userData.getLoginUsername());
@@ -56,7 +56,7 @@ public class Login extends BaseTest {
 	@Test
 	public void Login_01_Empty_Data() {
 		log.info("Login Step - 01: Open 'Log in' page");
-		loginPage = registerPage.openLoginPage();
+		loginPage = (LoginPageObject) registerPage.openPageAtHeaderLinks(driver, "ico-login");
 
 		log.info("Login Step - 02: Verify 'Login' page title");
 		verifyEquals(loginPage.getMessagePageTitle(), "Welcome, Please Sign In!");
@@ -71,7 +71,7 @@ public class Login extends BaseTest {
 	@Test
 	public void Login_02_Invalid_Email() {
 		log.info("Login Step - 05: Reload 'Log in' page");
-		loginPage = homePage.openLoginPage();
+		loginPage = (LoginPageObject) homePage.openPageAtHeaderLinks(driver, "ico-login");
 
 		log.info("Login Step - 06: Input to 'Email' textbox Invalid Email");
 		loginPage.inputToTextboxByID("Email", invalidEmail);
@@ -86,7 +86,7 @@ public class Login extends BaseTest {
 	@Test
 	public void Login_03_Unregister_Email() {
 		log.info("Login Step - 09: Reload 'Log in' page");
-		loginPage = homePage.openLoginPage();
+		loginPage = (LoginPageObject) homePage.openPageAtHeaderLinks(driver, "ico-login");
 
 		log.info("Login Step - 10: Input to 'Email' textbox Unregister Email");
 		loginPage.inputToTextboxByID("Email", unregisterEmail);
@@ -102,7 +102,7 @@ public class Login extends BaseTest {
 	@Test
 	public void Login_04_Not_Entered_Password() {
 		log.info("Login Step - 13: Reload 'Log in' page");
-		loginPage = homePage.openLoginPage();
+		loginPage = (LoginPageObject) homePage.openPageAtHeaderLinks(driver, "ico-login");
 
 		log.info("Login Step - 14: Input to 'Email' textbox Email Address");
 		loginPage.inputToTextboxByID("Email", emailAddress);
@@ -120,7 +120,7 @@ public class Login extends BaseTest {
 	@Test
 	public void Login_05_Wrong_Entered_Password() {
 		log.info("Login Step - 17: Reload 'Log in' page");
-		loginPage = homePage.openLoginPage();
+		loginPage = (LoginPageObject) homePage.openPageAtHeaderLinks(driver, "ico-login");
 
 		log.info("Login Step - 18: Input to 'Email' textbox Email Address");
 		loginPage.inputToTextboxByID("Email", emailAddress);
@@ -138,7 +138,7 @@ public class Login extends BaseTest {
 	@Test
 	public void Login_06_Login_Success() {
 		log.info("Login Step - 22: Reload 'Log in' page");
-		loginPage = homePage.openLoginPage();
+		loginPage = (LoginPageObject) homePage.openPageAtHeaderLinks(driver, "ico-login");
 
 		log.info("Login Step - 23: Input to 'Email' textbox Email Address");
 		loginPage.inputToTextboxByID("Email", emailAddress);

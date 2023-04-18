@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import pageObject.user.AddressPageObject;
 import pageObject.user.ApparelPageObject;
 import pageObject.user.BooksPageObject;
+import pageObject.user.CartPageObject;
 import pageObject.user.ChangePasswordPageObject;
 import pageObject.user.CheckoutPageObject;
 import pageObject.user.CompareProductPageObject;
@@ -27,7 +28,6 @@ import pageObject.user.RewardPointPageObject;
 import pageObject.user.SearchPageObject;
 import pageObject.user.SoftwarePageObject;
 import pageObject.user.WishListPageObject;
-import pageUI.user.CartPageObject;
 
 public class PageGeneratorManager {
 

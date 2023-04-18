@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 
 import nopcommerce.user.BasePage;
 import nopcommerce.user.PageGeneratorManager;
-import pageUI.user.CartPageObject;
 import pageUI.user.WishListPageUI;
 
 public class WishListPageObject extends BasePage {

@@ -1,11 +1,10 @@
-package pageUI.user;
+package pageObject.user;
 
 import org.openqa.selenium.WebDriver;
 
 import nopcommerce.user.BasePage;
 import nopcommerce.user.PageGeneratorManager;
-import pageObject.user.CheckoutPageObject;
-import pageObject.user.DesktopPageObject;
+import pageUI.user.CartPageUI;
 
 public class CartPageObject extends BasePage {
 	private WebDriver driver;
@@ -30,19 +29,14 @@ public class CartPageObject extends BasePage {
 		return getElementText(driver, CartPageUI.PRODUCTS_NAME);
 	}
 
-	public String getProductsPrice() {
-		waitForElementVisible(driver, CartPageUI.PRODUCTS_PRICE);
-		return getElementText(driver, CartPageUI.PRODUCTS_PRICE);
+	public String getPriceByDynamicValue(String classValue) {
+		waitForElementVisible(driver, CartPageUI.PRICE_BY_DYNAMIC_CLASS, classValue);
+		return getElementText(driver, CartPageUI.PRICE_BY_DYNAMIC_CLASS, classValue);
 	}
 
-	public String getTotalPrice() {
-		waitForElementVisible(driver, CartPageUI.TOTAL_PRICE);
-		return getElementText(driver, CartPageUI.TOTAL_PRICE);
-	}
-
-	public void clickToRemoveButton() {
-		waitForElementClickable(driver, CartPageUI.REMOVE_BUTTON);
-		clickToElement(driver, CartPageUI.REMOVE_BUTTON);
+	public void clickToButton(String classValue) {
+		waitForElementClickable(driver, CartPageUI.BUTTON_BY_DYNAMIC_CLASS, classValue);
+		clickToElement(driver, CartPageUI.BUTTON_BY_DYNAMIC_CLASS, classValue);
 	}
 
 	public String getOrderMessage() {
@@ -55,14 +49,9 @@ public class CartPageObject extends BasePage {
 		sendkeyToElement(driver, CartPageUI.QUANTITY_TEXT, string);
 	}
 
-	public void clickToUpdateShoppingButton() {
-		waitForElementClickable(driver, CartPageUI.UPDATE_SHOPPING_BUTTON);
-		clickToElement(driver, CartPageUI.UPDATE_SHOPPING_BUTTON);
-	}
-
-	public CheckoutPageObject clickToCheckoutButton() {
-		waitForElementClickable(driver, CartPageUI.CHECKOUT_BUTTON);
-		clickToElement(driver, CartPageUI.CHECKOUT_BUTTON);
+	public CheckoutPageObject openCheckoutPage(String classValue) {
+		waitForElementClickable(driver, CartPageUI.BUTTON_BY_DYNAMIC_CLASS, classValue);
+		clickToElement(driver, CartPageUI.BUTTON_BY_DYNAMIC_CLASS, classValue);
 		return PageGeneratorManager.getPageGeneratorManager().getCheckoutPage(driver);
 	}
 
@@ -84,5 +73,20 @@ public class CartPageObject extends BasePage {
 	public boolean isTermsOfServiceChecked() {
 		waitForElementVisible(driver, CartPageUI.TERMS_OF_SERVICE);
 		return isElementDisplayed(driver, CartPageUI.TERMS_OF_SERVICE);
+	}
+
+	public boolean isProductsAttributeDisplayed(String attributeValue) {
+		waitForElementVisible(driver, CartPageUI.PRODUCTS_ATTRIBUTE, attributeValue);
+		return isElementDisplayed(driver, CartPageUI.PRODUCTS_ATTRIBUTE, attributeValue);
+	}
+
+	public boolean isButtonDisplayed(String classValue) {
+		waitForElementVisible(driver, CartPageUI.BUTTON_BY_DYNAMIC_CLASS, classValue);
+		return isElementDisplayed(driver, CartPageUI.BUTTON_BY_DYNAMIC_CLASS, classValue);
+	}
+
+	public boolean isEditButtonDisplayed() {
+		waitForElementVisible(driver, CartPageUI.EDIT_BUTTON);
+		return isElementDisplayed(driver, CartPageUI.EDIT_BUTTON);
 	}
 }

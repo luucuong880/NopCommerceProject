@@ -45,7 +45,7 @@ public class MyAccount extends BaseTest {
 		newZipCode = "813";
 		newPhoneNumber = "0789654213";
 
-		registerPage = homePage.openRegisterPage();
+		registerPage = (RegisterPageObject) homePage.openPageAtHeaderLinks(driver, "ico-register");
 
 		registerPage.inputToTextboxByID(driver, "FirstName", userData.getLoginUsername());
 		registerPage.inputToTextboxByID(driver, "LastName", userData.getLastName());
@@ -55,7 +55,7 @@ public class MyAccount extends BaseTest {
 
 		registerPage.clickToRegisterButton("register-button");
 
-		loginPage = registerPage.openLoginPage();
+		loginPage = (LoginPageObject) registerPage.openPageAtHeaderLinks(driver, "ico-login");
 
 		loginPage.inputToTextboxByID("Email", emailAddress);
 		loginPage.inputToTextboxByID("Password", userData.getLoginPassword());
@@ -64,7 +64,7 @@ public class MyAccount extends BaseTest {
 
 		homePage = PageGeneratorManager.getPageGeneratorManager().getHomePage(driver);
 
-		customerInfoPage = homePage.openMyAccountPage();
+		customerInfoPage = (CustomerInfoPageObject) homePage.openPageAtHeaderLinks(driver, "ico-account");
 	}
 
 	@Test
@@ -110,7 +110,6 @@ public class MyAccount extends BaseTest {
 	public void My_Account_02_Address_Add_New_Empty_Data() {
 		log.info("Address Step - 01: Open 'Address' page ");
 		addressPage = (AddressPageObject) customerInfoPage.openPageAtMyAccountByName(driver, "Addresses");
-		addressPage = PageGeneratorManager.getPageGeneratorManager().getAddressPage(driver);
 
 		log.info("Address Step - 02: Verify Address page title is Displayed");
 		verifyTrue(addressPage.isPageTitleByTextDisplayed(driver, "Addresses"));
@@ -297,7 +296,6 @@ public class MyAccount extends BaseTest {
 	public void My_Account_05_Change_Password() {
 		log.info("Change Password Step - 01: Open 'Change Password' page");
 		changePasswordPage = (ChangePasswordPageObject) addressPage.openPageAtMyAccountByName(driver, "Change password");
-		changePasswordPage = PageGeneratorManager.getPageGeneratorManager().getChangePasswordPage(driver);
 
 		log.info("Change Password Step - 02: Click to 'Change Password' button");
 		changePasswordPage.clickButtonByText(driver, "Change password");

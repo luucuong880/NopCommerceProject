@@ -37,7 +37,7 @@ public class Register extends BaseTest {
 	@Test
 	public void Register_01_Without_Info() {
 		log.info("Register Step - 01: Navigate to 'Register' page");
-		registerPage = homePage.openRegisterPage();
+		registerPage = (RegisterPageObject) homePage.openPageAtHeaderLinks(driver, "ico-register");
 
 		log.info("Register Step - 02: Click to 'Register' button");
 		registerPage.clickToRegisterButton("register-button");
@@ -149,8 +149,7 @@ public class Register extends BaseTest {
 	@Test
 	public void Register_04_Already_Email() {
 		log.info("Register Step - 31: Open 'Register' page");
-		registerPage.openRegisterPage();
-		registerPage = PageGeneratorManager.getPageGeneratorManager().getRegisterPage(driver);
+		registerPage.openPageAtHeaderLinks(driver, "ico-register");
 
 		log.info("Register Step - 32: Click to 'Gender' Radio button");
 		registerPage.clickToRadioButtonByID(driver, "gender-male");

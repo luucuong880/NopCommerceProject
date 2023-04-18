@@ -628,6 +628,25 @@ public class BasePage {
 
 	}
 
+	public BasePage openPageAtHeaderLinks(WebDriver driver, String pageLink) {
+		waitForElementClickable(driver, BasePageUI.HEADER_LINKS, pageLink);
+		clickToElement(driver, BasePageUI.HEADER_LINKS, pageLink);
+		switch (pageLink) {
+		case "ico-register":
+			return PageGeneratorManager.getPageGeneratorManager().getRegisterPage(driver);
+		case "ico-login":
+			return PageGeneratorManager.getPageGeneratorManager().getLoginPage(driver);
+		case "ico-wishlist":
+			return PageGeneratorManager.getPageGeneratorManager().getWishListPage(driver);
+		case "ico-cart":
+			return PageGeneratorManager.getPageGeneratorManager().getCartPage(driver);
+		case "ico-account":
+			return PageGeneratorManager.getPageGeneratorManager().getCustomerInfoPage(driver);
+		default:
+			throw new RuntimeException("Invalid page Links at Header are.");
+		}
+	}
+
 	public boolean isPageTitleByTextDisplayed(WebDriver driver, String textValue) {
 		waitForElementVisible(driver, BasePageUI.DYNAMIC_PAGE_TITLE, textValue);
 		return isElementDisplayed(driver, BasePageUI.DYNAMIC_PAGE_TITLE, textValue);
