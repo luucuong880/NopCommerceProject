@@ -4,7 +4,6 @@ import java.util.Random;
 
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -159,7 +158,64 @@ public class Computers extends BaseTest {
 		verifyTrue(cartPage.isEditButtonDisplayed());
 	}
 
-	public void My_Account_03_Address_Add_New_Full_Data_And_Delete() {
+	@Test
+	public void Computers_03_Edit_Products() {
+		log.info("Edit Step - 01: Click to 'Edit' button at 'Cart' page");
+		desktopPage = cartPage.clickToEditButton();
+
+		log.info("Edit Step - 02: Select 'Processor' item");
+		desktopPage.selectItemByDynamicsValue("Processor", "product_attribute_1", "2.5 GHz Intel Pentium Dual-Core E2200 [+$15.00]");
+
+		log.info("Edit Step - 03: Verify Item Selected");
+		verifyFalse(desktopPage.isItemSelected("Processor", "product_attribute_1", "2.5 GHz Intel Pentium Dual-Core E2200 [+$15.00]"));
+
+		log.info("Edit Step - 04: Select 'Processor' item");
+		desktopPage.selectItemByDynamicsValue("RAM", "product_attribute_2", "8GB [+$60.00]");
+
+		log.info("Edit Step - 05: Verify Item Selected");
+		verifyFalse(desktopPage.isItemSelected("RAM", "product_attribute_2", "8GB [+$60.00]"));
+
+		log.info("Edit Step - 06: Check 'HDD' radio button");
+		desktopPage.checkToRadioOrCheckboxButton("HDD", "400 GB [+$100.00]");
+
+		log.info("Edit Step - 07: Verify 'HDD' radio button is Displayed");
+		verifyTrue(desktopPage.isItemChecked("HDD", "400 GB [+$100.00]"));
+
+		log.info("Edit Step - 08: Check 'OS' radio button");
+		desktopPage.checkToRadioOrCheckboxButton("OS", "Vista Premium [+$60.00]");
+
+		log.info("Edit Step - 09: Verify 'OS' radio button is Displayed");
+		verifyTrue(desktopPage.isItemChecked("OS", "Vista Premium [+$60.00]"));
+
+		log.info("Edit Step - 10: Check 'Software' radio button");
+		desktopPage.checkToRadioOrCheckboxButton("Software", "Microsoft Office [+$50.00]");
+
+		log.info("Edit Step - 11: Verify 'Software' radio button is Displayed");
+		verifyTrue(desktopPage.isItemChecked("Software", "Microsoft Office [+$50.00]"));
+
+		log.info("Edit Step - 12: Check 'Software' radio button");
+		desktopPage.checkToRadioOrCheckboxButton("Software", "Acrobat Reader [+$10.00]");
+
+		log.info("Edit Step - 13: Verify 'Software' radio button is Displayed");
+		verifyTrue(desktopPage.isItemChecked("Software", "Acrobat Reader [+$10.00]"));
+
+		log.info("Edit Step - 14: Check 'Software' radio button");
+		desktopPage.checkToRadioOrCheckboxButton("Software", "Total Commander [+$5.00]");
+
+		log.info("Edit Step - 15: Verify 'Software' radio button is Displayed");
+		verifyTrue(desktopPage.isItemChecked("Software", "Total Commander [+$5.00]"));
+
+		log.info("Edit Step - 16: Verify Total prices");
+		verifyEquals(desktopPage.totalPrices(), "$1,500.00");
+
+		log.info("Edit Step - 17: Click to 'Update' button");
+		desktopPage.clickButtonByText(driver, "Update");
+
+		log.info("Edit Step - 18: Verify Success Message Added");
+		verifyEquals(desktopPage.getSuccessMessage(driver), "The product has been added to your shopping cart");
+
+		log.info("Edit Step - 19: Close The title Message");
+		desktopPage.closeSuccessMessage(driver);
 	}
 
 	public void My_Account_04_Address_Add_New_Address() {
@@ -174,12 +230,12 @@ public class Computers extends BaseTest {
 
 	}
 
-	@Parameters({ "browser" })
-	@AfterClass
-	public void afterClass() {
-
-		driver.quit();
-	}
+	// @Parameters({ "browser" })
+	// @AfterClass
+	// public void afterClass() {
+	//
+	// driver.quit();
+	// }
 
 	WebDriver driver;
 	private String emailAddress;
