@@ -30,6 +30,7 @@ public class DesktopPageObject extends BasePage {
 	public void checkToRadioOrCheckboxButton(String textValue, String textValue1) {
 		waitForElementClickable(driver, DesktopPageUI.CHECKBOX_OR_RADIO_BUTTON, textValue, textValue1);
 		checkToDefaultCheckboxOrRadio(driver, DesktopPageUI.CHECKBOX_OR_RADIO_BUTTON, textValue, textValue1);
+		sleepInSecond(2);
 	}
 
 	public boolean isItemChecked(String textValue, String textValue1) {

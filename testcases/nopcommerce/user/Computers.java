@@ -4,6 +4,7 @@ import java.util.Random;
 
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -230,12 +231,12 @@ public class Computers extends BaseTest {
 
 	}
 
-	// @Parameters({ "browser" })
-	// @AfterClass
-	// public void afterClass() {
-	//
-	// driver.quit();
-	// }
+	@Parameters({ "browser" })
+	@AfterClass
+	public void afterClass() {
+
+		driver.quit();
+	}
 
 	WebDriver driver;
 	private String emailAddress;
