@@ -137,26 +137,33 @@ public class Computers extends BaseTest {
 		log.info("Shopping Cart Step - 01: Open 'Shopping Cart' page");
 		cartPage = (CartPageObject) desktopPage.openPageAtHeaderLinks(driver, "ico-cart");
 
-		log.info("Shoping Cart Step - 02: Verify 'Product' name is Displayed");
+		log.info("Shopping Cart Step - 02: Verify 'Product' name is Displayed");
 		verifyEquals(cartPage.getProductsName(), "Build your own computer");
 
 		log.info("Shoping Cart Step - 03: Verify 'Processor' name is Displayed");
 		verifyTrue(cartPage.isProductsAttributeDisplayed("Processor: 2.2 GHz Intel Pentium Dual-Core E2200"));
 
-		log.info("Shoping Cart Step - 04: Verify 'RAM' name is Displayed");
+		log.info("Shopping Cart Step - 04: Verify 'RAM' name is Displayed");
 		verifyTrue(cartPage.isProductsAttributeDisplayed("RAM: 2 GB"));
 
-		log.info("Shoping Cart Step - 05: Verify 'HDD' name is Displayed");
+		log.info("Shopping Cart Step - 05: Verify 'HDD' name is Displayed");
 		verifyTrue(cartPage.isProductsAttributeDisplayed("HDD: 320 GB"));
 
-		log.info("Shoping Cart Step - 06: Verify 'OS' name is Displayed");
+		log.info("Shopping Cart Step - 06: Verify 'OS' name is Displayed");
 		verifyTrue(cartPage.isProductsAttributeDisplayed("OS: Vista Home [+$50.00]"));
 
-		log.info("Shoping Cart Step - 07: Verify 'Software' name is Displayed");
+		log.info("Shopping Cart Step - 07: Verify 'Software' name is Displayed");
 		verifyTrue(cartPage.isProductsAttributeDisplayed("Software: Microsoft Office [+$50.00]"));
 
-		log.info("Shoping Cart Step - 08: Verify 'Edit' button is displayed");
+		log.info("Shopping Cart Step - 08: Verify 'Price' is Displayed");
+		verifyEquals(cartPage.getPriceByDynamicValue("product-unit-price"), "$1,500.00");
+		verifyEquals(cartPage.getPriceByDynamicValue("product-subtotal"), "$1,500.00");
+
+		log.info("Shopping Cart Step - 09: Verify 'Edit' button is displayed");
 		verifyTrue(cartPage.isEditButtonDisplayed());
+
+		log.info("Shopping Cart Step - 10: Verify 'Remove' button is displayed");
+		verifyTrue(cartPage.isButtonDisplayed("remove-btn"));
 	}
 
 	@Test
@@ -217,6 +224,44 @@ public class Computers extends BaseTest {
 
 		log.info("Edit Step - 19: Close The title Message");
 		desktopPage.closeSuccessMessage(driver);
+
+		log.info("Edit Step - 20: Open 'Shopping Cart' page");
+		cartPage = (CartPageObject) desktopPage.openPageAtHeaderLinks(driver, "ico-cart");
+
+		log.info("Edit Step - 21: Verify 'Product' name is Displayed");
+		verifyEquals(cartPage.getProductsName(), "Build your own computer");
+
+		log.info("Edit Step - 22: Verify 'Processor' name is Displayed");
+		verifyTrue(cartPage.isProductsAttributeDisplayed("Processor: 2.5 GHz Intel Pentium Dual-Core E2200 [+$15.00]"));
+
+		log.info("Edit Step - 23: Verify 'RAM' name is Displayed");
+		verifyTrue(cartPage.isProductsAttributeDisplayed("RAM: 8GB [+$60.00]"));
+
+		log.info("Edit Step - 24: Verify 'HDD' name is Displayed");
+		verifyTrue(cartPage.isProductsAttributeDisplayed("HDD: 400 GB [+$100.00]"));
+
+		log.info("Edit Step - 25: Verify 'OS' name is Displayed");
+		verifyTrue(cartPage.isProductsAttributeDisplayed("OS: Vista Premium [+$60.00]"));
+
+		log.info("Edit Step - 26: Verify 'Software' name is Displayed");
+		verifyTrue(cartPage.isProductsAttributeDisplayed("Software: Microsoft Office [+$50.00]"));
+		verifyTrue(cartPage.isProductsAttributeDisplayed("Software: Acrobat Reader [+$10.00]"));
+		verifyTrue(cartPage.isProductsAttributeDisplayed("Software: Total Commander [+$5.00]"));
+
+		log.info("Edit Step - 27:");
+
+		log.info("Edit Step - 27: Input to 'Quantity' field");
+		cartPage.inputToTextboxByID(driver, "itemquantity11300", "5");
+
+		log.info("Edit Step - 28: Click to 'Update' button");
+		cartPage.clickButtonByText(driver, "Update shopping cart");
+
+		log.info("Edit Step - 29: Verify 'Price' and 'Total Price' is displayed");
+		verifyEquals(cartPage.getPriceByDynamicValue("product-unit-price"), "$1,500.00");
+		verifyEquals(cartPage.getPriceByDynamicValue("product-subtotal"), "$7,500.00");
+
+		log.info("Edit Step - 30: Click to 'Remove' button");
+
 	}
 
 	public void My_Account_04_Address_Add_New_Address() {
