@@ -93,13 +93,13 @@ public class Computers extends BaseTest {
 		desktopPage.selectToDropdownByName(driver, "product_attribute_1", "2.2 GHz Intel Pentium Dual-Core E2200");
 
 		log.info("Desktop Step - 09: Verify Item Selected");
-		verifyFalse(desktopPage.isItemSelected(driver, "product_attribute_1", "2.2 GHz Intel Pentium Dual-Core E2200"));
+		verifyTrue(desktopPage.isItemSelected(driver, "product_attribute_1", "2.2 GHz Intel Pentium Dual-Core E2200"));
 
 		log.info("Desktop Step - 10: Select 'Processor' item");
 		desktopPage.selectToDropdownByName(driver, "product_attribute_2", "2 GB");
 
 		log.info("Desktop Step - 11: Verify Item Selected");
-		verifyFalse(desktopPage.isItemSelected(driver, "product_attribute_2", "2 GB"));
+		verifyTrue(desktopPage.isItemSelected(driver, "product_attribute_2", "2 GB"));
 
 		log.info("Desktop Step - 12: Check 'HDD' radio button");
 		desktopPage.checkToRadioOrCheckboxButton("HDD", "320 GB");
@@ -276,6 +276,30 @@ public class Computers extends BaseTest {
 
 		log.info("Checkout Cheque Step - 02: Count all products at page");
 		verifyEquals(notebookPage.getProductSize(), 6);
+
+		log.info("Checkout Cheque Step - 03: Select Sort by Name: A to Z");
+		notebookPage.selectToDropdownByName(driver, "products-orderby", "Name: A to Z");
+
+		log.info("Checkout Cheque Step - 04: Verify Sort by Name is Displayed");
+		verifyTrue(notebookPage.isItemSelected(driver, "products-orderby", "Name: A to Z"));
+
+		log.info("Checkout Cheque Step - 05: Select Sort by Name: Z to A");
+		notebookPage.selectToDropdownByName(driver, "products-orderby", "Name: Z to A");
+
+		log.info("Checkout Cheque Step - 06: Verify Sort by Name is Displayed");
+		verifyTrue(notebookPage.isItemSelected(driver, "products-orderby", "Name: Z to A"));
+
+		log.info("Checkout Cheque Step - 07: Select Sort by Price: Low to High");
+		notebookPage.selectToDropdownByName(driver, "products-orderby", "Price: Low to High");
+
+		log.info("Checkout Cheque Step - 08: Verify Sort by Price is Displayed");
+		verifyTrue(notebookPage.isItemSelected(driver, "products-orderby", "Price: Low to High"));
+
+		log.info("Checkout Cheque Step - 09: Select Sort by Price: High to Low");
+		notebookPage.selectToDropdownByName(driver, "products-orderby", "Price: High to Low");
+
+		log.info("Checkout Cheque Step - 10: Verify Sort by Price is Displayed");
+		verifyTrue(notebookPage.isItemSelected(driver, "products-orderby", "Price: High to Low"));
 
 	}
 
