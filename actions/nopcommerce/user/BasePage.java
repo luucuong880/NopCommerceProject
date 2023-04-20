@@ -679,6 +679,11 @@ public class BasePage {
 		selectItemInDefaultDropdown(driver, BasePageUI.DYNAMIC_DROPDOWN_BY_NAME, itemValue, dropdownAttributeName);
 	}
 
+	public boolean isItemSelected(WebDriver driver, String dropdownAttributeName, String itemValue) {
+		waitForElementVisible(driver, BasePageUI.DYNAMIC_DROPDOWN_BY_NAME, dropdownAttributeName);
+		return isElementSelected(driver, BasePageUI.DYNAMIC_DROPDOWN_BY_NAME, itemValue, dropdownAttributeName);
+	}
+
 	public void inputToTextboxByID(WebDriver driver, String textID, String textValue) {
 		waitForElementVisible(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID, textID);
 		sendkeyToElement(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID, textValue, textID);
@@ -698,6 +703,7 @@ public class BasePage {
 	public void closeSuccessMessage(WebDriver driver) {
 		waitForElementClickable(driver, BasePageUI.CLOSE_BUTTON);
 		clickToElement(driver, BasePageUI.CLOSE_BUTTON);
+		sleepInSecond(2);
 	}
 
 	public String getTextboxValueByID(WebDriver driver, String textboxID) {

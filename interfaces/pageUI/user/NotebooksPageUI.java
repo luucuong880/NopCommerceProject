@@ -1,15 +1,6 @@
 package pageUI.user;
 
 public class NotebooksPageUI {
-	public static final String SORT_BY = "id=products-orderby";
-	public static final String SORT_BY_A_Z = "xpath=//select[@id='products-orderby']//option[text()='Name: A to Z']";
-	public static final String SORT_BY_Z_A = "xpath=//select[@id='products-orderby']//option[text()='Name: Z to A']";
-	public static final String SORT_BY_H_L = "xpath=//select[@id='products-orderby']//option[text()='Price: High to Low']";
-	public static final String SORT_BY_L_H = "xpath=//select[@id='products-orderby']//option[text()='Price: Low to High']";
-	public static final String PAGE_SIZE = "id=products-pagesize";
-	public static final String PAGE_SIZE_3 = "xpath=//select[@id='products-pagesize']//option[text()='3']";
-	public static final String PAGE_SIZE_6 = "xpath=//select[@id='products-pagesize']//option[text()='6']";
-	public static final String PAGE_SIZE_9 = "xpath=//select[@id='products-pagesize']//option[text()='9']";
 	public static final String NEXT_PAGE_ICON = "class=next-page";
 	public static final String NEXT_PAGE_BUTTON = "xpath=//li[@class='next-page']//a";
 	public static final String PREVIOUS_PAGE_ICON = "class=previous-page";

@@ -17,6 +17,7 @@ import pageObject.user.ComputersPageObject;
 import pageObject.user.DesktopPageObject;
 import pageObject.user.HomePageObject;
 import pageObject.user.LoginPageObject;
+import pageObject.user.NotebooksPageObject;
 import pageObject.user.RegisterPageObject;
 import utilities.Environment;
 
@@ -89,16 +90,16 @@ public class Computers extends BaseTest {
 		desktopPage = PageGeneratorManager.getPageGeneratorManager().getDesktopPage(driver);
 
 		log.info("Desktop Step - 08: Select 'Processor' item");
-		desktopPage.selectItemByDynamicsValue("Processor", "product_attribute_1", "2.2 GHz Intel Pentium Dual-Core E2200");
+		desktopPage.selectToDropdownByName(driver, "product_attribute_1", "2.2 GHz Intel Pentium Dual-Core E2200");
 
 		log.info("Desktop Step - 09: Verify Item Selected");
-		verifyFalse(desktopPage.isItemSelected("Processor", "product_attribute_1", "2.2 GHz Intel Pentium Dual-Core E2200"));
+		verifyFalse(desktopPage.isItemSelected(driver, "product_attribute_1", "2.2 GHz Intel Pentium Dual-Core E2200"));
 
 		log.info("Desktop Step - 10: Select 'Processor' item");
-		desktopPage.selectItemByDynamicsValue("RAM", "product_attribute_2", "2 GB");
+		desktopPage.selectToDropdownByName(driver, "product_attribute_2", "2 GB");
 
 		log.info("Desktop Step - 11: Verify Item Selected");
-		verifyFalse(desktopPage.isItemSelected("RAM", "product_attribute_2", "2 GB"));
+		verifyFalse(desktopPage.isItemSelected(driver, "product_attribute_2", "2 GB"));
 
 		log.info("Desktop Step - 12: Check 'HDD' radio button");
 		desktopPage.checkToRadioOrCheckboxButton("HDD", "320 GB");
@@ -156,14 +157,15 @@ public class Computers extends BaseTest {
 		verifyTrue(cartPage.isProductsAttributeDisplayed("Software: Microsoft Office [+$50.00]"));
 
 		log.info("Shopping Cart Step - 08: Verify 'Price' is Displayed");
-		verifyEquals(cartPage.getPriceByDynamicValue("product-unit-price"), "$1,500.00");
-		verifyEquals(cartPage.getPriceByDynamicValue("product-subtotal"), "$1,500.00");
+		verifyEquals(cartPage.getPriceByDynamicValue("product-unit-price"), "$1,300.00");
+		verifyEquals(cartPage.getPriceByDynamicValue("product-subtotal"), "$1,300.00");
 
 		log.info("Shopping Cart Step - 09: Verify 'Edit' button is displayed");
 		verifyTrue(cartPage.isEditButtonDisplayed());
 
 		log.info("Shopping Cart Step - 10: Verify 'Remove' button is displayed");
 		verifyTrue(cartPage.isButtonDisplayed("remove-btn"));
+
 	}
 
 	@Test
@@ -172,16 +174,16 @@ public class Computers extends BaseTest {
 		desktopPage = cartPage.clickToEditButton();
 
 		log.info("Edit Step - 02: Select 'Processor' item");
-		desktopPage.selectItemByDynamicsValue("Processor", "product_attribute_1", "2.5 GHz Intel Pentium Dual-Core E2200 [+$15.00]");
+		desktopPage.selectToDropdownByName(driver, "product_attribute_1", "2.5 GHz Intel Pentium Dual-Core E2200 [+$15.00]");
 
 		log.info("Edit Step - 03: Verify Item Selected");
-		verifyFalse(desktopPage.isItemSelected("Processor", "product_attribute_1", "2.5 GHz Intel Pentium Dual-Core E2200 [+$15.00]"));
+		verifyFalse(desktopPage.isItemSelected(driver, "product_attribute_1", "2.5 GHz Intel Pentium Dual-Core E2200 [+$15.00]"));
 
 		log.info("Edit Step - 04: Select 'Processor' item");
-		desktopPage.selectItemByDynamicsValue("RAM", "product_attribute_2", "8GB [+$60.00]");
+		desktopPage.selectToDropdownByName(driver, "product_attribute_2", "8GB [+$60.00]");
 
 		log.info("Edit Step - 05: Verify Item Selected");
-		verifyFalse(desktopPage.isItemSelected("RAM", "product_attribute_2", "8GB [+$60.00]"));
+		verifyFalse(desktopPage.isItemSelected(driver, "product_attribute_2", "8GB [+$60.00]"));
 
 		log.info("Edit Step - 06: Check 'HDD' radio button");
 		desktopPage.checkToRadioOrCheckboxButton("HDD", "400 GB [+$100.00]");
@@ -251,7 +253,7 @@ public class Computers extends BaseTest {
 		log.info("Edit Step - 27:");
 
 		log.info("Edit Step - 27: Input to 'Quantity' field");
-		cartPage.inputToTextboxByID(driver, "itemquantity11300", "5");
+		cartPage.inputToQuantityTextbox("5");
 
 		log.info("Edit Step - 28: Click to 'Update' button");
 		cartPage.clickButtonByText(driver, "Update shopping cart");
@@ -261,13 +263,24 @@ public class Computers extends BaseTest {
 		verifyEquals(cartPage.getPriceByDynamicValue("product-subtotal"), "$7,500.00");
 
 		log.info("Edit Step - 30: Click to 'Remove' button");
+		cartPage.clickToButton("remove-btn");
+
+		log.info("Edit Step - 31: Verify Empty Message is Displayed");
+		verifyEquals(cartPage.getOrderMessage(), "Your Shopping Cart is empty!");
+	}
+
+	@Test
+	public void Computers_04_Checkout_Payment_By_Cheque() {
+		log.info("Checkout Cheque Step - 01: Open 'Notebooks' page");
+		notebookPage = (NotebooksPageObject) cartPage.openCategoriesOfComputerPage(driver, "Notebooks");
+
+		log.info("Checkout Cheque Step - 02: Count all products at page");
+		verifyEquals(notebookPage.getProductSize(), 6);
 
 	}
 
-	public void My_Account_04_Address_Add_New_Address() {
-	}
-
-	public void My_Account_05_Change_Password() {
+	@Test
+	public void Computers_05_Checkout_Payment_By_Card() {
 	}
 
 	public int generateFakeNumber() {
@@ -291,5 +304,6 @@ public class Computers extends BaseTest {
 	private DesktopPageObject desktopPage;
 	private ComputersPageObject computersPage;
 	private CartPageObject cartPage;
+	private NotebooksPageObject notebookPage;
 	UserDataMapper userData;
 }

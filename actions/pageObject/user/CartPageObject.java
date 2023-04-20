@@ -89,4 +89,10 @@ public class CartPageObject extends BasePage {
 		waitForElementVisible(driver, CartPageUI.EDIT_BUTTON);
 		return isElementDisplayed(driver, CartPageUI.EDIT_BUTTON);
 	}
+
+	public void inputToQuantityTextbox(String textValue) {
+		waitForElementVisible(driver, CartPageUI.QUANTITY_TEXT);
+		sendkeyToElement(driver, CartPageUI.QUANTITY_TEXT, textValue);
+	}
+
 }

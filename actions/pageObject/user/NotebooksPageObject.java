@@ -12,51 +12,6 @@ public class NotebooksPageObject extends BasePage {
 		this.driver = driver;
 	}
 
-	public void selectToSortBy(String textItem) {
-		waitForElementVisible(driver, NotebooksPageUI.SORT_BY);
-		selectItemInCustomDropdown(driver, NotebooksPageUI.SORT_BY, "xpath=//option", textItem);
-	}
-
-	public boolean isSortByA_Z() {
-		waitForElementVisible(driver, NotebooksPageUI.SORT_BY_A_Z);
-		return isElementSelected(driver, NotebooksPageUI.SORT_BY_A_Z);
-	}
-
-	public boolean isSortByZ_A() {
-		waitForElementVisible(driver, NotebooksPageUI.SORT_BY_Z_A);
-		return isElementSelected(driver, NotebooksPageUI.SORT_BY_Z_A);
-	}
-
-	public boolean isSortByHigh_Low() {
-		waitForElementVisible(driver, NotebooksPageUI.SORT_BY_H_L);
-		return isElementSelected(driver, NotebooksPageUI.SORT_BY_H_L);
-	}
-
-	public boolean isSortByLow_High() {
-		waitForElementVisible(driver, NotebooksPageUI.SORT_BY_L_H);
-		return isElementSelected(driver, NotebooksPageUI.SORT_BY_L_H);
-	}
-
-	public void selectToPageSizeProduct(String textNumb) {
-		waitForElementVisible(driver, NotebooksPageUI.PAGE_SIZE);
-		selectItemInCustomDropdown(driver, NotebooksPageUI.PAGE_SIZE, "xpath=//option", textNumb);
-	}
-
-	public boolean isPageSizeProductSelected_3() {
-		waitForElementVisible(driver, NotebooksPageUI.PAGE_SIZE_3);
-		return isElementSelected(driver, NotebooksPageUI.PAGE_SIZE_3);
-	}
-
-	public boolean isPageSizeProductSelected_6() {
-		waitForElementVisible(driver, NotebooksPageUI.PAGE_SIZE_6);
-		return isElementSelected(driver, NotebooksPageUI.PAGE_SIZE_6);
-	}
-
-	public boolean isPageSizeProductSelected_9() {
-		waitForElementVisible(driver, NotebooksPageUI.PAGE_SIZE_9);
-		return isElementSelected(driver, NotebooksPageUI.PAGE_SIZE_9);
-	}
-
 	public boolean isEnableNextPageIcon() {
 		waitForElementVisible(driver, NotebooksPageUI.NEXT_PAGE_ICON);
 		return isElementEnable(driver, NotebooksPageUI.NEXT_PAGE_ICON);
