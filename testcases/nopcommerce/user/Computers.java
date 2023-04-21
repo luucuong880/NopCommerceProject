@@ -270,7 +270,7 @@ public class Computers extends BaseTest {
 	}
 
 	@Test
-	public void Computers_04_Checkout_Payment_By_Cheque() {
+	public void Computers_04_Notebooks() {
 		log.info("Checkout Cheque Step - 01: Open 'Computers' page");
 		computersPage = (ComputersPageObject) cartPage.openPageAtTopMenuByText(driver, "Computers");
 
@@ -303,6 +303,9 @@ public class Computers extends BaseTest {
 
 		log.info("Checkout Cheque Step - 11: Verify Sort by Price is Displayed");
 		verifyEquals(notebookPage.getItemSelected(driver, "products-orderby"), "Price: High to Low");
+
+		log.info("Checkout Cheque Step - 12: Select display 3 per page");
+		notebookPage.selectToDropdownByName(driver, "products-pagesize", "3");
 
 	}
 
