@@ -1,10 +1,7 @@
 package pageUI.user;
 
 public class NotebooksPageUI {
-	public static final String NEXT_PAGE_ICON = "class=next-page";
-	public static final String NEXT_PAGE_BUTTON = "xpath=//li[@class='next-page']//a";
-	public static final String PREVIOUS_PAGE_ICON = "class=previous-page";
-	public static final String PREVIOUS_PAGE_BUTTON = "xpath=//li[@class='previous-page']//a";
+	public static final String PAGE_BUTTON = "xpath=//li[@class='%s']";
 	public static final String PRODUCT_SIZE = "xpath=//h2[@class='product-title']//a";
 	public static final String APPLE_WISH_LIST_BUTTON = "xpath=//a[text()='Apple MacBook Pro 13-inch']/parent::h2/following-sibling::div[@class='add-info']//button[@class='button-2 add-to-wishlist-button']";
 	public static final String ADD_WISH_LIST_SUCCESS_MESSAGE = "class=content";

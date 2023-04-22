@@ -341,9 +341,9 @@ public class BasePage {
 		driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
 	}
 
-	public boolean isElementUndisplayed(WebDriver driver, String locator) {
+	public boolean isElementUndisplayed(WebDriver driver, String locatorType) {
 		overrideImplicitTimeout(driver, shorttimeout);
-		List<WebElement> elements = getListWebElement(driver, locator);
+		List<WebElement> elements = getListWebElement(driver, locatorType);
 		overrideImplicitTimeout(driver, longtimeout);
 		if (elements.size() == 0) {
 			return true;

@@ -4,6 +4,7 @@ import java.util.Random;
 
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
@@ -271,41 +272,72 @@ public class Computers extends BaseTest {
 
 	@Test
 	public void Computers_04_Notebooks() {
-		log.info("Checkout Cheque Step - 01: Open 'Computers' page");
+		log.info("Notebooks Step - 01: Open 'Computers' page");
 		computersPage = (ComputersPageObject) cartPage.openPageAtTopMenuByText(driver, "Computers");
 
-		log.info("Checkout Cheque Step - 02: Open 'Notebooks' page");
+		log.info("Notebooks Step - 02: Open 'Notebooks' page");
 		notebookPage = (NotebooksPageObject) computersPage.openCategoriesOfComputerPage(driver, "Notebooks");
 
-		log.info("Checkout Cheque Step - 03: Count all products at page");
+		log.info("Notebooks Step - 03: Count all products at page");
 		verifyEquals(notebookPage.getProductSize(), 6);
 
-		log.info("Checkout Cheque Step - 04: Select Sort by Name: A to Z");
+		log.info("Notebooks Step - 04: Select Sort by Name: A to Z");
 		notebookPage.selectToDropdownByName(driver, "products-orderby", "Name: A to Z");
 
-		log.info("Checkout Cheque Step - 05: Verify Sort by Name is Displayed");
+		log.info("Notebooks Step - 05: Verify Sort by Name is Displayed");
 		verifyEquals(notebookPage.getItemSelected(driver, "products-orderby"), "Name: A to Z");
 
-		log.info("Checkout Cheque Step - 06: Select Sort by Name: Z to A");
+		log.info("Notebooks Step - 06: Select Sort by Name: Z to A");
 		notebookPage.selectToDropdownByName(driver, "products-orderby", "Name: Z to A");
 
-		log.info("Checkout Cheque Step - 07: Verify Sort by Name is Displayed");
+		log.info("Notebooks Step - 07: Verify Sort by Name is Displayed");
 		verifyEquals(notebookPage.getItemSelected(driver, "products-orderby"), "Name: Z to A");
 
-		log.info("Checkout Cheque Step - 08: Select Sort by Price: Low to High");
+		log.info("Notebooks Step - 08: Select Sort by Price: Low to High");
 		notebookPage.selectToDropdownByName(driver, "products-orderby", "Price: Low to High");
 
-		log.info("Checkout Cheque Step - 09: Verify Sort by Price is Displayed");
+		log.info("Notebooks Step - 09: Verify Sort by Price is Displayed");
 		verifyEquals(notebookPage.getItemSelected(driver, "products-orderby"), "Price: Low to High");
 
-		log.info("Checkout Cheque Step - 10: Select Sort by Price: High to Low");
+		log.info("Notebooks Step - 10: Select Sort by Price: High to Low");
 		notebookPage.selectToDropdownByName(driver, "products-orderby", "Price: High to Low");
 
-		log.info("Checkout Cheque Step - 11: Verify Sort by Price is Displayed");
+		log.info("Notebooks Step - 11: Verify Sort by Price is Displayed");
 		verifyEquals(notebookPage.getItemSelected(driver, "products-orderby"), "Price: High to Low");
 
-		log.info("Checkout Cheque Step - 12: Select display 3 per page");
+		log.info("Notebooks Step - 12: Select display 3 per page");
 		notebookPage.selectToDropdownByName(driver, "products-pagesize", "3");
+
+		log.info("Notebooks Step - 13: Verify 3 per page is Displayed");
+		verifyEquals(notebookPage.getItemSelected(driver, "products-pagesize"), "3");
+
+		log.info("Notebooks Step - 14: Count all products at page");
+		verifyEquals(notebookPage.getProductSize(), 3);
+
+		log.info("Notebooks Step - 15: Verify 'Next' page button is displayed");
+		verifyTrue(notebookPage.isPageButtonDisplayed("next-page"));
+
+		log.info("Notebooks Step - 16: Click to 'Next' page button");
+		notebookPage.clickToPagerButton("next-page");
+
+		log.info("Notebooks Step - 17: Count all products at page");
+		verifyEquals(notebookPage.getProductSize(), 3);
+
+		log.info("Notebooks Step - 18: Verify 'Previous' page button is displayed");
+		verifyTrue(notebookPage.isPageButtonDisplayed("previous-page"));
+
+		log.info("Notebooks Step - 19: Select display 6 per page");
+		notebookPage.selectToDropdownByName(driver, "products-pagesize", "6");
+
+		log.info("Notebooks Step - 20: Verify 3 per page is Displayed");
+		verifyEquals(notebookPage.getItemSelected(driver, "products-pagesize"), "6");
+
+		log.info("Notebooks Step - 21: Count all products at page");
+		verifyEquals(notebookPage.getProductSize(), 6);
+
+		log.info("Notebooks Step - 22: Verify 'Next' and 'Previous' page button is undisplayed");
+		Assert.assertFalse(notebookPage.isPageButtonDisplayed("next-page"));
+		Assert.assertFalse(notebookPage.isPageButtonDisplayed("previous-page"));
 
 	}
 

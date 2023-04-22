@@ -12,26 +12,6 @@ public class NotebooksPageObject extends BasePage {
 		this.driver = driver;
 	}
 
-	public boolean isEnableNextPageIcon() {
-		waitForElementVisible(driver, NotebooksPageUI.NEXT_PAGE_ICON);
-		return isElementEnable(driver, NotebooksPageUI.NEXT_PAGE_ICON);
-	}
-
-	public void clickToNextPageIcon() {
-		waitForElementVisible(driver, NotebooksPageUI.NEXT_PAGE_BUTTON);
-		clickToElement(driver, NotebooksPageUI.NEXT_PAGE_BUTTON);
-	}
-
-	public boolean isEnablePreviousIcon() {
-		waitForElementVisible(driver, NotebooksPageUI.PREVIOUS_PAGE_ICON);
-		return isElementEnable(driver, NotebooksPageUI.PREVIOUS_PAGE_ICON);
-	}
-
-	public void clickToPreviousIcon() {
-		waitForElementVisible(driver, NotebooksPageUI.PREVIOUS_PAGE_BUTTON);
-		clickToElement(driver, NotebooksPageUI.PREVIOUS_PAGE_BUTTON);
-	}
-
 	public Object getProductSize() {
 		waitForElementVisible(driver, NotebooksPageUI.PRODUCT_SIZE);
 		return getElementSize(driver, NotebooksPageUI.PRODUCT_SIZE);
@@ -108,9 +88,18 @@ public class NotebooksPageObject extends BasePage {
 		clickToElement(driver, NotebooksPageUI.ADD_TO_CART_BUTTON);
 	}
 
+	public void clickToPagerButton(String classValue) {
+		waitForElementClickable(driver, NotebooksPageUI.PAGE_BUTTON, classValue);
+		clickToElement(driver, NotebooksPageUI.PAGE_BUTTON, classValue);
+	}
+
 	public String getAddToCartSuccessMessage() {
 		waitForElementVisible(driver, NotebooksPageUI.ADD_CART_SUCCESS_MESSAGE);
 		return getElementText(driver, NotebooksPageUI.ADD_CART_SUCCESS_MESSAGE);
+	}
+
+	public boolean isPageButtonDisplayed(String classValue) {
+		return isElementDisplayed(driver, NotebooksPageUI.PAGE_BUTTON, classValue);
 	}
 
 }
