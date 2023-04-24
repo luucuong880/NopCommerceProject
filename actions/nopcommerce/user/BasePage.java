@@ -504,7 +504,8 @@ public class BasePage {
 
 	public boolean isImageLoaded(WebDriver driver, String locatorType, String... dynamicValues) {
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-		boolean status = (boolean) jsExecutor.executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", getWebElement(driver, getDynamicXpath(locatorType, dynamicValues)));
+		boolean status = (boolean) jsExecutor.executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0",
+				getWebElement(driver, getDynamicXpath(locatorType, dynamicValues)));
 		return status;
 	}
 
@@ -701,9 +702,14 @@ public class BasePage {
 		return getElementText(driver, BasePageUI.SUCCESS_MESSAGE);
 	}
 
-	public String getQuantityMessage(WebDriver driver) {
-		waitForElementVisible(driver, BasePageUI.SUCCESS_MESSAGE);
-		return getElementText(driver, BasePageUI.SUCCESS_MESSAGE);
+	public String getQuantityMessage(WebDriver driver, String classValue) {
+		waitForElementVisible(driver, BasePageUI.MESSAGE_DYNAMIC_BY_CLASS, classValue);
+		return getElementText(driver, BasePageUI.MESSAGE_DYNAMIC_BY_CLASS, classValue);
+	}
+
+	public String getTotalInfosMessage(WebDriver driver, String classValue) {
+		waitForElementVisible(driver, BasePageUI.TOTAL_INFOS, classValue);
+		return getElementText(driver, BasePageUI.TOTAL_INFOS, classValue);
 	}
 
 	public void closeSuccessMessage(WebDriver driver) {

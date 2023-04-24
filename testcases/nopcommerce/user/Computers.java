@@ -349,7 +349,7 @@ public class Computers extends BaseTest {
 		notebookPage.clickAddToCartButtonByText(driver, "Apple MacBook Pro 13-inch");
 
 		log.info("Checkout Cheque Step - 02: Verify Quantity Message");
-		verifyEquals(notebookPage.getQuantityMessage(driver), "This product has a minimum quantity of 2");
+		verifyEquals(notebookPage.getQuantityMessage(driver, "min-qty-notification"), "This product has a minimum quantity of 2");
 
 		log.info("Checkout Cheque Step - 02: Click to 'Add to cart' button");
 		notebookPage.clickToAddToCartButton();
@@ -377,7 +377,7 @@ public class Computers extends BaseTest {
 		cartPage.clickButtonByText(driver, "Update shopping cart");
 
 		log.info("Checkout Cheque Step - 10: Verify 'Price' and 'Total Price' is displayed");
-		verifyEquals(cartPage.getPriceByDynamicValue("product-unit-price"), "$1,500.00");
+		verifyEquals(cartPage.getPriceByDynamicValue("product-unit-price"), "$1,800.00");
 		verifyEquals(cartPage.getPriceByDynamicValue("product-subtotal"), "$9,000.00");
 
 		log.info("Checkout Cheque Step - 11: Select Gift Wrapping");
@@ -385,6 +385,23 @@ public class Computers extends BaseTest {
 
 		log.info("Checkout Cheque Step - 12: Verify Gift Wrapping is displayed");
 		verifyEquals(cartPage.getItemSelected(driver, "checkout_attribute_1"), "Yes [+$10.00]");
+
+		log.info("Checkout Cheque Step - 13: Verify Gift Wrapping Message");
+		verifyEquals(cartPage.getQuantityMessage(driver, "selected-checkout-attributes"), "Gift wrapping: Yes [+$10.00]");
+
+		log.info("Checkout Cheque Step - 14: Verify Order Subtotal text");
+		verifyEquals(cartPage.getTotalInfosMessage(driver, "order-subtotal"), "$9,010.00");
+
+		log.info("Checkout Cheque Step - 15: Verify Shipping Cost text");
+		verifyEquals(cartPage.getTotalInfosMessage(driver, "shipping-cost"), "$0.00");
+
+		log.info("Checkout Cheque Step - 16: Verify Tax Value text");
+		verifyEquals(cartPage.getTotalInfosMessage(driver, "tax-value"), "$0.00");
+
+		log.info("Checkout Cheque Step - 17: Verify Order Total text");
+		verifyEquals(cartPage.getTotalInfosMessage(driver, "order-total"), "");
+
+		log.info("Checkout Cheque Step - 18: Verify Earn Reward Point text");
 	}
 
 	public int generateFakeNumber() {
