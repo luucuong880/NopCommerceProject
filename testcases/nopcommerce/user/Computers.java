@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import com.nopcommerce.data.UserDataMapper;
 
 import pageObject.user.CartPageObject;
+import pageObject.user.CheckoutPageObject;
 import pageObject.user.ComputersPageObject;
 import pageObject.user.DesktopPageObject;
 import pageObject.user.HomePageObject;
@@ -399,9 +400,17 @@ public class Computers extends BaseTest {
 		verifyEquals(cartPage.getTotalInfosMessage(driver, "tax-value"), "$0.00");
 
 		log.info("Checkout Cheque Step - 17: Verify Order Total text");
-		verifyEquals(cartPage.getTotalInfosMessage(driver, "order-total"), "");
+		verifyEquals(cartPage.getOrderSubtotal(), "$9,010.00");
 
 		log.info("Checkout Cheque Step - 18: Verify Earn Reward Point text");
+		verifyEquals(cartPage.getTotalInfosMessage(driver, "earn-reward-points"), "901 points");
+
+		log.info("Checkout Cheque Step - 18: Check to 'Term of service' Checkbox");
+		cartPage.clickToRadioButtonByID(driver, "termsofservice");
+
+		log.info("Checkout Cheque Step - 19: Click to 'Checkout' button");
+		checkoutPage = cartPage.openCheckoutPage("button-1 checkout-button");
+
 	}
 
 	public int generateFakeNumber() {
@@ -426,5 +435,6 @@ public class Computers extends BaseTest {
 	private ComputersPageObject computersPage;
 	private CartPageObject cartPage;
 	private NotebooksPageObject notebookPage;
+	private CheckoutPageObject checkoutPage;
 	UserDataMapper userData;
 }

@@ -55,9 +55,9 @@ public class CartPageObject extends BasePage {
 		return PageGeneratorManager.getPageGeneratorManager().getCheckoutPage(driver);
 	}
 
-	public void selectGiftWrapping(String string) {
-		waitForElementVisible(driver, CartPageUI.GIFT_WRAPPING);
-		selectItemInCustomDropdown(driver, CartPageUI.GIFT_WRAPPING, "xpath=//option", string);
+	public String getOrderSubtotal() {
+		waitForElementVisible(driver, CartPageUI.OREDER_SUBTOTAL);
+		return getElementText(driver, CartPageUI.OREDER_SUBTOTAL);
 	}
 
 	public boolean isGiftWrappingselected() {
