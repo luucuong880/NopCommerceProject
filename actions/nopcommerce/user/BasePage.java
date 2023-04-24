@@ -701,6 +701,11 @@ public class BasePage {
 		return getElementText(driver, BasePageUI.SUCCESS_MESSAGE);
 	}
 
+	public String getQuantityMessage(WebDriver driver) {
+		waitForElementVisible(driver, BasePageUI.SUCCESS_MESSAGE);
+		return getElementText(driver, BasePageUI.SUCCESS_MESSAGE);
+	}
+
 	public void closeSuccessMessage(WebDriver driver) {
 		waitForElementClickable(driver, BasePageUI.CLOSE_BUTTON);
 		clickToElement(driver, BasePageUI.CLOSE_BUTTON);

@@ -4,7 +4,6 @@ import java.util.Random;
 
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
@@ -251,8 +250,6 @@ public class Computers extends BaseTest {
 		verifyTrue(cartPage.isProductsAttributeDisplayed("Software: Acrobat Reader [+$10.00]"));
 		verifyTrue(cartPage.isProductsAttributeDisplayed("Software: Total Commander [+$5.00]"));
 
-		log.info("Edit Step - 27:");
-
 		log.info("Edit Step - 27: Input to 'Quantity' field");
 		cartPage.inputToQuantityTextbox("5");
 
@@ -329,20 +326,65 @@ public class Computers extends BaseTest {
 		log.info("Notebooks Step - 19: Select display 6 per page");
 		notebookPage.selectToDropdownByName(driver, "products-pagesize", "6");
 
-		log.info("Notebooks Step - 20: Verify 3 per page is Displayed");
+		log.info("Notebooks Step - 20: Verify 6 per page is Displayed");
 		verifyEquals(notebookPage.getItemSelected(driver, "products-pagesize"), "6");
 
 		log.info("Notebooks Step - 21: Count all products at page");
 		verifyEquals(notebookPage.getProductSize(), 6);
 
-		log.info("Notebooks Step - 22: Verify 'Next' and 'Previous' page button is undisplayed");
-		Assert.assertFalse(notebookPage.isPageButtonDisplayed("next-page"));
-		Assert.assertFalse(notebookPage.isPageButtonDisplayed("previous-page"));
+		log.info("Notebooks Step - 22: Select display 9 per page");
+		notebookPage.selectToDropdownByName(driver, "products-pagesize", "9");
+
+		log.info("Notebooks Step - 23: Verify 9 per page is Displayed");
+		verifyEquals(notebookPage.getItemSelected(driver, "products-pagesize"), "9");
+
+		log.info("Notebooks Step - 24: Count all products at page");
+		verifyEquals(notebookPage.getProductSize(), 6);
 
 	}
 
 	@Test
-	public void Computers_05_Checkout_Payment_By_Card() {
+	public void Computers_05_Checkout_Payment_By_Cheque() {
+		log.info("Checkout Cheque Step - 01: Add Apple MacBook Pro to Cart");
+		notebookPage.clickAddToCartButtonByText(driver, "Apple MacBook Pro 13-inch");
+
+		log.info("Checkout Cheque Step - 02: Verify Quantity Message");
+		verifyEquals(notebookPage.getQuantityMessage(driver), "This product has a minimum quantity of 2");
+
+		log.info("Checkout Cheque Step - 02: Click to 'Add to cart' button");
+		notebookPage.clickToAddToCartButton();
+
+		log.info("Checkout Cheque Step - 03: Verify Success Message Added");
+		verifyEquals(notebookPage.getSuccessMessage(driver), "The product has been added to your shopping cart");
+
+		log.info("Checkout Cheque Step - 04: Close The title Message");
+		notebookPage.closeSuccessMessage(driver);
+
+		log.info("Checkout Cheque Step - 05: Open 'Shopping Cart' page");
+		cartPage = (CartPageObject) notebookPage.openPageAtHeaderLinks(driver, "ico-cart");
+
+		log.info("Checkout Cheque Step - 06: Verify 'Product' name is Displayed");
+		verifyEquals(cartPage.getProductsName(), "Apple MacBook Pro 13-inch");
+
+		log.info("Checkout Cheque Step - 07: Verify 'Price' and 'Total Price' is displayed");
+		verifyEquals(cartPage.getPriceByDynamicValue("product-unit-price"), "$1,800.00");
+		verifyEquals(cartPage.getPriceByDynamicValue("product-subtotal"), "$3,600.00");
+
+		log.info("Checkout Cheque Step - 08: Input to 'Quantity' field");
+		cartPage.inputToQuantityTextbox("5");
+
+		log.info("Checkout Cheque Step - 09: Click to 'Update' button");
+		cartPage.clickButtonByText(driver, "Update shopping cart");
+
+		log.info("Checkout Cheque Step - 10: Verify 'Price' and 'Total Price' is displayed");
+		verifyEquals(cartPage.getPriceByDynamicValue("product-unit-price"), "$1,500.00");
+		verifyEquals(cartPage.getPriceByDynamicValue("product-subtotal"), "$9,000.00");
+
+		log.info("Checkout Cheque Step - 11: Select Gift Wrapping");
+		cartPage.selectToDropdownByName(driver, "checkout_attribute_1", "Yes [+$10.00]");
+
+		log.info("Checkout Cheque Step - 12: Verify Gift Wrapping is displayed");
+		verifyEquals(cartPage.getItemSelected(driver, "checkout_attribute_1"), "Yes [+$10.00]");
 	}
 
 	public int generateFakeNumber() {
