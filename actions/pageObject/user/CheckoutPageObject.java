@@ -18,76 +18,6 @@ public class CheckoutPageObject extends BasePage {
 		checkToDefaultCheckboxOrRadio(driver, CheckoutPageUI.SHIP_TO_SAME_ADDRESS);
 	}
 
-	public void inputToFirstNameTextbox(String firstName) {
-		waitForElementVisible(driver, CheckoutPageUI.FIRST_NAME_TEXTBOX);
-		sendkeyToElement(driver, CheckoutPageUI.FIRST_NAME_TEXTBOX, firstName);
-	}
-
-	public void inputToLastNameTextbox(String lastName) {
-		waitForElementVisible(driver, CheckoutPageUI.LAST_NAME_TEXTBOX);
-		sendkeyToElement(driver, CheckoutPageUI.LAST_NAME_TEXTBOX, lastName);
-	}
-
-	public void inputToEmailTextbox(String emailAddress) {
-		waitForElementVisible(driver, CheckoutPageUI.EMAIL_TEXTBOX);
-		sendkeyToElement(driver, CheckoutPageUI.EMAIL_TEXTBOX, emailAddress);
-	}
-
-	public void selectCountryName(String string) {
-		waitForElementVisible(driver, CheckoutPageUI.COUNTRY);
-		selectItemInCustomDropdown(driver, CheckoutPageUI.COUNTRY, "xpath=//option", string);
-	}
-
-	public boolean isCountrySelected() {
-		waitForElementVisible(driver, CheckoutPageUI.COUNTRY_DROPDOWN);
-		return isElementSelected(driver, CheckoutPageUI.COUNTRY_DROPDOWN);
-	}
-
-	public void inputToCityAddressTextbox(String cityAddress) {
-		waitForElementVisible(driver, CheckoutPageUI.CITY_ADDRESS_TEXTBOX);
-		sendkeyToElement(driver, CheckoutPageUI.CITY_ADDRESS_TEXTBOX, cityAddress);
-	}
-
-	public void inputToAddressTextbox(String address) {
-		waitForElementVisible(driver, CheckoutPageUI.ADDRESS_TEXTBOX);
-		sendkeyToElement(driver, CheckoutPageUI.ADDRESS_TEXTBOX, address);
-	}
-
-	public void inputToZipCodeTextbox(String zipCode) {
-		waitForElementVisible(driver, CheckoutPageUI.ZIP_CODE_TEXTBOX);
-		sendkeyToElement(driver, CheckoutPageUI.ZIP_CODE_TEXTBOX, zipCode);
-	}
-
-	public void inputToPhoneTextbox(String phone) {
-		waitForElementVisible(driver, CheckoutPageUI.PHONE_TEXTBOX);
-		sendkeyToElement(driver, CheckoutPageUI.PHONE_TEXTBOX, phone);
-	}
-
-	public void clickToContinueButtonAtBillingAddress() {
-		waitForElementClickable(driver, CheckoutPageUI.CONTINUE_BILLING_ADDRESS);
-		clickToElement(driver, CheckoutPageUI.CONTINUE_BILLING_ADDRESS);
-	}
-
-	public void clickToContinueButtonAtShippingMethod() {
-		waitForElementClickable(driver, CheckoutPageUI.CONTINUE_SHIPPING_METHOD);
-		clickToElement(driver, CheckoutPageUI.CONTINUE_SHIPPING_METHOD);
-	}
-
-	public void clickToContinueButtonAtPaymentMethod() {
-		waitForElementClickable(driver, CheckoutPageUI.CONTINUE_PAYMENT_METHOD);
-		clickToElement(driver, CheckoutPageUI.CONTINUE_PAYMENT_METHOD);
-	}
-
-	public boolean isPaymentInfoDisplayed() {
-		waitForElementVisible(driver, CheckoutPageUI.PAYMENT_INFO_LOAD);
-		return isElementDisplayed(driver, CheckoutPageUI.PAYMENT_INFO_LOAD);
-	}
-
-	public void clickToContinueButtonAtPaymenInfo() {
-		waitForElementClickable(driver, CheckoutPageUI.CONTINUE_PAYMENT_INFO);
-		clickToElement(driver, CheckoutPageUI.CONTINUE_PAYMENT_INFO);
-	}
-
 	public boolean isBillingInfoDisplayed() {
 		waitForElementVisible(driver, CheckoutPageUI.BILLING_INFO_WRAP);
 		return isElementDisplayed(driver, CheckoutPageUI.BILLING_INFO_WRAP);
@@ -158,9 +88,9 @@ public class CheckoutPageObject extends BasePage {
 		return getElementText(driver, CheckoutPageUI.ORDER_TOTAL);
 	}
 
-	public void clickToConfirmButton() {
-		waitForElementClickable(driver, CheckoutPageUI.CONFIRM_BUTTON);
-		clickToElement(driver, CheckoutPageUI.CONFIRM_BUTTON);
+	public void clickToConfirmButton(String idValue) {
+		waitForElementClickable(driver, CheckoutPageUI.CONFIRM_BUTTON_BY_ID, idValue);
+		clickToElement(driver, CheckoutPageUI.CONFIRM_BUTTON_BY_ID, idValue);
 	}
 
 	public boolean isThankYouMessageDisplayed() {

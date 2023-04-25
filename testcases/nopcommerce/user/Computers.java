@@ -4,6 +4,7 @@ import java.util.Random;
 
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
@@ -411,6 +412,35 @@ public class Computers extends BaseTest {
 		log.info("Checkout Cheque Step - 19: Click to 'Checkout' button");
 		checkoutPage = cartPage.openCheckoutPage("button-1 checkout-button");
 
+		log.info("Checkout Cheque Step - 20: Verify 'First Name' value is correctly");
+		Assert.assertEquals(checkoutPage.getTextboxValueByID(driver, "BillingNewAddress_FirstName"), userData.getFirstName());
+
+		log.info("Checkout Cheque Step - 21: Verify 'Last Name' value is correctly");
+		Assert.assertEquals(checkoutPage.getTextboxValueByID(driver, "BillingNewAddress_LastName"), userData.getLastName());
+
+		log.info("Checkout Cheque Step - 22: Verify 'Email' value is correctly");
+		Assert.assertEquals(checkoutPage.getTextboxValueByID(driver, "BillingNewAddress_Email"), emailAddress);
+
+		log.info("Checkout Cheque Step - 23: Select Country Name");
+		checkoutPage.selectToDropdownByName(driver, "BillingNewAddress.CountryId", userData.getCountry());
+
+		log.info("Checkout Cheque Step - 24: Verify Country Name is Selected");
+		verifyEquals(checkoutPage.getItemSelected(driver, "BillingNewAddress.CountryId"), userData.getCountry());
+
+		log.info("Checkout Cheque Step - 25: Input to 'City' field");
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_City", userData.getCity());
+
+		log.info("Checkout Cheque Step - 26: Input to 'Address' field");
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_Address1", userData.getAddress());
+
+		log.info("Checkout Cheque Step - 27: Input to 'Zip/Code' field");
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_ZipPostalCode", userData.getZipcode());
+
+		log.info("Checkout Cheque Step - 28: Input to 'Phone' field");
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_PhoneNumber", userData.getPhone());
+
+		log.info("Checkout Cheque Step - 29: Click to 'Continue' button");
+		checkoutPage.clickToConfirmButton("billing-buttons-container");
 	}
 
 	public int generateFakeNumber() {
