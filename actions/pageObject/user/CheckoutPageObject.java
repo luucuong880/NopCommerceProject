@@ -169,4 +169,9 @@ public class CheckoutPageObject extends BasePage {
 		return PageGeneratorManager.getPageGeneratorManager().getCustomerInfoPage(driver);
 	}
 
+	public Object getMessageSize() {
+		waitForElementVisible(driver, CheckoutPageUI.MESSAGE_SIZE);
+		return getElementSize(driver, CheckoutPageUI.MESSAGE_SIZE);
+	}
+
 }

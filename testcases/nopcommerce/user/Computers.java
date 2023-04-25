@@ -441,6 +441,25 @@ public class Computers extends BaseTest {
 
 		log.info("Checkout Cheque Step - 29: Click to 'Continue' button");
 		checkoutPage.clickToConfirmButton("billing-buttons-container");
+
+		log.info("Checkout Cheque Step - 30: Click 'Next day air' radio button");
+		checkoutPage.clickToRadioButtonByID(driver, "shippingoption_2");
+
+		log.info("Checkout Cheque Step - 31: Click to 'Continue' button");
+		checkoutPage.clickToConfirmButton("shipping-method-buttons-container");
+
+		log.info("Checkout Cheque Step - 32: Click 'Check/Monney Order' radio button");
+		checkoutPage.clickToRadioButtonByID(driver, "paymentmethod_0");
+
+		log.info("Checkout Cheque Step - 33: Click to 'Continue' button");
+		checkoutPage.clickToConfirmButton("payment-method-buttons-container");
+
+		log.info("Checkout Cheque Step - 34: Count Infomation message");
+		verifyEquals(checkoutPage.getMessageSize(), 4);
+
+		log.info("Chekcout Cheque Step - 35: Click to 'Continue' button");
+		checkoutPage.clickToConfirmButton("payment-info-buttons-container");
+
 	}
 
 	public int generateFakeNumber() {
