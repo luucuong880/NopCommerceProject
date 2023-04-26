@@ -42,7 +42,7 @@ public class Computers extends BaseTest {
 
 		registerPage = (RegisterPageObject) homePage.openPageAtHeaderLinks(driver, "ico-register");
 
-		registerPage.inputToTextboxByID(driver, "FirstName", userData.getLoginUsername());
+		registerPage.inputToTextboxByID(driver, "FirstName", userData.getFirstName());
 		registerPage.inputToTextboxByID(driver, "LastName", userData.getLastName());
 		registerPage.inputToTextboxByID(driver, "Email", emailAddress);
 		registerPage.inputToTextboxByID(driver, "Password", userData.getLoginPassword());
@@ -459,6 +459,14 @@ public class Computers extends BaseTest {
 
 		log.info("Chekcout Cheque Step - 35: Click to 'Continue' button");
 		checkoutPage.clickToConfirmButton("payment-info-buttons-container");
+
+		log.info("Checkout Cheque Step - 36: Verify Billing Info");
+		verifyEquals(checkoutPage.getInfoBillingList("name"), userData.getFirstName() + "\t" + userData.getLastName());
+		verifyEquals(checkoutPage.getInfoBillingList("email"), "Email: " + emailAddress);
+		verifyEquals(checkoutPage.getInfoBillingList("phone"), "Phone: " + userData.getPhone());
+		verifyEquals(checkoutPage.getInfoBillingList("address1"), userData.getAddress());
+		verifyEquals(checkoutPage.getInfoBillingList("city-state-zip"), userData.getCity() + "," + userData.getZipcode());
+		verifyEquals(checkoutPage.getInfoBillingList("country"), userData.getCountry());
 
 	}
 

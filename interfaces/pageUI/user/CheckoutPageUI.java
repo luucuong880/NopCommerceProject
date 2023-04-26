@@ -34,5 +34,6 @@ public class CheckoutPageUI {
 	public static final String NEW_ADDRESS = "xpath=//select[@id='billing-address-select']";
 	public static final String NEXTDAY_AIR = "xpath=//input[@id='shippingoption_1']";
 	public static final String MESSAGE_SIZE = "xpath=//td/p";
+	public static final String INFO_LIST = "xpath=//strong[text()='Billing Address']/parent::div/following-sibling::ul/li[@class='%s']";
 
 }

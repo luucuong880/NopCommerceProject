@@ -174,4 +174,9 @@ public class CheckoutPageObject extends BasePage {
 		return getElementSize(driver, CheckoutPageUI.MESSAGE_SIZE);
 	}
 
+	public Object getInfoBillingList(String className) {
+		waitForElementVisible(driver, CheckoutPageUI.INFO_LIST, className);
+		return getElementText(driver, CheckoutPageUI.INFO_LIST, className);
+	}
+
 }
