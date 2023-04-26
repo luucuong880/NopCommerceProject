@@ -461,7 +461,7 @@ public class Computers extends BaseTest {
 		checkoutPage.clickToConfirmButton("payment-info-buttons-container");
 
 		log.info("Checkout Cheque Step - 36: Verify Billing Info");
-		verifyEquals(checkoutPage.getInfoBillingList("name"), userData.getFirstName() + "\t" + userData.getLastName());
+		verifyEquals(checkoutPage.getInfoBillingList("name"), userData.getFirstName() + " " + userData.getLastName());
 		verifyEquals(checkoutPage.getInfoBillingList("email"), "Email: " + emailAddress);
 		verifyEquals(checkoutPage.getInfoBillingList("phone"), "Phone: " + userData.getPhone());
 		verifyEquals(checkoutPage.getInfoBillingList("address1"), userData.getAddress());
