@@ -461,12 +461,22 @@ public class Computers extends BaseTest {
 		checkoutPage.clickToConfirmButton("payment-info-buttons-container");
 
 		log.info("Checkout Cheque Step - 36: Verify Billing Info");
-		verifyEquals(checkoutPage.getInfoBillingList("name"), userData.getFirstName() + " " + userData.getLastName());
-		verifyEquals(checkoutPage.getInfoBillingList("email"), "Email: " + emailAddress);
-		verifyEquals(checkoutPage.getInfoBillingList("phone"), "Phone: " + userData.getPhone());
-		verifyEquals(checkoutPage.getInfoBillingList("address1"), userData.getAddress());
-		verifyEquals(checkoutPage.getInfoBillingList("city-state-zip"), userData.getCity() + "," + userData.getZipcode());
-		verifyEquals(checkoutPage.getInfoBillingList("country"), userData.getCountry());
+		verifyEquals(checkoutPage.getInfoBillingShipping("Billing Address", "name"), userData.getFirstName() + " " + userData.getLastName());
+		verifyEquals(checkoutPage.getInfoBillingShipping("Billing Address", "email"), "Email: " + emailAddress);
+		verifyEquals(checkoutPage.getInfoBillingShipping("Billing Address", "phone"), "Phone: " + userData.getPhone());
+		verifyEquals(checkoutPage.getInfoBillingShipping("Billing Address", "address1"), userData.getAddress());
+		verifyEquals(checkoutPage.getInfoBillingShipping("Billing Address", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
+		verifyEquals(checkoutPage.getInfoBillingShipping("Billing Address", "country"), userData.getCountry());
+
+		log.info("Checkout Cheque Step - 37: Verify Shipping Info");
+		verifyEquals(checkoutPage.getInfoBillingShipping("Shipping Address", "name"), userData.getFirstName() + " " + userData.getLastName());
+		verifyEquals(checkoutPage.getInfoBillingShipping("Shipping Address", "email"), "Email: " + emailAddress);
+		verifyEquals(checkoutPage.getInfoBillingShipping("Shipping Address", "phone"), "Phone: " + userData.getPhone());
+		verifyEquals(checkoutPage.getInfoBillingShipping("Shipping Address", "address1"), userData.getAddress());
+		verifyEquals(checkoutPage.getInfoBillingShipping("Shipping Address", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
+		verifyEquals(checkoutPage.getInfoBillingShipping("Shipping Address", "country"), userData.getCountry());
+
+		log.info("Checkout Cheque Step - 38: Verify Payment Info");
 
 	}
 

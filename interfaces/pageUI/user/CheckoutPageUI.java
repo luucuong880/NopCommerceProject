@@ -5,11 +5,6 @@ public class CheckoutPageUI {
 	public static final String MY_ACCOUNT_LINK = "xpath=//a[@class='ico-account']";
 	public static final String CONFIRM_BUTTON_BY_ID = "xpath=//div[@id='%s']//button[text()='Continue']";
 	public static final String SHIP_TO_SAME_ADDRESS = "xpath=//input[@id='ShipToSameAddress']";
-	public static final String PAYMENT_INFO_LOAD = "xpath=//div[@id='checkout-payment-info-load']";
-	public static final String BILLING_INFO_WRAP = "xpath=//div[@class='billing-info-wrap']";
-	public static final String SHIPPING_INFO_WRAP = "xpath=//div[@class='shipping-info-wrap']";
-	public static final String PAYMENT_METHOD_INFO = "xpath=//div[@class='payment-method-info']";
-	public static final String SHIPPING_METHOD_INFO = "xpath=//div[@class='shipping-method-info']";
 	public static final String SKU_NUMBER = "xpath=//span[@class='sku-number']";
 	public static final String PRODUCT_NAME = "xpath=//a[@class='product-name']";
 	public static final String PRICE = "xpath=//span[@class='product-unit-price']";
@@ -34,6 +29,6 @@ public class CheckoutPageUI {
 	public static final String NEW_ADDRESS = "xpath=//select[@id='billing-address-select']";
 	public static final String NEXTDAY_AIR = "xpath=//input[@id='shippingoption_1']";
 	public static final String MESSAGE_SIZE = "xpath=//td/p";
-	public static final String INFO_LIST = "xpath=//strong[text()='Billing Address']/parent::div/following-sibling::ul/li[@class='%s']";
+	public static final String BILLING_INFO = "xpath=//strong[text()='%s']/parent::div/following-sibling::ul/li[@class='%s']";
 
 }

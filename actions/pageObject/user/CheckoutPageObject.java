@@ -18,26 +18,6 @@ public class CheckoutPageObject extends BasePage {
 		checkToDefaultCheckboxOrRadio(driver, CheckoutPageUI.SHIP_TO_SAME_ADDRESS);
 	}
 
-	public boolean isBillingInfoDisplayed() {
-		waitForElementVisible(driver, CheckoutPageUI.BILLING_INFO_WRAP);
-		return isElementDisplayed(driver, CheckoutPageUI.BILLING_INFO_WRAP);
-	}
-
-	public boolean isShippingInfoDisplayed() {
-		waitForElementVisible(driver, CheckoutPageUI.SHIPPING_INFO_WRAP);
-		return isElementDisplayed(driver, CheckoutPageUI.SHIPPING_INFO_WRAP);
-	}
-
-	public boolean isPaymentMethodDisplayed() {
-		waitForElementVisible(driver, CheckoutPageUI.PAYMENT_METHOD_INFO);
-		return isElementDisplayed(driver, CheckoutPageUI.PAYMENT_METHOD_INFO);
-	}
-
-	public boolean isShippingMethodDisplayed() {
-		waitForElementVisible(driver, CheckoutPageUI.SHIPPING_METHOD_INFO);
-		return isElementDisplayed(driver, CheckoutPageUI.SHIPPING_METHOD_INFO);
-	}
-
 	public String getSKUText() {
 		waitForElementVisible(driver, CheckoutPageUI.SKU_NUMBER);
 		return getElementText(driver, CheckoutPageUI.SKU_NUMBER);
@@ -174,9 +154,9 @@ public class CheckoutPageObject extends BasePage {
 		return getElementSize(driver, CheckoutPageUI.MESSAGE_SIZE);
 	}
 
-	public Object getInfoBillingList(String className) {
-		waitForElementVisible(driver, CheckoutPageUI.INFO_LIST, className);
-		return getElementText(driver, CheckoutPageUI.INFO_LIST, className);
+	public Object getInfoBillingShipping(String textValue, String className) {
+		waitForElementVisible(driver, CheckoutPageUI.BILLING_INFO, textValue, className);
+		return getElementText(driver, CheckoutPageUI.BILLING_INFO, textValue, className);
 	}
 
 }
