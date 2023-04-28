@@ -2,7 +2,6 @@ package pageUI.user;
 
 public class CartPageUI {
 
-	public static final String PAGE_TITLE_MESSAGE = "xpath=//div[@class='page-title']//h1";
 	public static final String EDIT_BUTTON = "xpath=//a[text()='Edit']";
 	public static final String PRODUCTS_NAME = "xpath=//a[@class='product-name']";
 	public static final String PRICE_BY_DYNAMIC_CLASS = "xpath=//span[@class='%s']";

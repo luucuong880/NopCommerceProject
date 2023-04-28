@@ -159,4 +159,9 @@ public class CheckoutPageObject extends BasePage {
 		return getElementText(driver, CheckoutPageUI.BILLING_INFO, textValue, className);
 	}
 
+	public String getTitleSuccessMessage() {
+		waitForElementVisible(driver, CheckoutPageUI.TITLE_SUCCESS_MESSAGE);
+		return getElementText(driver, CheckoutPageUI.TITLE_SUCCESS_MESSAGE);
+	}
+
 }

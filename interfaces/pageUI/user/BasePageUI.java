@@ -15,4 +15,5 @@ public class BasePageUI {
 	public static final String ADD_TO_CART_BUTTON = "xpath=//a[text()='%s']/parent::h2/following-sibling::div[@class='add-info']//button[text()='Add to cart']";
 	public static final String HEADER_LINKS = "xpath=//a[@class='%s']";
 	public static final String TOTAL_INFOS = "xpath=//tr[@class='%s']//span[@class='value-summary']";
+	public static final String PAGE_TITLE_MESSAGE = "xpath=//div[@class='page-title']//h1";
 }

@@ -702,6 +702,11 @@ public class BasePage {
 		return getElementText(driver, BasePageUI.SUCCESS_MESSAGE);
 	}
 
+	public String getPageTitleText(WebDriver driver) {
+		waitForElementVisible(driver, BasePageUI.PAGE_TITLE_MESSAGE);
+		return getElementText(driver, BasePageUI.PAGE_TITLE_MESSAGE);
+	}
+
 	public String getQuantityMessage(WebDriver driver, String classValue) {
 		waitForElementVisible(driver, BasePageUI.MESSAGE_DYNAMIC_BY_CLASS, classValue);
 		return getElementText(driver, BasePageUI.MESSAGE_DYNAMIC_BY_CLASS, classValue);

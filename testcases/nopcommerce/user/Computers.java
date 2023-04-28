@@ -476,7 +476,15 @@ public class Computers extends BaseTest {
 		verifyEquals(checkoutPage.getInfoBillingShipping("Shipping Address", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
 		verifyEquals(checkoutPage.getInfoBillingShipping("Shipping Address", "country"), userData.getCountry());
 
-		log.info("Checkout Cheque Step - 38: Verify Payment Info");
+		log.info("Checkout Cheque Step - 38: Click to 'Continue' button");
+		checkoutPage.clickButtonByText(driver, "Confirm");
+		checkoutPage.sleepInSecond(2);
+
+		log.info("Checkout Cheque Step - 39: Verify page title message");
+		verifyEquals(checkoutPage.getPageTitleText(driver), "Thank you");
+
+		log.info("Checkout Cheque Step - 40: Verify title success message");
+		verifyEquals(checkoutPage.getTitleSuccessMessage(), "Your order has been successfully processed!");
 
 	}
 

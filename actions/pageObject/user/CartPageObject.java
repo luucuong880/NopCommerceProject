@@ -13,11 +13,6 @@ public class CartPageObject extends BasePage {
 		this.driver = driver;
 	}
 
-	public String getPageTitleText() {
-		waitForElementVisible(driver, CartPageUI.PAGE_TITLE_MESSAGE);
-		return getElementText(driver, CartPageUI.PAGE_TITLE_MESSAGE);
-	}
-
 	public DesktopPageObject clickToEditButton() {
 		waitForElementClickable(driver, CartPageUI.EDIT_BUTTON);
 		clickToElement(driver, CartPageUI.EDIT_BUTTON);
