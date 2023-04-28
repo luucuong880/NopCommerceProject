@@ -733,6 +733,11 @@ public class BasePage {
 		return isElementDisplayed(driver, BasePageUI.LINK_BY_TEXT, textboxID);
 	}
 
+	public Object getInfoBillingShipping(WebDriver driver, String textValue, String className) {
+		waitForElementVisible(driver, BasePageUI.BILLING_INFO, textValue, className);
+		return getElementText(driver, BasePageUI.BILLING_INFO, textValue, className);
+	}
+
 	private long longtimeout = 30;
 	private short shorttimeout = 5;
 }

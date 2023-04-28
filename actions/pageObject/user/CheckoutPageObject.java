@@ -154,11 +154,6 @@ public class CheckoutPageObject extends BasePage {
 		return getElementSize(driver, CheckoutPageUI.MESSAGE_SIZE);
 	}
 
-	public Object getInfoBillingShipping(String textValue, String className) {
-		waitForElementVisible(driver, CheckoutPageUI.BILLING_INFO, textValue, className);
-		return getElementText(driver, CheckoutPageUI.BILLING_INFO, textValue, className);
-	}
-
 	public String getTitleSuccessMessage() {
 		waitForElementVisible(driver, CheckoutPageUI.TITLE_SUCCESS_MESSAGE);
 		return getElementText(driver, CheckoutPageUI.TITLE_SUCCESS_MESSAGE);

@@ -16,4 +16,5 @@ public class BasePageUI {
 	public static final String HEADER_LINKS = "xpath=//a[@class='%s']";
 	public static final String TOTAL_INFOS = "xpath=//tr[@class='%s']//span[@class='value-summary']";
 	public static final String PAGE_TITLE_MESSAGE = "xpath=//div[@class='page-title']//h1";
+	public static final String BILLING_INFO = "xpath=//strong[text()='%s']/parent::div/following-sibling::ul/li[@class='%s']";
 }

@@ -16,10 +16,12 @@ import com.nopcommerce.data.UserDataMapper;
 import pageObject.user.CartPageObject;
 import pageObject.user.CheckoutPageObject;
 import pageObject.user.ComputersPageObject;
+import pageObject.user.CustomerInfoPageObject;
 import pageObject.user.DesktopPageObject;
 import pageObject.user.HomePageObject;
 import pageObject.user.LoginPageObject;
 import pageObject.user.NotebooksPageObject;
+import pageObject.user.OrderPageObject;
 import pageObject.user.RegisterPageObject;
 import utilities.Environment;
 
@@ -461,20 +463,20 @@ public class Computers extends BaseTest {
 		checkoutPage.clickToConfirmButton("payment-info-buttons-container");
 
 		log.info("Checkout Cheque Step - 36: Verify Billing Info");
-		verifyEquals(checkoutPage.getInfoBillingShipping("Billing Address", "name"), userData.getFirstName() + " " + userData.getLastName());
-		verifyEquals(checkoutPage.getInfoBillingShipping("Billing Address", "email"), "Email: " + emailAddress);
-		verifyEquals(checkoutPage.getInfoBillingShipping("Billing Address", "phone"), "Phone: " + userData.getPhone());
-		verifyEquals(checkoutPage.getInfoBillingShipping("Billing Address", "address1"), userData.getAddress());
-		verifyEquals(checkoutPage.getInfoBillingShipping("Billing Address", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
-		verifyEquals(checkoutPage.getInfoBillingShipping("Billing Address", "country"), userData.getCountry());
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "name"), userData.getFirstName() + " " + userData.getLastName());
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "email"), "Email: " + emailAddress);
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "phone"), "Phone: " + userData.getPhone());
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "address1"), userData.getAddress());
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "country"), userData.getCountry());
 
 		log.info("Checkout Cheque Step - 37: Verify Shipping Info");
-		verifyEquals(checkoutPage.getInfoBillingShipping("Shipping Address", "name"), userData.getFirstName() + " " + userData.getLastName());
-		verifyEquals(checkoutPage.getInfoBillingShipping("Shipping Address", "email"), "Email: " + emailAddress);
-		verifyEquals(checkoutPage.getInfoBillingShipping("Shipping Address", "phone"), "Phone: " + userData.getPhone());
-		verifyEquals(checkoutPage.getInfoBillingShipping("Shipping Address", "address1"), userData.getAddress());
-		verifyEquals(checkoutPage.getInfoBillingShipping("Shipping Address", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
-		verifyEquals(checkoutPage.getInfoBillingShipping("Shipping Address", "country"), userData.getCountry());
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "name"), userData.getFirstName() + " " + userData.getLastName());
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "email"), "Email: " + emailAddress);
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "phone"), "Phone: " + userData.getPhone());
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "address1"), userData.getAddress());
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "country"), userData.getCountry());
 
 		log.info("Checkout Cheque Step - 38: Click to 'Continue' button");
 		checkoutPage.clickButtonByText(driver, "Confirm");
@@ -486,6 +488,40 @@ public class Computers extends BaseTest {
 		log.info("Checkout Cheque Step - 40: Verify title success message");
 		verifyEquals(checkoutPage.getTitleSuccessMessage(), "Your order has been successfully processed!");
 
+	}
+
+	@Test
+	public void Computers_06_Checkout_Payment_By_Credit_Card() {
+		log.info("Checkout Credit Step - 01: Open 'Customer Info' page");
+		customerInfoPage = (CustomerInfoPageObject) checkoutPage.openPageAtHeaderLinks(driver, "ico-account");
+
+		log.info("Checkout Credit Step - 02: Open 'Orders' page");
+		orderPage = (OrderPageObject) customerInfoPage.openPageAtMyAccountByName(driver, "Orders");
+
+		log.info("Checkout Credit Step - 03: Verify 'Details' button is displayed");
+		verifyTrue(orderPage.isButtonDisplayed(driver, "Details"));
+
+		log.info("Checkout Credit Step - 04: Click to 'Details' button");
+		orderPage.clickButtonByText(driver, "Details");
+
+		log.info("Checkout Credit Step - 05: Verify Billing Info");
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "name"), userData.getFirstName() + " " + userData.getLastName());
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "email"), "Email: " + emailAddress);
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "phone"), "Phone: " + userData.getPhone());
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "address1"), userData.getAddress());
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "country"), userData.getCountry());
+
+		log.info("Checkout Credit Step - 06: Verify Shipping Info");
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "name"), userData.getFirstName() + " " + userData.getLastName());
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "email"), "Email: " + emailAddress);
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "phone"), "Phone: " + userData.getPhone());
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "address1"), userData.getAddress());
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
+		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "country"), userData.getCountry());
+
+		log.info("Checkout Credit Step - 07: Verify Payment Info");
+		verifyEquals(checkoutPage, cartPage);
 	}
 
 	public int generateFakeNumber() {
@@ -511,5 +547,7 @@ public class Computers extends BaseTest {
 	private CartPageObject cartPage;
 	private NotebooksPageObject notebookPage;
 	private CheckoutPageObject checkoutPage;
+	private CustomerInfoPageObject customerInfoPage;
+	private OrderPageObject orderPage;
 	UserDataMapper userData;
 }
