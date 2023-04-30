@@ -40,6 +40,16 @@ public class Computers extends BaseTest {
 		homePage = PageGeneratorManager.getPageGeneratorManager().getHomePage(driver);
 
 		userData = UserDataMapper.getUserData();
+		newFirstName = "Johnny";
+		newLastName = "Deep";
+		newEmail = newFirstName + newLastName + "@hotmail.com";
+		newCity = "Ha Noi";
+		newZipCode = "113000";
+		newAddress = "456 Hai Ba Trung";
+		newPhone = "0789564213";
+		cardHolderName = "Gaylord Ryan";
+		cardNumber = "4485587734773155";
+		cardCode = "599";
 		emailAddress = userData.getEmailAddress() + generateFakeNumber() + "@fakermail.com";
 
 		registerPage = (RegisterPageObject) homePage.openPageAtHeaderLinks(driver, "ico-register");
@@ -575,14 +585,24 @@ public class Computers extends BaseTest {
 		checkoutPage.selectToDropdownByName(driver, "billing_address_id", "New Address");
 
 		log.info("Checkout Credit Step - 24: Input New Address Info");
-		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_FirstName", "");
-		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_LastName", "");
-		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_Email", "");
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_FirstName", newFirstName);
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_LastName", newLastName);
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_Email", newEmail);
 		checkoutPage.selectToDropdownByName(driver, "BillingNewAddress.CountryId", "Viet Nam");
-		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_City", "");
-		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_Address1", "");
-		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_ZipPostalCode", "");
-		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_PhoneNumber", "");
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_City", newCity);
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_Address1", newAddress);
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_ZipPostalCode", newZipCode);
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_PhoneNumber", newPhone);
+		checkoutPage.clickToConfirmButton("billing-buttons-container");
+
+		log.info("Checkout Credit Step - 25: Select 2nd Day Air radio button");
+		checkoutPage.clickToRadioButtonByID(driver, "shippingoption_2");
+		checkoutPage.clickToConfirmButton("shipping-method-buttons-container");
+
+		log.info("Checkout Credit Step - 26: Select Pay by Credit Card radio button");
+		checkoutPage.clickToRadioButtonByID(driver, "paymentmethod_1");
+		checkoutPage.clickToConfirmButton("payment-method-buttons-container");
+
 	}
 
 	public int generateFakeNumber() {
@@ -599,7 +619,8 @@ public class Computers extends BaseTest {
 	}
 
 	WebDriver driver;
-	private String emailAddress;
+	private String emailAddress, newFirstName, newLastName, newEmail, newCity, newAddress, newZipCode, newPhone;
+	private String cardHolderName, cardNumber, cardCode;
 	private HomePageObject homePage;
 	private RegisterPageObject registerPage;
 	private LoginPageObject loginPage;
