@@ -504,8 +504,7 @@ public class BasePage {
 
 	public boolean isImageLoaded(WebDriver driver, String locatorType, String... dynamicValues) {
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-		boolean status = (boolean) jsExecutor.executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0",
-				getWebElement(driver, getDynamicXpath(locatorType, dynamicValues)));
+		boolean status = (boolean) jsExecutor.executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", getWebElement(driver, getDynamicXpath(locatorType, dynamicValues)));
 		return status;
 	}
 
@@ -733,9 +732,14 @@ public class BasePage {
 		return isElementDisplayed(driver, BasePageUI.LINK_BY_TEXT, textboxID);
 	}
 
-	public Object getInfoBillingShipping(WebDriver driver, String textValue, String className) {
-		waitForElementVisible(driver, BasePageUI.BILLING_INFO, textValue, className);
-		return getElementText(driver, BasePageUI.BILLING_INFO, textValue, className);
+	public String getBillingShippingAddress(WebDriver driver, String textValue, String className) {
+		waitForElementVisible(driver, BasePageUI.BILLING_SHIPPING_ADDRESS, textValue, className);
+		return getElementText(driver, BasePageUI.BILLING_SHIPPING_ADDRESS, textValue, className);
+	}
+
+	public String getPaymentShippingStatus(WebDriver driver, String className, String classValue) {
+		waitForElementVisible(driver, BasePageUI.PAYMENT_SHIPPING_METHOD, className, classValue);
+		return getElementText(driver, BasePageUI.PAYMENT_SHIPPING_METHOD, className, classValue);
 	}
 
 	private long longtimeout = 30;

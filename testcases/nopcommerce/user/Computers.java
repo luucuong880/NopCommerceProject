@@ -463,20 +463,20 @@ public class Computers extends BaseTest {
 		checkoutPage.clickToConfirmButton("payment-info-buttons-container");
 
 		log.info("Checkout Cheque Step - 36: Verify Billing Info");
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "name"), userData.getFirstName() + " " + userData.getLastName());
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "email"), "Email: " + emailAddress);
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "phone"), "Phone: " + userData.getPhone());
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "address1"), userData.getAddress());
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "country"), userData.getCountry());
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Billing Address", "name"), userData.getFirstName() + " " + userData.getLastName());
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Billing Address", "email"), "Email: " + emailAddress);
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Billing Address", "phone"), "Phone: " + userData.getPhone());
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Billing Address", "address1"), userData.getAddress());
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Billing Address", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Billing Address", "country"), userData.getCountry());
 
 		log.info("Checkout Cheque Step - 37: Verify Shipping Info");
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "name"), userData.getFirstName() + " " + userData.getLastName());
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "email"), "Email: " + emailAddress);
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "phone"), "Phone: " + userData.getPhone());
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "address1"), userData.getAddress());
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "country"), userData.getCountry());
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Shipping Address", "name"), userData.getFirstName() + " " + userData.getLastName());
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Shipping Address", "email"), "Email: " + emailAddress);
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Shipping Address", "phone"), "Phone: " + userData.getPhone());
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Shipping Address", "address1"), userData.getAddress());
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Shipping Address", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Shipping Address", "country"), userData.getCountry());
 
 		log.info("Checkout Cheque Step - 38: Click to 'Continue' button");
 		checkoutPage.clickButtonByText(driver, "Confirm");
@@ -505,23 +505,84 @@ public class Computers extends BaseTest {
 		orderPage.clickButtonByText(driver, "Details");
 
 		log.info("Checkout Credit Step - 05: Verify Billing Info");
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "name"), userData.getFirstName() + " " + userData.getLastName());
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "email"), "Email: " + emailAddress);
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "phone"), "Phone: " + userData.getPhone());
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "address1"), userData.getAddress());
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Billing Address", "country"), userData.getCountry());
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "name"), userData.getFirstName() + " " + userData.getLastName());
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "email"), "Email: " + emailAddress);
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "phone"), "Phone: " + userData.getPhone());
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "address1"), userData.getAddress());
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "country"), userData.getCountry());
 
 		log.info("Checkout Credit Step - 06: Verify Shipping Info");
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "name"), userData.getFirstName() + " " + userData.getLastName());
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "email"), "Email: " + emailAddress);
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "phone"), "Phone: " + userData.getPhone());
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "address1"), userData.getAddress());
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
-		verifyEquals(checkoutPage.getInfoBillingShipping(driver, "Shipping Address", "country"), userData.getCountry());
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "name"), userData.getFirstName() + " " + userData.getLastName());
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "email"), "Email: " + emailAddress);
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "phone"), "Phone: " + userData.getPhone());
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "address1"), userData.getAddress());
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "country"), userData.getCountry());
 
 		log.info("Checkout Credit Step - 07: Verify Payment Info");
-		verifyEquals(checkoutPage, cartPage);
+		verifyEquals(checkoutPage.getPaymentShippingStatus(driver, "billing-info-wrap", "payment-method"), "Check / Money Order");
+		verifyEquals(checkoutPage.getPaymentShippingStatus(driver, "billing-info-wrap", "payment-method-status"), " Pending");
+
+		verifyEquals(checkoutPage.getPaymentShippingStatus(driver, "shipping-info-wrap", "shipping-method"), "Next Day Air");
+		verifyEquals(checkoutPage.getPaymentShippingStatus(driver, "shipping-info-wrap", "shipping-method-status"), "Not yet shipped");
+
+		log.info("Checkout Credit Step - 09: Verify 'Re-order' button is displayed");
+		verifyTrue(checkoutPage.isButtonDisplayed(driver, "Re-order"));
+
+		log.info("Checkout Credit Step - 10: Click to 'Re-order' button");
+		checkoutPage.clickButtonByText(driver, "Re-order");
+		cartPage = PageGeneratorManager.getPageGeneratorManager().getCartPage(driver);
+
+		log.info("Checkout Credit Step - 11: Input to 'Quantity' field");
+		cartPage.inputToQuantityTextbox("10");
+
+		log.info("Checkout Credit Step - 12: Click to 'Update' button");
+		cartPage.clickButtonByText(driver, "Update shopping cart");
+
+		log.info("Checkout Credit Step - 13: Verify 'Price' and 'Total Price' is displayed");
+		verifyEquals(cartPage.getPriceByDynamicValue("product-unit-price"), "$1,800.00");
+		verifyEquals(cartPage.getPriceByDynamicValue("product-subtotal"), "$18,000.00");
+
+		log.info("Checkout Credit Step - 14: Verify Gift Wrapping is displayed");
+		verifyEquals(cartPage.getItemSelected(driver, "checkout_attribute_1"), "No");
+
+		log.info("Checkout Credit Step - 15: Verify Gift Wrapping Message");
+		verifyEquals(cartPage.getQuantityMessage(driver, "selected-checkout-attributes"), "Gift wrapping: No");
+
+		log.info("Checkout Credit Step - 16: Verify Order Subtotal text");
+		verifyEquals(cartPage.getTotalInfosMessage(driver, "order-subtotal"), "$18,000.00");
+
+		log.info("Checkout Credit Step - 17: Verify Shipping Cost text");
+		verifyEquals(cartPage.getTotalInfosMessage(driver, "shipping-cost"), "$0.00");
+
+		log.info("Checkout Credit Step - 18: Verify Tax Value text");
+		verifyEquals(cartPage.getTotalInfosMessage(driver, "tax-value"), "$0.00");
+
+		log.info("Checkout Credit Step - 19: Verify Order Total text");
+		verifyEquals(cartPage.getOrderSubtotal(), "$18,000.00");
+
+		log.info("Checkout Credit Step - 20: Verify Earn Reward Point text");
+		verifyEquals(cartPage.getTotalInfosMessage(driver, "earn-reward-points"), "1800 points");
+
+		log.info("Checkout Credit Step - 21: Check to 'Term of service' Checkbox");
+		cartPage.clickToRadioButtonByID(driver, "termsofservice");
+
+		log.info("Checkout Credit Step - 22: Click to 'Checkout' button");
+		checkoutPage = cartPage.openCheckoutPage("button-1 checkout-button");
+
+		log.info("Checkout Credit Step - 23: Select New Address Shipping");
+		checkoutPage.selectToDropdownByName(driver, "billing_address_id", "New Address");
+
+		log.info("Checkout Credit Step - 24: Input New Address Info");
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_FirstName", "");
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_LastName", "");
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_Email", "");
+		checkoutPage.selectToDropdownByName(driver, "BillingNewAddress.CountryId", "Viet Nam");
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_City", "");
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_Address1", "");
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_ZipPostalCode", "");
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_PhoneNumber", "");
 	}
 
 	public int generateFakeNumber() {
