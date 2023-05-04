@@ -14,9 +14,9 @@ public class RegisterPageObject extends BasePage {
 	}
 
 	@Step("Verify Register success message is displayed")
-	public boolean registerSuccessMessage() {
+	public String registerSuccessMessage() {
 		waitForElementVisible(driver, RegisterPageUI.REGISTER_SUCCESS_MESSAGE);
-		return isElementDisplayed(driver, RegisterPageUI.REGISTER_SUCCESS_MESSAGE);
+		return getElementText(driver, RegisterPageUI.REGISTER_SUCCESS_MESSAGE);
 	}
 
 	public String getErrorExistingEmailMessage() {

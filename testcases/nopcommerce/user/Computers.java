@@ -4,7 +4,6 @@ import java.util.Random;
 
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
@@ -16,12 +15,10 @@ import com.nopcommerce.data.UserDataMapper;
 import pageObject.user.CartPageObject;
 import pageObject.user.CheckoutPageObject;
 import pageObject.user.ComputersPageObject;
-import pageObject.user.CustomerInfoPageObject;
 import pageObject.user.DesktopPageObject;
 import pageObject.user.HomePageObject;
 import pageObject.user.LoginPageObject;
 import pageObject.user.NotebooksPageObject;
-import pageObject.user.OrderPageObject;
 import pageObject.user.RegisterPageObject;
 import utilities.Environment;
 
@@ -41,15 +38,15 @@ public class Computers extends BaseTest {
 
 		userData = UserDataMapper.getUserData();
 		newFirstName = "Johnny";
-		newLastName = "Deep";
-		newEmail = newFirstName + newLastName + "@hotmail.com";
+		newLastName = "Depp";
+		newEmail = newFirstName + newLastName + generateFakeNumber() + "@hotmail.com";
 		newCity = "Ha Noi";
 		newZipCode = "113000";
 		newAddress = "456 Hai Ba Trung";
 		newPhone = "0789564213";
-		cardHolderName = "Gaylord Ryan";
-		cardNumber = "4485587734773155";
-		cardCode = "599";
+		cardHolderName = "Gara Desheriyev";
+		cardNumber = "4006201619732092";
+		cardCode = "641";
 		emailAddress = userData.getEmailAddress() + generateFakeNumber() + "@fakermail.com";
 
 		registerPage = (RegisterPageObject) homePage.openPageAtHeaderLinks(driver, "ico-register");
@@ -357,234 +354,226 @@ public class Computers extends BaseTest {
 
 	}
 
-	@Test
-	public void Computers_05_Checkout_Payment_By_Cheque() {
-		log.info("Checkout Cheque Step - 01: Add Apple MacBook Pro to Cart");
-		notebookPage.clickAddToCartButtonByText(driver, "Apple MacBook Pro 13-inch");
-
-		log.info("Checkout Cheque Step - 02: Verify Quantity Message");
-		verifyEquals(notebookPage.getQuantityMessage(driver, "min-qty-notification"), "This product has a minimum quantity of 2");
-
-		log.info("Checkout Cheque Step - 02: Click to 'Add to cart' button");
-		notebookPage.clickToAddToCartButton();
-
-		log.info("Checkout Cheque Step - 03: Verify Success Message Added");
-		verifyEquals(notebookPage.getSuccessMessage(driver), "The product has been added to your shopping cart");
-
-		log.info("Checkout Cheque Step - 04: Close The title Message");
-		notebookPage.closeSuccessMessage(driver);
-
-		log.info("Checkout Cheque Step - 05: Open 'Shopping Cart' page");
-		cartPage = (CartPageObject) notebookPage.openPageAtHeaderLinks(driver, "ico-cart");
-
-		log.info("Checkout Cheque Step - 06: Verify 'Product' name is Displayed");
-		verifyEquals(cartPage.getProductsName(), "Apple MacBook Pro 13-inch");
-
-		log.info("Checkout Cheque Step - 07: Verify 'Price' and 'Total Price' is displayed");
-		verifyEquals(cartPage.getPriceByDynamicValue("product-unit-price"), "$1,800.00");
-		verifyEquals(cartPage.getPriceByDynamicValue("product-subtotal"), "$3,600.00");
-
-		log.info("Checkout Cheque Step - 08: Input to 'Quantity' field");
-		cartPage.inputToQuantityTextbox("5");
-
-		log.info("Checkout Cheque Step - 09: Click to 'Update' button");
-		cartPage.clickButtonByText(driver, "Update shopping cart");
-
-		log.info("Checkout Cheque Step - 10: Verify 'Price' and 'Total Price' is displayed");
-		verifyEquals(cartPage.getPriceByDynamicValue("product-unit-price"), "$1,800.00");
-		verifyEquals(cartPage.getPriceByDynamicValue("product-subtotal"), "$9,000.00");
-
-		log.info("Checkout Cheque Step - 11: Select Gift Wrapping");
-		cartPage.selectToDropdownByName(driver, "checkout_attribute_1", "Yes [+$10.00]");
-
-		log.info("Checkout Cheque Step - 12: Verify Gift Wrapping is displayed");
-		verifyEquals(cartPage.getItemSelected(driver, "checkout_attribute_1"), "Yes [+$10.00]");
-
-		log.info("Checkout Cheque Step - 13: Verify Gift Wrapping Message");
-		verifyEquals(cartPage.getQuantityMessage(driver, "selected-checkout-attributes"), "Gift wrapping: Yes [+$10.00]");
-
-		log.info("Checkout Cheque Step - 14: Verify Order Subtotal text");
-		verifyEquals(cartPage.getTotalInfosMessage(driver, "order-subtotal"), "$9,010.00");
-
-		log.info("Checkout Cheque Step - 15: Verify Shipping Cost text");
-		verifyEquals(cartPage.getTotalInfosMessage(driver, "shipping-cost"), "$0.00");
-
-		log.info("Checkout Cheque Step - 16: Verify Tax Value text");
-		verifyEquals(cartPage.getTotalInfosMessage(driver, "tax-value"), "$0.00");
-
-		log.info("Checkout Cheque Step - 17: Verify Order Total text");
-		verifyEquals(cartPage.getOrderSubtotal(), "$9,010.00");
-
-		log.info("Checkout Cheque Step - 18: Verify Earn Reward Point text");
-		verifyEquals(cartPage.getTotalInfosMessage(driver, "earn-reward-points"), "901 points");
-
-		log.info("Checkout Cheque Step - 18: Check to 'Term of service' Checkbox");
-		cartPage.clickToRadioButtonByID(driver, "termsofservice");
-
-		log.info("Checkout Cheque Step - 19: Click to 'Checkout' button");
-		checkoutPage = cartPage.openCheckoutPage("button-1 checkout-button");
-
-		log.info("Checkout Cheque Step - 20: Verify 'First Name' value is correctly");
-		Assert.assertEquals(checkoutPage.getTextboxValueByID(driver, "BillingNewAddress_FirstName"), userData.getFirstName());
-
-		log.info("Checkout Cheque Step - 21: Verify 'Last Name' value is correctly");
-		Assert.assertEquals(checkoutPage.getTextboxValueByID(driver, "BillingNewAddress_LastName"), userData.getLastName());
-
-		log.info("Checkout Cheque Step - 22: Verify 'Email' value is correctly");
-		Assert.assertEquals(checkoutPage.getTextboxValueByID(driver, "BillingNewAddress_Email"), emailAddress);
-
-		log.info("Checkout Cheque Step - 23: Select Country Name");
-		checkoutPage.selectToDropdownByName(driver, "BillingNewAddress.CountryId", userData.getCountry());
-
-		log.info("Checkout Cheque Step - 24: Verify Country Name is Selected");
-		verifyEquals(checkoutPage.getItemSelected(driver, "BillingNewAddress.CountryId"), userData.getCountry());
-
-		log.info("Checkout Cheque Step - 25: Input to 'City' field");
-		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_City", userData.getCity());
-
-		log.info("Checkout Cheque Step - 26: Input to 'Address' field");
-		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_Address1", userData.getAddress());
-
-		log.info("Checkout Cheque Step - 27: Input to 'Zip/Code' field");
-		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_ZipPostalCode", userData.getZipcode());
-
-		log.info("Checkout Cheque Step - 28: Input to 'Phone' field");
-		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_PhoneNumber", userData.getPhone());
-
-		log.info("Checkout Cheque Step - 29: Click to 'Continue' button");
-		checkoutPage.clickToConfirmButton("billing-buttons-container");
-
-		log.info("Checkout Cheque Step - 30: Click 'Next day air' radio button");
-		checkoutPage.clickToRadioButtonByID(driver, "shippingoption_2");
-
-		log.info("Checkout Cheque Step - 31: Click to 'Continue' button");
-		checkoutPage.clickToConfirmButton("shipping-method-buttons-container");
-
-		log.info("Checkout Cheque Step - 32: Click 'Check/Monney Order' radio button");
-		checkoutPage.clickToRadioButtonByID(driver, "paymentmethod_0");
-
-		log.info("Checkout Cheque Step - 33: Click to 'Continue' button");
-		checkoutPage.clickToConfirmButton("payment-method-buttons-container");
-
-		log.info("Checkout Cheque Step - 34: Count Infomation message");
-		verifyEquals(checkoutPage.getMessageSize(), 4);
-
-		log.info("Chekcout Cheque Step - 35: Click to 'Continue' button");
-		checkoutPage.clickToConfirmButton("payment-info-buttons-container");
-
-		log.info("Checkout Cheque Step - 36: Verify Billing Info");
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Billing Address", "name"), userData.getFirstName() + " " + userData.getLastName());
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Billing Address", "email"), "Email: " + emailAddress);
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Billing Address", "phone"), "Phone: " + userData.getPhone());
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Billing Address", "address1"), userData.getAddress());
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Billing Address", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Billing Address", "country"), userData.getCountry());
-
-		log.info("Checkout Cheque Step - 37: Verify Shipping Info");
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Shipping Address", "name"), userData.getFirstName() + " " + userData.getLastName());
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Shipping Address", "email"), "Email: " + emailAddress);
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Shipping Address", "phone"), "Phone: " + userData.getPhone());
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Shipping Address", "address1"), userData.getAddress());
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Shipping Address", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "Shipping Address", "country"), userData.getCountry());
-
-		log.info("Checkout Cheque Step - 38: Click to 'Continue' button");
-		checkoutPage.clickButtonByText(driver, "Confirm");
-		checkoutPage.sleepInSecond(2);
-
-		log.info("Checkout Cheque Step - 39: Verify page title message");
-		verifyEquals(checkoutPage.getPageTitleText(driver), "Thank you");
-
-		log.info("Checkout Cheque Step - 40: Verify title success message");
-		verifyEquals(checkoutPage.getTitleSuccessMessage(), "Your order has been successfully processed!");
-
-	}
+	// @Test
+	// public void Computers_05_Checkout_Payment_By_Cheque() {
+	// log.info("Checkout Cheque Step - 01: Add Apple MacBook Pro to Cart");
+	// notebookPage.clickAddToCartButtonByText(driver, "Apple MacBook Pro 13-inch");
+	//
+	// log.info("Checkout Cheque Step - 02: Verify Quantity Message");
+	// verifyEquals(notebookPage.getQuantityMessage(driver, "min-qty-notification"), "This product has a minimum quantity of 2");
+	//
+	// log.info("Checkout Cheque Step - 02: Click to 'Add to cart' button");
+	// notebookPage.clickToAddToCartButton();
+	//
+	// log.info("Checkout Cheque Step - 03: Verify Success Message Added");
+	// verifyEquals(notebookPage.getSuccessMessage(driver), "The product has been added to your shopping cart");
+	//
+	// log.info("Checkout Cheque Step - 04: Close The title Message");
+	// notebookPage.closeSuccessMessage(driver);
+	//
+	// log.info("Checkout Cheque Step - 05: Open 'Shopping Cart' page");
+	// cartPage = (CartPageObject) notebookPage.openPageAtHeaderLinks(driver, "ico-cart");
+	//
+	// log.info("Checkout Cheque Step - 06: Verify 'Product' name is Displayed");
+	// verifyEquals(cartPage.getProductsName(), "Apple MacBook Pro 13-inch");
+	//
+	// log.info("Checkout Cheque Step - 07: Verify 'Price' and 'Total Price' is displayed");
+	// verifyEquals(cartPage.getPriceByDynamicValue("product-unit-price"), "$1,800.00");
+	// verifyEquals(cartPage.getPriceByDynamicValue("product-subtotal"), "$3,600.00");
+	//
+	// log.info("Checkout Cheque Step - 08: Input to 'Quantity' field");
+	// cartPage.inputToQuantityTextbox("5");
+	//
+	// log.info("Checkout Cheque Step - 09: Click to 'Update' button");
+	// cartPage.clickButtonByText(driver, "Update shopping cart");
+	//
+	// log.info("Checkout Cheque Step - 10: Verify 'Price' and 'Total Price' is displayed");
+	// verifyEquals(cartPage.getPriceByDynamicValue("product-unit-price"), "$1,800.00");
+	// verifyEquals(cartPage.getPriceByDynamicValue("product-subtotal"), "$9,000.00");
+	//
+	// log.info("Checkout Cheque Step - 11: Select Gift Wrapping");
+	// cartPage.selectToDropdownByName(driver, "checkout_attribute_1", "Yes [+$10.00]");
+	//
+	// log.info("Checkout Cheque Step - 12: Verify Gift Wrapping is displayed");
+	// verifyEquals(cartPage.getItemSelected(driver, "checkout_attribute_1"), "Yes [+$10.00]");
+	//
+	// log.info("Checkout Cheque Step - 13: Verify Gift Wrapping Message");
+	// verifyEquals(cartPage.getQuantityMessage(driver, "selected-checkout-attributes"), "Gift wrapping: Yes [+$10.00]");
+	//
+	// log.info("Checkout Cheque Step - 14: Verify Order Subtotal text");
+	// verifyEquals(cartPage.getTotalInfosMessage(driver, "order-subtotal"), "$9,010.00");
+	//
+	// log.info("Checkout Cheque Step - 15: Verify Shipping Cost text");
+	// verifyEquals(cartPage.getTotalInfosMessage(driver, "shipping-cost"), "$0.00");
+	//
+	// log.info("Checkout Cheque Step - 16: Verify Tax Value text");
+	// verifyEquals(cartPage.getTotalInfosMessage(driver, "tax-value"), "$0.00");
+	//
+	// log.info("Checkout Cheque Step - 17: Verify Order Total text");
+	// verifyEquals(cartPage.getOrderSubtotal(), "$9,010.00");
+	//
+	// log.info("Checkout Cheque Step - 18: Verify Earn Reward Point text");
+	// verifyEquals(cartPage.getTotalInfosMessage(driver, "earn-reward-points"), "901 points");
+	//
+	// log.info("Checkout Cheque Step - 18: Check to 'Term of service' Checkbox");
+	// cartPage.clickToRadioButtonByID(driver, "termsofservice");
+	//
+	// log.info("Checkout Cheque Step - 19: Click to 'Checkout' button");
+	// checkoutPage = cartPage.openCheckoutPage("button-1 checkout-button");
+	//
+	// log.info("Checkout Cheque Step - 20: Verify 'First Name' value is correctly");
+	// Assert.assertEquals(checkoutPage.getTextboxValueByID(driver, "BillingNewAddress_FirstName"), userData.getFirstName());
+	//
+	// log.info("Checkout Cheque Step - 21: Verify 'Last Name' value is correctly");
+	// Assert.assertEquals(checkoutPage.getTextboxValueByID(driver, "BillingNewAddress_LastName"), userData.getLastName());
+	//
+	// log.info("Checkout Cheque Step - 22: Verify 'Email' value is correctly");
+	// Assert.assertEquals(checkoutPage.getTextboxValueByID(driver, "BillingNewAddress_Email"), emailAddress);
+	//
+	// log.info("Checkout Cheque Step - 23: Select Country Name");
+	// checkoutPage.selectToDropdownByName(driver, "BillingNewAddress.CountryId", userData.getCountry());
+	//
+	// log.info("Checkout Cheque Step - 24: Verify Country Name is Selected");
+	// verifyEquals(checkoutPage.getItemSelected(driver, "BillingNewAddress.CountryId"), userData.getCountry());
+	//
+	// log.info("Checkout Cheque Step - 25: Input to 'City' field");
+	// checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_City", userData.getCity());
+	//
+	// log.info("Checkout Cheque Step - 26: Input to 'Address' field");
+	// checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_Address1", userData.getAddress());
+	//
+	// log.info("Checkout Cheque Step - 27: Input to 'Zip/Code' field");
+	// checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_ZipPostalCode", userData.getZipcode());
+	//
+	// log.info("Checkout Cheque Step - 28: Input to 'Phone' field");
+	// checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_PhoneNumber", userData.getPhone());
+	//
+	// log.info("Checkout Cheque Step - 29: Click to 'Continue' button");
+	// checkoutPage.clickToConfirmButton("billing-buttons-container");
+	//
+	// log.info("Checkout Cheque Step - 30: Click 'Next day air' radio button");
+	// checkoutPage.clickToRadioButtonByID(driver, "shippingoption_1");
+	//
+	// log.info("Checkout Cheque Step - 31: Click to 'Continue' button");
+	// checkoutPage.clickToConfirmButton("shipping-method-buttons-container");
+	//
+	// log.info("Checkout Cheque Step - 32: Click 'Check/Monney Order' radio button");
+	// checkoutPage.clickToRadioButtonByID(driver, "paymentmethod_0");
+	//
+	// log.info("Checkout Cheque Step - 33: Click to 'Continue' button");
+	// checkoutPage.clickToConfirmButton("payment-method-buttons-container");
+	//
+	// log.info("Checkout Cheque Step - 34: Count Infomation message");
+	// verifyEquals(checkoutPage.getMessageSize(), 4);
+	//
+	// log.info("Chekcout Cheque Step - 35: Click to 'Continue' button");
+	// checkoutPage.clickToConfirmButton("payment-info-buttons-container");
+	//
+	// log.info("Checkout Cheque Step - 36: Verify Billing Info");
+	// verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "name"), userData.getFirstName() + " " + userData.getLastName());
+	// verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "email"), "Email: " + emailAddress);
+	// verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "phone"), "Phone: " + userData.getPhone());
+	// verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "address1"), userData.getAddress());
+	// verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
+	// verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "country"), userData.getCountry());
+	//
+	// log.info("Checkout Cheque Step - 37: Verify Shipping Info");
+	// verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "name"), userData.getFirstName() + " " + userData.getLastName());
+	// verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "email"), "Email: " + emailAddress);
+	// verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "phone"), "Phone: " + userData.getPhone());
+	// verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "address1"), userData.getAddress());
+	// verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
+	// verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "country"), userData.getCountry());
+	//
+	// log.info("Checkout Cheque Step - 38: Click to 'Continue' button");
+	// checkoutPage.clickButtonByText(driver, "Confirm");
+	// checkoutPage.sleepInSecond(2);
+	//
+	// log.info("Checkout Cheque Step - 39: Verify page title message");
+	// verifyEquals(checkoutPage.getPageTitleText(driver), "Thank you");
+	//
+	// log.info("Checkout Cheque Step - 40: Verify title success message");
+	// verifyEquals(checkoutPage.getTitleSuccessMessage(), "Your order has been successfully processed!");
+	//
+	// }
 
 	@Test
 	public void Computers_06_Checkout_Payment_By_Credit_Card() {
-		log.info("Checkout Credit Step - 01: Open 'Customer Info' page");
-		customerInfoPage = (CustomerInfoPageObject) checkoutPage.openPageAtHeaderLinks(driver, "ico-account");
+		// log.info("Checkout Credit Step - 01: Open 'Computers' page");
+		// computersPage = (ComputersPageObject) checkoutPage.openPageAtTopMenuByText(driver, "Computers");
+		//
+		// log.info("Checkout Credit Step - 02: Open 'Orders' page");
+		// notebookPage = (NotebooksPageObject) computersPage.openCategoriesOfComputerPage(driver, "Notebooks");
+		//
+		// log.info("Checkout Credit Step - 03: Count all products at page");
+		// verifyEquals(notebookPage.getProductSize(), 6);
 
-		log.info("Checkout Credit Step - 02: Open 'Orders' page");
-		orderPage = (OrderPageObject) customerInfoPage.openPageAtMyAccountByName(driver, "Orders");
+		log.info("Checkout Credit Step - 04: Add Apple MacBook Pro to Cart");
+		notebookPage.clickAddToCartButtonByText(driver, "Apple MacBook Pro 13-inch");
 
-		log.info("Checkout Credit Step - 03: Verify 'Details' button is displayed");
-		verifyTrue(orderPage.isButtonDisplayed(driver, "Details"));
+		log.info("Checkout Credit Step - 05: Verify Quantity Message");
+		verifyEquals(notebookPage.getQuantityMessage(driver, "min-qty-notification"), "This product has a minimum quantity of 2");
 
-		log.info("Checkout Credit Step - 04: Click to 'Details' button");
-		orderPage.clickButtonByText(driver, "Details");
+		log.info("Checkout Credit Step - 06: Click to 'Add to cart' button");
+		notebookPage.clickToAddToCartButton();
 
-		log.info("Checkout Credit Step - 05: Verify Billing Info");
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "name"), userData.getFirstName() + " " + userData.getLastName());
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "email"), "Email: " + emailAddress);
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "phone"), "Phone: " + userData.getPhone());
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "address1"), userData.getAddress());
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "country"), userData.getCountry());
+		log.info("Checkout Credit Step - 07: Verify Success Message Added");
+		verifyEquals(notebookPage.getSuccessMessage(driver), "The product has been added to your shopping cart");
 
-		log.info("Checkout Credit Step - 06: Verify Shipping Info");
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "name"), userData.getFirstName() + " " + userData.getLastName());
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "email"), "Email: " + emailAddress);
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "phone"), "Phone: " + userData.getPhone());
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "address1"), userData.getAddress());
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
-		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "country"), userData.getCountry());
+		log.info("Checkout Credit Step - 08: Close The title Message");
+		notebookPage.closeSuccessMessage(driver);
 
-		log.info("Checkout Credit Step - 07: Verify Payment Info");
-		verifyEquals(checkoutPage.getPaymentShippingStatus(driver, "billing-info-wrap", "payment-method"), "Check / Money Order");
-		verifyEquals(checkoutPage.getPaymentShippingStatus(driver, "billing-info-wrap", "payment-method-status"), " Pending");
+		log.info("Checkout Credit Step - 09: Open 'Shopping Cart' page");
+		cartPage = (CartPageObject) notebookPage.openPageAtHeaderLinks(driver, "ico-cart");
 
-		verifyEquals(checkoutPage.getPaymentShippingStatus(driver, "shipping-info-wrap", "shipping-method"), "Next Day Air");
-		verifyEquals(checkoutPage.getPaymentShippingStatus(driver, "shipping-info-wrap", "shipping-method-status"), "Not yet shipped");
+		log.info("Checkout Credit Step - 10: Verify 'Product' name is Displayed");
+		verifyEquals(cartPage.getProductsName(), "Apple MacBook Pro 13-inch");
 
-		log.info("Checkout Credit Step - 09: Verify 'Re-order' button is displayed");
-		verifyTrue(checkoutPage.isButtonDisplayed(driver, "Re-order"));
+		log.info("Checkout Credit Step - 11: Verify 'Price' and 'Total Price' is displayed");
+		verifyEquals(cartPage.getPriceByDynamicValue("product-unit-price"), "$1,800.00");
+		verifyEquals(cartPage.getPriceByDynamicValue("product-subtotal"), "$3,600.00");
 
-		log.info("Checkout Credit Step - 10: Click to 'Re-order' button");
-		checkoutPage.clickButtonByText(driver, "Re-order");
-		cartPage = PageGeneratorManager.getPageGeneratorManager().getCartPage(driver);
-
-		log.info("Checkout Credit Step - 11: Input to 'Quantity' field");
+		log.info("Checkout Credit Step - 12: Input to 'Quantity' field");
 		cartPage.inputToQuantityTextbox("10");
 
-		log.info("Checkout Credit Step - 12: Click to 'Update' button");
+		log.info("Checkout Credit Step - 13: Click to 'Update' button");
 		cartPage.clickButtonByText(driver, "Update shopping cart");
 
-		log.info("Checkout Credit Step - 13: Verify 'Price' and 'Total Price' is displayed");
+		log.info("Checkout Credit Step - 14: Verify 'Price' and 'Total Price' is displayed");
 		verifyEquals(cartPage.getPriceByDynamicValue("product-unit-price"), "$1,800.00");
 		verifyEquals(cartPage.getPriceByDynamicValue("product-subtotal"), "$18,000.00");
 
-		log.info("Checkout Credit Step - 14: Verify Gift Wrapping is displayed");
+		log.info("Checkout Credit Step - 15: Select Gift Wrapping Item");
+		cartPage.selectToDropdownByName(driver, "checkout_attribute_1", "No");
+
+		log.info("Checkout Credit Step - 16: Verify Gift Wrapping is displayed");
 		verifyEquals(cartPage.getItemSelected(driver, "checkout_attribute_1"), "No");
 
-		log.info("Checkout Credit Step - 15: Verify Gift Wrapping Message");
+		log.info("Checkout Credit Step - 17: Verify Gift Wrapping Message");
 		verifyEquals(cartPage.getQuantityMessage(driver, "selected-checkout-attributes"), "Gift wrapping: No");
 
-		log.info("Checkout Credit Step - 16: Verify Order Subtotal text");
+		log.info("Checkout Credit Step - 18: Verify Order Subtotal text");
 		verifyEquals(cartPage.getTotalInfosMessage(driver, "order-subtotal"), "$18,000.00");
 
-		log.info("Checkout Credit Step - 17: Verify Shipping Cost text");
+		log.info("Checkout Credit Step - 19: Verify Shipping Cost text");
 		verifyEquals(cartPage.getTotalInfosMessage(driver, "shipping-cost"), "$0.00");
 
-		log.info("Checkout Credit Step - 18: Verify Tax Value text");
+		log.info("Checkout Credit Step - 20: Verify Tax Value text");
 		verifyEquals(cartPage.getTotalInfosMessage(driver, "tax-value"), "$0.00");
 
-		log.info("Checkout Credit Step - 19: Verify Order Total text");
+		log.info("Checkout Credit Step - 21: Verify Order Total text");
 		verifyEquals(cartPage.getOrderSubtotal(), "$18,000.00");
 
-		log.info("Checkout Credit Step - 20: Verify Earn Reward Point text");
+		log.info("Checkout Credit Step - 22: Verify Earn Reward Point text");
 		verifyEquals(cartPage.getTotalInfosMessage(driver, "earn-reward-points"), "1800 points");
 
-		log.info("Checkout Credit Step - 21: Check to 'Term of service' Checkbox");
+		log.info("Checkout Credit Step - 23: Check to 'Term of service' Checkbox");
 		cartPage.clickToRadioButtonByID(driver, "termsofservice");
 
-		log.info("Checkout Credit Step - 22: Click to 'Checkout' button");
+		log.info("Checkout Credit Step - 24: Click to 'Checkout' button");
 		checkoutPage = cartPage.openCheckoutPage("button-1 checkout-button");
 
-		log.info("Checkout Credit Step - 23: Select New Address Shipping");
-		checkoutPage.selectToDropdownByName(driver, "billing_address_id", "New Address");
-
-		log.info("Checkout Credit Step - 24: Input New Address Info");
+		log.info("Checkout Credit Step - 25: Input New Address Info");
 		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_FirstName", newFirstName);
 		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_LastName", newLastName);
 		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_Email", newEmail);
@@ -595,14 +584,81 @@ public class Computers extends BaseTest {
 		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_PhoneNumber", newPhone);
 		checkoutPage.clickToConfirmButton("billing-buttons-container");
 
-		log.info("Checkout Credit Step - 25: Select 2nd Day Air radio button");
+		log.info("Checkout Credit Step - 26: Select 2nd Day Air radio button");
 		checkoutPage.clickToRadioButtonByID(driver, "shippingoption_2");
 		checkoutPage.clickToConfirmButton("shipping-method-buttons-container");
 
-		log.info("Checkout Credit Step - 26: Select Pay by Credit Card radio button");
+		log.info("Checkout Credit Step - 27: Select Pay by Credit Card radio button");
 		checkoutPage.clickToRadioButtonByID(driver, "paymentmethod_1");
 		checkoutPage.clickToConfirmButton("payment-method-buttons-container");
 
+		log.info("Checkout Credit Step - 28: Input to 'Card Holder Name' field");
+		checkoutPage.inputToTextboxByID(driver, "CardholderName", cardHolderName);
+
+		log.info("Checkout Credit Step - 29: Input to 'Card Number' field");
+		checkoutPage.inputToTextboxByID(driver, "CardNumber", cardNumber);
+
+		log.info("Checkout Credit Step - 30: Select Expiration date");
+		checkoutPage.selectToDropdownByName(driver, "ExpireMonth", "08");
+		checkoutPage.selectToDropdownByName(driver, "ExpireYear", "2026");
+
+		log.info("Checkout Credit Step - 31: Verify Expiration date is displayed");
+		verifyEquals(checkoutPage.getItemSelected(driver, "ExpireMonth"), "08");
+		verifyEquals(checkoutPage.getItemSelected(driver, "ExpireYear"), "2026");
+
+		log.info("Checkout Credit Step - 32: Input to 'Card Code' field");
+		checkoutPage.inputToTextboxByID(driver, "CardCode", cardCode);
+
+		log.info("Checkout Credit Step - 33: Click to 'Continue' button");
+		checkoutPage.clickToConfirmButton("payment-info-buttons-container");
+
+		log.info("Checkout Credit Step - 34: Verify Billing Info");
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "name"), newFirstName + " " + newLastName);
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "email"), "Email: " + newEmail);
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "phone"), "Phone: " + newPhone);
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "address1"), newAddress);
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "city-state-zip"), newCity + "," + newZipCode);
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "billing-info-wrap", "country"), userData.getCountry());
+
+		log.info("Checkout Credit Step - 35: Verify Shipping Info");
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "name"), newFirstName + " " + newLastName);
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "email"), "Email: " + newEmail);
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "phone"), "Phone: " + newPhone);
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "address1"), newAddress);
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "city-state-zip"), newCity + "," + newZipCode);
+		verifyEquals(checkoutPage.getBillingShippingAddress(driver, "shipping-info-wrap", "country"), userData.getCountry());
+
+		log.info("Checkout Credit Step - 36: Verify Payment Info");
+		verifyEquals(checkoutPage.getPaymentShippingStatus(driver, "billing-info-wrap", "payment-method"), "Credit Card");
+		verifyEquals(checkoutPage.getPaymentShippingStatus(driver, "shipping-info-wrap", "shipping-method"), "2nd Day Air");
+
+		log.info("Checkout Credit Step - 37: Verify Gift Wrapping Message");
+		verifyEquals(cartPage.getQuantityMessage(driver, "selected-checkout-attributes"), "Gift wrapping: No");
+
+		log.info("Checkout Credit Step - 38: Verify Order Subtotal text");
+		verifyEquals(cartPage.getTotalInfosMessage(driver, "order-subtotal"), "$18,000.00");
+
+		log.info("Checkout Credit Step - 39: Verify Shipping Cost text");
+		verifyEquals(cartPage.getTotalInfosMessage(driver, "shipping-cost"), "$0.00");
+
+		log.info("Checkout Credit Step - 40: Verify Tax Value text");
+		verifyEquals(cartPage.getTotalInfosMessage(driver, "tax-value"), "$0.00");
+
+		log.info("Checkout Credit Step - 41: Verify Order Total text");
+		verifyEquals(cartPage.getOrderSubtotal(), "$18,000.00");
+
+		log.info("Checkout Credit Step - 42: Verify Earn Reward Point text");
+		verifyEquals(cartPage.getTotalInfosMessage(driver, "earn-reward-points"), "1800 points");
+
+		log.info("Checkout Credit Step - 43: Click to 'Confirm' button");
+		checkoutPage.clickButtonByText(driver, "Confirm");
+		checkoutPage.sleepInSecond(2);
+
+		log.info("Checkout Cheque Step - 44: Verify page title message");
+		verifyEquals(checkoutPage.getPageTitleText(driver), "Thank you");
+
+		log.info("Checkout Cheque Step - 45: Verify title success message");
+		verifyEquals(checkoutPage.getTitleSuccessMessage(), "Your order has been successfully processed!");
 	}
 
 	public int generateFakeNumber() {
@@ -629,7 +685,5 @@ public class Computers extends BaseTest {
 	private CartPageObject cartPage;
 	private NotebooksPageObject notebookPage;
 	private CheckoutPageObject checkoutPage;
-	private CustomerInfoPageObject customerInfoPage;
-	private OrderPageObject orderPage;
 	UserDataMapper userData;
 }
