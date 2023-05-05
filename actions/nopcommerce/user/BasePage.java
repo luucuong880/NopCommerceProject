@@ -696,6 +696,16 @@ public class BasePage {
 		checkToDefaultCheckboxOrRadio(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID, radioButtonByID);
 	}
 
+	public void clickToProductByText(WebDriver driver, String textValue) {
+		waitForElementClickable(driver, BasePageUI.PRODUCT_BY_DYNAMICS_TEXT, textValue);
+		checkToDefaultCheckboxOrRadio(driver, BasePageUI.PRODUCT_BY_DYNAMICS_TEXT, textValue);
+	}
+
+	public boolean isProductReviewDisplayed(WebDriver driver, String textValue) {
+		waitForElementVisible(driver, BasePageUI.PRODUCT_BY_DYNAMICS_TEXT);
+		return isElementDisplayed(driver, BasePageUI.PRODUCT_BY_DYNAMICS_TEXT);
+	}
+
 	public String getSuccessMessage(WebDriver driver) {
 		waitForElementVisible(driver, BasePageUI.SUCCESS_MESSAGE);
 		return getElementText(driver, BasePageUI.SUCCESS_MESSAGE);

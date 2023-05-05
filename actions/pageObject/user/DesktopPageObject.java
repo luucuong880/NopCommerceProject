@@ -3,6 +3,7 @@ package pageObject.user;
 import org.openqa.selenium.WebDriver;
 
 import nopcommerce.user.BasePage;
+import nopcommerce.user.PageGeneratorManager;
 import pageUI.user.DesktopPageUI;
 
 public class DesktopPageObject extends BasePage {
@@ -31,6 +32,12 @@ public class DesktopPageObject extends BasePage {
 	public String totalPrices() {
 		waitForElementVisible(driver, DesktopPageUI.TOTAL_PRICES);
 		return getElementText(driver, DesktopPageUI.TOTAL_PRICES);
+	}
+
+	public ProductReviewPageObject clickToAddReviewLink() {
+		waitForElementClickable(driver, DesktopPageUI.REVIEW_LINK);
+		clickToElement(driver, DesktopPageUI.REVIEW_LINK);
+		return PageGeneratorManager.getPageGeneratorManager().getProductReviewPage(driver);
 	}
 
 }

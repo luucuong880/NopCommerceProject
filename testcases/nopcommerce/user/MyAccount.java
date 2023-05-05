@@ -15,9 +15,13 @@ import com.nopcommerce.data.UserDataMapper;
 
 import pageObject.user.AddressPageObject;
 import pageObject.user.ChangePasswordPageObject;
+import pageObject.user.ComputersPageObject;
 import pageObject.user.CustomerInfoPageObject;
+import pageObject.user.DesktopPageObject;
 import pageObject.user.HomePageObject;
 import pageObject.user.LoginPageObject;
+import pageObject.user.MyProductReviewPageObject;
+import pageObject.user.ProductReviewPageObject;
 import pageObject.user.RegisterPageObject;
 import utilities.Environment;
 
@@ -44,6 +48,8 @@ public class MyAccount extends BaseTest {
 		newAddress = "325 Lightning";
 		newZipCode = "813";
 		newPhoneNumber = "0789654213";
+		reviewTitle = "Order " + generateFakeNumber();
+		reviewText = "Good product " + generateFakeNumber();
 
 		registerPage = (RegisterPageObject) homePage.openPageAtHeaderLinks(driver, "ico-register");
 
@@ -359,6 +365,37 @@ public class MyAccount extends BaseTest {
 		addressPage.closeSuccessMessage(driver);
 	}
 
+	@Test
+	public void My_Account_06_My_Product_Review() {
+		log.info("My Product Review Step - 01: Open 'Computers' page");
+		computersPage = (ComputersPageObject) addressPage.openPageAtTopMenuByText(driver, "Computers");
+		desktopPage = (DesktopPageObject) computersPage.openCategoriesOfComputerPage(driver, "Desktop");
+
+		log.info("My Product Review Step - 02: Click to Product Item");
+		desktopPage.clickToProductByText(driver, "Lenovo IdeaCentre 600 All-in-One PC");
+
+		log.info("My Product Review Step - 03: Click to 'Add your review' link");
+		productReviewPage = desktopPage.clickToAddReviewLink();
+		productReviewPage.sleepInSecond(2);
+
+		log.info("My Product Review Step - 04: Input to Review Title and Review Text");
+		productReviewPage.inputToTextboxByID(driver, "AddProductReview_Title", reviewTitle);
+		productReviewPage.inputToReviewText(reviewText);
+
+		log.info("My Product Review Step - 05: Click to Submit button");
+		productReviewPage.clickButtonByText(driver, "Submit review");
+
+		log.info("My Product Review Step - 06: Verify Product Review message");
+		verifyEquals(productReviewPage.getProductReviewMessage(), "Product review is successfully added.");
+
+		log.info("My Product Review Step - 07: Open Customer Info Page");
+		customerInfoPage = (CustomerInfoPageObject) productReviewPage.openPageAtHeaderLinks(driver, "ico-account");
+		myProductReviewPage = (MyProductReviewPageObject) customerInfoPage.openPageAtMyAccountByName(driver, "My product reviews");
+
+		log.info("My Product Review Step - 08: Verify Product Review is Displayed");
+		verifyTrue(myProductReviewPage.isProductReviewDisplayed(driver, "Lenovo IdeaCentre 600 All-in-One PC"));
+	}
+
 	public int generateFakeNumber() {
 		Random rand = new Random();
 		return rand.nextInt(99999);
@@ -373,12 +410,16 @@ public class MyAccount extends BaseTest {
 	}
 
 	WebDriver driver;
-	private String emailAddress, newEmailAddress, newCompany, newCity, newAddress, newZipCode, newPhoneNumber;
+	private String emailAddress, newEmailAddress, newCompany, newCity, newAddress, newZipCode, newPhoneNumber, reviewTitle, reviewText;
 	private HomePageObject homePage;
 	private RegisterPageObject registerPage;
 	private LoginPageObject loginPage;
 	private CustomerInfoPageObject customerInfoPage;
 	private AddressPageObject addressPage;
 	private ChangePasswordPageObject changePasswordPage;
+	ComputersPageObject computersPage;
+	private DesktopPageObject desktopPage;
+	private ProductReviewPageObject productReviewPage;
+	private MyProductReviewPageObject myProductReviewPage;
 	UserDataMapper userData;
 }

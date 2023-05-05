@@ -14,11 +14,6 @@ public class ProductReviewPageObject extends BasePage {
 		this.driver = driver;
 	}
 
-	public void inputToRiviewTitle(String titleText) {
-		waitForElementVisible(driver, ProductReviewPageUI.REVIEW_TITLE);
-		sendkeyToElement(driver, ProductReviewPageUI.REVIEW_TITLE, titleText);
-	}
-
 	public void inputToReviewText(String text) {
 		waitForElementVisible(driver, ProductReviewPageUI.REVIEW_TEXT);
 		sendkeyToElement(driver, ProductReviewPageUI.REVIEW_TEXT, text);
@@ -38,5 +33,10 @@ public class ProductReviewPageObject extends BasePage {
 		waitForElementClickable(driver, ProductReviewPageUI.MY_ACCOUNT_BUTTON);
 		clickToElement(driver, ProductReviewPageUI.MY_ACCOUNT_BUTTON);
 		return PageGeneratorManager.getPageGeneratorManager().getCustomerInfoPage(driver);
+	}
+
+	public String getProductReviewMessage() {
+		waitForElementVisible(driver, ProductReviewPageUI.SUCCESS_MESSAGE);
+		return getElementText(driver, ProductReviewPageUI.SUCCESS_MESSAGE);
 	}
 }
