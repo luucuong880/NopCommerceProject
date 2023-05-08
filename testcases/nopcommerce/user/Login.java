@@ -39,7 +39,7 @@ public class Login extends BaseTest {
 
 		registerPage = (RegisterPageObject) homePage.openPageAtHeaderLinks(driver, "ico-register");
 
-		registerPage.clickToRadioButtonByID(driver, "gender-male");
+		registerPage.checkToRadioButtonByID(driver, "gender-male");
 		registerPage.inputToTextboxByID(driver, "FirstName", userData.getLoginUsername());
 		registerPage.inputToTextboxByID(driver, "LastName", userData.getLastName());
 		registerPage.selectToDropdownByName(driver, "DateOfBirthDay", userData.getDate());
@@ -74,7 +74,7 @@ public class Login extends BaseTest {
 		loginPage = (LoginPageObject) homePage.openPageAtHeaderLinks(driver, "ico-login");
 
 		log.info("Login Step - 06: Input to 'Email' textbox Invalid Email");
-		loginPage.inputToTextboxByID("Email", invalidEmail);
+		loginPage.inputToTextboxByID(driver, "Email", invalidEmail);
 
 		log.info("Login Step - 07: Click to 'Log in' button");
 		loginPage.clickToButtonByText("Log in");
@@ -89,7 +89,7 @@ public class Login extends BaseTest {
 		loginPage = (LoginPageObject) homePage.openPageAtHeaderLinks(driver, "ico-login");
 
 		log.info("Login Step - 10: Input to 'Email' textbox Unregister Email");
-		loginPage.inputToTextboxByID("Email", unregisterEmail);
+		loginPage.inputToTextboxByID(driver, "Email", unregisterEmail);
 
 		log.info("Login Step - 11: Click to 'Log in' button");
 		loginPage.clickToButtonByText("Log in");
@@ -105,10 +105,10 @@ public class Login extends BaseTest {
 		loginPage = (LoginPageObject) homePage.openPageAtHeaderLinks(driver, "ico-login");
 
 		log.info("Login Step - 14: Input to 'Email' textbox Email Address");
-		loginPage.inputToTextboxByID("Email", emailAddress);
+		loginPage.inputToTextboxByID(driver, "Email", emailAddress);
 
 		log.info("Login Step - 14: Input to 'Password' textbox");
-		loginPage.inputToTextboxByID("Password", "");
+		loginPage.inputToTextboxByID(driver, "Password", "");
 
 		log.info("Login Step - 15: Click to 'Log in' button");
 		loginPage.clickToButtonByText("Log in");
@@ -123,10 +123,10 @@ public class Login extends BaseTest {
 		loginPage = (LoginPageObject) homePage.openPageAtHeaderLinks(driver, "ico-login");
 
 		log.info("Login Step - 18: Input to 'Email' textbox Email Address");
-		loginPage.inputToTextboxByID("Email", emailAddress);
+		loginPage.inputToTextboxByID(driver, "Email", emailAddress);
 
 		log.info("Login Step - 19: Input to 'Password' textbox");
-		loginPage.inputToTextboxByID("Password", incorrectPassword);
+		loginPage.inputToTextboxByID(driver, "Password", incorrectPassword);
 
 		log.info("Login Step - 20: Click to 'Log in' button");
 		loginPage.clickToButtonByText("Log in");
@@ -141,10 +141,10 @@ public class Login extends BaseTest {
 		loginPage = (LoginPageObject) homePage.openPageAtHeaderLinks(driver, "ico-login");
 
 		log.info("Login Step - 23: Input to 'Email' textbox Email Address");
-		loginPage.inputToTextboxByID("Email", emailAddress);
+		loginPage.inputToTextboxByID(driver, "Email", emailAddress);
 
 		log.info("Login Step - 24: Input to 'Password' textbox");
-		loginPage.inputToTextboxByID("Password", userData.getLoginPassword());
+		loginPage.inputToTextboxByID(driver, "Password", userData.getLoginPassword());
 
 		log.info("Login Step - 25: Click to 'Log in' button");
 		loginPage.clickToButtonByText("Log in");

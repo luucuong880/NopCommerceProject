@@ -67,7 +67,7 @@ public class Register extends BaseTest {
 		registerPage = (RegisterPageObject) registerPage.openPageAtHeaderLinks(driver, "ico-register");
 
 		log.info("Register Step - 08: Click to 'Gender' Radio button");
-		registerPage.clickToRadioButtonByID(driver, "gender-male");
+		registerPage.checkToRadioButtonByID(driver, "gender-male");
 
 		log.info("Register Step - 09: Input to 'First Name' textbox");
 		registerPage.inputToTextboxByID(driver, "FirstName", userData.getFirstName());
@@ -111,7 +111,7 @@ public class Register extends BaseTest {
 		registerPage = (RegisterPageObject) registerPage.openPageAtHeaderLinks(driver, "ico-register");
 
 		log.info("Register Step - 20: Click to 'Gender' Radio button");
-		registerPage.clickToRadioButtonByID(driver, "gender-male");
+		registerPage.checkToRadioButtonByID(driver, "gender-male");
 
 		log.info("Register Step - 21: Input to 'First Name' textbox");
 		registerPage.inputToTextboxByID(driver, "FirstName", userData.getFirstName());
@@ -153,7 +153,7 @@ public class Register extends BaseTest {
 		registerPage.openPageAtHeaderLinks(driver, "ico-register");
 
 		log.info("Register Step - 32: Click to 'Gender' Radio button");
-		registerPage.clickToRadioButtonByID(driver, "gender-male");
+		registerPage.checkToRadioButtonByID(driver, "gender-male");
 
 		log.info("Register Step - 33: Input to 'First Name' textbox");
 		registerPage.inputToTextboxByID(driver, "FirstName", userData.getFirstName());
@@ -196,7 +196,7 @@ public class Register extends BaseTest {
 		registerPage = (RegisterPageObject) registerPage.openPageAtHeaderLinks(driver, "ico-register");
 
 		log.info("Register Step - 44: Click to 'Gender' Radio button");
-		registerPage.clickToRadioButtonByID(driver, "gender-male");
+		registerPage.checkToRadioButtonByID(driver, "gender-male");
 
 		log.info("Register Step - 45: Input to 'First Name' textbox");
 		registerPage.inputToTextboxByID(driver, "FirstName", userData.getFirstName());
@@ -239,7 +239,7 @@ public class Register extends BaseTest {
 		registerPage = (RegisterPageObject) registerPage.openPageAtHeaderLinks(driver, "ico-register");
 
 		log.info("Register Step - 56: Click to 'Gender' Radio button");
-		registerPage.clickToRadioButtonByID(driver, "gender-male");
+		registerPage.checkToRadioButtonByID(driver, "gender-male");
 
 		log.info("Register Step - 57: Input to 'First Name' textbox");
 		registerPage.inputToTextboxByID(driver, "FirstName", userData.getFirstName());

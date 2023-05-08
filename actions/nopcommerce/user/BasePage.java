@@ -590,42 +590,10 @@ public class BasePage {
 
 	}
 
-	public BasePage openPageAtTopMenuByText(WebDriver driver, String pageName) {
+	public BasePage openMenuPage(WebDriver driver, String pageName) {
 		waitForElementClickable(driver, BasePageUI.DYNAMIC_PAGE_AT_TOP_MENU_AREA, pageName);
 		clickToElement(driver, BasePageUI.DYNAMIC_PAGE_AT_TOP_MENU_AREA, pageName);
-		switch (pageName) {
-		case "Computers":
-			return PageGeneratorManager.getPageGeneratorManager().getComputersPage(driver);
-		case "Electronics":
-			return PageGeneratorManager.getPageGeneratorManager().getElectronicsPage(driver);
-		case "Apparel":
-			return PageGeneratorManager.getPageGeneratorManager().getApparelPage(driver);
-		case "Digital downloads":
-			return PageGeneratorManager.getPageGeneratorManager().getDigitalPage(driver);
-		case "Books":
-			return PageGeneratorManager.getPageGeneratorManager().getBooksPage(driver);
-		case "Gift Cards":
-			return PageGeneratorManager.getPageGeneratorManager().getGiftCardPage(driver);
-		default:
-			throw new RuntimeException("Invalid page name at Top Menu are.");
-		}
-
-	}
-
-	public BasePage openCategoriesOfComputerPage(WebDriver driver, String pageName) {
-		waitForElementClickable(driver, BasePageUI.LINK_BY_TEXT, pageName);
-		clickToElement(driver, BasePageUI.LINK_BY_TEXT, pageName);
-		switch (pageName) {
-		case "Desktop":
-			return PageGeneratorManager.getPageGeneratorManager().getDesktopPage(driver);
-		case "Notebooks":
-			return PageGeneratorManager.getPageGeneratorManager().getNotebooksPage(driver);
-		case "Software":
-			return PageGeneratorManager.getPageGeneratorManager().getSoftwarePage(driver);
-		default:
-			throw new RuntimeException("Invalid page name at Top Menu are.");
-		}
-
+		return PageGeneratorManager.getPageGeneratorManager().getMenuPage(driver);
 	}
 
 	public BasePage openPageAtHeaderLinks(WebDriver driver, String pageLink) {
@@ -645,6 +613,12 @@ public class BasePage {
 		default:
 			throw new RuntimeException("Invalid page Links at Header are.");
 		}
+	}
+
+	public BasePage openFooterPage(WebDriver driver, String pageLink) {
+		waitForElementClickable(driver, BasePageUI.FOOTER_LINKS, pageLink);
+		clickToElement(driver, BasePageUI.FOOTER_LINKS, pageLink);
+		return PageGeneratorManager.getPageGeneratorManager().getFootersPage(driver);
 	}
 
 	public boolean isPageTitleByTextDisplayed(WebDriver driver, String textValue) {
@@ -691,7 +665,7 @@ public class BasePage {
 	}
 
 	@Step("Click to Radio Button with value is {0}")
-	public void clickToRadioButtonByID(WebDriver driver, String radioButtonByID) {
+	public void checkToRadioButtonByID(WebDriver driver, String radioButtonByID) {
 		waitForElementClickable(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID, radioButtonByID);
 		checkToDefaultCheckboxOrRadio(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID, radioButtonByID);
 	}
@@ -702,8 +676,8 @@ public class BasePage {
 	}
 
 	public boolean isProductReviewDisplayed(WebDriver driver, String textValue) {
-		waitForElementVisible(driver, BasePageUI.PRODUCT_BY_DYNAMICS_TEXT);
-		return isElementDisplayed(driver, BasePageUI.PRODUCT_BY_DYNAMICS_TEXT);
+		waitForElementVisible(driver, BasePageUI.PRODUCT_BY_DYNAMICS_TEXT, textValue);
+		return isElementDisplayed(driver, BasePageUI.PRODUCT_BY_DYNAMICS_TEXT, textValue);
 	}
 
 	public String getSuccessMessage(WebDriver driver) {
@@ -716,7 +690,7 @@ public class BasePage {
 		return getElementText(driver, BasePageUI.PAGE_TITLE_MESSAGE);
 	}
 
-	public String getQuantityMessage(WebDriver driver, String classValue) {
+	public String getMessageByDynamicsClass(WebDriver driver, String classValue) {
 		waitForElementVisible(driver, BasePageUI.MESSAGE_DYNAMIC_BY_CLASS, classValue);
 		return getElementText(driver, BasePageUI.MESSAGE_DYNAMIC_BY_CLASS, classValue);
 	}
@@ -737,11 +711,6 @@ public class BasePage {
 		return getElementAttribute(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID, "value", textboxID);
 	}
 
-	public boolean isLinkByTextDisplayed(WebDriver driver, String textboxID) {
-		waitForElementVisible(driver, BasePageUI.LINK_BY_TEXT, textboxID);
-		return isElementDisplayed(driver, BasePageUI.LINK_BY_TEXT, textboxID);
-	}
-
 	public String getBillingShippingAddress(WebDriver driver, String textValue, String className) {
 		waitForElementVisible(driver, BasePageUI.BILLING_SHIPPING_ADDRESS, textValue, className);
 		return getElementText(driver, BasePageUI.BILLING_SHIPPING_ADDRESS, textValue, className);
@@ -750,6 +719,11 @@ public class BasePage {
 	public String getPaymentShippingStatus(WebDriver driver, String className, String classValue) {
 		waitForElementVisible(driver, BasePageUI.PAYMENT_SHIPPING_METHOD, className, classValue);
 		return getElementText(driver, BasePageUI.PAYMENT_SHIPPING_METHOD, className, classValue);
+	}
+
+	public Object getProductSize(WebDriver driver) {
+		waitForElementVisible(driver, BasePageUI.PRODUCT_SIZE);
+		return getElementSize(driver, BasePageUI.PRODUCT_SIZE);
 	}
 
 	private long longtimeout = 30;

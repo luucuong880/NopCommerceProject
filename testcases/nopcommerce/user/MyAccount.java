@@ -15,14 +15,14 @@ import com.nopcommerce.data.UserDataMapper;
 
 import pageObject.user.AddressPageObject;
 import pageObject.user.ChangePasswordPageObject;
-import pageObject.user.ComputersPageObject;
 import pageObject.user.CustomerInfoPageObject;
-import pageObject.user.DesktopPageObject;
 import pageObject.user.HomePageObject;
 import pageObject.user.LoginPageObject;
+import pageObject.user.MenuPageObject;
 import pageObject.user.MyProductReviewPageObject;
 import pageObject.user.ProductReviewPageObject;
 import pageObject.user.RegisterPageObject;
+import pageObject.user.SubMenuPageObject;
 import utilities.Environment;
 
 public class MyAccount extends BaseTest {
@@ -63,8 +63,8 @@ public class MyAccount extends BaseTest {
 
 		loginPage = (LoginPageObject) registerPage.openPageAtHeaderLinks(driver, "ico-login");
 
-		loginPage.inputToTextboxByID("Email", emailAddress);
-		loginPage.inputToTextboxByID("Password", userData.getLoginPassword());
+		loginPage.inputToTextboxByID(driver, "Email", emailAddress);
+		loginPage.inputToTextboxByID(driver, "Password", userData.getLoginPassword());
 
 		loginPage.clickToButtonByText("Log in");
 
@@ -368,31 +368,39 @@ public class MyAccount extends BaseTest {
 	@Test
 	public void My_Account_06_My_Product_Review() {
 		log.info("My Product Review Step - 01: Open 'Computers' page");
-		computersPage = (ComputersPageObject) addressPage.openPageAtTopMenuByText(driver, "Computers");
-		desktopPage = (DesktopPageObject) computersPage.openCategoriesOfComputerPage(driver, "Desktop");
+		menuPage = (MenuPageObject) addressPage.openMenuPage(driver, "Computers");
 
-		log.info("My Product Review Step - 02: Click to Product Item");
-		desktopPage.clickToProductByText(driver, "Lenovo IdeaCentre 600 All-in-One PC");
+		log.info("My Product Review Step - 02: Open 'Log in' page And Login");
+		loginPage = (LoginPageObject) addressPage.openPageAtHeaderLinks(driver, "ico-login");
+		loginPage.inputToTextboxByID(driver, "Email", emailAddress);
+		loginPage.inputToTextboxByID(driver, "Password", "456789");
+		loginPage.clickButtonByText(driver, "Log in");
 
-		log.info("My Product Review Step - 03: Click to 'Add your review' link");
-		productReviewPage = desktopPage.clickToAddReviewLink();
-		productReviewPage.sleepInSecond(2);
+		log.info("My Product Review Step - 03: Open 'Computers' page");
+		menuPage = (MenuPageObject) loginPage.openMenuPage(driver, "Computers");
+		subMenuPage = (SubMenuPageObject) menuPage.openSubMenuPage("Desktop");
 
-		log.info("My Product Review Step - 04: Input to Review Title and Review Text");
+		log.info("My Product Review Step - 04: Click to Product Item");
+		subMenuPage.clickToProductByText(driver, "Lenovo IdeaCentre 600 All-in-One PC");
+
+		log.info("My Product Review Step - 05: Click to 'Add your review' link");
+		productReviewPage = subMenuPage.clickToAddReviewLink();
+
+		log.info("My Product Review Step - 06: Input to Review Title and Review Text");
 		productReviewPage.inputToTextboxByID(driver, "AddProductReview_Title", reviewTitle);
 		productReviewPage.inputToReviewText(reviewText);
 
-		log.info("My Product Review Step - 05: Click to Submit button");
+		log.info("My Product Review Step - 07: Click to Submit button");
 		productReviewPage.clickButtonByText(driver, "Submit review");
 
-		log.info("My Product Review Step - 06: Verify Product Review message");
+		log.info("My Product Review Step - 08: Verify Product Review message");
 		verifyEquals(productReviewPage.getProductReviewMessage(), "Product review is successfully added.");
 
-		log.info("My Product Review Step - 07: Open Customer Info Page");
+		log.info("My Product Review Step - 09: Open Customer Info Page");
 		customerInfoPage = (CustomerInfoPageObject) productReviewPage.openPageAtHeaderLinks(driver, "ico-account");
 		myProductReviewPage = (MyProductReviewPageObject) customerInfoPage.openPageAtMyAccountByName(driver, "My product reviews");
 
-		log.info("My Product Review Step - 08: Verify Product Review is Displayed");
+		log.info("My Product Review Step - 10: Verify Product Review is Displayed");
 		verifyTrue(myProductReviewPage.isProductReviewDisplayed(driver, "Lenovo IdeaCentre 600 All-in-One PC"));
 	}
 
@@ -417,8 +425,8 @@ public class MyAccount extends BaseTest {
 	private CustomerInfoPageObject customerInfoPage;
 	private AddressPageObject addressPage;
 	private ChangePasswordPageObject changePasswordPage;
-	ComputersPageObject computersPage;
-	private DesktopPageObject desktopPage;
+	MenuPageObject menuPage;
+	private SubMenuPageObject subMenuPage;
 	private ProductReviewPageObject productReviewPage;
 	private MyProductReviewPageObject myProductReviewPage;
 	UserDataMapper userData;

@@ -13,10 +13,10 @@ public class CartPageObject extends BasePage {
 		this.driver = driver;
 	}
 
-	public DesktopPageObject clickToEditButton() {
+	public SubMenuPageObject clickToEditButton() {
 		waitForElementClickable(driver, CartPageUI.EDIT_BUTTON);
 		clickToElement(driver, CartPageUI.EDIT_BUTTON);
-		return PageGeneratorManager.getPageGeneratorManager().getDesktopPage(driver);
+		return PageGeneratorManager.getPageGeneratorManager().getSubMenuPage(driver);
 	}
 
 	public String getProductsName() {

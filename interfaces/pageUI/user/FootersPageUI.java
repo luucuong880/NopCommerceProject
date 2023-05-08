@@ -1,10 +1,9 @@
 package pageUI.user;
 
-public class SearchPageUI {
+public class FootersPageUI {
 
 	public static final String SEARCH_TEXTBOX = "id=q";
 	public static final String SEARCH_BUTTON = "class=search-button";
-	public static final String SIZE_OF_PRODUCT = "xpath=//div[@class='item-box']";
 	public static final String ADVANCED_SEARCH = "xpath=//input[@id='advs']";
 	public static final String CATEGORY = "xpath=//select[@id='cid']";
 	public static final String CATEGORY_SELECTED = "xpath=//select[@id='cid']//option[text()='Computers']";

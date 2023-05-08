@@ -39,10 +39,4 @@ public class LoginPageObject extends BasePage {
 		clickToElement(driver, LoginPageUI.BUTTON_BY_TEXT, buttonByText);
 	}
 
-	@Step("Enter to Textbox with value is {0}")
-	public void inputToTextboxByID(String textboxID, String value) {
-		waitForElementVisible(driver, LoginPageUI.TEXTBOX_BY_ID, textboxID);
-		sendkeyToElement(driver, LoginPageUI.TEXTBOX_BY_ID, value, textboxID);
-	}
-
 }

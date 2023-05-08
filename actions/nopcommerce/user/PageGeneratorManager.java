@@ -3,30 +3,22 @@ package nopcommerce.user;
 import org.openqa.selenium.WebDriver;
 
 import pageObject.user.AddressPageObject;
-import pageObject.user.ApparelPageObject;
-import pageObject.user.BooksPageObject;
 import pageObject.user.CartPageObject;
 import pageObject.user.ChangePasswordPageObject;
 import pageObject.user.CheckoutPageObject;
 import pageObject.user.CompareProductPageObject;
-import pageObject.user.ComputersPageObject;
 import pageObject.user.CustomerInfoPageObject;
-import pageObject.user.DesktopPageObject;
-import pageObject.user.DigitalPageObject;
-import pageObject.user.ElectronicsPageObject;
-import pageObject.user.GiftCardPageObject;
+import pageObject.user.FootersPageObject;
 import pageObject.user.HomePageObject;
-import pageObject.user.JewelryPageObject;
 import pageObject.user.LoginPageObject;
+import pageObject.user.MenuPageObject;
 import pageObject.user.MyProductReviewPageObject;
-import pageObject.user.NotebooksPageObject;
 import pageObject.user.OrderPageObject;
 import pageObject.user.ProductReviewPageObject;
 import pageObject.user.RecentlyViewedProductsPageObject;
 import pageObject.user.RegisterPageObject;
 import pageObject.user.RewardPointPageObject;
-import pageObject.user.SearchPageObject;
-import pageObject.user.SoftwarePageObject;
+import pageObject.user.SubMenuPageObject;
 import pageObject.user.WishListPageObject;
 
 public class PageGeneratorManager {
@@ -51,24 +43,16 @@ public class PageGeneratorManager {
 		return new CustomerInfoPageObject(driver);
 	}
 
-	public ComputersPageObject getComputersPage(WebDriver driver) {
-		return new ComputersPageObject(driver);
-	}
-
-	public DesktopPageObject getDesktopPage(WebDriver driver) {
-		return new DesktopPageObject(driver);
+	public SubMenuPageObject getSubMenuPage(WebDriver driver) {
+		return new SubMenuPageObject(driver);
 	}
 
 	public MyProductReviewPageObject getMyProductReviewPage(WebDriver driver) {
 		return new MyProductReviewPageObject(driver);
 	}
 
-	public SearchPageObject getSearchPage(WebDriver driver) {
-		return new SearchPageObject(driver);
-	}
-
-	public NotebooksPageObject getNotebooksPage(WebDriver driver) {
-		return new NotebooksPageObject(driver);
+	public FootersPageObject getFootersPage(WebDriver driver) {
+		return new FootersPageObject(driver);
 	}
 
 	public AddressPageObject getAddressPage(WebDriver driver) {
@@ -111,32 +95,8 @@ public class PageGeneratorManager {
 		return new CheckoutPageObject(driver);
 	}
 
-	public ElectronicsPageObject getElectronicsPage(WebDriver driver) {
-		return new ElectronicsPageObject(driver);
-	}
-
-	public ApparelPageObject getApparelPage(WebDriver driver) {
-		return new ApparelPageObject(driver);
-	}
-
-	public DigitalPageObject getDigitalPage(WebDriver driver) {
-		return new DigitalPageObject(driver);
-	}
-
-	public BooksPageObject getBooksPage(WebDriver driver) {
-		return new BooksPageObject(driver);
-	}
-
-	public JewelryPageObject getJewelryPage(WebDriver driver) {
-		return new JewelryPageObject(driver);
-	}
-
-	public GiftCardPageObject getGiftCardPage(WebDriver driver) {
-		return new GiftCardPageObject(driver);
-	}
-
-	public SoftwarePageObject getSoftwarePage(WebDriver driver) {
-		return new SoftwarePageObject(driver);
+	public MenuPageObject getMenuPage(WebDriver driver) {
+		return new MenuPageObject(driver);
 	}
 
 }
