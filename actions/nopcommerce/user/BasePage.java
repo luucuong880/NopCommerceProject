@@ -1,5 +1,7 @@
 package nopcommerce.user;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -354,6 +356,19 @@ public class BasePage {
 		}
 	}
 
+	public boolean isElementUndisplayed(WebDriver driver, String locatorType, String... dynamicValues) {
+		overrideImplicitTimeout(driver, shorttimeout);
+		List<WebElement> elements = getListWebElement(driver, getDynamicXpath(locatorType, dynamicValues));
+		overrideImplicitTimeout(driver, longtimeout);
+		if (elements.size() == 0) {
+			return true;
+		} else if (elements.size() > 0 && !elements.get(0).isDisplayed()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public boolean isElementEnable(WebDriver driver, String locatorType) {
 		return getWebElement(driver, locatorType).isEnabled();
 	}
@@ -641,6 +656,11 @@ public class BasePage {
 		return isElementDisplayed(driver, BasePageUI.BUTTON_TEXT, textValue);
 	}
 
+	public boolean isButtonUnDisplayed(WebDriver driver, String textValue) {
+		waitForElementInVisible(driver, BasePageUI.BUTTON_TEXT, textValue);
+		return isElementUndisplayed(driver, BasePageUI.BUTTON_TEXT, textValue);
+	}
+
 	@Step("Get Error Message At Fields")
 	public String getErrorMessageWithDynamicValue(WebDriver driver, String errorMessage) {
 		waitForElementVisible(driver, BasePageUI.DYNAMIC_ERROR_MESSAGE_BY_ID, errorMessage);
@@ -724,6 +744,90 @@ public class BasePage {
 	public Object getProductSize(WebDriver driver) {
 		waitForElementVisible(driver, BasePageUI.PRODUCT_SIZE);
 		return getElementSize(driver, BasePageUI.PRODUCT_SIZE);
+	}
+
+	public boolean isProductNameSortByAscending(WebDriver driver) {
+		ArrayList<String> productUIList = new ArrayList<String>();
+
+		List<WebElement> productNameText = getListWebElement(driver, BasePageUI.PRODUCT_SIZE);
+
+		for (WebElement productName : productNameText) {
+			productUIList.add(productName.getText());
+		}
+
+		ArrayList<String> productSortList = new ArrayList<String>();
+
+		for (String product : productUIList) {
+			productSortList.add(product);
+		}
+
+		Collections.sort(productSortList);
+
+		return productSortList.equals(productUIList);
+	}
+
+	public boolean isProductNameSortByDescending(WebDriver driver) {
+		ArrayList<String> productUIList = new ArrayList<String>();
+
+		List<WebElement> productNameText = getListWebElement(driver, BasePageUI.PRODUCT_SIZE);
+
+		for (WebElement productName : productNameText) {
+			productUIList.add(productName.getText());
+		}
+
+		ArrayList<String> productSortList = new ArrayList<String>();
+
+		for (String product : productUIList) {
+			productSortList.add(product);
+		}
+
+		Collections.sort(productSortList);
+
+		Collections.reverse(productSortList);
+
+		return productSortList.equals(productUIList);
+	}
+
+	public boolean isProductPriceSortByAscending(WebDriver driver) {
+		ArrayList<Float> productUIList = new ArrayList<Float>();
+
+		List<WebElement> productPriceText = getListWebElement(driver, BasePageUI.PRODUCT_PRICE);
+
+		for (WebElement productPrice : productPriceText) {
+			productUIList.add(Float.parseFloat(productPrice.getText().replace("$", "")));
+		}
+
+		ArrayList<Float> productSortList = new ArrayList<Float>();
+
+		for (Float product : productUIList) {
+			productSortList.add(product);
+		}
+
+		Collections.sort(productSortList);
+
+		return productSortList.equals(productUIList);
+	}
+
+	public boolean isProductPriceSortByDescending(WebDriver driver) {
+		ArrayList<Float> productUIList = new ArrayList<Float>();
+
+		List<WebElement> productPriceText = getListWebElement(driver, BasePageUI.PRODUCT_PRICE);
+
+		for (WebElement productPrice : productPriceText) {
+			productUIList.add(Float.parseFloat(productPrice.getText().replace("$", "")));
+		}
+
+		ArrayList<Float> productSortList = new ArrayList<Float>();
+
+		for (Float product : productUIList) {
+			productSortList.add(product);
+		}
+
+		Collections.sort(productSortList);
+
+		Collections.reverse(productSortList);
+
+		return productSortList.equals(productUIList);
 	}
 
 	private long longtimeout = 30;
