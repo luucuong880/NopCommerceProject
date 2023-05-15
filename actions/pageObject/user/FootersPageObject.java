@@ -72,4 +72,27 @@ public class FootersPageObject extends BasePage {
 		return getElementText(driver, FootersPageUI.SEARCH_MESSAGE);
 	}
 
+	public boolean isCompareProductNameDisplayed(String textValue) {
+		waitForElementVisible(driver, FootersPageUI.COMPARE_PRODUCT_NAME, textValue);
+		return isElementDisplayed(driver, FootersPageUI.COMPARE_PRODUCT_NAME, textValue);
+	}
+
+	public boolean isCompareProductNameUnDisplayed(String textValue) {
+		return isElementUndisplayed(driver, FootersPageUI.COMPARE_PRODUCT_NAME, textValue);
+	}
+
+	public boolean isCompareProductInfoDisplayed(String classValue, String textValue) {
+		waitForElementVisible(driver, FootersPageUI.COMPARE_PRODUCT_INFO, classValue, textValue);
+		return isElementDisplayed(driver, FootersPageUI.COMPARE_PRODUCT_INFO, classValue, textValue);
+	}
+
+	public boolean isCompareProductInfoUnDisplayed(String classValue, String textValue) {
+		return isElementUndisplayed(driver, FootersPageUI.COMPARE_PRODUCT_INFO, classValue, textValue);
+	}
+
+	public Object getRemoveButtonSize() {
+		waitForElementVisible(driver, FootersPageUI.REMOVE_BUTTON);
+		return getElementSize(driver, FootersPageUI.REMOVE_BUTTON);
+	}
+
 }

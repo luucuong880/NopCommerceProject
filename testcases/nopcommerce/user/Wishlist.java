@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import com.nopcommerce.data.UserDataMapper;
 
 import pageObject.user.CartPageObject;
-import pageObject.user.CompareProductPageObject;
+import pageObject.user.FootersPageObject;
 import pageObject.user.HomePageObject;
 import pageObject.user.LoginPageObject;
 import pageObject.user.MenuPageObject;
@@ -147,24 +147,24 @@ public class Wishlist extends BaseTest {
 		subMenuPage.closeSuccessMessage(driver);
 
 		log.info("Compare Step - 03: Open Compare product list page");
-		compareProductPage = (CompareProductPageObject) subMenuPage.openFooterPage(driver, "Compare products list");
+		footersPage = (FootersPageObject) subMenuPage.openFooterPage(driver, "Compare products list");
 
 		log.info("Compare Step - 04: Verify Info list Displayed");
-		verifyEquals(compareProductPage.getRemoveButtonSize(), 2);
-		verifyTrue(compareProductPage.isCompareProductNameDisplayed("Asus N551JK-XO076H Laptop"));
-		verifyTrue(compareProductPage.isCompareProductNameDisplayed("Apple MacBook Pro 13-inch"));
-		verifyTrue(compareProductPage.isCompareProductInfoDisplayed("product-price", "$1,500.00"));
-		verifyTrue(compareProductPage.isCompareProductInfoDisplayed("product-price", "$1,800.00"));
+		verifyEquals(footersPage.getRemoveButtonSize(), 2);
+		verifyTrue(footersPage.isCompareProductNameDisplayed("Asus N551JK-XO076H Laptop"));
+		verifyTrue(footersPage.isCompareProductNameDisplayed("Apple MacBook Pro 13-inch"));
+		verifyTrue(footersPage.isCompareProductInfoDisplayed("product-price", "$1,500.00"));
+		verifyTrue(footersPage.isCompareProductInfoDisplayed("product-price", "$1,800.00"));
 
 		log.info("Compare Step - 05: Click to Clear list button");
-		compareProductPage.clickButtonByText(driver, "Clear list");
+		footersPage.clickButtonByText(driver, "Clear list");
 
 		log.info("Compare Step - 06: Verify Message Displayed");
-		verifyEquals(compareProductPage.getNoDataMessage(driver), "You have no items to compare.");
+		verifyEquals(footersPage.getNoDataMessage(driver), "You have no items to compare.");
 
 		log.info("Compare Step - 07: Verify 2 product is Undisplayed");
-		verifyTrue(compareProductPage.isCompareProductNameUnDisplayed("Asus N551JK-XO076H Laptop"));
-		verifyTrue(compareProductPage.isCompareProductNameUnDisplayed("Apple MacBook Pro 13-inch"));
+		verifyTrue(footersPage.isCompareProductNameUnDisplayed("Asus N551JK-XO076H Laptop"));
+		verifyTrue(footersPage.isCompareProductNameUnDisplayed("Apple MacBook Pro 13-inch"));
 	}
 
 	@Parameters({ "browser" })
@@ -184,5 +184,5 @@ public class Wishlist extends BaseTest {
 	private SubMenuPageObject subMenuPage;
 	private WishListPageObject wishListPage;
 	private CartPageObject cartPage;
-	private CompareProductPageObject compareProductPage;
+	private FootersPageObject footersPage;
 }

@@ -6,7 +6,6 @@ import pageObject.user.AddressPageObject;
 import pageObject.user.CartPageObject;
 import pageObject.user.ChangePasswordPageObject;
 import pageObject.user.CheckoutPageObject;
-import pageObject.user.CompareProductPageObject;
 import pageObject.user.CustomerInfoPageObject;
 import pageObject.user.FootersPageObject;
 import pageObject.user.HomePageObject;
@@ -77,10 +76,6 @@ public class PageGeneratorManager {
 
 	public CartPageObject getCartPage(WebDriver driver) {
 		return new CartPageObject(driver);
-	}
-
-	public CompareProductPageObject getCompareProductPage(WebDriver driver) {
-		return new CompareProductPageObject(driver);
 	}
 
 	public RecentlyViewedProductsPageObject getRecentlyViewedProductsPage(WebDriver driver) {

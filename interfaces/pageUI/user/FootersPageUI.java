@@ -11,4 +11,8 @@ public class FootersPageUI {
 	public static final String MANUFACTURER = "xpath=//select[@id='mid']";
 	public static final String ERROR_SEARCH_MESSAGE = "xpath=//div[@class='warning']";
 	public static final String SEARCH_MESSAGE = "xpath=//div[@class='no-result']";
+
+	public static final String COMPARE_PRODUCT_NAME = "xpath=//tr[@class='product-name']//a[text()='%s']";
+	public static final String COMPARE_PRODUCT_INFO = "xpath=//tr[@class='%s']//td[text()='%s']";
+	public static final String REMOVE_BUTTON = "class=remove-button";
 }
