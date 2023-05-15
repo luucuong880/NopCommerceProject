@@ -646,11 +646,6 @@ public class BasePage {
 		clickToElement(driver, BasePageUI.BUTTON_TEXT, textValue);
 	}
 
-	public void clickAddToCartButtonByText(WebDriver driver, String textValue) {
-		waitForElementVisible(driver, BasePageUI.ADD_TO_CART_BUTTON, textValue);
-		clickToElementByJS(driver, BasePageUI.ADD_TO_CART_BUTTON, textValue);
-	}
-
 	public boolean isButtonDisplayed(WebDriver driver, String textValue) {
 		waitForElementVisible(driver, BasePageUI.BUTTON_TEXT, textValue);
 		return isElementDisplayed(driver, BasePageUI.BUTTON_TEXT, textValue);
@@ -700,6 +695,11 @@ public class BasePage {
 		return isElementDisplayed(driver, BasePageUI.PRODUCT_BY_DYNAMICS_TEXT, textValue);
 	}
 
+	public boolean isProductReviewUnDisplayed(WebDriver driver, String textValue) {
+		waitForElementInVisible(driver, BasePageUI.PRODUCT_BY_DYNAMICS_TEXT, textValue);
+		return isElementUndisplayed(driver, BasePageUI.PRODUCT_BY_DYNAMICS_TEXT, textValue);
+	}
+
 	public String getSuccessMessage(WebDriver driver) {
 		waitForElementVisible(driver, BasePageUI.SUCCESS_MESSAGE);
 		return getElementText(driver, BasePageUI.SUCCESS_MESSAGE);
@@ -724,6 +724,11 @@ public class BasePage {
 		waitForElementClickable(driver, BasePageUI.CLOSE_BUTTON);
 		clickToElement(driver, BasePageUI.CLOSE_BUTTON);
 		sleepInSecond(2);
+	}
+
+	public String getNoDataMessage(WebDriver driver) {
+		waitForElementVisible(driver, BasePageUI.NO_DATA_MESSAGE);
+		return getElementText(driver, BasePageUI.NO_DATA_MESSAGE);
 	}
 
 	public String getTextboxValueByID(WebDriver driver, String textboxID) {

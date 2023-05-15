@@ -38,11 +38,6 @@ public class WishListPageObject extends BasePage {
 		return isElementDisplayed(driver, WishListPageUI.PAGE_TITLE);
 	}
 
-	public boolean isWishListMessageDisplayed() {
-		waitForElementVisible(driver, WishListPageUI.WISH_LIST_MESSAGE);
-		return isElementDisplayed(driver, WishListPageUI.WISH_LIST_MESSAGE);
-	}
-
 	public void clickToRemoveButton() {
 		waitForElementClickable(driver, WishListPageUI.REMOVE_BUTTON);
 		clickToElement(driver, WishListPageUI.REMOVE_BUTTON);

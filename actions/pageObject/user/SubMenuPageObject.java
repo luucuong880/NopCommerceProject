@@ -34,8 +34,9 @@ public class SubMenuPageObject extends BasePage {
 		clickToElement(driver, SubMenuPageUI.BUTTON_BY_DINAMICS, classValue, textValue);
 	}
 
-	public void clickToShareLink() {
-		waitForElementClickable(driver, SubMenuPageUI.LINK_SHARE);
-		clickToElement(driver, SubMenuPageUI.LINK_SHARE);
+	public void clickAddToButtonsByTextProduct(String textValue, String textValue1) {
+		waitForElementVisible(driver, SubMenuPageUI.ADD_TO_CART_BUTTON, textValue, textValue1);
+		clickToElementByJS(driver, SubMenuPageUI.ADD_TO_CART_BUTTON, textValue, textValue1);
 	}
+
 }
