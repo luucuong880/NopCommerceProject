@@ -167,6 +167,40 @@ public class Wishlist extends BaseTest {
 		verifyTrue(footersPage.isCompareProductNameUnDisplayed("Apple MacBook Pro 13-inch"));
 	}
 
+	@Test
+	public void Case_05_Recently_View_Products() {
+		log.info("Recently Step - 01: Open Sub menu page");
+		menuPage = (MenuPageObject) footersPage.openMenuPage(driver, "Computers");
+		subMenuPage = menuPage.openSubMenuPage("Notebooks");
+
+		log.info("Recently Step - 02: View products");
+		subMenuPage.clickToProductByText(driver, "Samsung Series 9 NP900X4C Premium Ultrabook");
+		subMenuPage.backToPage(driver);
+
+		subMenuPage.clickToProductByText(driver, "Apple MacBook Pro 13-inch");
+		subMenuPage.backToPage(driver);
+
+		subMenuPage.clickToProductByText(driver, "Lenovo Thinkpad X1 Carbon Laptop");
+		subMenuPage.backToPage(driver);
+
+		subMenuPage.clickToProductByText(driver, "HP Envy 6-1180ca 15.6-Inch Sleekbook");
+		subMenuPage.backToPage(driver);
+
+		subMenuPage.clickToProductByText(driver, "Asus N551JK-XO076H Laptop");
+		subMenuPage.backToPage(driver);
+
+		subMenuPage.clickToProductByText(driver, "HP Spectre XT Pro UltraBook");
+		subMenuPage.backToPage(driver);
+
+		log.info("Recently Step - 02: Open Recently Review page");
+		footersPage = (FootersPageObject) subMenuPage.openFooterPage(driver, "Recently viewed products");
+
+		log.info("Recently Step - 03: Verify 3 Products last view Displayed");
+		verifyTrue(footersPage.isProductReviewDisplayed(driver, "HP Envy 6-1180ca 15.6-Inch Sleekbook"));
+		verifyTrue(footersPage.isProductReviewDisplayed(driver, "Asus N551JK-XO076H Laptop"));
+		verifyTrue(footersPage.isProductReviewDisplayed(driver, "HP Spectre XT Pro UltraBook"));
+	}
+
 	@Parameters({ "browser" })
 	@AfterClass
 	public void afterClass() {
