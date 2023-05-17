@@ -710,6 +710,11 @@ public class BasePage {
 		return getElementText(driver, BasePageUI.PAGE_TITLE_MESSAGE);
 	}
 
+	public String getHeaderText(WebDriver driver) {
+		waitForElementVisible(driver, BasePageUI.HEADER_LINKS);
+		return getElementText(driver, BasePageUI.HEADER_LINKS);
+	}
+
 	public String getMessageByDynamicsClass(WebDriver driver, String classValue) {
 		waitForElementVisible(driver, BasePageUI.MESSAGE_DYNAMIC_BY_CLASS, classValue);
 		return getElementText(driver, BasePageUI.MESSAGE_DYNAMIC_BY_CLASS, classValue);
