@@ -65,6 +65,21 @@ public class Order extends BaseTest {
 		log.info("Add To Cart Step - 01: Select Attribute for product");
 		subMenuPage.selectToDropdownByName(driver, "product_attribute_1", "2.2 GHz Intel Pentium Dual-Core E2200");
 		subMenuPage.selectToDropdownByName(driver, "product_attribute_2", "2 GB");
+
+		log.info("Add To Cart Step - 02: Check to Checkbox and Radio button");
+		subMenuPage.checkToRadioButtonByID(driver, "product_attribute_3_6");
+		subMenuPage.checkToRadioButtonByID(driver, "product_attribute_4_8");
+		subMenuPage.checkToRadioButtonByID(driver, "product_attribute_5_10");
+
+		log.info("Add To Cart Step - 03: Verify Product Price Displayed");
+		verifyEquals(subMenuPage.getMessageByDynamicsClass(driver, "product-price"), "$1,300.00");
+
+		log.info("Add To Cart Step - 04: Click to Add to Cart button");
+		subMenuPage.clickButtonByText(driver, "Add to cart");
+
+		log.info("Add To Cart Step - 05: Verify Success Add To Cart Message");
+		verifyEquals(subMenuPage.getSuccessMessage(driver), "The product has been added to your shopping cart");
+		subMenuPage.closeSuccessMessage(driver);
 	}
 
 	@Parameters({ "browser" })
