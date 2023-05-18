@@ -39,11 +39,6 @@ public class CartPageObject extends BasePage {
 		return getElementText(driver, CartPageUI.ORDER_MESSAGE);
 	}
 
-	public void inputToQuantityText(String string) {
-		waitForElementVisible(driver, CartPageUI.QUANTITY_TEXT);
-		sendkeyToElement(driver, CartPageUI.QUANTITY_TEXT, string);
-	}
-
 	public CheckoutPageObject openCheckoutPage(String classValue) {
 		waitForElementClickable(driver, CartPageUI.BUTTON_BY_DYNAMIC_CLASS, classValue);
 		clickToElement(driver, CartPageUI.BUTTON_BY_DYNAMIC_CLASS, classValue);
