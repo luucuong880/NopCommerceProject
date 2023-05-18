@@ -181,7 +181,22 @@ public class Order extends BaseTest {
 
 	@Test
 	public void Order_05_Payment_By_Cheque() {
+		log.info("Cheque Payment Step - 01: Remove product from Cart page");
+		cartPage.clickToButton("remove-btn");
 
+		log.info("Cheque Payment Step - 02: Open Sub Menu page");
+		menuPage = (MenuPageObject) cartPage.openMenuPage(driver, "Computers");
+		subMenuPage = menuPage.openSubMenuPage("Notebooks");
+
+		log.info("Cheque Payment Step - 03: Add Product to Cart shopping");
+		subMenuPage.clickToProductByText(driver, "Apple MacBook Pro 13-inch");
+
+		log.info("Cheque Payment Step - 04: Click to 'Add to Cart' button");
+		subMenuPage.clickToButtonByClassText("add-to-cart-panel", "Add to cart");
+
+		log.info("Cheque Payment Step - 05: Verify Success Add To Cart Message");
+		verifyEquals(subMenuPage.getSuccessMessage(driver), "The product has been added to your shopping cart");
+		subMenuPage.closeSuccessMessage(driver);
 	}
 
 	@Parameters({ "browser" })
