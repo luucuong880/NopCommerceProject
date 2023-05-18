@@ -75,11 +75,20 @@ public class Order extends BaseTest {
 		verifyEquals(subMenuPage.getMessageByDynamicsClass(driver, "product-price"), "$1,300.00");
 
 		log.info("Add To Cart Step - 04: Click to Add to Cart button");
-		subMenuPage.clickButtonByText(driver, "Add to cart");
+		subMenuPage.clickToButtonByClassText("", "Add to cart");
 
 		log.info("Add To Cart Step - 05: Verify Success Add To Cart Message");
 		verifyEquals(subMenuPage.getSuccessMessage(driver), "The product has been added to your shopping cart");
 		subMenuPage.closeSuccessMessage(driver);
+
+		log.info("Add To Cart Step - 06: Verify Header link Message");
+		verifyEquals(subMenuPage.getHeaderText(driver, "ico-cart"), "Shopping cart (1)");
+
+		log.info("Add To Cart Step - 07: Verify Info Product At Shopping Cart");
+		subMenuPage.hoverToHeaderLinks(driver, "ico-cart");
+		verifyEquals(subMenuPage.getMessageByDynamicsClass(driver, "count"), "There are 1 item(s) in your cart.");
+		verifyTrue(subMenuPage.isMessageByDynamicsClassDisplayed(driver, "product"));
+		verifyEquals(subMenuPage.getMessageByDynamicsClass(driver, "totals"), "Sub-Total: $1,300.00");
 	}
 
 	@Parameters({ "browser" })

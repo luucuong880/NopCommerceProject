@@ -646,6 +646,10 @@ public class BasePage {
 		clickToElement(driver, BasePageUI.BUTTON_TEXT, textValue);
 	}
 
+	public void hoverToHeaderLinks(WebDriver driver, String classValue) {
+		hoverMouseToElement(driver, BasePageUI.HEADER_LINKS, classValue);
+	}
+
 	public boolean isButtonDisplayed(WebDriver driver, String textValue) {
 		waitForElementVisible(driver, BasePageUI.BUTTON_TEXT, textValue);
 		return isElementDisplayed(driver, BasePageUI.BUTTON_TEXT, textValue);
@@ -710,14 +714,19 @@ public class BasePage {
 		return getElementText(driver, BasePageUI.PAGE_TITLE_MESSAGE);
 	}
 
-	public String getHeaderText(WebDriver driver) {
-		waitForElementVisible(driver, BasePageUI.HEADER_LINKS);
-		return getElementText(driver, BasePageUI.HEADER_LINKS);
+	public String getHeaderText(WebDriver driver, String classValue) {
+		waitForElementVisible(driver, BasePageUI.HEADER_LINKS, classValue);
+		return getElementText(driver, BasePageUI.HEADER_LINKS, classValue);
 	}
 
 	public String getMessageByDynamicsClass(WebDriver driver, String classValue) {
 		waitForElementVisible(driver, BasePageUI.MESSAGE_DYNAMIC_BY_CLASS, classValue);
 		return getElementText(driver, BasePageUI.MESSAGE_DYNAMIC_BY_CLASS, classValue);
+	}
+
+	public boolean isMessageByDynamicsClassDisplayed(WebDriver driver, String classValue) {
+		waitForElementVisible(driver, BasePageUI.MESSAGE_DYNAMIC_BY_CLASS, classValue);
+		return isElementDisplayed(driver, BasePageUI.MESSAGE_DYNAMIC_BY_CLASS, classValue);
 	}
 
 	public String getTotalInfosMessage(WebDriver driver, String classValue) {
