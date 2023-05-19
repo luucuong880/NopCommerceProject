@@ -207,8 +207,16 @@ public class Order extends BaseTest {
 		log.info("Cheque Payment Step - 07: Open Shopping Cart page");
 		cartPage = (CartPageObject) subMenuPage.openPageAtHeaderLinks(driver, "ico-cart");
 
-		log.info("Cheque Payment Step - 08: Input/Select Infomation");
+		log.info("Cheque Payment Step - 08: Verify Infomation");
+		verifyEquals(cartPage.getTotalInfosMessage("order-subtotal"), "$3,600.00");
+		verifyEquals(cartPage.getTotalInfosMessage("shipping-cost"), "$0.00");
+		verifyEquals(cartPage.getTotalInfosMessage("tax-value"), "$0.00");
+		verifyEquals(cartPage.getTotalInfosMessage("order-total"), "$3,600.00");
+		verifyEquals(cartPage.getTotalInfosMessage("order-subtotal"), "$3,600.00");
+
+		log.info("Cheque Payment Step - 09: Input/Select Infomation");
 		cartPage.selectToDropdownByName(driver, "checkout_attribute_1", "No");
+		cartPage.checkToRadioButtonByID(driver, "termsofservice");
 	}
 
 	@Parameters({ "browser" })

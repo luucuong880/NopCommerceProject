@@ -729,11 +729,6 @@ public class BasePage {
 		return isElementDisplayed(driver, BasePageUI.MESSAGE_DYNAMIC_BY_CLASS, classValue);
 	}
 
-	public String getTotalInfosMessage(WebDriver driver, String classValue) {
-		waitForElementVisible(driver, BasePageUI.TOTAL_INFOS, classValue);
-		return getElementText(driver, BasePageUI.TOTAL_INFOS, classValue);
-	}
-
 	public void closeSuccessMessage(WebDriver driver) {
 		waitForElementClickable(driver, BasePageUI.CLOSE_BUTTON);
 		clickToElement(driver, BasePageUI.CLOSE_BUTTON);

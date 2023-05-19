@@ -24,6 +24,11 @@ public class CartPageObject extends BasePage {
 		return getElementText(driver, CartPageUI.PRODUCTS_NAME);
 	}
 
+	public String getTotalInfosMessage(String classValue) {
+		waitForElementVisible(driver, CartPageUI.TOTAL_INFOS, classValue);
+		return getElementText(driver, CartPageUI.TOTAL_INFOS, classValue);
+	}
+
 	public String getPriceByDynamicValue(String classValue) {
 		waitForElementVisible(driver, CartPageUI.PRICE_BY_DYNAMIC_CLASS, classValue);
 		return getElementText(driver, CartPageUI.PRICE_BY_DYNAMIC_CLASS, classValue);
