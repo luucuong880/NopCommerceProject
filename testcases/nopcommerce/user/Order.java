@@ -197,6 +197,18 @@ public class Order extends BaseTest {
 		log.info("Cheque Payment Step - 05: Verify Success Add To Cart Message");
 		verifyEquals(subMenuPage.getSuccessMessage(driver), "The product has been added to your shopping cart");
 		subMenuPage.closeSuccessMessage(driver);
+
+		log.info("Cheque Payment Step - 06: Verify Info Product At Shopping Cart");
+		subMenuPage.hoverToHeaderLinks(driver, "ico-cart");
+		verifyEquals(subMenuPage.getMessageByDynamicsClass(driver, "count"), "There are 2 item(s) in your cart.");
+		verifyTrue(subMenuPage.isMessageByDynamicsClassDisplayed(driver, "product"));
+		verifyEquals(subMenuPage.getMessageByDynamicsClass(driver, "totals"), "Sub-Total: $3,600.00");
+
+		log.info("Cheque Payment Step - 07: Open Shopping Cart page");
+		cartPage = (CartPageObject) subMenuPage.openPageAtHeaderLinks(driver, "ico-cart");
+
+		log.info("Cheque Payment Step - 08: Input/Select Infomation");
+		cartPage.selectToDropdownByName(driver, "checkout_attribute_1", "No");
 	}
 
 	@Parameters({ "browser" })
