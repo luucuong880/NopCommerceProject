@@ -251,6 +251,24 @@ public class Order extends BaseTest {
 		checkoutPage.clickToConfirmButton("payment-info-buttons-container");
 
 		log.info("Cheque Payment Step - 17: Verify Info Billing Address");
+		verifyEquals(checkoutPage.getBillingShippingAddress("billing-info-wrap", "name"), userData.getFirstName() + " " + userData.getLastName());
+		verifyEquals(checkoutPage.getBillingShippingAddress("billing-info-wrap", "email"), "Email: " + emailAddress);
+		verifyEquals(checkoutPage.getBillingShippingAddress("billing-info-wrap", "phone"), "Phone: " + userData.getPhone());
+		verifyEquals(checkoutPage.getBillingShippingAddress("billing-info-wrap", "address1"), userData.getAddress());
+		verifyEquals(checkoutPage.getBillingShippingAddress("billing-info-wrap", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
+		verifyEquals(checkoutPage.getBillingShippingAddress("billing-info-wrap", "country"), userData.getCountry());
+		verifyEquals(checkoutPage.getPaymentShippingStatus("payment-method-info", "payment-method"), "Check / Money Order");
+
+		log.info("Cheque Payment Step - 18: Verify Info Shipping Address");
+		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-info-wrap", "name"), userData.getFirstName() + " " + userData.getLastName());
+		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-info-wrap", "email"), "Email: " + emailAddress);
+		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-info-wrap", "phone"), "Phone: " + userData.getPhone());
+		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-info-wrap", "address1"), userData.getAddress());
+		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-info-wrap", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
+		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-info-wrap", "country"), userData.getCountry());
+		verifyEquals(checkoutPage.getPaymentShippingStatus("shipping-method-info", "shipping-method"), "Ground");
+
+		log.info("Cheque Payment Step - 19: Verify Info product at Checkout page");
 
 	}
 

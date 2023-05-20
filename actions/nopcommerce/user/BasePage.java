@@ -745,16 +745,6 @@ public class BasePage {
 		return getElementAttribute(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID, "value", textboxID);
 	}
 
-	public String getBillingShippingAddress(WebDriver driver, String textValue, String className) {
-		waitForElementVisible(driver, BasePageUI.BILLING_SHIPPING_ADDRESS, textValue, className);
-		return getElementText(driver, BasePageUI.BILLING_SHIPPING_ADDRESS, textValue, className);
-	}
-
-	public String getPaymentShippingStatus(WebDriver driver, String className, String classValue) {
-		waitForElementVisible(driver, BasePageUI.PAYMENT_SHIPPING_METHOD, className, classValue);
-		return getElementText(driver, BasePageUI.PAYMENT_SHIPPING_METHOD, className, classValue);
-	}
-
 	public Object getProductSize(WebDriver driver) {
 		waitForElementVisible(driver, BasePageUI.PRODUCT_SIZE);
 		return getElementSize(driver, BasePageUI.PRODUCT_SIZE);
