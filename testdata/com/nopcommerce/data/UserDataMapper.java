@@ -30,6 +30,9 @@ public class UserDataMapper {
 	@JsonProperty("emailAddress")
 	private String emailAddress;
 
+	@JsonProperty("new_emailAddress")
+	private String new_emailAddress;
+
 	@JsonProperty("password")
 	private String password;
 
@@ -51,14 +54,26 @@ public class UserDataMapper {
 	@JsonProperty("city")
 	private String city;
 
+	@JsonProperty("new_city")
+	private String new_city;
+
 	@JsonProperty("address")
 	private String address;
+
+	@JsonProperty("new_address")
+	private String new_address;
 
 	@JsonProperty("zipcode")
 	private String zipcode;
 
+	@JsonProperty("new_zipcode")
+	private String new_zipcode;
+
 	@JsonProperty("phone")
 	private String phone;
+
+	@JsonProperty("new_phone")
+	private String new_phone;
 
 	static class Login {
 		@JsonProperty("username")
@@ -88,6 +103,10 @@ public class UserDataMapper {
 		return emailAddress;
 	}
 
+	public String getNewEmailAddress() {
+		return new_emailAddress;
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -112,16 +131,32 @@ public class UserDataMapper {
 		return city;
 	}
 
+	public String getNewCity() {
+		return new_city;
+	}
+
 	public String getAddress() {
 		return address;
+	}
+
+	public String getNewAddress() {
+		return new_address;
 	}
 
 	public String getZipcode() {
 		return zipcode;
 	}
 
+	public String getNewZipcode() {
+		return new_zipcode;
+	}
+
 	public String getPhone() {
 		return phone;
+	}
+
+	public String getNewPhone() {
+		return new_phone;
 	}
 
 }

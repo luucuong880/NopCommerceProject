@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 import com.nopcommerce.data.UserDataMapper;
 
 import pageObject.user.CartPageObject;
+import pageObject.user.CheckoutPageObject;
 import pageObject.user.HomePageObject;
 import pageObject.user.LoginPageObject;
 import pageObject.user.MenuPageObject;
@@ -42,6 +43,10 @@ public class Order extends BaseTest {
 		registerPage.inputToTextboxByID(driver, "Email", emailAddress);
 		registerPage.inputToTextboxByID(driver, "Password", userData.getPassword());
 		registerPage.inputToTextboxByID(driver, "ConfirmPassword", userData.getPassword());
+
+		infoCheckoutMessage = "Mail Personal or Business Check, Cashier's Check or money order to:" + "\n" + "\n" + "NOP SOLUTIONS" + "\n" + "your address here," + "\n" + "New York, NY 10001" + "\n" + "USA" + "\n"
+				+ "Notice that if you pay by Personal or Business Check, your order may be held for up to 10 days after we receive your check to allow enough time for the check to clear. If you want us to ship faster upon receipt of your payment, then we recommend your send a money order or Cashier's check."
+				+ "\n" + "P.S. You can edit this text from admin panel.";
 
 		registerPage.clickToRegisterButton("register-button");
 
@@ -212,11 +217,41 @@ public class Order extends BaseTest {
 		verifyEquals(cartPage.getTotalInfosMessage("shipping-cost"), "$0.00");
 		verifyEquals(cartPage.getTotalInfosMessage("tax-value"), "$0.00");
 		verifyEquals(cartPage.getTotalInfosMessage("order-total"), "$3,600.00");
-		verifyEquals(cartPage.getTotalInfosMessage("order-subtotal"), "$3,600.00");
+		verifyEquals(cartPage.getTotalInfosMessage("earn-reward-points"), "360 points");
 
 		log.info("Cheque Payment Step - 09: Input/Select Infomation");
 		cartPage.selectToDropdownByName(driver, "checkout_attribute_1", "No");
+		verifyEquals(cartPage.getItemSelected(driver, "checkout_attribute_1"), "No");
 		cartPage.checkToRadioButtonByID(driver, "termsofservice");
+
+		log.info("Cheque Payment Step - 10: Click to Checkout button and Open Checkout page");
+		checkoutPage = cartPage.openCheckoutPage("button-1 checkout-button");
+
+		log.info("Cheque Payment Step - 11: Input/Select Information at Checkout page");
+		checkoutPage.selectToDropdownByName(driver, "BillingNewAddress.CountryId", "Viet Nam");
+		verifyEquals(checkoutPage.getItemSelected(driver, "BillingNewAddress.CountryId"), "Viet Nam");
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_City", userData.getCity());
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_Address1", userData.getAddress());
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_ZipPostalCode", userData.getZipcode());
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_PhoneNumber", userData.getPhone());
+
+		log.info("Cheque Payment Step - 12: Click to Continue button");
+		checkoutPage.clickToConfirmButton("billing-buttons-container");
+
+		log.info("Cheque Payment Step - 13: Click to Continue button at Shipping method step");
+		checkoutPage.clickToConfirmButton("shipping-method-buttons-container");
+
+		log.info("Cheque Payment Step - 14: Click to Continue button at Payment method step");
+		checkoutPage.clickToConfirmButton("payment-method-buttons-container");
+
+		log.info("Cheque Payment Step - 15: Verify Information at Payment Information step");
+		verifyEquals(checkoutPage.getMessageByDynamicsClass(driver, "info"), infoCheckoutMessage);
+
+		log.info("Cheque Payment Step - 16: Click to Continue button at Payment Information step");
+		checkoutPage.clickToConfirmButton("payment-info-buttons-container");
+
+		log.info("Cheque Payment Step - 17: Verify Info Billing Address");
+
 	}
 
 	@Parameters({ "browser" })
@@ -228,11 +263,12 @@ public class Order extends BaseTest {
 
 	WebDriver driver;
 	UserDataMapper userData;
-	String emailAddress;
+	String emailAddress, infoCheckoutMessage;
 	private HomePageObject homePage;
 	private RegisterPageObject registerPage;
 	private LoginPageObject loginPage;
 	private MenuPageObject menuPage;
 	private SubMenuPageObject subMenuPage;
 	private CartPageObject cartPage;
+	private CheckoutPageObject checkoutPage;
 }
