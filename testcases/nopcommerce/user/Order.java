@@ -12,9 +12,11 @@ import com.nopcommerce.data.UserDataMapper;
 
 import pageObject.user.CartPageObject;
 import pageObject.user.CheckoutPageObject;
+import pageObject.user.CustomerInfoPageObject;
 import pageObject.user.HomePageObject;
 import pageObject.user.LoginPageObject;
 import pageObject.user.MenuPageObject;
+import pageObject.user.OrderPageObject;
 import pageObject.user.RegisterPageObject;
 import pageObject.user.SubMenuPageObject;
 import utilities.Environment;
@@ -236,19 +238,19 @@ public class Order extends BaseTest {
 		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_PhoneNumber", userData.getPhone());
 
 		log.info("Cheque Payment Step - 12: Click to Continue button");
-		checkoutPage.clickToConfirmButton("billing-buttons-container");
+		checkoutPage.clickToContinueButton("billing-buttons-container");
 
 		log.info("Cheque Payment Step - 13: Click to Continue button at Shipping method step");
-		checkoutPage.clickToConfirmButton("shipping-method-buttons-container");
+		checkoutPage.clickToContinueButton("shipping-method-buttons-container");
 
 		log.info("Cheque Payment Step - 14: Click to Continue button at Payment method step");
-		checkoutPage.clickToConfirmButton("payment-method-buttons-container");
+		checkoutPage.clickToContinueButton("payment-method-buttons-container");
 
 		log.info("Cheque Payment Step - 15: Verify Information at Payment Information step");
 		verifyEquals(checkoutPage.getMessageByDynamicsClass(driver, "info"), infoCheckoutMessage);
 
 		log.info("Cheque Payment Step - 16: Click to Continue button at Payment Information step");
-		checkoutPage.clickToConfirmButton("payment-info-buttons-container");
+		checkoutPage.clickToContinueButton("payment-info-buttons-container");
 
 		log.info("Cheque Payment Step - 17: Verify Info Billing Address");
 		verifyEquals(checkoutPage.getBillingShippingAddress("billing-info-wrap", "name"), userData.getFirstName() + " " + userData.getLastName());
@@ -257,7 +259,7 @@ public class Order extends BaseTest {
 		verifyEquals(checkoutPage.getBillingShippingAddress("billing-info-wrap", "address1"), userData.getAddress());
 		verifyEquals(checkoutPage.getBillingShippingAddress("billing-info-wrap", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
 		verifyEquals(checkoutPage.getBillingShippingAddress("billing-info-wrap", "country"), userData.getCountry());
-		verifyEquals(checkoutPage.getPaymentShippingStatus("payment-method-info", "payment-method"), "Check / Money Order");
+		verifyEquals(checkoutPage.getBillingShippingAddress("payment-method-info", "payment-method"), "Payment Method: Check / Money Order");
 
 		log.info("Cheque Payment Step - 18: Verify Info Shipping Address");
 		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-info-wrap", "name"), userData.getFirstName() + " " + userData.getLastName());
@@ -266,9 +268,85 @@ public class Order extends BaseTest {
 		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-info-wrap", "address1"), userData.getAddress());
 		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-info-wrap", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
 		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-info-wrap", "country"), userData.getCountry());
-		verifyEquals(checkoutPage.getPaymentShippingStatus("shipping-method-info", "shipping-method"), "Ground");
+		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-method-info", "shipping-method"), "Shipping Method: Ground");
 
 		log.info("Cheque Payment Step - 19: Verify Info product at Checkout page");
+		verifyEquals(checkoutPage.getProductNameText(), "Apple MacBook Pro 13-inch");
+		verifyEquals(checkoutPage.getInfoText("sku-number"), "AP_MBP_13");
+		verifyEquals(checkoutPage.getInfoText("product-unit-price"), "$1,800.00");
+		verifyEquals(checkoutPage.getInfoText("product-quantity"), "2");
+		verifyEquals(checkoutPage.getInfoText("product-subtotal"), "$3,600.00");
+		verifyEquals(checkoutPage.getMessageByDynamicsClass(driver, "selected-checkout-attributes"), "Gift wrapping: No");
+
+		log.info("Cheque Payment Step - 20: Verify Total Info at Checkout page");
+		verifyEquals(checkoutPage.getTotalsInfoText("order-subtotal"), "$3,600.00");
+		verifyEquals(checkoutPage.getTotalsInfoText("shipping-cost"), "$0.00");
+		verifyEquals(checkoutPage.getTotalsInfoText("tax-value"), "$0.00");
+		verifyEquals(checkoutPage.getTotalsInfoText("order-total"), "$3,600.00");
+		verifyEquals(checkoutPage.getTotalsInfoText("earn-reward-points"), "360 points");
+
+		log.info("Cheque Payment Step - 21: Click to Confirm button");
+		checkoutPage.clickToConfirmButton();
+		checkoutPage.sleepInSecond(2);
+
+		log.info("Cheque Payment Step - 22: Verify Success Message");
+		verifyEquals(checkoutPage.getPageTitleText(driver), "Thank you");
+		verifyEquals(checkoutPage.getTitleSuccessMessage(), "Your order has been successfully processed!");
+		verifyTrue(checkoutPage.isOrderNumberDisplayed());
+
+		log.info("Cheque Payment Step - 23: Open Customer Info page");
+		customerInfoPage = (CustomerInfoPageObject) checkoutPage.openPageAtHeaderLinks(driver, "ico-account");
+
+		log.info("Cheque Payment Step - 24: Open Oreders page");
+		orderPage = (OrderPageObject) customerInfoPage.openPageAtMyAccountByName(driver, "Orders");
+
+		log.info("Cheque Payment Step - 25: Verify 'Details' button is Displayed");
+		verifyTrue(orderPage.isDetailsButtonDisplayed());
+
+		log.info("Cheque Payment Step - 26: Click to 'Details' button");
+		orderPage.clickToDetailButton();
+
+		log.info("Cheque Payment Step - 27: Verify Order Overview Content text");
+		verifyEquals(orderPage.getOrderOverviewText("order-status"), "Order Status: Pending");
+		verifyEquals(orderPage.getOrderOverviewText("order-total"), "Order Total: $3,600.00");
+
+		log.info("Cheque Payment Step - 28: Verify Info Billing Address");
+		verifyEquals(orderPage.getBillingShippingAddress("billing-info-wrap", "name"), userData.getFirstName() + " " + userData.getLastName());
+		verifyEquals(orderPage.getBillingShippingAddress("billing-info-wrap", "email"), "Email: " + emailAddress);
+		verifyEquals(orderPage.getBillingShippingAddress("billing-info-wrap", "phone"), "Phone: " + userData.getPhone());
+		verifyEquals(orderPage.getBillingShippingAddress("billing-info-wrap", "address1"), userData.getAddress());
+		verifyEquals(orderPage.getBillingShippingAddress("billing-info-wrap", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
+		verifyEquals(orderPage.getBillingShippingAddress("billing-info-wrap", "country"), userData.getCountry());
+		verifyEquals(orderPage.getBillingShippingAddress("payment-method-info", "payment-method"), "Payment Method: Check / Money Order");
+		verifyEquals(orderPage.getBillingShippingAddress("payment-method-info", "payment-method-status"), "Payment Status: Pending");
+
+		log.info("Cheque Payment Step - 29: Verify Info Shipping Address");
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-info-wrap", "name"), userData.getFirstName() + " " + userData.getLastName());
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-info-wrap", "email"), "Email: " + emailAddress);
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-info-wrap", "phone"), "Phone: " + userData.getPhone());
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-info-wrap", "address1"), userData.getAddress());
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-info-wrap", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-info-wrap", "country"), userData.getCountry());
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-method-info", "shipping-method"), "Shipping Method: Ground");
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-method-info", "shipping-status"), "Shipping Status: Not yet shipped");
+
+		log.info("Cheque Payment Step - 30: Verify Info product at Order page");
+		verifyEquals(orderPage.getInfoText("sku"), "AP_MBP_13");
+		verifyEquals(orderPage.getInfoText("product"), "Apple MacBook Pro 13-inch");
+		verifyEquals(orderPage.getInfoText("unit-price"), "$1,800.00");
+		verifyEquals(orderPage.getInfoText("quantity"), "2");
+		verifyEquals(orderPage.getInfoText("total"), "$3,600.00");
+		verifyEquals(orderPage.getMessageByDynamicsClass(driver, "selected-checkout-attributes"), "Gift wrapping: No");
+
+		log.info("Cheque Payment Step - 31: Verify Total Info at Order page");
+		verifyEquals(orderPage.getTotalsInfoText("Sub-Total:"), "$3,600.00");
+		verifyEquals(orderPage.getTotalsInfoText("Shipping:"), "$0.00");
+		verifyEquals(orderPage.getTotalsInfoText("Tax:"), "$0.00");
+		verifyEquals(orderPage.getTotalsInfoText("Order Total:"), "$3,600.00");
+	}
+
+	@Test
+	public void Order_06_Payment_By_Card() {
 
 	}
 
@@ -289,4 +367,6 @@ public class Order extends BaseTest {
 	private SubMenuPageObject subMenuPage;
 	private CartPageObject cartPage;
 	private CheckoutPageObject checkoutPage;
+	private CustomerInfoPageObject customerInfoPage;
+	private OrderPageObject orderPage;
 }

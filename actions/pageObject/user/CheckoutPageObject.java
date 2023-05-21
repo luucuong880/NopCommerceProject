@@ -3,7 +3,6 @@ package pageObject.user;
 import org.openqa.selenium.WebDriver;
 
 import nopcommerce.user.BasePage;
-import nopcommerce.user.PageGeneratorManager;
 import pageUI.user.CheckoutPageUI;
 
 public class CheckoutPageObject extends BasePage {
@@ -13,9 +12,9 @@ public class CheckoutPageObject extends BasePage {
 		this.driver = driver;
 	}
 
-	public String getSKUText() {
-		waitForElementVisible(driver, CheckoutPageUI.SKU_NUMBER);
-		return getElementText(driver, CheckoutPageUI.SKU_NUMBER);
+	public String getInfoText(String classValue) {
+		waitForElementVisible(driver, CheckoutPageUI.INFO_BY_DYNAMICS_CLASS, classValue);
+		return getElementText(driver, CheckoutPageUI.INFO_BY_DYNAMICS_CLASS, classValue);
 	}
 
 	public String getBillingShippingAddress(String textValue, String className) {
@@ -23,14 +22,19 @@ public class CheckoutPageObject extends BasePage {
 		return getElementText(driver, CheckoutPageUI.BILLING_SHIPPING_ADDRESS, textValue, className);
 	}
 
-	public String getPaymentShippingStatus(String className, String classValue) {
-		waitForElementVisible(driver, CheckoutPageUI.PAYMENT_SHIPPING_METHOD, className, classValue);
-		return getElementText(driver, CheckoutPageUI.PAYMENT_SHIPPING_METHOD, className, classValue);
+	public String getTotalsInfoText(String classValue) {
+		waitForElementVisible(driver, CheckoutPageUI.TOTALS_INFO, classValue);
+		return getElementText(driver, CheckoutPageUI.TOTALS_INFO, classValue);
 	}
 
-	public void clickToConfirmButton(String idValue) {
-		waitForElementClickable(driver, CheckoutPageUI.CONFIRM_BUTTON_BY_ID, idValue);
-		clickToElement(driver, CheckoutPageUI.CONFIRM_BUTTON_BY_ID, idValue);
+	public void clickToContinueButton(String idValue) {
+		waitForElementClickable(driver, CheckoutPageUI.CONTINUE_BUTTON_BY_ID, idValue);
+		clickToElement(driver, CheckoutPageUI.CONTINUE_BUTTON_BY_ID, idValue);
+	}
+
+	public void clickToConfirmButton() {
+		waitForElementClickable(driver, CheckoutPageUI.CONFIRM_BUTTON);
+		clickToElement(driver, CheckoutPageUI.CONFIRM_BUTTON);
 	}
 
 	public boolean isThankYouMessageDisplayed() {
@@ -38,15 +42,19 @@ public class CheckoutPageObject extends BasePage {
 		return isElementDisplayed(driver, CheckoutPageUI.THANK_YOU_MESSAGE);
 	}
 
-	public CustomerInfoPageObject clickToMyAccountLink() {
-		waitForElementClickable(driver, CheckoutPageUI.MY_ACCOUNT_LINK);
-		clickToElement(driver, CheckoutPageUI.MY_ACCOUNT_LINK);
-		return PageGeneratorManager.getPageGeneratorManager().getCustomerInfoPage(driver);
+	public String getProductNameText() {
+		waitForElementVisible(driver, CheckoutPageUI.PRODUCT_NAME);
+		return getElementText(driver, CheckoutPageUI.PRODUCT_NAME);
 	}
 
 	public String getTitleSuccessMessage() {
 		waitForElementVisible(driver, CheckoutPageUI.TITLE_SUCCESS_MESSAGE);
 		return getElementText(driver, CheckoutPageUI.TITLE_SUCCESS_MESSAGE);
+	}
+
+	public boolean isOrderNumberDisplayed() {
+		waitForElementVisible(driver, CheckoutPageUI.ORDER_NUMBER);
+		return isElementDisplayed(driver, CheckoutPageUI.ORDER_NUMBER);
 	}
 
 }
