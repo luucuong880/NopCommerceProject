@@ -37,6 +37,9 @@ public class Order extends BaseTest {
 
 		userData = UserDataMapper.getUserData();
 		emailAddress = userData.getEmailAddress() + generateFakeNumber() + "@fakermail.com";
+		cardNumber = "4556613504727322";
+		cardName = "Neal Schulist";
+		cardCode = "525";
 
 		registerPage = (RegisterPageObject) homePage.openPageAtHeaderLinks(driver, "ico-register");
 
@@ -72,8 +75,10 @@ public class Order extends BaseTest {
 	public void Order_01_Add_Product_To_Cart() {
 		log.info("Add To Cart Step - 01: Select Attribute for product");
 		subMenuPage.selectToDropdownByName(driver, "product_attribute_1", "2.2 GHz Intel Pentium Dual-Core E2200");
+		subMenuPage.waitForAjaxLoadingUndisplayed(driver);
 		verifyEquals(subMenuPage.getItemSelected(driver, "product_attribute_1"), "2.2 GHz Intel Pentium Dual-Core E2200");
 		subMenuPage.selectToDropdownByName(driver, "product_attribute_2", "2 GB");
+		subMenuPage.waitForAjaxLoadingUndisplayed(driver);
 		verifyEquals(subMenuPage.getItemSelected(driver, "product_attribute_2"), "2 GB");
 
 		log.info("Add To Cart Step - 02: Check to Checkbox and Radio button");
@@ -86,6 +91,7 @@ public class Order extends BaseTest {
 
 		log.info("Add To Cart Step - 04: Click to Add to Cart button");
 		subMenuPage.clickToButtonByClassText("add-to-cart-panel", "Add to cart");
+		subMenuPage.waitForAjaxLoadingUndisplayed(driver);
 
 		log.info("Add To Cart Step - 05: Verify Success Add To Cart Message");
 		verifyEquals(subMenuPage.getSuccessMessage(driver), "The product has been added to your shopping cart");
@@ -108,11 +114,14 @@ public class Order extends BaseTest {
 
 		log.info("Edit Step - 02: Click to Edit button");
 		subMenuPage = cartPage.clickToEditButton();
+		subMenuPage.waitForAjaxLoadingUndisplayed(driver);
 
 		log.info("Edit Step - 03: Select Attribute for product");
 		subMenuPage.selectToDropdownByName(driver, "product_attribute_1", "2.2 GHz Intel Pentium Dual-Core E2200");
+		subMenuPage.waitForAjaxLoadingUndisplayed(driver);
 		verifyEquals(subMenuPage.getItemSelected(driver, "product_attribute_1"), "2.2 GHz Intel Pentium Dual-Core E2200");
 		subMenuPage.selectToDropdownByName(driver, "product_attribute_2", "4GB [+$20.00]");
+		subMenuPage.waitForAjaxLoadingUndisplayed(driver);
 		verifyEquals(subMenuPage.getItemSelected(driver, "product_attribute_2"), "4GB [+$20.00]");
 
 		log.info("Edit Step - 04: Check to Checkbox and Radio button");
@@ -123,7 +132,8 @@ public class Order extends BaseTest {
 
 		log.info("Edit Step - 05: Click to Update button");
 		subMenuPage.clickToButtonByClassText("add-to-cart-panel", "Update");
-		subMenuPage.sleepInSecond(2);
+		subMenuPage.waitForAjaxLoadingUndisplayed(driver);
+		// subMenuPage.sleepInSecond(2);
 
 		log.info("Edit Step - 06: Verify Product Price Displayed");
 		verifyEquals(subMenuPage.getMessageByDynamicsClass(driver, "product-price"), "$1,320.00");
@@ -162,12 +172,14 @@ public class Order extends BaseTest {
 
 		log.info("Update Step - 02: Click to Product");
 		subMenuPage.clickToProductByText(driver, "Lenovo IdeaCentre 600 All-in-One PC");
+		subMenuPage.waitForAjaxLoadingUndisplayed(driver);
 
 		log.info("Update Step - 03: Verify Product Price Displayed");
 		verifyEquals(subMenuPage.getMessageByDynamicsClass(driver, "product-price"), "$500.00");
 
 		log.info("Update Step - 04: Click to Add to Cart button");
 		subMenuPage.clickToButtonByClassText("add-to-cart-panel", "Add to cart");
+		subMenuPage.waitForAjaxLoadingUndisplayed(driver);
 
 		log.info("Update Step - 05: Verify Success Add To Cart Message");
 		verifyEquals(subMenuPage.getSuccessMessage(driver), "The product has been added to your shopping cart");
@@ -197,9 +209,11 @@ public class Order extends BaseTest {
 
 		log.info("Cheque Payment Step - 03: Add Product to Cart shopping");
 		subMenuPage.clickToProductByText(driver, "Apple MacBook Pro 13-inch");
+		subMenuPage.waitForAjaxLoadingUndisplayed(driver);
 
 		log.info("Cheque Payment Step - 04: Click to 'Add to Cart' button");
 		subMenuPage.clickToButtonByClassText("add-to-cart-panel", "Add to cart");
+		subMenuPage.waitForAjaxLoadingUndisplayed(driver);
 
 		log.info("Cheque Payment Step - 05: Verify Success Add To Cart Message");
 		verifyEquals(subMenuPage.getSuccessMessage(driver), "The product has been added to your shopping cart");
@@ -223,6 +237,7 @@ public class Order extends BaseTest {
 
 		log.info("Cheque Payment Step - 09: Input/Select Infomation");
 		cartPage.selectToDropdownByName(driver, "checkout_attribute_1", "No");
+
 		verifyEquals(cartPage.getItemSelected(driver, "checkout_attribute_1"), "No");
 		cartPage.checkToRadioButtonByID(driver, "termsofservice");
 
@@ -231,6 +246,7 @@ public class Order extends BaseTest {
 
 		log.info("Cheque Payment Step - 11: Input/Select Information at Checkout page");
 		checkoutPage.selectToDropdownByName(driver, "BillingNewAddress.CountryId", "Viet Nam");
+
 		verifyEquals(checkoutPage.getItemSelected(driver, "BillingNewAddress.CountryId"), "Viet Nam");
 		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_City", userData.getCity());
 		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_Address1", userData.getAddress());
@@ -287,7 +303,8 @@ public class Order extends BaseTest {
 
 		log.info("Cheque Payment Step - 21: Click to Confirm button");
 		checkoutPage.clickToConfirmButton();
-		checkoutPage.sleepInSecond(2);
+
+		checkoutPage.sleepInSecond(3);
 
 		log.info("Cheque Payment Step - 22: Verify Success Message");
 		verifyEquals(checkoutPage.getPageTitleText(driver), "Thank you");
@@ -347,6 +364,175 @@ public class Order extends BaseTest {
 
 	@Test
 	public void Order_06_Payment_By_Card() {
+		log.info("Card Payment Step - 01: Click to Re-order button");
+		cartPage = orderPage.clickToReOrderButton();
+
+		log.info("Card Payment Step - 02: Click to Remove button");
+		cartPage.clickToButton("remove-btn");
+
+		verifyEquals(cartPage.getNoDataMessage(driver), "Your Shopping Cart is empty!");
+
+		log.info("Card Payment Step - 03: Open Sub menu page");
+		menuPage = (MenuPageObject) cartPage.openMenuPage(driver, "Computers");
+		subMenuPage = menuPage.openSubMenuPage("Notebooks");
+
+		log.info("Card Payment Step - 04: Add Product to Cart shopping");
+		subMenuPage.clickToProductByText(driver, "Apple MacBook Pro 13-inch");
+		subMenuPage.waitForAjaxLoadingUndisplayed(driver);
+
+		log.info("Card Payment Step - 05: Click to 'Add to Cart' button");
+		subMenuPage.clickToButtonByClassText("add-to-cart-panel", "Add to cart");
+		subMenuPage.waitForAjaxLoadingUndisplayed(driver);
+
+		log.info("Card Payment Step - 06: Verify Success Add To Cart Message");
+		verifyEquals(subMenuPage.getSuccessMessage(driver), "The product has been added to your shopping cart");
+		subMenuPage.closeSuccessMessage(driver);
+
+		log.info("Card Payment Step - 08: Open Shopping Cart page");
+		cartPage = (CartPageObject) subMenuPage.openPageAtHeaderLinks(driver, "ico-cart");
+
+		log.info("Card Payment Step - 09: Verify Infomation");
+		verifyEquals(cartPage.getTotalInfosMessage("order-subtotal"), "$3,600.00");
+		verifyEquals(cartPage.getTotalInfosMessage("shipping-cost"), "$0.00");
+		verifyEquals(cartPage.getTotalInfosMessage("tax-value"), "$0.00");
+		verifyEquals(cartPage.getTotalInfosMessage("order-total"), "$3,600.00");
+		verifyEquals(cartPage.getTotalInfosMessage("earn-reward-points"), "360 points");
+
+		log.info("Card Payment Step - 10: Input/Select Infomation");
+		cartPage.selectToDropdownByName(driver, "checkout_attribute_1", "No");
+
+		verifyEquals(cartPage.getItemSelected(driver, "checkout_attribute_1"), "No");
+		cartPage.checkToRadioButtonByID(driver, "termsofservice");
+
+		log.info("Card Payment Step - 11: Click to Checkout button and Open Checkout page");
+		checkoutPage = cartPage.openCheckoutPage("button-1 checkout-button");
+
+		log.info("Card Payment Step - 12: Click to Continue button");
+		checkoutPage.clickToContinueButton("billing-buttons-container");
+		checkoutPage.sleepInSecond(3);
+
+		log.info("Card Payment Step - 13: Click to Continue button");
+		checkoutPage.clickToContinueButton("shipping-method-buttons-container");
+
+		log.info("Card Payment Step - 14: Check to Credit Card radio button");
+		checkoutPage.checkToRadioButtonByID(driver, "paymentmethod_1");
+
+		log.info("Card Payment Step - 15: Click to Continue button");
+		checkoutPage.clickToContinueButton("payment-method-buttons-container");
+
+		log.info("Card Payment Step - 16: Input Infomation Card Credit");
+		checkoutPage.inputToTextboxByID(driver, "CardholderName", cardName);
+		checkoutPage.inputToTextboxByID(driver, "CardNumber", cardNumber);
+		checkoutPage.selectToDropdownByName(driver, "ExpireMonth", "02");
+		checkoutPage.selectToDropdownByName(driver, "ExpireYear", "2024");
+		checkoutPage.inputToTextboxByID(driver, "CardCode", cardCode);
+
+		log.info("Card Payment Step - 17: Click to Continue button");
+		checkoutPage.clickToContinueButton("payment-info-buttons-container");
+
+		log.info("Card Payment Step - 18: Verify Info Billing Address");
+		verifyEquals(checkoutPage.getBillingShippingAddress("billing-info-wrap", "name"), userData.getFirstName() + " " + userData.getLastName());
+		verifyEquals(checkoutPage.getBillingShippingAddress("billing-info-wrap", "email"), "Email: " + emailAddress);
+		verifyEquals(checkoutPage.getBillingShippingAddress("billing-info-wrap", "phone"), "Phone: " + userData.getPhone());
+		verifyEquals(checkoutPage.getBillingShippingAddress("billing-info-wrap", "address1"), userData.getAddress());
+		verifyEquals(checkoutPage.getBillingShippingAddress("billing-info-wrap", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
+		verifyEquals(checkoutPage.getBillingShippingAddress("billing-info-wrap", "country"), userData.getCountry());
+		verifyEquals(checkoutPage.getBillingShippingAddress("payment-method-info", "payment-method"), "Payment Method: Credit Card");
+
+		log.info("Card Payment Step - 19: Verify Info Shipping Address");
+		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-info-wrap", "name"), userData.getFirstName() + " " + userData.getLastName());
+		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-info-wrap", "email"), "Email: " + emailAddress);
+		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-info-wrap", "phone"), "Phone: " + userData.getPhone());
+		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-info-wrap", "address1"), userData.getAddress());
+		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-info-wrap", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
+		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-info-wrap", "country"), userData.getCountry());
+		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-method-info", "shipping-method"), "Shipping Method: Ground");
+
+		log.info("Card Payment Step - 20: Verify Info product at Checkout page");
+		verifyEquals(checkoutPage.getProductNameText(), "Apple MacBook Pro 13-inch");
+		verifyEquals(checkoutPage.getInfoText("sku-number"), "AP_MBP_13");
+		verifyEquals(checkoutPage.getInfoText("product-unit-price"), "$1,800.00");
+		verifyEquals(checkoutPage.getInfoText("product-quantity"), "2");
+		verifyEquals(checkoutPage.getInfoText("product-subtotal"), "$3,600.00");
+		verifyEquals(checkoutPage.getMessageByDynamicsClass(driver, "selected-checkout-attributes"), "Gift wrapping: No");
+
+		log.info("Card Payment Step - 21: Verify Total Info at Checkout page");
+		verifyEquals(checkoutPage.getTotalsInfoText("order-subtotal"), "$3,600.00");
+		verifyEquals(checkoutPage.getTotalsInfoText("shipping-cost"), "$0.00");
+		verifyEquals(checkoutPage.getTotalsInfoText("tax-value"), "$0.00");
+		verifyEquals(checkoutPage.getTotalsInfoText("order-total"), "$3,600.00");
+		verifyEquals(checkoutPage.getTotalsInfoText("earn-reward-points"), "360 points");
+
+		log.info("Card Payment Step - 22: Click to Confirm button");
+		checkoutPage.clickToConfirmButton();
+		checkoutPage.sleepInSecond(2);
+
+		log.info("Card Payment Step - 23: Verify Success Message");
+		verifyEquals(checkoutPage.getPageTitleText(driver), "Thank you");
+		verifyEquals(checkoutPage.getTitleSuccessMessage(), "Your order has been successfully processed!");
+		verifyTrue(checkoutPage.isOrderNumberDisplayed());
+
+		log.info("Card Payment Step - 24: Open Customer Info page");
+		customerInfoPage = (CustomerInfoPageObject) checkoutPage.openPageAtHeaderLinks(driver, "ico-account");
+
+		log.info("Card Payment Step - 25: Open Oreders page");
+		orderPage = (OrderPageObject) customerInfoPage.openPageAtMyAccountByName(driver, "Orders");
+
+		log.info("Card Payment Step - 26: Verify 'Details' button is Displayed");
+		verifyTrue(orderPage.isDetailsButtonDisplayed());
+
+		log.info("Card Payment Step - 27: Click to 'Details' button");
+		orderPage.clickToDetailButton();
+
+		log.info("Card Payment Step - 28: Verify Order Overview Content text");
+		verifyEquals(orderPage.getOrderOverviewText("order-status"), "Order Status: Pending");
+		verifyEquals(orderPage.getOrderOverviewText("order-total"), "Order Total: $3,600.00");
+
+		log.info("Card Payment Step - 29: Verify Info Billing Address");
+		verifyEquals(orderPage.getBillingShippingAddress("billing-info-wrap", "name"), userData.getFirstName() + " " + userData.getLastName());
+		verifyEquals(orderPage.getBillingShippingAddress("billing-info-wrap", "email"), "Email: " + emailAddress);
+		verifyEquals(orderPage.getBillingShippingAddress("billing-info-wrap", "phone"), "Phone: " + userData.getPhone());
+		verifyEquals(orderPage.getBillingShippingAddress("billing-info-wrap", "address1"), userData.getAddress());
+		verifyEquals(orderPage.getBillingShippingAddress("billing-info-wrap", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
+		verifyEquals(orderPage.getBillingShippingAddress("billing-info-wrap", "country"), userData.getCountry());
+		verifyEquals(orderPage.getBillingShippingAddress("payment-method-info", "payment-method"), "Payment Method: Credit Card");
+		verifyEquals(orderPage.getBillingShippingAddress("payment-method-info", "payment-method-status"), "Payment Status: Pending");
+
+		log.info("Card Payment Step - 30: Verify Info Shipping Address");
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-info-wrap", "name"), userData.getFirstName() + " " + userData.getLastName());
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-info-wrap", "email"), "Email: " + emailAddress);
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-info-wrap", "phone"), "Phone: " + userData.getPhone());
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-info-wrap", "address1"), userData.getAddress());
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-info-wrap", "city-state-zip"), userData.getCity() + "," + userData.getZipcode());
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-info-wrap", "country"), userData.getCountry());
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-method-info", "shipping-method"), "Shipping Method: Ground");
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-method-info", "shipping-status"), "Shipping Status: Not yet shipped");
+
+		log.info("Card Payment Step - 31: Verify Info product at Order page");
+		verifyEquals(orderPage.getInfoText("sku"), "AP_MBP_13");
+		verifyEquals(orderPage.getInfoText("product"), "Apple MacBook Pro 13-inch");
+		verifyEquals(orderPage.getInfoText("unit-price"), "$1,800.00");
+		verifyEquals(orderPage.getInfoText("quantity"), "2");
+		verifyEquals(orderPage.getInfoText("total"), "$3,600.00");
+		verifyEquals(orderPage.getMessageByDynamicsClass(driver, "selected-checkout-attributes"), "Gift wrapping: No");
+
+		log.info("Card Payment Step - 32: Verify Total Info at Order page");
+		verifyEquals(orderPage.getTotalsInfoText("Sub-Total:"), "$3,600.00");
+		verifyEquals(orderPage.getTotalsInfoText("Shipping:"), "$0.00");
+		verifyEquals(orderPage.getTotalsInfoText("Tax:"), "$0.00");
+		verifyEquals(orderPage.getTotalsInfoText("Order Total:"), "$3,600.00");
+	}
+
+	@Test
+	public void Order_07_Re_Order() {
+		log.info("Re-order Step - 01: Click to Re-order button");
+		cartPage = orderPage.clickToReOrderButton();
+
+		log.info("Re-order Step - 02: Input to Quantity textbox");
+		cartPage.inputToQuantityTextbox("10");
+
+		log.info("Re-order Step - 03: Click to Update Shopping button");
+		cartPage.clickToButton("button-2 update-cart-button");
 
 	}
 
@@ -359,7 +545,7 @@ public class Order extends BaseTest {
 
 	WebDriver driver;
 	UserDataMapper userData;
-	String emailAddress, infoCheckoutMessage;
+	String emailAddress, infoCheckoutMessage, cardName, cardNumber, cardCode;
 	private HomePageObject homePage;
 	private RegisterPageObject registerPage;
 	private LoginPageObject loginPage;

@@ -706,6 +706,10 @@ public class BasePage {
 		return isElementUndisplayed(driver, BasePageUI.PRODUCT_BY_DYNAMICS_TEXT, textValue);
 	}
 
+	public void waitForAjaxLoadingUndisplayed(WebDriver driver) {
+		waitForElementInVisible(driver, BasePageUI.AJAX_LOADING_ICON);
+	}
+
 	public String getSuccessMessage(WebDriver driver) {
 		waitForElementVisible(driver, BasePageUI.SUCCESS_MESSAGE);
 		return getElementText(driver, BasePageUI.SUCCESS_MESSAGE);

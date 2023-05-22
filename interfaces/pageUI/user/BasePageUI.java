@@ -18,4 +18,5 @@ public class BasePageUI {
 	public static final String FOOTER_LINKS = "xpath=//a[text()='%s']";
 	public static final String PRODUCT_SIZE = "xpath=//h2[@class='product-title']//a";
 	public static final String PRODUCT_PRICE = "xpath=//span[@class='price actual-price']";
+	public static final String AJAX_LOADING_ICON = "class=ajax-loading-block-window";
 }
