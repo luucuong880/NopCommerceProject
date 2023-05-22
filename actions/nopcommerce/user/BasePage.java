@@ -625,6 +625,8 @@ public class BasePage {
 			return PageGeneratorManager.getPageGeneratorManager().getCartPage(driver);
 		case "ico-account":
 			return PageGeneratorManager.getPageGeneratorManager().getCustomerInfoPage(driver);
+		case "ico-logout":
+			return PageGeneratorManager.getPageGeneratorManager().getHomePage(driver);
 		default:
 			throw new RuntimeException("Invalid page Links at Header are.");
 		}
