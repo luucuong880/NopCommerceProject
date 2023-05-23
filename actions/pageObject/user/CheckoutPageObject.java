@@ -30,11 +30,13 @@ public class CheckoutPageObject extends BasePage {
 	public void clickToContinueButton(String idValue) {
 		waitForElementClickable(driver, CheckoutPageUI.CONTINUE_BUTTON_BY_ID, idValue);
 		clickToElement(driver, CheckoutPageUI.CONTINUE_BUTTON_BY_ID, idValue);
+		sleepInSecond(2);
 	}
 
 	public void clickToConfirmButton() {
 		waitForElementClickable(driver, CheckoutPageUI.CONFIRM_BUTTON);
 		clickToElement(driver, CheckoutPageUI.CONFIRM_BUTTON);
+		sleepInSecond(3);
 	}
 
 	public boolean isThankYouMessageDisplayed() {

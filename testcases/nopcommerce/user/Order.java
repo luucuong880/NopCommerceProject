@@ -304,8 +304,6 @@ public class Order extends BaseTest {
 		log.info("Cheque Payment Step - 21: Click to Confirm button");
 		checkoutPage.clickToConfirmButton();
 
-		checkoutPage.sleepInSecond(3);
-
 		log.info("Cheque Payment Step - 22: Verify Success Message");
 		verifyEquals(checkoutPage.getPageTitleText(driver), "Thank you");
 		verifyEquals(checkoutPage.getTitleSuccessMessage(), "Your order has been successfully processed!");
@@ -409,7 +407,6 @@ public class Order extends BaseTest {
 
 		log.info("Card Payment Step - 12: Click to Continue button");
 		checkoutPage.clickToContinueButton("billing-buttons-container");
-		checkoutPage.sleepInSecond(3);
 
 		log.info("Card Payment Step - 13: Click to Continue button");
 		checkoutPage.clickToContinueButton("shipping-method-buttons-container");
@@ -465,7 +462,6 @@ public class Order extends BaseTest {
 
 		log.info("Card Payment Step - 22: Click to Confirm button");
 		checkoutPage.clickToConfirmButton();
-		checkoutPage.sleepInSecond(2);
 
 		log.info("Card Payment Step - 23: Verify Success Message");
 		verifyEquals(checkoutPage.getPageTitleText(driver), "Thank you");
