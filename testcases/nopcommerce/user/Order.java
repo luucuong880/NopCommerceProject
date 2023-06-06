@@ -37,6 +37,7 @@ public class Order extends BaseTest {
 
 		userData = UserDataMapper.getUserData();
 		emailAddress = userData.getEmailAddress() + generateFakeNumber() + "@fakermail.com";
+		newEmailAddress = userData.getNewEmailAddress() + generateFakeNumber() + "@fakermail.com";
 		cardNumber = "4556613504727322";
 		cardName = "Neal Schulist";
 		cardCode = "525";
@@ -530,6 +531,141 @@ public class Order extends BaseTest {
 		log.info("Re-order Step - 03: Click to Update Shopping button");
 		cartPage.clickToButton("button-2 update-cart-button");
 
+		log.info("Re-order Step - 04: Input/Select Infomation");
+		cartPage.selectToDropdownByName(driver, "checkout_attribute_1", "No");
+
+		verifyEquals(cartPage.getItemSelected(driver, "checkout_attribute_1"), "No");
+		cartPage.checkToRadioButtonByID(driver, "termsofservice");
+
+		log.info("Re-order Step - 05: Click to Checkout button and Open Checkout page");
+		checkoutPage = cartPage.openCheckoutPage("button-1 checkout-button");
+
+		log.info("Re-order Step - 06: Select New Address item");
+		checkoutPage.selectToDropdownByName(driver, "billing_address_id", "New Address");
+
+		log.info("Re-order Step - 07: Input New Info Address");
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_FirstName", userData.getFirstName());
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_LastName", userData.getLastName());
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_Email", newEmailAddress);
+		checkoutPage.selectToDropdownByName(driver, "BillingNewAddress.CountryId", userData.getCountry());
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_City", userData.getNewCity());
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_Address1", userData.getNewAddress());
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_ZipPostalCode", userData.getNewZipcode());
+		checkoutPage.inputToTextboxByID(driver, "BillingNewAddress_PhoneNumber", userData.getNewPhone());
+
+		log.info("Re-order Step - 08: Click to 'Continue' button");
+		checkoutPage.clickToContinueButton("billing-buttons-container");
+
+		log.info("Re-order Step - 09: Check to Shipping option radio button");
+		checkoutPage.checkToRadioButtonByID(driver, "shippingoption_1");
+		checkoutPage.clickToContinueButton("shipping-method-buttons-container");
+
+		log.info("Re-order Step - 10: Check to Credit Card radio button");
+		checkoutPage.checkToRadioButtonByID(driver, "paymentmethod_1");
+
+		log.info("Re-order Step - 11: Click to Continue button");
+		checkoutPage.clickToContinueButton("payment-method-buttons-container");
+
+		log.info("Re-order Step - 12: Input Infomation Card Credit");
+		checkoutPage.inputToTextboxByID(driver, "CardholderName", cardName);
+		checkoutPage.inputToTextboxByID(driver, "CardNumber", cardNumber);
+		checkoutPage.selectToDropdownByName(driver, "ExpireMonth", "02");
+		checkoutPage.selectToDropdownByName(driver, "ExpireYear", "2024");
+		checkoutPage.inputToTextboxByID(driver, "CardCode", cardCode);
+
+		log.info("Re-order Step - 13: Click to Continue button");
+		checkoutPage.clickToContinueButton("payment-info-buttons-container");
+
+		log.info("Re-order Step - 14: Verify Info Billing Address");
+		verifyEquals(checkoutPage.getBillingShippingAddress("billing-info-wrap", "name"), userData.getFirstName() + " " + userData.getLastName());
+		verifyEquals(checkoutPage.getBillingShippingAddress("billing-info-wrap", "email"), "Email: " + newEmailAddress);
+		verifyEquals(checkoutPage.getBillingShippingAddress("billing-info-wrap", "phone"), "Phone: " + userData.getNewPhone());
+		verifyEquals(checkoutPage.getBillingShippingAddress("billing-info-wrap", "address1"), userData.getNewAddress());
+		verifyEquals(checkoutPage.getBillingShippingAddress("billing-info-wrap", "city-state-zip"), userData.getNewCity() + "," + userData.getNewZipcode());
+		verifyEquals(checkoutPage.getBillingShippingAddress("billing-info-wrap", "country"), userData.getCountry());
+		verifyEquals(checkoutPage.getBillingShippingAddress("payment-method-info", "payment-method"), "Payment Method: Credit Card");
+
+		log.info("Re-order Step - 15: Verify Info Shipping Address");
+		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-info-wrap", "name"), userData.getFirstName() + " " + userData.getLastName());
+		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-info-wrap", "email"), "Email: " + newEmailAddress);
+		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-info-wrap", "phone"), "Phone: " + userData.getNewPhone());
+		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-info-wrap", "address1"), userData.getNewAddress());
+		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-info-wrap", "city-state-zip"), userData.getNewCity() + "," + userData.getNewZipcode());
+		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-info-wrap", "country"), userData.getCountry());
+		verifyEquals(checkoutPage.getBillingShippingAddress("shipping-method-info", "shipping-method"), "Shipping Method: Next Day Air");
+
+		log.info("Re-order Step - 16: Verify Info product at Checkout page");
+		verifyEquals(checkoutPage.getProductNameText(), "Apple MacBook Pro 13-inch");
+		verifyEquals(checkoutPage.getInfoText("sku-number"), "AP_MBP_13");
+		verifyEquals(checkoutPage.getInfoText("product-unit-price"), "$1,800.00");
+		verifyEquals(checkoutPage.getInfoText("product-quantity"), "10");
+		verifyEquals(checkoutPage.getInfoText("product-subtotal"), "$18,000.00");
+		verifyEquals(checkoutPage.getMessageByDynamicsClass(driver, "selected-checkout-attributes"), "Gift wrapping: No");
+
+		log.info("Re-order Step - 17: Verify Total Info at Checkout page");
+		verifyEquals(checkoutPage.getTotalsInfoText("order-subtotal"), "$18,000.00");
+		verifyEquals(checkoutPage.getTotalsInfoText("shipping-cost"), "$0.00");
+		verifyEquals(checkoutPage.getTotalsInfoText("tax-value"), "$0.00");
+		verifyEquals(checkoutPage.getTotalsInfoText("order-total"), "$18,000.00");
+		verifyEquals(checkoutPage.getTotalsInfoText("earn-reward-points"), "1800 points");
+
+		log.info("Re-order Step - 18: Click to Confirm button");
+		checkoutPage.clickToConfirmButton();
+
+		log.info("Re-order Step - 19: Verify Success Message");
+		verifyEquals(checkoutPage.getPageTitleText(driver), "Thank you");
+		verifyEquals(checkoutPage.getTitleSuccessMessage(), "Your order has been successfully processed!");
+		verifyTrue(checkoutPage.isOrderNumberDisplayed());
+
+		log.info("Re-order Step - 20: Open Customer Info page");
+		customerInfoPage = (CustomerInfoPageObject) checkoutPage.openPageAtHeaderLinks(driver, "ico-account");
+
+		log.info("Re-order Step - 21: Open Oreders page");
+		orderPage = (OrderPageObject) customerInfoPage.openPageAtMyAccountByName(driver, "Orders");
+
+		log.info("Re-order Step - 22: Verify 'Details' button is Displayed");
+		verifyTrue(orderPage.isDetailsButtonByTextDisplayed("$18,000.00"));
+
+		log.info("Re-order Step - 23: Click to 'Details' button");
+		orderPage.clickToDetailButtonByText("$18,000.00");
+
+		log.info("Re-order Step - 24: Verify Order Overview Content text");
+		verifyEquals(orderPage.getOrderOverviewText("order-status"), "Order Status: Pending");
+		verifyEquals(orderPage.getOrderOverviewText("order-total"), "Order Total: $18,000.00");
+
+		log.info("Re-order Step - 25: Verify Info Billing Address");
+		verifyEquals(orderPage.getBillingShippingAddress("billing-info-wrap", "name"), userData.getFirstName() + " " + userData.getLastName());
+		verifyEquals(orderPage.getBillingShippingAddress("billing-info-wrap", "email"), "Email: " + newEmailAddress);
+		verifyEquals(orderPage.getBillingShippingAddress("billing-info-wrap", "phone"), "Phone: " + userData.getNewPhone());
+		verifyEquals(orderPage.getBillingShippingAddress("billing-info-wrap", "address1"), userData.getNewAddress());
+		verifyEquals(orderPage.getBillingShippingAddress("billing-info-wrap", "city-state-zip"), userData.getNewCity() + "," + userData.getNewZipcode());
+		verifyEquals(orderPage.getBillingShippingAddress("billing-info-wrap", "country"), userData.getCountry());
+		verifyEquals(orderPage.getBillingShippingAddress("payment-method-info", "payment-method"), "Payment Method: Credit Card");
+		verifyEquals(orderPage.getBillingShippingAddress("payment-method-info", "payment-method-status"), "Payment Status: Pending");
+
+		log.info("Re-order Step - 26: Verify Info Shipping Address");
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-info-wrap", "name"), userData.getFirstName() + " " + userData.getLastName());
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-info-wrap", "email"), "Email: " + newEmailAddress);
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-info-wrap", "phone"), "Phone: " + userData.getNewPhone());
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-info-wrap", "address1"), userData.getNewAddress());
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-info-wrap", "city-state-zip"), userData.getNewCity() + "," + userData.getNewZipcode());
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-info-wrap", "country"), userData.getCountry());
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-method-info", "shipping-method"), "Shipping Method: Next Day Air");
+		verifyEquals(orderPage.getBillingShippingAddress("shipping-method-info", "shipping-status"), "Shipping Status: Not yet shipped");
+
+		log.info("Re-order Step - 27: Verify Info product at Order page");
+		verifyEquals(orderPage.getInfoText("sku"), "AP_MBP_13");
+		verifyEquals(orderPage.getInfoText("product"), "Apple MacBook Pro 13-inch");
+		verifyEquals(orderPage.getInfoText("unit-price"), "$1,800.00");
+		verifyEquals(orderPage.getInfoText("quantity"), "10");
+		verifyEquals(orderPage.getInfoText("total"), "$18,000.00");
+		verifyEquals(orderPage.getMessageByDynamicsClass(driver, "selected-checkout-attributes"), "Gift wrapping: No");
+
+		log.info("Re-order Step - 28: Verify Total Info at Order page");
+		verifyEquals(orderPage.getTotalsInfoText("Sub-Total:"), "$18,000.00");
+		verifyEquals(orderPage.getTotalsInfoText("Shipping:"), "$0.00");
+		verifyEquals(orderPage.getTotalsInfoText("Tax:"), "$0.00");
+		verifyEquals(orderPage.getTotalsInfoText("Order Total:"), "$18,000.00");
 	}
 
 	@Parameters({ "browser" })
@@ -541,7 +677,7 @@ public class Order extends BaseTest {
 
 	WebDriver driver;
 	UserDataMapper userData;
-	String emailAddress, infoCheckoutMessage, cardName, cardNumber, cardCode;
+	String emailAddress, newEmailAddress, infoCheckoutMessage, cardName, cardNumber, cardCode;
 	private HomePageObject homePage;
 	private RegisterPageObject registerPage;
 	private LoginPageObject loginPage;

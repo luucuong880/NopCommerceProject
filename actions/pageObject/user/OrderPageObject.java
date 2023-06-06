@@ -38,9 +38,19 @@ public class OrderPageObject extends BasePage {
 		return isElementDisplayed(driver, OrderPageUI.DETAILS_BUTTON);
 	}
 
+	public boolean isDetailsButtonByTextDisplayed(String textValue) {
+		waitForElementVisible(driver, OrderPageUI.DETAILS_BUTTON_BY_TEXT, textValue);
+		return isElementDisplayed(driver, OrderPageUI.DETAILS_BUTTON_BY_TEXT, textValue);
+	}
+
 	public void clickToDetailButton() {
 		waitForElementClickable(driver, OrderPageUI.DETAILS_BUTTON);
 		clickToElement(driver, OrderPageUI.DETAILS_BUTTON);
+	}
+
+	public void clickToDetailButtonByText(String textValue) {
+		waitForElementClickable(driver, OrderPageUI.DETAILS_BUTTON_BY_TEXT, textValue);
+		clickToElement(driver, OrderPageUI.DETAILS_BUTTON_BY_TEXT, textValue);
 	}
 
 	public CartPageObject clickToReOrderButton() {
