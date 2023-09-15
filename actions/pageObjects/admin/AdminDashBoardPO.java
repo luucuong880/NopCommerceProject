@@ -6,10 +6,10 @@ import nopcommerce.admin.BasePage;
 import nopcommerce.admin.PageGeneraterManager;
 import pageUIs.admin.AdminDashBoardPageUI;
 
-public class DashBoardPageObject extends BasePage {
+public class AdminDashBoardPO extends BasePage {
 	private WebDriver driver;
 
-	public DashBoardPageObject(WebDriver driver) {
+	public AdminDashBoardPO(WebDriver driver) {
 		this.driver = driver;
 	}
 
@@ -27,7 +27,7 @@ public class DashBoardPageObject extends BasePage {
 		clickToElement(driver, AdminDashBoardPageUI.CATALOG_BUTTON);
 	}
 
-	public ProductsPageObject clickToProductsButton() {
+	public AdminProductsPO clickToProductsButton() {
 		waitForElementClickable(driver, AdminDashBoardPageUI.PRODUCTS_BUTTON);
 		clickToElement(driver, AdminDashBoardPageUI.PRODUCTS_BUTTON);
 		return PageGeneraterManager.getProductsPage(driver);

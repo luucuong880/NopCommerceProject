@@ -6,10 +6,10 @@ import nopcommerce.admin.BasePage;
 import nopcommerce.admin.PageGeneraterManager;
 import pageUIs.admin.AdminCreateNewCustomerPageUI;
 
-public class CreateNewCustomerPageObject extends BasePage {
+public class AdminCreateNewCustomerPO extends BasePage {
 	private WebDriver driver;
 
-	public CreateNewCustomerPageObject(WebDriver driver) {
+	public AdminCreateNewCustomerPO(WebDriver driver) {
 		this.driver = driver;
 	}
 
@@ -79,7 +79,7 @@ public class CreateNewCustomerPageObject extends BasePage {
 		return isElementDisplayed(driver, AdminCreateNewCustomerPageUI.SUCCESS_MESSAGE);
 	}
 
-	public CustomerInfoPageObject clickToBackCustomerListButton() {
+	public AdminCustomerInfoPO clickToBackCustomerListButton() {
 		waitForElementClickable(driver, AdminCreateNewCustomerPageUI.BACK_CUSTOMER_BUTTON);
 		clickToElement(driver, AdminCreateNewCustomerPageUI.BACK_CUSTOMER_BUTTON);
 		sleepInSecond(3);

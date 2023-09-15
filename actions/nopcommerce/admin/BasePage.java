@@ -17,8 +17,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pageObjects.admin.CustomerInfoPageObject;
-import pageObjects.admin.LoginPageObject;
+import pageObjects.admin.AdminCustomerInfoPO;
+import pageObjects.admin.AdminLoginPO;
 import pageObjects.wordpress.AdminDashboardPO;
 import pageObjects.wordpress.UserHomePO;
 import pageUIs.admin.BasePageUI;
@@ -519,13 +519,13 @@ public class BasePage {
 	//
 	// }
 
-	public LoginPageObject clickToLogoutLinkAtAdminPage(WebDriver driver) {
+	public AdminLoginPO clickToLogoutLinkAtAdminPage(WebDriver driver) {
 		waitForElementClickable(driver, BasePageUI.LOGOUT_LINK_AT_ADMIN);
 		clickToElement(driver, BasePageUI.LOGOUT_LINK_AT_ADMIN);
 		return PageGeneraterManager.getAdminLoginPage(driver);
 	}
 
-	public CustomerInfoPageObject openAdminCustomerInfoPage(WebDriver driver) {
+	public AdminCustomerInfoPO openAdminCustomerInfoPage(WebDriver driver) {
 		waitForElementClickable(driver, BasePageUI.CUSTOMER_BUTTON);
 		clickToElement(driver, BasePageUI.CUSTOMER_BUTTON);
 		waitForElementClickable(driver, BasePageUI.CUSTOMER_LINK);

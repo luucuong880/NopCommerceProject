@@ -5,10 +5,10 @@ import org.openqa.selenium.WebDriver;
 import nopcommerce.admin.BasePage;
 import pageUIs.admin.AdminEditProductPageUI;
 
-public class EditProductPageObject extends BasePage {
+public class AdminEditProductPO extends BasePage {
 	private WebDriver driver;
 
-	public EditProductPageObject(WebDriver driver) {
+	public AdminEditProductPO(WebDriver driver) {
 		this.driver = driver;
 	}
 

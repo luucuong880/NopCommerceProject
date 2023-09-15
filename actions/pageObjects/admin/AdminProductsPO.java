@@ -6,10 +6,10 @@ import nopcommerce.admin.BasePage;
 import nopcommerce.admin.PageGeneraterManager;
 import pageUIs.admin.AdminProductsPageUI;
 
-public class ProductsPageObject extends BasePage {
+public class AdminProductsPO extends BasePage {
 	private WebDriver driver;
 
-	public ProductsPageObject(WebDriver driver) {
+	public AdminProductsPO(WebDriver driver) {
 		this.driver = driver;
 	}
 
@@ -101,7 +101,7 @@ public class ProductsPageObject extends BasePage {
 		sendkeyToElement(driver, AdminProductsPageUI.SKU_TEXT_BOX, string);
 	}
 
-	public EditProductPageObject clickToGoButton() {
+	public AdminEditProductPO clickToGoButton() {
 		waitForElementClickable(driver, AdminProductsPageUI.GO_BUTTON);
 		clickToElement(driver, AdminProductsPageUI.GO_BUTTON);
 		return PageGeneraterManager.getAdminEditProductPage(driver);

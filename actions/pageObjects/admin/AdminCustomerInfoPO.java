@@ -6,14 +6,14 @@ import nopcommerce.admin.BasePage;
 import nopcommerce.admin.PageGeneraterManager;
 import pageUIs.admin.AdminCustomerInfoPageUI;
 
-public class CustomerInfoPageObject extends BasePage {
+public class AdminCustomerInfoPO extends BasePage {
 	private WebDriver driver;
 
-	public CustomerInfoPageObject(WebDriver driver) {
+	public AdminCustomerInfoPO(WebDriver driver) {
 		this.driver = driver;
 	}
 
-	public CreateNewCustomerPageObject clickToAddNewButton() {
+	public AdminCreateNewCustomerPO clickToAddNewButton() {
 		waitForElementClickable(driver, AdminCustomerInfoPageUI.ADD_NEW_BUTTON);
 		clickToElement(driver, AdminCustomerInfoPageUI.ADD_NEW_BUTTON);
 		sleepInSecond(5);
@@ -80,7 +80,7 @@ public class CustomerInfoPageObject extends BasePage {
 		return isElementDisplayed(driver, AdminCustomerInfoPageUI.DAY_SELECTED);
 	}
 
-	public EditPageObject clickToEditButton() {
+	public AdminEditPO clickToEditButton() {
 		waitForElementClickable(driver, AdminCustomerInfoPageUI.EDIT_BUTTON);
 		clickToElement(driver, AdminCustomerInfoPageUI.EDIT_BUTTON);
 		sleepInSecond(3);
@@ -92,7 +92,7 @@ public class CustomerInfoPageObject extends BasePage {
 
 	}
 
-	public AddNewAddressPageObject clickToEditAddressButton() {
+	public AdminAddNewAddressPO clickToEditAddressButton() {
 		waitForElementClickable(driver, AdminCustomerInfoPageUI.EDIT_ADDRESS_BUTTON);
 		clickToElement(driver, AdminCustomerInfoPageUI.EDIT_ADDRESS_BUTTON);
 		return PageGeneraterManager.getAdminAddNewAddressPage(driver);

@@ -6,10 +6,10 @@ import nopcommerce.admin.BasePage;
 import nopcommerce.admin.PageGeneraterManager;
 import pageUIs.admin.AdminEditPageUI;
 
-public class EditPageObject extends BasePage {
+public class AdminEditPO extends BasePage {
 	private WebDriver driver;
 
-	public EditPageObject(WebDriver driver) {
+	public AdminEditPO(WebDriver driver) {
 		this.driver = driver;
 	}
 
@@ -50,7 +50,7 @@ public class EditPageObject extends BasePage {
 		sendkeyToElement(driver, AdminEditPageUI.ADMIN_COMMENT_TEXTBOX, string);
 	}
 
-	public CustomerInfoPageObject clickToSaveButton() {
+	public AdminCustomerInfoPO clickToSaveButton() {
 		waitForElementClickable(driver, AdminEditPageUI.SAVE_BUTTON);
 		clickToElement(driver, AdminEditPageUI.SAVE_BUTTON);
 		sleepInSecond(3);
@@ -79,7 +79,7 @@ public class EditPageObject extends BasePage {
 		clickToElement(driver, AdminEditPageUI.ADD_NEW_ADDRESS_LINK);
 	}
 
-	public AddNewAddressPageObject openAddNewAddressPage() {
+	public AdminAddNewAddressPO openAddNewAddressPage() {
 		sleepInSecond(3);
 		clickToAddNewAddressButton();
 		clickToAddNewAddressLink();
@@ -116,7 +116,7 @@ public class EditPageObject extends BasePage {
 		return isElementDisplayed(driver, AdminEditPageUI.ADDRESS);
 	}
 
-	public AddNewAddressPageObject clickToEditButton() {
+	public AdminAddNewAddressPO clickToEditButton() {
 		waitForElementClickable(driver, AdminEditPageUI.EDIT_BUTTON);
 		clickToElement(driver, AdminEditPageUI.EDIT_BUTTON);
 		sleepInSecond(3);

@@ -3,7 +3,9 @@ package pageObject.user;
 import org.openqa.selenium.WebDriver;
 
 import io.qameta.allure.Step;
+import nopcommerce.admin.PageGeneraterManager;
 import nopcommerce.user.BasePage;
+import pageObjects.admin.AdminLoginPO;
 import pageUI.user.RegisterPageUI;
 
 public class RegisterPageObject extends BasePage {
@@ -28,6 +30,11 @@ public class RegisterPageObject extends BasePage {
 	public void clickToRegisterButton(String valueItem) {
 		waitForElementClickable(driver, RegisterPageUI.DYNAMIC_BUTTON_BY_ID, valueItem);
 		clickToElement(driver, RegisterPageUI.DYNAMIC_BUTTON_BY_ID, valueItem);
+	}
+
+	public AdminLoginPO openAdminLoginPage() {
+		driver.get("https://admin-demo.nopcommerce.com/");
+		return PageGeneraterManager.getAdminLoginPage(driver);
 	}
 
 }
