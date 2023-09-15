@@ -68,7 +68,7 @@ public class Admin extends BaseTest {
 
 	@Test
 	public void Admin_02_Search_With_Product_Name() {
-		log.info("Login Step - 01: Login with empty data");
+		log.info("Search Step - 01: Login with empty data");
 	}
 
 	public int generateFakeNumber() {
