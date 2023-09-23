@@ -4,16 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import nopcommerce.user.GlobalConstants;
 
 public class FirefoxDriverManager implements BrowserFactory {
 
 	@Override
 	public WebDriver getBrowserDriver() {
-		WebDriverManager.firefoxdriver().setup();
-		System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "true");
-		System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, GlobalConstants.getGlobalConstants().getBrowserLogPath() + "Firefox.log");
+		System.setProperty(FirefoxDriver.SystemProperty.BROWSER_BINARY, "true");
+		System.setProperty(FirefoxDriver.SystemProperty.BROWSER_PROFILE, GlobalConstants.getGlobalConstants().getBrowserLogPath() + "Firefox.log");
 
 		FirefoxOptions options = new FirefoxOptions();
 		options.addPreference("browser.download.folderList", 2);

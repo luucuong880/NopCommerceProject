@@ -13,7 +13,7 @@ public class BasePageUI {
 	public static final String MESSAGE_DYNAMIC_BY_CLASS = "xpath=//div[@class='%s']";
 	public static final String CLOSE_BUTTON = "xpath=//span[@class='close']";
 	public static final String DYNAMIC_PAGE_AT_TOP_MENU_AREA = "xpath=//ul[@class='top-menu notmobile']//a[contains(text(),'%s')]";
-	public static final String HEADER_LINKS = "xpath=//a[@class='%s']";
+	public static final String HEADER_LINKS = "xpath=//div[@class='header-links']//a[@class='%s']";
 	public static final String PAGE_TITLE_MESSAGE = "xpath=//div[@class='page-title']//h1";
 	public static final String FOOTER_LINKS = "xpath=//a[text()='%s']";
 	public static final String PRODUCT_SIZE = "xpath=//h2[@class='product-title']//a";

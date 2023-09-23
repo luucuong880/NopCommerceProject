@@ -11,8 +11,8 @@
 	<parameter name="serverName" value="testing" />
 	
 
-	<test name="Run on Edge">
-		<parameter name="browser" value="edge" />
+	<test name="Run on Chrome">
+		<parameter name="browser" value="chrome" />
 		<classes>
 			<class name="nopcommerce.admin.Admin" />
 		</classes>

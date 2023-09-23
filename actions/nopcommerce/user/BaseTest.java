@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,7 +17,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
@@ -32,7 +30,6 @@ import factoryEnvironment.GridFactory;
 import factoryEnvironment.LambdaFactory;
 import factoryEnvironment.LocalFactory;
 import factoryEnvironment.SaucelabFactory;
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseTest {
 	private static ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>();
@@ -77,7 +74,6 @@ public class BaseTest {
 			break;
 		}
 
-		driver.get().manage().timeouts().implicitlyWait(GlobalConstants.getGlobalConstants().getLongTimeout(), TimeUnit.SECONDS);
 		driver.get().manage().window().maximize();
 		driver.get().get(getEnvironmentValue(serverName));
 
@@ -89,10 +85,8 @@ public class BaseTest {
 	protected WebDriver getBrowserDriver(String browserName) {
 		BrowserList browser = BrowserList.valueOf(browserName.toUpperCase());
 		if (browser == BrowserList.FIREFOX) {
-			WebDriverManager.firefoxdriver().setup();
 			driver.set(new FirefoxDriver());
 		} else if (browser == BrowserList.CHROME) {
-			WebDriverManager.chromedriver().setup();
 			ChromeOptions options = new ChromeOptions();
 
 			Map<String, Object> prefs = new HashMap<String, Object>();
@@ -108,16 +102,10 @@ public class BaseTest {
 
 			driver.set(new ChromeDriver(options));
 		} else if (browser == BrowserList.EDGE) {
-			WebDriverManager.edgedriver().setup();
 			driver.set(new EdgeDriver());
 		} else if (browser == BrowserList.IE) {
-			WebDriverManager.iedriver().arch32().setup();
 			driver.set(new InternetExplorerDriver());
-		} else if (browser == BrowserList.OPERA) {
-			WebDriverManager.operadriver().setup();
-			driver.set(new OperaDriver());
 		} else if (browser == BrowserList.COCCOC) {
-			WebDriverManager.chromedriver().driverVersion("105.0.5195.52").setup();
 			ChromeOptions options = new ChromeOptions();
 			options.setBinary("C:\\Program Files\\CocCoc\\Browser\\Application\\browser.exe");
 			driver.set(new ChromeDriver(options));
@@ -127,7 +115,6 @@ public class BaseTest {
 			throw new RuntimeException("Please enter correct browser name!");
 		}
 
-		driver.get().manage().timeouts().implicitlyWait(GlobalConstants.getGlobalConstants().getLongTimeout(), TimeUnit.SECONDS);
 		driver.get().manage().window().maximize();
 		driver.get().get(GlobalConstants.getGlobalConstants().getDevAppUrl());
 

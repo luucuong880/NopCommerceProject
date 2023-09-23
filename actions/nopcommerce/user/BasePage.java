@@ -1,10 +1,10 @@
 package nopcommerce.user;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -71,7 +71,7 @@ public class BasePage {
 	}
 
 	public Alert waitForAlertPresence(WebDriver driver) {
-		WebDriverWait explicitWait = new WebDriverWait(driver, longtimeout);
+		WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		return explicitWait.until(ExpectedConditions.alertIsPresent());
 	}
 
@@ -218,7 +218,7 @@ public class BasePage {
 		getWebElement(driver, parentXpath).click();
 		sleepInSecond(2);
 
-		WebDriverWait explicitWait = new WebDriverWait(driver, longtimeout);
+		WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 		List<WebElement> allItems = explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(getByLocator(childXpath)));
 
@@ -238,7 +238,7 @@ public class BasePage {
 		getWebElement(driver, parentXpath).click();
 		sleepInSecond(2);
 
-		WebDriverWait explicitWait = new WebDriverWait(driver, longtimeout);
+		WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 		List<WebElement> allItems = explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(getByLocator(childXpath)));
 
@@ -339,14 +339,14 @@ public class BasePage {
 		return getWebElement(driver, getDynamicXpath(locatorType, dynamicValues)).isDisplayed();
 	}
 
-	public void overrideImplicitTimeout(WebDriver driver, long timeout) {
-		driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
+	public void overrideImplicitTimeout(WebDriver driver, Duration timeout) {
+		driver.manage().timeouts().implicitlyWait(timeout);
 	}
 
 	public boolean isElementUndisplayed(WebDriver driver, String locatorType) {
-		overrideImplicitTimeout(driver, shorttimeout);
+		overrideImplicitTimeout(driver, Duration.ofSeconds(30));
 		List<WebElement> elements = getListWebElement(driver, locatorType);
-		overrideImplicitTimeout(driver, longtimeout);
+		overrideImplicitTimeout(driver, Duration.ofSeconds(30));
 		if (elements.size() == 0) {
 			return true;
 		} else if (elements.size() > 0 && !elements.get(0).isDisplayed()) {
@@ -357,9 +357,9 @@ public class BasePage {
 	}
 
 	public boolean isElementUndisplayed(WebDriver driver, String locatorType, String... dynamicValues) {
-		overrideImplicitTimeout(driver, shorttimeout);
+		overrideImplicitTimeout(driver, Duration.ofSeconds(30));
 		List<WebElement> elements = getListWebElement(driver, getDynamicXpath(locatorType, dynamicValues));
-		overrideImplicitTimeout(driver, longtimeout);
+		overrideImplicitTimeout(driver, Duration.ofSeconds(30));
 		if (elements.size() == 0) {
 			return true;
 		} else if (elements.size() > 0 && !elements.get(0).isDisplayed()) {
@@ -467,7 +467,7 @@ public class BasePage {
 	}
 
 	public boolean areJQueryAndJSLoadedSuccess(WebDriver driver) {
-		WebDriverWait explicitWait = new WebDriverWait(driver, longtimeout);
+		WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 
 		ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
@@ -524,52 +524,52 @@ public class BasePage {
 	}
 
 	public void waitForElementVisible(WebDriver driver, String locatorType) {
-		WebDriverWait explicitWait = new WebDriverWait(driver, longtimeout);
+		WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(getByLocator(locatorType)));
 	}
 
 	public void waitForElementVisible(WebDriver driver, String locatorType, String... dynamicValues) {
-		WebDriverWait explicitWait = new WebDriverWait(driver, longtimeout);
+		WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(getByLocator(getDynamicXpath(locatorType, dynamicValues))));
 	}
 
 	public void waitForAllElementVisible(WebDriver driver, String locatorType) {
-		WebDriverWait explicitWait = new WebDriverWait(driver, longtimeout);
+		WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		explicitWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(getByLocator(locatorType)));
 	}
 
 	public void waitForAllElementVisible(WebDriver driver, String locatorType, String... dynamicValues) {
-		WebDriverWait explicitWait = new WebDriverWait(driver, longtimeout);
+		WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		explicitWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(getByLocator(getDynamicXpath(locatorType, dynamicValues))));
 	}
 
 	public void waitForElementInVisible(WebDriver driver, String locatorType) {
-		WebDriverWait explicitWait = new WebDriverWait(driver, longtimeout);
+		WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(getByLocator(locatorType)));
 	}
 
 	public void waitForElementInVisible(WebDriver driver, String locatorType, String... dynamicValues) {
-		WebDriverWait explicitWait = new WebDriverWait(driver, longtimeout);
+		WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(getByLocator(getDynamicXpath(locatorType, dynamicValues))));
 	}
 
 	public void waitForAllElementInVisible(WebDriver driver, String locatorType) {
-		WebDriverWait explicitWait = new WebDriverWait(driver, longtimeout);
+		WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		explicitWait.until(ExpectedConditions.invisibilityOfAllElements(getListWebElement(driver, locatorType)));
 	}
 
 	public void waitForAllElementInVisible(WebDriver driver, String locatorType, String... dynamicValues) {
-		WebDriverWait explicitWait = new WebDriverWait(driver, longtimeout);
+		WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		explicitWait.until(ExpectedConditions.invisibilityOfAllElements(getListWebElement(driver, getDynamicXpath(locatorType, dynamicValues))));
 	}
 
 	public void waitForElementClickable(WebDriver driver, String locatorType) {
-		WebDriverWait explicitWait = new WebDriverWait(driver, longtimeout);
+		WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		explicitWait.until(ExpectedConditions.elementToBeClickable(getByLocator(locatorType)));
 	}
 
 	public void waitForElementClickable(WebDriver driver, String locatorType, String... dynamicValues) {
-		WebDriverWait explicitWait = new WebDriverWait(driver, longtimeout);
+		WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		explicitWait.until(ExpectedConditions.elementToBeClickable(getByLocator(getDynamicXpath(locatorType, dynamicValues))));
 	}
 
@@ -840,6 +840,4 @@ public class BasePage {
 		return productSortList.equals(productUIList);
 	}
 
-	private long longtimeout = 30;
-	private short shorttimeout = 5;
 }
