@@ -1,5 +1,6 @@
 {
-	"adminEmail": "admin@yourstore.com",
-	"adminPassword" : "admin",
+    "login" : {
+	  "adminEmail": "admin@yourstore.com",
+	  "adminPassword" : "admin",
 	}
 }

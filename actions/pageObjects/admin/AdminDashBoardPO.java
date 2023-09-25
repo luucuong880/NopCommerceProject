@@ -3,7 +3,6 @@ package pageObjects.admin;
 import org.openqa.selenium.WebDriver;
 
 import nopcommerce.admin.BasePage;
-import nopcommerce.admin.PageGeneraterManager;
 import pageUIs.admin.AdminDashBoardPageUI;
 
 public class AdminDashBoardPO extends BasePage {
@@ -27,9 +26,4 @@ public class AdminDashBoardPO extends BasePage {
 		clickToElement(driver, AdminDashBoardPageUI.CATALOG_BUTTON);
 	}
 
-	public AdminProductsPO clickToProductsButton() {
-		waitForElementClickable(driver, AdminDashBoardPageUI.PRODUCTS_BUTTON);
-		clickToElement(driver, AdminDashBoardPageUI.PRODUCTS_BUTTON);
-		return PageGeneraterManager.getProductsPage(driver);
-	}
 }

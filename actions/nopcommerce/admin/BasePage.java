@@ -525,6 +525,11 @@ public class BasePage {
 		return PageGeneraterManager.getAdminLoginPage(driver);
 	}
 
+	public AdminLoginPO reloadAdminLoginPage(WebDriver driver) {
+		refreshPage(driver);
+		return PageGeneraterManager.getAdminLoginPage(driver);
+	}
+
 	public AdminCustomerInfoPO openAdminCustomerInfoPage(WebDriver driver) {
 		waitForElementClickable(driver, BasePageUI.CUSTOMER_BUTTON);
 		clickToElement(driver, BasePageUI.CUSTOMER_BUTTON);
@@ -542,6 +547,20 @@ public class BasePage {
 	public AdminDashboardPO openAdminSite(WebDriver driver, String adminUrl) {
 		openPageUrl(driver, adminUrl);
 		return pageObjects.wordpress.PageGeneraterManager.getAdminDashboardPage(driver);
+	}
+
+	public BasePage chosePageAtTreeviewMenu(WebDriver driver, String itemInTreeviewMenu, String itemInTreeview) {
+		waitForElementClickable(driver, BasePageUI.ITEM_IN_TREEVIEW_MENU, itemInTreeviewMenu);
+		clickToElement(driver, BasePageUI.ITEM_IN_TREEVIEW_MENU, itemInTreeviewMenu);
+		sleepInSecond(2);
+		waitForElementClickable(driver, BasePageUI.ITEM_IN_TREEVIEW, itemInTreeviewMenu, itemInTreeview);
+		clickToElement(driver, BasePageUI.ITEM_IN_TREEVIEW, itemInTreeviewMenu, itemInTreeview);
+		switch (itemInTreeview) {
+		case "Products":
+			return PageGeneraterManager.getPageGeneraterManager().getProductsPage(driver);
+		default:
+			throw new RuntimeException("Invalid page Links at Header are.");
+		}
 	}
 
 }

@@ -21,5 +21,7 @@ public class BasePageUI {
 	public static final String REGISTER_LINK = "class=ico-register";
 	public static final String CUSTOMER_BUTTON = "xpath=//p[contains(text(),'Customers')]//i";
 	public static final String CUSTOMER_LINK = "xpath=//p[text()=' Customers']";
+	public static final String ITEM_IN_TREEVIEW_MENU = "xpath=//i[@class='%s']";
+	public static final String ITEM_IN_TREEVIEW = "xpath=//i[@class='%s']/parent::a/following-sibling::ul//p[contains(text(),'%s')]";
 
 }

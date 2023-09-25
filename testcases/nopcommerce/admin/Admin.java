@@ -17,7 +17,9 @@ import nopcommerce.user.BaseTest;
 import nopcommerce.user.PageGeneratorManager;
 import pageObject.user.HomePageObject;
 import pageObject.user.RegisterPageObject;
+import pageObjects.admin.AdminDashBoardPO;
 import pageObjects.admin.AdminLoginPO;
+import pageObjects.admin.AdminProductsPO;
 import utilities.Environment;
 
 public class Admin extends BaseTest {
@@ -36,8 +38,6 @@ public class Admin extends BaseTest {
 
 		userData = UserDataMapper.getUserData();
 
-		adminData = AdminDataMapper.getAdminData();
-
 		emailAddress = userData.getEmailAddress() + generateFakeNumber() + "@fakermail.com";
 
 		registerPage = (RegisterPageObject) homePage.openPageAtHeaderLinks(driver, "ico-register");
@@ -55,20 +55,31 @@ public class Admin extends BaseTest {
 		registerPage.clickToRegisterButton("register-button");
 
 		adminLoginPage = registerPage.openAdminLoginPage();
+
 	}
 
 	@Test
-	public void Admin_01_Login_With_Empty_Data() {
-		log.info("Login Step - 01: Login with empty data");
+	public void Admin_01_Search_With_Product_Name() {
+		log.info("Search Step - 01: Login with empty data");
 		adminLoginPage.loginAsAdmin("", "");
 
-		log.info("Login Step - 02: Verify Email Error message");
+		log.info("Search Step - 02: Verify Email Error message");
 		verifyEquals(adminLoginPage.getErrorEmailMessage(), "Please enter your email");
+
+		log.info("Search Step - 03: Login to Dashboard page");
+
+		adminLoginPage = adminLoginPage.reloadAdminLoginPage(driver);
+
+		adminDasboardPage = adminLoginPage.clickToLoginButton();
+
+		log.info("Search Step - 04: Open Products page at Dasboard page");
+
+		adminProductsPage = (AdminProductsPO) adminDasboardPage.chosePageAtTreeviewMenu(driver, "nav-icon fas fa-book", "Products");
 	}
 
 	@Test
 	public void Admin_02_Search_With_Product_Name() {
-		log.info("Search Step - 01: Login with empty data");
+
 	}
 
 	public int generateFakeNumber() {
@@ -85,10 +96,12 @@ public class Admin extends BaseTest {
 	}
 
 	WebDriver driver;
-	private String emailAddress, adminEmail, adminPassword;
+	private String emailAddress;
 	private HomePageObject homePage;
 	private RegisterPageObject registerPage;
 	private AdminLoginPO adminLoginPage;
+	private AdminDashBoardPO adminDasboardPage;
+	private AdminProductsPO adminProductsPage;
 	UserDataMapper userData;
 	AdminDataMapper adminData;
 }
