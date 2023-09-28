@@ -220,6 +220,26 @@ public class BasePage {
 		}
 	}
 
+	public void selectItemInCustomDropdown(WebDriver driver, String parentXpath, String childXpath, String expectedTextItem, String... dynamicValues) {
+		getWebElement(driver, getDynamicXpath(parentXpath, dynamicValues)).click();
+		sleepInSecond(2);
+
+		WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
+
+		List<WebElement> allItems = explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(getByLocator(childXpath)));
+
+		for (WebElement item : allItems) {
+			if (item.getText().trim().equals(expectedTextItem)) {
+				JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+				jsExecutor.executeScript("arguments[0].scrollIntoView(true);", item);
+				sleepInSecond(2);
+				item.click();
+				break;
+			}
+
+		}
+	}
+
 	public void sleepInSecond(long timeInSecond) {
 		try {
 			Thread.sleep(timeInSecond * 1000);
@@ -557,10 +577,15 @@ public class BasePage {
 		clickToElement(driver, BasePageUI.ITEM_IN_TREEVIEW, itemInTreeviewMenu, itemInTreeview);
 		switch (itemInTreeview) {
 		case "Products":
-			return PageGeneraterManager.getPageGeneraterManager().getProductsPage(driver);
+			return PageGeneraterManager.getPageGeneraterManager().getAdminProductsPage(driver);
 		default:
 			throw new RuntimeException("Invalid page Links at Header are.");
 		}
+	}
+
+	public void clickToButtonAtMenuColumn(WebDriver driver, String classValue) {
+		waitForElementClickable(driver, BasePageUI.BUTTON_AT_COLUMN_MENU, classValue);
+		clickToElement(driver, BasePageUI.BUTTON_AT_COLUMN_MENU, classValue);
 	}
 
 }

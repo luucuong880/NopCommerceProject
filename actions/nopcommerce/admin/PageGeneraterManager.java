@@ -37,7 +37,7 @@ public class PageGeneraterManager {
 		return new AdminAddNewAddressPO(driver);
 	}
 
-	public AdminProductsPO getProductsPage(WebDriver driver) {
+	public AdminProductsPO getAdminProductsPage(WebDriver driver) {
 		return new AdminProductsPO(driver);
 	}
 
@@ -48,4 +48,5 @@ public class PageGeneraterManager {
 	public static AdminLoginPO getAdminLoginPage(WebDriver driver) {
 		return new AdminLoginPO(driver);
 	}
+
 }

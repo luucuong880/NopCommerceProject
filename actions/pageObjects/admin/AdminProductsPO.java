@@ -13,38 +13,8 @@ public class AdminProductsPO extends BasePage {
 		this.driver = driver;
 	}
 
-	public void inputToProductsNameTextbox(String text) {
-		waitForElementVisible(driver, AdminProductsPageUI.PRODUCTS_TEXTBOX);
-		sendkeyToElement(driver, AdminProductsPageUI.PRODUCTS_TEXTBOX, text);
-	}
-
-	public void clickToSearchButton() {
-		waitForElementClickable(driver, AdminProductsPageUI.SEARCH_BUTTON);
-		clickToElement(driver, AdminProductsPageUI.SEARCH_BUTTON);
-	}
-
 	public void waitForAjaxBusyIconInvisible() {
 		waitForElementInVisible(driver, AdminProductsPageUI.AJAX_BUSY_ICON);
-	}
-
-	public String getProductsNameText() {
-		waitForElementVisible(driver, AdminProductsPageUI.PRODUCT_NAME_TEXT);
-		return getElementText(driver, AdminProductsPageUI.PRODUCT_NAME_TEXT);
-	}
-
-	public String getSKUText() {
-		waitForElementVisible(driver, AdminProductsPageUI.SKU_TEXT);
-		return getElementText(driver, AdminProductsPageUI.SKU_TEXT);
-	}
-
-	public String getPriceText() {
-		waitForElementVisible(driver, AdminProductsPageUI.PRICE_TEXT);
-		return getElementText(driver, AdminProductsPageUI.PRICE_TEXT);
-	}
-
-	public String getStockText() {
-		waitForElementVisible(driver, AdminProductsPageUI.STOCK_TEXT);
-		return getElementText(driver, AdminProductsPageUI.STOCK_TEXT);
 	}
 
 	public boolean isTrueIconDisplayed() {
@@ -56,55 +26,40 @@ public class AdminProductsPO extends BasePage {
 		refreshPage(driver);
 	}
 
-	public void selectCategory(String textItem) {
-		waitForElementVisible(driver, AdminProductsPageUI.CATEGORY);
-		selectItemInCustomDropdown(driver, AdminProductsPageUI.CATEGORY, "xpath=//option", textItem);
-	}
-
-	public boolean isCategorySelected() {
-		waitForElementVisible(driver, AdminProductsPageUI.CATEGORY_DROPDOWN);
-		return isElementSelected(driver, AdminProductsPageUI.CATEGORY_DROPDOWN);
-	}
-
-	public String getTableMessage() {
-		waitForElementVisible(driver, AdminProductsPageUI.TABLE_MESSAGE);
-		return getElementText(driver, AdminProductsPageUI.TABLE_MESSAGE);
-	}
-
 	public void checkSubCategories() {
 		waitForElementVisible(driver, AdminProductsPageUI.SUB_CATEGORIES);
 		checkToDefaultCheckboxOrRadio(driver, AdminProductsPageUI.SUB_CATEGORIES);
-	}
-
-	public void selectChildCategory(String text) {
-		waitForElementVisible(driver, AdminProductsPageUI.CHILD_CATEGORY);
-		selectItemInCustomDropdown(driver, AdminProductsPageUI.CHILD_CATEGORY, "xpath=//option", text);
-	}
-
-	public boolean isChildCategorySelected() {
-		waitForElementVisible(driver, AdminProductsPageUI.CHILD_CATEGORY_DROPDOWN);
-		return isElementSelected(driver, AdminProductsPageUI.CHILD_CATEGORY_DROPDOWN);
-	}
-
-	public void selectManufacturer(String string) {
-		waitForElementVisible(driver, AdminProductsPageUI.MANUFACTURER);
-		selectItemInCustomDropdown(driver, AdminProductsPageUI.MANUFACTURER, "xpath=//option", string);
-	}
-
-	public boolean isAppleManufacturerSelected() {
-		waitForElementVisible(driver, AdminProductsPageUI.MANUFACTURER_DROPDOWN);
-		return isElementSelected(driver, AdminProductsPageUI.MANUFACTURER_DROPDOWN);
-	}
-
-	public void inputToSKUTextbox(String string) {
-		waitForElementClickable(driver, AdminProductsPageUI.SKU_TEXT_BOX);
-		sendkeyToElement(driver, AdminProductsPageUI.SKU_TEXT_BOX, string);
 	}
 
 	public AdminEditProductPO clickToGoButton() {
 		waitForElementClickable(driver, AdminProductsPageUI.GO_BUTTON);
 		clickToElement(driver, AdminProductsPageUI.GO_BUTTON);
 		return PageGeneraterManager.getAdminEditProductPage(driver);
+	}
+
+	public void inputToFieldTextByID(String idValue, String textValue) {
+		waitForElementVisible(driver, AdminProductsPageUI.FIELD_INPUT_BY_ID, idValue);
+		sendkeyToElement(driver, AdminProductsPageUI.FIELD_INPUT_BY_ID, textValue, idValue);
+	}
+
+	public void clickToButtonByID(String buttonID) {
+		waitForElementClickable(driver, AdminProductsPageUI.BUTTON_BY_ID, buttonID);
+		clickToElement(driver, AdminProductsPageUI.BUTTON_BY_ID, buttonID);
+	}
+
+	public boolean isInfoProductsInTable(String text1, String text2) {
+		waitForAllElementVisible(driver, AdminProductsPageUI.PRODUCTS_INFO, text1, text2);
+		return isElementDisplayed(driver, AdminProductsPageUI.PRODUCTS_INFO, text1, text2);
+	}
+
+	public void selectDropDownByName(String idValue, String textValue) {
+		waitForElementVisible(driver, AdminProductsPageUI.FIELD_SELECT_BY_NAME, idValue);
+		selectItemInCustomDropdown(driver, AdminProductsPageUI.FIELD_SELECT_BY_NAME, "xpath=//option", textValue, idValue);
+	}
+
+	public String getEmptyDataTableText() {
+		waitForElementVisible(driver, AdminProductsPageUI.EMPTY_DATA_TABLES);
+		return getElementText(driver, AdminProductsPageUI.EMPTY_DATA_TABLES);
 	}
 
 }
