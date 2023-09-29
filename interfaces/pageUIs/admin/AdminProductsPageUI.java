@@ -12,5 +12,6 @@ public class AdminProductsPageUI {
 	public static final String PRODUCTS_INFO = "xpath=//th[text()='%s']/ancestor::div[@class='dataTables_scrollHead']/following-sibling::div//td[text()='%s']";
 	public static final String FIELD_SELECT_BY_NAME = "xpath=//select[@id='%s']";
 	public static final String EMPTY_DATA_TABLES = "xpath=//tr[@class='odd']/td";
+	public static final String PRODUCT_DETAILS = "xpath=//h1[@class='float-left']";
 
 }

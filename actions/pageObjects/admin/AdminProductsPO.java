@@ -22,6 +22,11 @@ public class AdminProductsPO extends BasePage {
 		return isElementDisplayed(driver, AdminProductsPageUI.TRUE_ICON);
 	}
 
+	public boolean isProductDetailDisplayed() {
+		waitForElementVisible(driver, AdminProductsPageUI.PRODUCT_DETAILS);
+		return isElementDisplayed(driver, AdminProductsPageUI.PRODUCT_DETAILS);
+	}
+
 	public void reloadPage() {
 		refreshPage(driver);
 	}
@@ -60,6 +65,11 @@ public class AdminProductsPO extends BasePage {
 	public String getEmptyDataTableText() {
 		waitForElementVisible(driver, AdminProductsPageUI.EMPTY_DATA_TABLES);
 		return getElementText(driver, AdminProductsPageUI.EMPTY_DATA_TABLES);
+	}
+
+	public String getProductDetailMessage() {
+		waitForElementVisible(driver, AdminProductsPageUI.PRODUCT_DETAILS);
+		return getElementText(driver, AdminProductsPageUI.PRODUCT_DETAILS);
 	}
 
 }

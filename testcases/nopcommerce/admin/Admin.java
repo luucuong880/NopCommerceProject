@@ -110,7 +110,7 @@ public class Admin extends BaseTest {
 		adminProductsPage.reloadPage();
 		adminProductsPage.waitForAjaxBusyIconInvisible();
 
-		log.info("Search Step - 02: Search with Products name Category Uncheck Subcategory");
+		log.info("Search Step - 02: Search with Products name Category Check Subcategory");
 		adminProductsPage.inputToFieldTextByID("SearchProductName", "Lenovo IdeaCentre 600 All-in-One PC");
 		adminProductsPage.selectDropDownByName("SearchCategoryId", "Computers");
 		adminProductsPage.checkSubCategories();
@@ -143,7 +143,41 @@ public class Admin extends BaseTest {
 
 	@Test
 	public void Admin_05_Search_With_Product_Name_Manufactuer() {
+		log.info("Search Step - 01: Refresh Products page");
+		adminProductsPage.reloadPage();
+		adminProductsPage.waitForAjaxBusyIconInvisible();
 
+		log.info("Search Step - 02: Search with Products name Category Uncheck Subcategory");
+		adminProductsPage.inputToFieldTextByID("SearchProductName", "Lenovo IdeaCentre 600 All-in-One PC");
+		adminProductsPage.selectDropDownByName("SearchCategoryId", "All");
+
+		log.info("Search Step - 03: Select Manufacturer is Apple");
+		adminProductsPage.selectDropDownByName("SearchManufacturerId", "Apple");
+
+		log.info("Search Step - 04: Click to Search Button");
+		adminProductsPage.clickToButtonByID("search-products");
+		adminProductsPage.waitForAjaxBusyIconInvisible();
+
+		log.info("Search Step - 05: Verify DataTable Empty");
+		verifyEquals(adminProductsPage.getEmptyDataTableText(), "No data available in table");
+	}
+
+	@Test
+	public void Admin_06_Go_Directly_To_Product_SKU() {
+		log.info("SKU Step - 01: Refresh Products page");
+		adminProductsPage.reloadPage();
+		adminProductsPage.waitForAjaxBusyIconInvisible();
+
+		log.info("SKU Step - 02: Input to Go directly textbox");
+		adminProductsPage.inputToFieldTextByID("GoDirectlyToSku", "LE_IC_600");
+
+		log.info("SKU Step - 03: Click to Go Button");
+		adminProductsPage.clickToGoButton();
+		adminProductsPage.waitForAjaxBusyIconInvisible();
+
+		log.info("SKU Step - 04: Verify Product Details is Diplayed and get Text Message");
+		verifyTrue(adminProductsPage.isProductDetailDisplayed());
+		verifyEquals(adminProductsPage.getProductDetailMessage(), "Edit product details - Lenovo IdeaCentre 600 All-in-One PC back to product list");
 	}
 
 	public int generateFakeNumber() {
