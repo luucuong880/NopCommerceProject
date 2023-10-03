@@ -1,8 +1,10 @@
 package nopcommerce.user;
 
 import java.util.Random;
+import java.util.Set;
 
 import org.aeonbits.owner.ConfigFactory;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -290,6 +292,7 @@ public class Register extends BaseTest {
 
 	WebDriver driver;
 	private String emailAddress, invalidEmail, invalidPassword;
+	public static Set<Cookie> cookies;
 	private HomePageObject homePage;
 	private RegisterPageObject registerPage;
 	UserDataMapper userData;

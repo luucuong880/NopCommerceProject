@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -110,6 +111,20 @@ public class BasePage {
 			}
 		}
 		driver.switchTo().window(parentID);
+	}
+
+	public Set<Cookie> getBrowserCookies(WebDriver driver) {
+		return driver.manage().getCookies();
+	}
+
+	public void setCookies(WebDriver driver, Set<Cookie> cookies) {
+		for (Cookie cookie : cookies) {
+			driver.manage().addCookie(cookie);
+		}
+	}
+
+	public void deleteAllCookies(WebDriver driver) {
+		driver.manage().deleteAllCookies();
 	}
 
 	private By getByLocator(String locatorType) {
@@ -578,14 +593,31 @@ public class BasePage {
 		switch (itemInTreeview) {
 		case "Products":
 			return PageGeneraterManager.getPageGeneraterManager().getAdminProductsPage(driver);
+		case "Customers":
+			return PageGeneraterManager.getPageGeneraterManager().getAdminCustomerPage(driver);
 		default:
 			throw new RuntimeException("Invalid page Links at Header are.");
 		}
 	}
 
+	public void inputToFieldTextByID(WebDriver driver, String idValue, String textValue) {
+		waitForElementVisible(driver, BasePageUI.FIELD_INPUT_BY_ID, idValue);
+		sendkeyToElement(driver, BasePageUI.FIELD_INPUT_BY_ID, textValue, idValue);
+	}
+
+	public void clickToAddNewButton(WebDriver driver) {
+		waitForElementClickable(driver, BasePageUI.ADD_NEW_BUTTON);
+		clickToElement(driver, BasePageUI.ADD_NEW_BUTTON);
+	}
+
 	public void clickToButtonAtMenuColumn(WebDriver driver, String classValue) {
 		waitForElementClickable(driver, BasePageUI.BUTTON_AT_COLUMN_MENU, classValue);
 		clickToElement(driver, BasePageUI.BUTTON_AT_COLUMN_MENU, classValue);
+	}
+
+	public void checkToCheckboxOrRadioButton(WebDriver driver, String idValue) {
+		waitForElementClickable(driver, BasePageUI.FIELD_INPUT_BY_ID, idValue);
+		checkToDefaultCheckboxOrRadio(driver, BasePageUI.FIELD_INPUT_BY_ID, idValue);
 	}
 
 }

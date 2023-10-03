@@ -2,7 +2,6 @@ package pageUIs.admin;
 
 public class AdminCustomerInfoPageUI {
 
-	public static final String ADD_NEW_BUTTON = "xpath=//a[@class='btn btn-primary']";
 	public static final String SEARCH_BUTTON = "xpath=//button[@id='search-customers']";
 	public static final String TABLE = "class=dataTables_scrollBody";
 	public static final String MONTH = "xpath=//select[@id='SearchMonthOfBirth']";

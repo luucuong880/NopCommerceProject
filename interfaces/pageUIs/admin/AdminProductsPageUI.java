@@ -7,7 +7,6 @@ public class AdminProductsPageUI {
 	public static final String TABLE_MESSAGE = "class=dataTables_empty";
 	public static final String SUB_CATEGORIES = "xpath=//input[@id='SearchIncludeSubCategories']";
 	public static final String GO_BUTTON = "xpath=//button[@id='go-to-product-by-sku']";
-	public static final String FIELD_INPUT_BY_ID = "xpath=//input[@id='%s']";
 	public static final String BUTTON_BY_ID = "xpath=//button[@id='%s']";
 	public static final String PRODUCTS_INFO = "xpath=//th[text()='%s']/ancestor::div[@class='dataTables_scrollHead']/following-sibling::div//td[text()='%s']";
 	public static final String FIELD_SELECT_BY_NAME = "xpath=//select[@id='%s']";

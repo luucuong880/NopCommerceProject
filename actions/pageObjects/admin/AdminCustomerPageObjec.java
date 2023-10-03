@@ -6,10 +6,10 @@ import nopcommerce.admin.BasePage;
 import nopcommerce.admin.PageGeneraterManager;
 import pageUIs.admin.AdminCreateNewCustomerPageUI;
 
-public class AdminCreateNewCustomerPO extends BasePage {
+public class AdminCustomerPageObjec extends BasePage {
 	private WebDriver driver;
 
-	public AdminCreateNewCustomerPO(WebDriver driver) {
+	public AdminCustomerPageObjec(WebDriver driver) {
 		this.driver = driver;
 	}
 

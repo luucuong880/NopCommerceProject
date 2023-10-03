@@ -30,4 +30,9 @@ public class CustomerInfoPageObject extends BasePage {
 		return PageGeneratorManager.getPageGeneratorManager().getOrderPage(driver);
 	}
 
+	public void clickSaveButton() {
+		waitForAllElementVisible(driver, CustomerInfoPageUI.SAVE_ADDRESS_BUTTON);
+		clickToElementByJS(driver, CustomerInfoPageUI.SAVE_ADDRESS_BUTTON);
+	}
+
 }

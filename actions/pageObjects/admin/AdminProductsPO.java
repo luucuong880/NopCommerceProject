@@ -42,11 +42,6 @@ public class AdminProductsPO extends BasePage {
 		return PageGeneraterManager.getAdminEditProductPage(driver);
 	}
 
-	public void inputToFieldTextByID(String idValue, String textValue) {
-		waitForElementVisible(driver, AdminProductsPageUI.FIELD_INPUT_BY_ID, idValue);
-		sendkeyToElement(driver, AdminProductsPageUI.FIELD_INPUT_BY_ID, textValue, idValue);
-	}
-
 	public void clickToButtonByID(String buttonID) {
 		waitForElementClickable(driver, AdminProductsPageUI.BUTTON_BY_ID, buttonID);
 		clickToElement(driver, AdminProductsPageUI.BUTTON_BY_ID, buttonID);

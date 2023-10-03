@@ -21,7 +21,6 @@ import pageObject.user.LoginPageObject;
 import pageObject.user.MenuPageObject;
 import pageObject.user.MyProductReviewPageObject;
 import pageObject.user.ProductReviewPageObject;
-import pageObject.user.RegisterPageObject;
 import pageObject.user.SubMenuPageObject;
 import utilities.Environment;
 
@@ -40,7 +39,8 @@ public class MyAccount extends BaseTest {
 		homePage = PageGeneratorManager.getPageGeneratorManager().getHomePage(driver);
 
 		userData = UserDataMapper.getUserData();
-		emailAddress = userData.getEmailAddress() + generateFakeNumber() + "@fakermail.com";
+
+		emailAddress = RegisterComplete.emailAddress;
 
 		newEmailAddress = userData.getEmailAddress() + generateFakeNumber() + "@gmail.play";
 		newCompany = "RedSkull";
@@ -51,26 +51,13 @@ public class MyAccount extends BaseTest {
 		reviewTitle = "Order " + generateFakeNumber();
 		reviewText = "Good product " + generateFakeNumber();
 
-		registerPage = (RegisterPageObject) homePage.openPageAtHeaderLinks(driver, "ico-register");
+		loginPage = homePage.clickToLoginLink();
 
-		registerPage.inputToTextboxByID(driver, "FirstName", userData.getLoginUsername());
-		registerPage.inputToTextboxByID(driver, "LastName", userData.getLastName());
-		registerPage.inputToTextboxByID(driver, "Email", emailAddress);
-		registerPage.inputToTextboxByID(driver, "Password", userData.getLoginPassword());
-		registerPage.inputToTextboxByID(driver, "ConfirmPassword", userData.getLoginPassword());
+		loginPage.setCookies(driver, RegisterComplete.cookies);
+		loginPage.sleepInSecond(3);
+		loginPage.refreshCurrentPage(driver);
 
-		registerPage.clickToRegisterButton("register-button");
-
-		loginPage = (LoginPageObject) registerPage.openPageAtHeaderLinks(driver, "ico-login");
-
-		loginPage.inputToTextboxByID(driver, "Email", emailAddress);
-		loginPage.inputToTextboxByID(driver, "Password", userData.getLoginPassword());
-
-		loginPage.clickToButtonByText("Log in");
-
-		homePage = PageGeneratorManager.getPageGeneratorManager().getHomePage(driver);
-
-		customerInfoPage = (CustomerInfoPageObject) homePage.openPageAtHeaderLinks(driver, "ico-account");
+		customerInfoPage = homePage.openMyAccountLink();
 	}
 
 	@Test
@@ -103,7 +90,7 @@ public class MyAccount extends BaseTest {
 		customerInfoPage.inputToTextboxByID(driver, "Company", "AutomationFC");
 
 		log.info("Customer Info Step - 10: Click to 'Save' button");
-		customerInfoPage.clickButtonByText(driver, "Save");
+		customerInfoPage.clickSaveButton();
 
 		log.info("Customer Info Step - 11: Get Success Save Message");
 		verifyEquals(customerInfoPage.getSuccessMessage(driver), "The customer info has been updated successfully.");
@@ -127,7 +114,7 @@ public class MyAccount extends BaseTest {
 		verifyTrue(addressPage.isPageTitleByTextDisplayed(driver, "Add new address"));
 
 		log.info("Address Step - 05: Click to 'Save' button");
-		addressPage.clickButtonByText(driver, "Save");
+		addressPage.clickButtonByClass(driver, "Save");
 
 		log.info("Address Step - 06: Get Error Message at 'First Name' field");
 		verifyEquals(addressPage.getErrorMessageWithDynamicValue(driver, "Address_FirstName-error"), "First name is required.");
@@ -186,7 +173,7 @@ public class MyAccount extends BaseTest {
 		addressPage.inputToTextboxByID(driver, "Address_PhoneNumber", userData.getPhone());
 
 		log.info("Address Step - 23: Click to 'Save' button");
-		addressPage.clickButtonByText(driver, "Save");
+		addressPage.clickButtonByClass(driver, "Save");
 
 		log.info("Address Step - 24: Get Success Save Message");
 		Assert.assertEquals(addressPage.getSuccessMessage(driver), "The new address has been added successfully.");
@@ -213,13 +200,13 @@ public class MyAccount extends BaseTest {
 		verifyEquals(addressPage.getTextboxValueByClass("country"), userData.getCountry());
 
 		log.info("Address Step - 32: Verify 'Edit' button is Displayed");
-		verifyTrue(addressPage.isButtonDisplayed(driver, "Edit"));
+		verifyTrue(addressPage.isButtonDisplayed("Edit"));
 
 		log.info("Address Step - 32: Verify 'Delete' button is Displayed");
-		verifyTrue(addressPage.isButtonDisplayed(driver, "Delete"));
+		verifyTrue(addressPage.isButtonDisplayed("Delete"));
 
 		log.info("Address Step - 33: Click to 'Delete' button");
-		addressPage.clickButtonByText(driver, "Delete");
+		addressPage.clickButtonByClass(driver, "Delete");
 
 		log.info("Address Step - 34: Verify Alert text message is Displayed");
 		verifyEquals(addressPage.getAlertMessageDisplayed(), "Are you sure?");
@@ -265,7 +252,7 @@ public class MyAccount extends BaseTest {
 		addressPage.inputToTextboxByID(driver, "Address_PhoneNumber", newPhoneNumber);
 
 		log.info("Address Step - 47: Click to 'Save' button");
-		addressPage.clickButtonByText(driver, "Save");
+		addressPage.clickButtonByClass(driver, "Save");
 
 		log.info("Address Step - 48: Get Success Save Message");
 		Assert.assertEquals(addressPage.getSuccessMessage(driver), "The new address has been added successfully.");
@@ -292,10 +279,10 @@ public class MyAccount extends BaseTest {
 		verifyEquals(addressPage.getTextboxValueByClass("country"), userData.getCountry());
 
 		log.info("Address Step - 56: Verify 'Edit' button is Displayed");
-		verifyTrue(addressPage.isButtonDisplayed(driver, "Edit"));
+		verifyTrue(addressPage.isButtonDisplayed("Edit"));
 
 		log.info("Address Step - 57: Verify 'Delete' button is Displayed");
-		verifyTrue(addressPage.isButtonDisplayed(driver, "Delete"));
+		verifyTrue(addressPage.isButtonDisplayed("Delete"));
 	}
 
 	@Test
@@ -304,7 +291,7 @@ public class MyAccount extends BaseTest {
 		changePasswordPage = (ChangePasswordPageObject) addressPage.openPageAtMyAccountByName(driver, "Change password");
 
 		log.info("Change Password Step - 02: Click to 'Change Password' button");
-		changePasswordPage.clickButtonByText(driver, "Change password");
+		changePasswordPage.clickButtonByClass(driver, "Change password");
 
 		log.info("Change Password Step - 03: Get Error Message at 'Old Password' field");
 		Assert.assertEquals(changePasswordPage.getErrorMessageWithDynamicValue(driver, "OldPassword-error"), "Old password is required.");
@@ -316,7 +303,7 @@ public class MyAccount extends BaseTest {
 		Assert.assertEquals(changePasswordPage.getErrorMessageWithDynamicValue(driver, "ConfirmNewPassword-error"), "Password is required.");
 
 		log.info("Change Password Step - 06: Click to 'Change Password' button");
-		changePasswordPage.clickButtonByText(driver, "Change password");
+		changePasswordPage.clickButtonByClass(driver, "Change password");
 
 		log.info("Change Password Step - 05: Input to 'New Password' textbox");
 		changePasswordPage.inputToTextboxByID(driver, "NewPassword", "123");
@@ -341,7 +328,7 @@ public class MyAccount extends BaseTest {
 		changePasswordPage.inputToTextboxByID(driver, "ConfirmNewPassword", "123456");
 
 		log.info("Change Password Step - 13: Click to 'Change Password' button");
-		changePasswordPage.clickButtonByText(driver, "Change password");
+		changePasswordPage.clickButtonByClass(driver, "Change password");
 
 		log.info("Change Password Step - 14: Get Error Message At 'Change Password' page");
 		Assert.assertEquals(changePasswordPage.getErrorMessageAtPage(), "Old password doesn't match");
@@ -356,7 +343,7 @@ public class MyAccount extends BaseTest {
 		changePasswordPage.inputToTextboxByID(driver, "ConfirmNewPassword", "456789");
 
 		log.info("Change Password Step - 18: Click to 'Change Password' button");
-		changePasswordPage.clickButtonByText(driver, "Change password");
+		changePasswordPage.clickButtonByClass(driver, "Change password");
 
 		log.info("Change Password Step - 19: Get Success Save Message");
 		Assert.assertEquals(addressPage.getSuccessMessage(driver), "Password was changed");
@@ -418,9 +405,9 @@ public class MyAccount extends BaseTest {
 	}
 
 	WebDriver driver;
-	private String emailAddress, newEmailAddress, newCompany, newCity, newAddress, newZipCode, newPhoneNumber, reviewTitle, reviewText;
+	public static String emailAddress;
+	private String newEmailAddress, newCompany, newCity, newAddress, newZipCode, newPhoneNumber, reviewTitle, reviewText;
 	private HomePageObject homePage;
-	private RegisterPageObject registerPage;
 	private LoginPageObject loginPage;
 	private CustomerInfoPageObject customerInfoPage;
 	private AddressPageObject addressPage;

@@ -13,13 +13,6 @@ public class AdminCustomerInfoPO extends BasePage {
 		this.driver = driver;
 	}
 
-	public AdminCreateNewCustomerPO clickToAddNewButton() {
-		waitForElementClickable(driver, AdminCustomerInfoPageUI.ADD_NEW_BUTTON);
-		clickToElement(driver, AdminCustomerInfoPageUI.ADD_NEW_BUTTON);
-		sleepInSecond(5);
-		return PageGeneraterManager.getAdminCreateNewCustomerPage(driver);
-	}
-
 	public void inputToEmailSearchTextbox(String userEmailAddress) {
 		waitForElementVisible(driver, AdminCustomerInfoPageUI.EMAIL_SEARCH_TEXTBOX);
 		sendkeyToElement(driver, AdminCustomerInfoPageUI.EMAIL_SEARCH_TEXTBOX, userEmailAddress);

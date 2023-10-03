@@ -24,5 +24,7 @@ public class BasePageUI {
 	public static final String ITEM_IN_TREEVIEW_MENU = "xpath=//i[@class='%s']";
 	public static final String ITEM_IN_TREEVIEW = "xpath=//i[@class='%s']/parent::a/following-sibling::ul//p[contains(text(),'%s')]";
 	public static final String BUTTON_AT_COLUMN_MENU = "xpath=//i[@class='%s']";
+	public static final String ADD_NEW_BUTTON = "xpath=//a[@class='btn btn-primary']";
+	public static final String FIELD_INPUT_BY_ID = "xpath=//input[@id='%s']";
 
 }

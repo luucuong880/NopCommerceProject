@@ -22,7 +22,12 @@ public class ChromeDriverManager implements BrowserFactory {
 
 		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
 		chromePrefs.put("profile.default_directory", GlobalConstants.getGlobalConstants().getDownloadFolderPath());
+		chromePrefs.put("profile.default_content_setting_values.notifications", 2);
+		chromePrefs.put("credentials_enable_service", false);
+		chromePrefs.put("profile.password_manager_enabled", false);
+		chromePrefs.put("autofill.profile_enabled", false);
 		options.setExperimentalOption("prefs", chromePrefs);
+		options.addArguments("--disable-notifications");
 
 		System.setProperty("webdriver.chrome.args", "--disable-logging");
 		System.setProperty("webdriver.chrome.silentOutput", "true");

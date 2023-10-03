@@ -3,8 +3,8 @@ package nopcommerce.admin;
 import org.openqa.selenium.WebDriver;
 
 import pageObjects.admin.AdminAddNewAddressPO;
-import pageObjects.admin.AdminCreateNewCustomerPO;
 import pageObjects.admin.AdminCustomerInfoPO;
+import pageObjects.admin.AdminCustomerPageObjec;
 import pageObjects.admin.AdminDashBoardPO;
 import pageObjects.admin.AdminEditPO;
 import pageObjects.admin.AdminEditProductPO;
@@ -29,8 +29,8 @@ public class PageGeneraterManager {
 		return new AdminEditProductPO(driver);
 	}
 
-	public static AdminCreateNewCustomerPO getAdminCreateNewCustomerPage(WebDriver driver) {
-		return new AdminCreateNewCustomerPO(driver);
+	public AdminCustomerPageObjec getAdminCustomerPage(WebDriver driver) {
+		return new AdminCustomerPageObjec(driver);
 	}
 
 	public static AdminAddNewAddressPO getAdminAddNewAddressPage(WebDriver driver) {

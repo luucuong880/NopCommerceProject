@@ -59,7 +59,7 @@ public class BasePage {
 		driver.navigate().refresh();
 	}
 
-	public Set<Cookie> getAllCooikes(WebDriver driver) {
+	public Set<Cookie> getBrowserCookies(WebDriver driver) {
 		return driver.manage().getCookies();
 	}
 
@@ -67,7 +67,10 @@ public class BasePage {
 		for (Cookie cookie : cookies) {
 			driver.manage().addCookie(cookie);
 		}
-		sleepInSecond(3);
+	}
+
+	public void deleteAllCookies(WebDriver driver) {
+		driver.manage().deleteAllCookies();
 	}
 
 	public Alert waitForAlertPresence(WebDriver driver) {
@@ -646,6 +649,11 @@ public class BasePage {
 	public void clickButtonByText(WebDriver driver, String textValue) {
 		waitForElementVisible(driver, BasePageUI.BUTTON_TEXT, textValue);
 		clickToElement(driver, BasePageUI.BUTTON_TEXT, textValue);
+	}
+
+	public void clickButtonByClass(WebDriver driver, String classValue) {
+		waitForElementVisible(driver, BasePageUI.BUTTON_DYNAMIC, classValue);
+		clickToElement(driver, BasePageUI.BUTTON_DYNAMIC, classValue);
 	}
 
 	public void hoverToHeaderLinks(WebDriver driver, String classValue) {

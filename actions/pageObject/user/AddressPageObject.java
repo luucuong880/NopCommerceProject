@@ -37,4 +37,9 @@ public class AddressPageObject extends BasePage {
 		return getElementText(driver, AddressPageUI.BODY_MESSAGE);
 	}
 
+	public boolean isButtonDisplayed(String textValue) {
+		waitForElementVisible(driver, AddressPageUI.DYNAMIC_BUTON_BY_TEXT, textValue);
+		return isElementDisplayed(driver, AddressPageUI.DYNAMIC_BUTON_BY_TEXT, textValue);
+	}
+
 }

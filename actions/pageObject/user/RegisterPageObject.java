@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import io.qameta.allure.Step;
 import nopcommerce.admin.PageGeneraterManager;
 import nopcommerce.user.BasePage;
+import nopcommerce.user.PageGeneratorManager;
 import pageObjects.admin.AdminLoginPO;
 import pageUI.user.RegisterPageUI;
 
@@ -35,6 +36,12 @@ public class RegisterPageObject extends BasePage {
 	public AdminLoginPO openAdminLoginPage() {
 		driver.get("https://admin-demo.nopcommerce.com/");
 		return PageGeneraterManager.getAdminLoginPage(driver);
+	}
+
+	public HomePageObject clickToNopCommerceLogo() {
+		waitForElementClickable(driver, RegisterPageUI.NOCOMMERCE_LOGO);
+		clickToElement(driver, RegisterPageUI.NOCOMMERCE_LOGO);
+		return PageGeneratorManager.getPageGeneratorManager().getHomePage(driver);
 	}
 
 }

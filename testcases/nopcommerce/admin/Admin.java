@@ -17,6 +17,7 @@ import nopcommerce.user.BaseTest;
 import nopcommerce.user.PageGeneratorManager;
 import pageObject.user.HomePageObject;
 import pageObject.user.RegisterPageObject;
+import pageObjects.admin.AdminCustomerPageObjec;
 import pageObjects.admin.AdminDashBoardPO;
 import pageObjects.admin.AdminLoginPO;
 import pageObjects.admin.AdminProductsPO;
@@ -43,7 +44,7 @@ public class Admin extends BaseTest {
 		registerPage = (RegisterPageObject) homePage.openPageAtHeaderLinks(driver, "ico-register");
 
 		registerPage.checkToRadioButtonByID(driver, "gender-male");
-		registerPage.inputToTextboxByID(driver, "FirstName", userData.getLoginUsername());
+		registerPage.inputToTextboxByID(driver, "FirstName", userData.getFirstName());
 		registerPage.inputToTextboxByID(driver, "LastName", userData.getLastName());
 		registerPage.selectToDropdownByName(driver, "DateOfBirthDay", userData.getDate());
 		registerPage.selectToDropdownByName(driver, "DateOfBirthMonth", userData.getMonth());
@@ -74,7 +75,7 @@ public class Admin extends BaseTest {
 		adminProductsPage = (AdminProductsPO) adminDasboardPage.chosePageAtTreeviewMenu(driver, "nav-icon fas fa-book", "Products");
 
 		log.info("Search Step - 05: Click to Search Button");
-		adminProductsPage.inputToFieldTextByID("SearchProductName", "Lenovo IdeaCentre 600 All-in-One PC");
+		adminProductsPage.inputToFieldTextByID(driver, "SearchProductName", "Lenovo IdeaCentre 600 All-in-One PC");
 		adminProductsPage.clickToButtonByID("search-products");
 		adminProductsPage.waitForAjaxBusyIconInvisible();
 
@@ -92,7 +93,7 @@ public class Admin extends BaseTest {
 		adminProductsPage.waitForAjaxBusyIconInvisible();
 
 		log.info("Search Step - 02: Search with Products name Category Uncheck Subcategory");
-		adminProductsPage.inputToFieldTextByID("SearchProductName", "Lenovo IdeaCentre 600 All-in-One PC");
+		adminProductsPage.inputToFieldTextByID(driver, "SearchProductName", "Lenovo IdeaCentre 600 All-in-One PC");
 		adminProductsPage.selectDropDownByName("SearchCategoryId", "Computers");
 
 		log.info("Search Step - 03: Click to Search Button");
@@ -111,7 +112,7 @@ public class Admin extends BaseTest {
 		adminProductsPage.waitForAjaxBusyIconInvisible();
 
 		log.info("Search Step - 02: Search with Products name Category Check Subcategory");
-		adminProductsPage.inputToFieldTextByID("SearchProductName", "Lenovo IdeaCentre 600 All-in-One PC");
+		adminProductsPage.inputToFieldTextByID(driver, "SearchProductName", "Lenovo IdeaCentre 600 All-in-One PC");
 		adminProductsPage.selectDropDownByName("SearchCategoryId", "Computers");
 		adminProductsPage.checkSubCategories();
 
@@ -130,7 +131,7 @@ public class Admin extends BaseTest {
 		adminProductsPage.waitForAjaxBusyIconInvisible();
 
 		log.info("Search Step - 02: Search with Products name Category Uncheck Subcategory");
-		adminProductsPage.inputToFieldTextByID("SearchProductName", "Lenovo IdeaCentre 600 All-in-One PC");
+		adminProductsPage.inputToFieldTextByID(driver, "SearchProductName", "Lenovo IdeaCentre 600 All-in-One PC");
 		adminProductsPage.selectDropDownByName("SearchCategoryId", "Computers >> Desktops");
 
 		log.info("Search Step - 03: Click to Search Button");
@@ -148,7 +149,7 @@ public class Admin extends BaseTest {
 		adminProductsPage.waitForAjaxBusyIconInvisible();
 
 		log.info("Search Step - 02: Search with Products name Category Uncheck Subcategory");
-		adminProductsPage.inputToFieldTextByID("SearchProductName", "Lenovo IdeaCentre 600 All-in-One PC");
+		adminProductsPage.inputToFieldTextByID(driver, "SearchProductName", "Lenovo IdeaCentre 600 All-in-One PC");
 		adminProductsPage.selectDropDownByName("SearchCategoryId", "All");
 
 		log.info("Search Step - 03: Select Manufacturer is Apple");
@@ -169,7 +170,7 @@ public class Admin extends BaseTest {
 		adminProductsPage.waitForAjaxBusyIconInvisible();
 
 		log.info("SKU Step - 02: Input to Go directly textbox");
-		adminProductsPage.inputToFieldTextByID("GoDirectlyToSku", "LE_IC_600");
+		adminProductsPage.inputToFieldTextByID(driver, "GoDirectlyToSku", "LE_IC_600");
 
 		log.info("SKU Step - 03: Click to Go Button");
 		adminProductsPage.clickToGoButton();
@@ -178,6 +179,22 @@ public class Admin extends BaseTest {
 		log.info("SKU Step - 04: Verify Product Details is Diplayed and get Text Message");
 		verifyTrue(adminProductsPage.isProductDetailDisplayed());
 		verifyEquals(adminProductsPage.getProductDetailMessage(), "Edit product details - Lenovo IdeaCentre 600 All-in-One PC back to product list");
+	}
+
+	@Test
+	public void Admin_07_Create_New_Customer() {
+		log.info("Customer Step - 01: Open Customers page");
+		adminCustomerPage = (AdminCustomerPageObjec) adminProductsPage.chosePageAtTreeviewMenu(driver, "nav-icon far fa-user", "Customers");
+
+		log.info("Customer Step - 02: Click to Add new button");
+		adminCustomerPage.clickToAddNewButton(driver);
+
+		log.info("Customer Step - 03: Input Information at Add a new Customer tab");
+		adminCustomerPage.inputToFieldTextByID(driver, "Email", emailAddress);
+		adminCustomerPage.inputToFieldTextByID(driver, "Password", userData.getLoginPassword());
+		adminCustomerPage.inputToFieldTextByID(driver, "FirstName", "LE_IC_600");
+		adminCustomerPage.inputToFieldTextByID(driver, "LastName", "LE_IC_600");
+		adminCustomerPage.checkToCheckboxOrRadioButton(driver, "Gender_Male");
 	}
 
 	public int generateFakeNumber() {
@@ -200,6 +217,7 @@ public class Admin extends BaseTest {
 	private AdminLoginPO adminLoginPage;
 	private AdminDashBoardPO adminDasboardPage;
 	private AdminProductsPO adminProductsPage;
+	private AdminCustomerPageObjec adminCustomerPage;
 	UserDataMapper userData;
 	AdminDataMapper adminData;
 }
