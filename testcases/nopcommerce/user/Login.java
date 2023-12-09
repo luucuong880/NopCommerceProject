@@ -42,7 +42,7 @@ public class Login extends BaseTest {
 		registerPage.checkToRadioButtonByID(driver, "gender-male");
 		registerPage.inputToTextboxByID(driver, "FirstName", userData.getLoginUsername());
 		registerPage.inputToTextboxByID(driver, "LastName", userData.getLastName());
-		registerPage.selectToDropdownByName(driver, "DateOfBirthDay", userData.getDate());
+		registerPage.selectToDropdownByName(driver, "DateOfBirthDay", userData.getDay());
 		registerPage.selectToDropdownByName(driver, "DateOfBirthMonth", userData.getMonth());
 		registerPage.selectToDropdownByName(driver, "DateOfBirthYear", userData.getYear());
 		registerPage.inputToTextboxByID(driver, "Email", emailAddress);

@@ -18,6 +18,11 @@
 		<classes>
 			<class name="nopcommerce.user.RegisterComplete" />
 			<class name="nopcommerce.user.MyAccount" />
+			<class name="nopcommerce.user.Login" />
+			<class name="nopcommerce.user.Order" />
+			<class name="nopcommerce.user.SDP" />
+			<class name="nopcommerce.user.Search" />
+			<class name="nopcommerce.user.Wishlist" />
 		</classes>
 	</test>
 	

@@ -26,5 +26,9 @@ public class BasePageUI {
 	public static final String BUTTON_AT_COLUMN_MENU = "xpath=//i[@class='%s']";
 	public static final String ADD_NEW_BUTTON = "xpath=//a[@class='btn btn-primary']";
 	public static final String FIELD_INPUT_BY_ID = "xpath=//input[@id='%s']";
+	public static final String CLOSE_ICON = "xpath=//span[@class='k-icon k-i-close']";
+	public static final String FIELD_INPUT_BY_CLASS = "xpath=//ul[@id='%s']/following-sibling::input";
+	public static final String DYNAMIC_NAME_BUTTON = "xpath=//button[@name='%s']";
+	public static final String SUCCESS_MESSAGE = "xpath=//div[@class='alert alert-success alert-dismissable']";
 
 }

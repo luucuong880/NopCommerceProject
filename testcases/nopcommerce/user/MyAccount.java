@@ -42,7 +42,8 @@ public class MyAccount extends BaseTest {
 
 		emailAddress = RegisterComplete.emailAddress;
 
-		newEmailAddress = userData.getEmailAddress() + generateFakeNumber() + "@gmail.play";
+		newEmailAddress = userData.getNewEmailAddress() + generateFakeNumber() + "@gmail.play";
+		newPassword = "456789";
 		newCompany = "RedSkull";
 		newCity = "Gotham";
 		newAddress = "325 Lightning";
@@ -78,7 +79,7 @@ public class MyAccount extends BaseTest {
 		customerInfoPage.checkToGenderTextbox("gender-male");
 
 		log.info("Customer Info Step - 06: Select Day Of Birth");
-		customerInfoPage.selectToDropdownByName(driver, "DateOfBirthDay", userData.getDate());
+		customerInfoPage.selectToDropdownByName(driver, "DateOfBirthDay", userData.getDay());
 
 		log.info("Customer Info Step - 07: Select Month Of Birth");
 		customerInfoPage.selectToDropdownByName(driver, "DateOfBirthMonth", userData.getMonth());
@@ -337,31 +338,32 @@ public class MyAccount extends BaseTest {
 		changePasswordPage.inputToTextboxByID(driver, "OldPassword", userData.getLoginPassword());
 
 		log.info("Change Password Step - 16: Input to 'New Password' textbox");
-		changePasswordPage.inputToTextboxByID(driver, "NewPassword", "456789");
+		changePasswordPage.inputToTextboxByID(driver, "NewPassword", newPassword);
 
 		log.info("Change Password Step - 17: Input to 'Confirm New Password' textbox");
-		changePasswordPage.inputToTextboxByID(driver, "ConfirmNewPassword", "456789");
+		changePasswordPage.inputToTextboxByID(driver, "ConfirmNewPassword", newPassword);
 
 		log.info("Change Password Step - 18: Click to 'Change Password' button");
 		changePasswordPage.clickButtonByClass(driver, "Change password");
 
 		log.info("Change Password Step - 19: Get Success Save Message");
-		Assert.assertEquals(addressPage.getSuccessMessage(driver), "Password was changed");
+		Assert.assertEquals(changePasswordPage.getSuccessMessage(driver), "Password was changed");
 
 		log.info("Change Password Step - 20: Close Success Message");
-		addressPage.closeSuccessMessage(driver);
+		changePasswordPage.closeSuccessMessage(driver);
 	}
 
 	@Test
 	public void My_Account_06_My_Product_Review() {
 		log.info("My Product Review Step - 01: Open 'Computers' page");
-		menuPage = (MenuPageObject) addressPage.openMenuPage(driver, "Computers");
+		menuPage = (MenuPageObject) changePasswordPage.openMenuPage(driver, "Computers");
 
 		log.info("My Product Review Step - 02: Open 'Log in' page And Login");
-		loginPage = (LoginPageObject) addressPage.openPageAtHeaderLinks(driver, "ico-login");
-		loginPage.inputToTextboxByID(driver, "Email", emailAddress);
-		loginPage.inputToTextboxByID(driver, "Password", "456789");
+		loginPage = (LoginPageObject) menuPage.openPageAtHeaderLinks(driver, "ico-login");
+		loginPage.inputToTextboxByID(driver, "Email", newEmailAddress);
+		loginPage.inputToTextboxByID(driver, "Password", newPassword);
 		loginPage.clickButtonByText(driver, "Log in");
+		loginPage.sleepInSecond(2);
 
 		log.info("My Product Review Step - 03: Open 'Computers' page");
 		menuPage = (MenuPageObject) loginPage.openMenuPage(driver, "Computers");
@@ -405,8 +407,8 @@ public class MyAccount extends BaseTest {
 	}
 
 	WebDriver driver;
-	public static String emailAddress;
-	private String newEmailAddress, newCompany, newCity, newAddress, newZipCode, newPhoneNumber, reviewTitle, reviewText;
+	public static String emailAddress, newEmailAddress;
+	private String newPassword, newCompany, newCity, newAddress, newZipCode, newPhoneNumber, reviewTitle, reviewText;
 	private HomePageObject homePage;
 	private LoginPageObject loginPage;
 	private CustomerInfoPageObject customerInfoPage;

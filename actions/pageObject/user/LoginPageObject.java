@@ -3,8 +3,10 @@ package pageObject.user;
 import org.openqa.selenium.WebDriver;
 
 import io.qameta.allure.Step;
+import nopcommerce.admin.PageGeneraterManager;
 import nopcommerce.user.BasePage;
 import nopcommerce.user.PageGeneratorManager;
+import pageObjects.admin.AdminLoginPO;
 import pageUI.user.LoginPageUI;
 
 public class LoginPageObject extends BasePage {
@@ -44,6 +46,11 @@ public class LoginPageObject extends BasePage {
 		waitForElementClickable(driver, LoginPageUI.LOGIN_BUTTON);
 		clickToElement(driver, LoginPageUI.LOGIN_BUTTON);
 		return PageGeneratorManager.getPageGeneratorManager().getHomePage(driver);
+	}
+
+	public AdminLoginPO openAdminLoginPage() {
+		driver.get("https://admin-demo.nopcommerce.com/");
+		return PageGeneraterManager.getAdminLoginPage(driver);
 	}
 
 }

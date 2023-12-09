@@ -78,8 +78,8 @@ public class Register extends BaseTest {
 		registerPage.inputToTextboxByID(driver, "LastName", userData.getLastName());
 
 		log.info("Register Step - 11: Select 'Date of birth Day' value");
-		registerPage.selectToDropdownByName(driver, "DateOfBirthDay", userData.getDate());
-		verifyEquals(registerPage.getItemSelected(driver, "DateOfBirthDay"), userData.getDate());
+		registerPage.selectToDropdownByName(driver, "DateOfBirthDay", userData.getDay());
+		verifyEquals(registerPage.getItemSelected(driver, "DateOfBirthDay"), userData.getDay());
 
 		log.info("Register Step - 12: Select 'Date of birth Month' value");
 		registerPage.selectToDropdownByName(driver, "DateOfBirthMonth", userData.getMonth());
@@ -122,8 +122,8 @@ public class Register extends BaseTest {
 		registerPage.inputToTextboxByID(driver, "LastName", userData.getLastName());
 
 		log.info("Register Step - 23: Select 'Date of birth Day' value");
-		registerPage.selectToDropdownByName(driver, "DateOfBirthDay", userData.getDate());
-		verifyEquals(registerPage.getItemSelected(driver, "DateOfBirthDay"), userData.getDate());
+		registerPage.selectToDropdownByName(driver, "DateOfBirthDay", userData.getDay());
+		verifyEquals(registerPage.getItemSelected(driver, "DateOfBirthDay"), userData.getDay());
 
 		log.info("Register Step - 24: Select 'Date of birth Month' value");
 		registerPage.selectToDropdownByName(driver, "DateOfBirthMonth", userData.getMonth());
@@ -164,8 +164,8 @@ public class Register extends BaseTest {
 		registerPage.inputToTextboxByID(driver, "LastName", userData.getLastName());
 
 		log.info("Register Step - 35: Select 'Date of birth Day' value");
-		registerPage.selectToDropdownByName(driver, "DateOfBirthDay", userData.getDate());
-		verifyEquals(registerPage.getItemSelected(driver, "DateOfBirthDay"), userData.getDate());
+		registerPage.selectToDropdownByName(driver, "DateOfBirthDay", userData.getDay());
+		verifyEquals(registerPage.getItemSelected(driver, "DateOfBirthDay"), userData.getDay());
 
 		log.info("Register Step - 36: Select 'Date of birth Month' value");
 		registerPage.selectToDropdownByName(driver, "DateOfBirthMonth", userData.getMonth());
@@ -207,8 +207,8 @@ public class Register extends BaseTest {
 		registerPage.inputToTextboxByID(driver, "LastName", userData.getLastName());
 
 		log.info("Register Step - 47: Select 'Date of birth Day' value");
-		registerPage.selectToDropdownByName(driver, "DateOfBirthDay", userData.getDate());
-		verifyEquals(registerPage.getItemSelected(driver, "DateOfBirthDay"), userData.getDate());
+		registerPage.selectToDropdownByName(driver, "DateOfBirthDay", userData.getDay());
+		verifyEquals(registerPage.getItemSelected(driver, "DateOfBirthDay"), userData.getDay());
 
 		log.info("Register Step - 48: Select 'Date of birth Month' value");
 		registerPage.selectToDropdownByName(driver, "DateOfBirthMonth", userData.getMonth());
@@ -250,8 +250,8 @@ public class Register extends BaseTest {
 		registerPage.inputToTextboxByID(driver, "LastName", userData.getLastName());
 
 		log.info("Register Step - 59: Select 'Date of birth Day' value");
-		registerPage.selectToDropdownByName(driver, "DateOfBirthDay", userData.getDate());
-		verifyEquals(registerPage.getItemSelected(driver, "DateOfBirthDay"), userData.getDate());
+		registerPage.selectToDropdownByName(driver, "DateOfBirthDay", userData.getDay());
+		verifyEquals(registerPage.getItemSelected(driver, "DateOfBirthDay"), userData.getDay());
 
 		log.info("Register Step - 60: Select 'Date of birth Month' value");
 		registerPage.selectToDropdownByName(driver, "DateOfBirthMonth", userData.getMonth());

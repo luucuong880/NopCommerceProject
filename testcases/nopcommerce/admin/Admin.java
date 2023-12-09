@@ -40,13 +40,16 @@ public class Admin extends BaseTest {
 		userData = UserDataMapper.getUserData();
 
 		emailAddress = userData.getEmailAddress() + generateFakeNumber() + "@fakermail.com";
+		firstName = userData.getFirstName();
+		lastName = userData.getLastName();
+		dateOfBirth = userData.getMonth() + "/" + userData.getDay() + "/" + userData.getYear();
 
 		registerPage = (RegisterPageObject) homePage.openPageAtHeaderLinks(driver, "ico-register");
 
 		registerPage.checkToRadioButtonByID(driver, "gender-male");
 		registerPage.inputToTextboxByID(driver, "FirstName", userData.getFirstName());
 		registerPage.inputToTextboxByID(driver, "LastName", userData.getLastName());
-		registerPage.selectToDropdownByName(driver, "DateOfBirthDay", userData.getDate());
+		registerPage.selectToDropdownByName(driver, "DateOfBirthDay", userData.getDay());
 		registerPage.selectToDropdownByName(driver, "DateOfBirthMonth", userData.getMonth());
 		registerPage.selectToDropdownByName(driver, "DateOfBirthYear", userData.getYear());
 		registerPage.inputToTextboxByID(driver, "Email", emailAddress);
@@ -73,16 +76,17 @@ public class Admin extends BaseTest {
 
 		log.info("Search Step - 04: Open Products page at Dasboard page");
 		adminProductsPage = (AdminProductsPO) adminDasboardPage.chosePageAtTreeviewMenu(driver, "nav-icon fas fa-book", "Products");
+		adminProductsPage.clicktoSearchIcon();
 
 		log.info("Search Step - 05: Click to Search Button");
-		adminProductsPage.inputToFieldTextByID(driver, "SearchProductName", "Lenovo IdeaCentre 600 All-in-One PC");
+		adminProductsPage.inputToFieldTextByID(driver, "SearchProductName", "Apple MacBook Pro 13-inch");
 		adminProductsPage.clickToButtonByID("search-products");
 		adminProductsPage.waitForAjaxBusyIconInvisible();
 
 		log.info("Search Step - 06: Verify 1 Item is Displayed in Table");
-		verifyTrue(adminProductsPage.isInfoProductsInTable("Product name", "Lenovo IdeaCentre 600 All-in-One PC"));
-		verifyTrue(adminProductsPage.isInfoProductsInTable("SKU", "LE_IC_600"));
-		verifyTrue(adminProductsPage.isInfoProductsInTable("Price", "500"));
+		verifyTrue(adminProductsPage.isInfoProductsInTable("Product name", "Apple MacBook Pro 13-inch"));
+		verifyTrue(adminProductsPage.isInfoProductsInTable("SKU", "AP_MBP_13"));
+		verifyTrue(adminProductsPage.isInfoProductsInTable("Price", "1800"));
 		verifyTrue(adminProductsPage.isInfoProductsInTable("Stock quantity", "10000"));
 	}
 
@@ -93,8 +97,8 @@ public class Admin extends BaseTest {
 		adminProductsPage.waitForAjaxBusyIconInvisible();
 
 		log.info("Search Step - 02: Search with Products name Category Uncheck Subcategory");
-		adminProductsPage.inputToFieldTextByID(driver, "SearchProductName", "Lenovo IdeaCentre 600 All-in-One PC");
-		adminProductsPage.selectDropDownByName("SearchCategoryId", "Computers");
+		adminProductsPage.inputToFieldTextByID(driver, "SearchProductName", "Apple MacBook Pro 13-inch");
+		adminProductsPage.selectDropDownByName("SearchCategoryId", "Electronics");
 
 		log.info("Search Step - 03: Click to Search Button");
 		adminProductsPage.clickToButtonByID("search-products");
@@ -112,8 +116,8 @@ public class Admin extends BaseTest {
 		adminProductsPage.waitForAjaxBusyIconInvisible();
 
 		log.info("Search Step - 02: Search with Products name Category Check Subcategory");
-		adminProductsPage.inputToFieldTextByID(driver, "SearchProductName", "Lenovo IdeaCentre 600 All-in-One PC");
-		adminProductsPage.selectDropDownByName("SearchCategoryId", "Computers");
+		adminProductsPage.inputToFieldTextByID(driver, "SearchProductName", "Apple MacBook Pro 13-inch");
+		adminProductsPage.selectDropDownByName("SearchCategoryId", "All");
 		adminProductsPage.checkSubCategories();
 
 		log.info("Search Step - 03: Click to Search Button");
@@ -121,39 +125,21 @@ public class Admin extends BaseTest {
 		adminProductsPage.waitForAjaxBusyIconInvisible();
 
 		log.info("Search Step - 04: Verify 1 Item is Displayed in Table");
-		verifyTrue(adminProductsPage.isInfoProductsInTable("Product name", "Lenovo IdeaCentre 600 All-in-One PC"));
+		verifyTrue(adminProductsPage.isInfoProductsInTable("Product name", "Apple MacBook Pro 13-inch"));
 	}
 
 	@Test
-	public void Admin_04_Search_With_Product_Name_Child_Category() {
+	public void Admin_04_Search_With_Product_Name_Manufactuer() {
 		log.info("Search Step - 01: Refresh Products page");
 		adminProductsPage.reloadPage();
 		adminProductsPage.waitForAjaxBusyIconInvisible();
 
 		log.info("Search Step - 02: Search with Products name Category Uncheck Subcategory");
-		adminProductsPage.inputToFieldTextByID(driver, "SearchProductName", "Lenovo IdeaCentre 600 All-in-One PC");
-		adminProductsPage.selectDropDownByName("SearchCategoryId", "Computers >> Desktops");
-
-		log.info("Search Step - 03: Click to Search Button");
-		adminProductsPage.clickToButtonByID("search-products");
-		adminProductsPage.waitForAjaxBusyIconInvisible();
-
-		log.info("Search Step - 04: Verify 1 Item is Displayed in Table");
-		verifyTrue(adminProductsPage.isInfoProductsInTable("Product name", "Lenovo IdeaCentre 600 All-in-One PC"));
-	}
-
-	@Test
-	public void Admin_05_Search_With_Product_Name_Manufactuer() {
-		log.info("Search Step - 01: Refresh Products page");
-		adminProductsPage.reloadPage();
-		adminProductsPage.waitForAjaxBusyIconInvisible();
-
-		log.info("Search Step - 02: Search with Products name Category Uncheck Subcategory");
-		adminProductsPage.inputToFieldTextByID(driver, "SearchProductName", "Lenovo IdeaCentre 600 All-in-One PC");
+		adminProductsPage.inputToFieldTextByID(driver, "SearchProductName", "Apple MacBook Pro 13-inch");
 		adminProductsPage.selectDropDownByName("SearchCategoryId", "All");
 
 		log.info("Search Step - 03: Select Manufacturer is Apple");
-		adminProductsPage.selectDropDownByName("SearchManufacturerId", "Apple");
+		adminProductsPage.selectDropDownByName("SearchVendorId", "Vendor 2");
 
 		log.info("Search Step - 04: Click to Search Button");
 		adminProductsPage.clickToButtonByID("search-products");
@@ -164,13 +150,13 @@ public class Admin extends BaseTest {
 	}
 
 	@Test
-	public void Admin_06_Go_Directly_To_Product_SKU() {
+	public void Admin_05_Go_Directly_To_Product_SKU() {
 		log.info("SKU Step - 01: Refresh Products page");
 		adminProductsPage.reloadPage();
 		adminProductsPage.waitForAjaxBusyIconInvisible();
 
 		log.info("SKU Step - 02: Input to Go directly textbox");
-		adminProductsPage.inputToFieldTextByID(driver, "GoDirectlyToSku", "LE_IC_600");
+		adminProductsPage.inputToFieldTextByID(driver, "GoDirectlyToSku", "AP_MBP_13");
 
 		log.info("SKU Step - 03: Click to Go Button");
 		adminProductsPage.clickToGoButton();
@@ -178,11 +164,11 @@ public class Admin extends BaseTest {
 
 		log.info("SKU Step - 04: Verify Product Details is Diplayed and get Text Message");
 		verifyTrue(adminProductsPage.isProductDetailDisplayed());
-		verifyEquals(adminProductsPage.getProductDetailMessage(), "Edit product details - Lenovo IdeaCentre 600 All-in-One PC back to product list");
+		verifyEquals(adminProductsPage.getProductDetailMessage(), "Edit product details - Apple MacBook Pro 13-inch back to product list");
 	}
 
 	@Test
-	public void Admin_07_Create_New_Customer() {
+	public void Admin_06_Create_New_Customer() {
 		log.info("Customer Step - 01: Open Customers page");
 		adminCustomerPage = (AdminCustomerPageObjec) adminProductsPage.chosePageAtTreeviewMenu(driver, "nav-icon far fa-user", "Customers");
 
@@ -192,9 +178,24 @@ public class Admin extends BaseTest {
 		log.info("Customer Step - 03: Input Information at Add a new Customer tab");
 		adminCustomerPage.inputToFieldTextByID(driver, "Email", emailAddress);
 		adminCustomerPage.inputToFieldTextByID(driver, "Password", userData.getLoginPassword());
-		adminCustomerPage.inputToFieldTextByID(driver, "FirstName", "LE_IC_600");
-		adminCustomerPage.inputToFieldTextByID(driver, "LastName", "LE_IC_600");
+		adminCustomerPage.inputToFieldTextByID(driver, "FirstName", firstName);
+		adminCustomerPage.inputToFieldTextByID(driver, "LastName", lastName);
 		adminCustomerPage.checkToCheckboxOrRadioButton(driver, "Gender_Male");
+		adminCustomerPage.inputToFieldTextByID(driver, "DateOfBirth", dateOfBirth);
+		adminCustomerPage.inputToFieldTextByID(driver, "Company", "Automation FC");
+		adminCustomerPage.clickToCloseIcon(driver);
+		adminCustomerPage.inputToFieldTextByClass(driver, "SelectedCustomerRoleIds_taglist", "Guests");
+		adminCustomerPage.inputToAdminComment("Add new Customer (Guests)");
+
+		log.info("Customer Step - 04: Click to 'Save and continue Edit' button");
+		adminCustomerPage.clickToButtonByName(driver, "save-continue");
+		adminProductsPage.waitForAjaxBusyIconInvisible();
+
+		log.info("Customer Step - 05: Get Success message text");
+		verifyEquals(adminCustomerPage.getSuccessMessageText(driver), "The new customer has been added successfully.");
+		adminCustomerPage.clickToButtonByClass("alert alert-success alert-dismissable");
+
+		log.info("Customer Step - 06: Verify New information was successfully created");
 	}
 
 	public int generateFakeNumber() {
@@ -211,7 +212,7 @@ public class Admin extends BaseTest {
 	}
 
 	WebDriver driver;
-	private String emailAddress;
+	private String emailAddress, dateOfBirth, firstName, lastName;
 	private HomePageObject homePage;
 	private RegisterPageObject registerPage;
 	private AdminLoginPO adminLoginPage;

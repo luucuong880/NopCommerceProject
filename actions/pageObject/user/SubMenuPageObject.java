@@ -16,6 +16,7 @@ public class SubMenuPageObject extends BasePage {
 	public ProductReviewPageObject clickToAddReviewLink() {
 		waitForElementClickable(driver, SubMenuPageUI.REVIEW_LINK);
 		clickToElement(driver, SubMenuPageUI.REVIEW_LINK);
+		sleepInSecond(2);
 		return PageGeneratorManager.getPageGeneratorManager().getProductReviewPage(driver);
 	}
 

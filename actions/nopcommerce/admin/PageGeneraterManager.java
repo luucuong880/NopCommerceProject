@@ -2,6 +2,7 @@ package nopcommerce.admin;
 
 import org.openqa.selenium.WebDriver;
 
+import pageObject.user.HomePageObject;
 import pageObjects.admin.AdminAddNewAddressPO;
 import pageObjects.admin.AdminCustomerInfoPO;
 import pageObjects.admin.AdminCustomerPageObjec;
@@ -47,6 +48,10 @@ public class PageGeneraterManager {
 
 	public static AdminLoginPO getAdminLoginPage(WebDriver driver) {
 		return new AdminLoginPO(driver);
+	}
+
+	public HomePageObject getHomePage(WebDriver driver) {
+		return new HomePageObject(driver);
 	}
 
 }

@@ -67,4 +67,9 @@ public class AdminProductsPO extends BasePage {
 		return getElementText(driver, AdminProductsPageUI.PRODUCT_DETAILS);
 	}
 
+	public void clicktoSearchIcon() {
+		waitForElementClickable(driver, AdminProductsPageUI.ICON_SEARCH);
+		clickToElement(driver, AdminProductsPageUI.ICON_SEARCH);
+	}
+
 }

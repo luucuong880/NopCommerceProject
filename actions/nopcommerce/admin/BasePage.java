@@ -605,6 +605,11 @@ public class BasePage {
 		sendkeyToElement(driver, BasePageUI.FIELD_INPUT_BY_ID, textValue, idValue);
 	}
 
+	public void inputToFieldTextByClass(WebDriver driver, String classValue, String textValue) {
+		waitForElementVisible(driver, BasePageUI.FIELD_INPUT_BY_CLASS, classValue);
+		sendkeyToElement(driver, BasePageUI.FIELD_INPUT_BY_CLASS, textValue, classValue);
+	}
+
 	public void clickToAddNewButton(WebDriver driver) {
 		waitForElementClickable(driver, BasePageUI.ADD_NEW_BUTTON);
 		clickToElement(driver, BasePageUI.ADD_NEW_BUTTON);
@@ -615,9 +620,24 @@ public class BasePage {
 		clickToElement(driver, BasePageUI.BUTTON_AT_COLUMN_MENU, classValue);
 	}
 
+	public void clickToCloseIcon(WebDriver driver) {
+		waitForElementClickable(driver, BasePageUI.CLOSE_ICON);
+		clickToElementByJS(driver, BasePageUI.CLOSE_ICON);
+	}
+
 	public void checkToCheckboxOrRadioButton(WebDriver driver, String idValue) {
 		waitForElementClickable(driver, BasePageUI.FIELD_INPUT_BY_ID, idValue);
 		checkToDefaultCheckboxOrRadio(driver, BasePageUI.FIELD_INPUT_BY_ID, idValue);
+	}
+
+	public void clickToButtonByName(WebDriver driver, String dynamicName) {
+		waitForElementClickable(driver, BasePageUI.DYNAMIC_NAME_BUTTON, dynamicName);
+		clickToElement(driver, BasePageUI.DYNAMIC_NAME_BUTTON, dynamicName);
+	}
+
+	public String getSuccessMessageText(WebDriver driver) {
+		waitForElementVisible(driver, BasePageUI.SUCCESS_MESSAGE);
+		return getElementText(driver, BasePageUI.SUCCESS_MESSAGE);
 	}
 
 }

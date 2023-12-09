@@ -12,5 +12,6 @@ public class AdminProductsPageUI {
 	public static final String FIELD_SELECT_BY_NAME = "xpath=//select[@id='%s']";
 	public static final String EMPTY_DATA_TABLES = "xpath=//tr[@class='odd']/td";
 	public static final String PRODUCT_DETAILS = "xpath=//h1[@class='float-left']";
+	public static final String ICON_SEARCH = "xpath=//div[@class='icon-search']";
 
 }

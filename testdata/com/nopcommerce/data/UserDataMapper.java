@@ -36,8 +36,8 @@ public class UserDataMapper {
 	@JsonProperty("password")
 	private String password;
 
-	@JsonProperty("date")
-	private String date;
+	@JsonProperty("day")
+	private String day;
 
 	@JsonProperty("month")
 	private String month;
@@ -111,8 +111,8 @@ public class UserDataMapper {
 		return password;
 	}
 
-	public String getDate() {
-		return date;
+	public String getDay() {
+		return day;
 	}
 
 	public String getMonth() {
