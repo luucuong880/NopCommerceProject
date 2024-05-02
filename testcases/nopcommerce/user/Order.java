@@ -61,9 +61,7 @@ public class Order extends BaseTest {
 		loginPage.inputToTextboxByID(driver, "Email", emailAddress);
 		loginPage.inputToTextboxByID(driver, "Password", userData.getLoginPassword());
 
-		loginPage.clickToButtonByText("Log in");
-
-		homePage = PageGeneratorManager.getPageGeneratorManager().getHomePage(driver);
+		homePage = loginPage.clickLoginButton();
 
 		menuPage = (MenuPageObject) homePage.openMenuPage(driver, "Computers");
 

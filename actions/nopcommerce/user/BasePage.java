@@ -633,6 +633,7 @@ public class BasePage {
 		default:
 			throw new RuntimeException("Invalid page Links at Header are.");
 		}
+
 	}
 
 	public BasePage openFooterPage(WebDriver driver, String pageLink) {

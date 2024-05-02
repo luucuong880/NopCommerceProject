@@ -360,13 +360,12 @@ public class MyAccount extends BaseTest {
 
 		log.info("My Product Review Step - 02: Open 'Log in' page And Login");
 		loginPage = (LoginPageObject) menuPage.openPageAtHeaderLinks(driver, "ico-login");
-		loginPage.inputToTextboxByID(driver, "Email", newEmailAddress);
+		loginPage.inputToTextboxByID(driver, "Email", emailAddress);
 		loginPage.inputToTextboxByID(driver, "Password", newPassword);
-		loginPage.clickButtonByText(driver, "Log in");
-		loginPage.sleepInSecond(2);
+		homePage = loginPage.clickLoginButton();
 
 		log.info("My Product Review Step - 03: Open 'Computers' page");
-		menuPage = (MenuPageObject) loginPage.openMenuPage(driver, "Computers");
+		menuPage = (MenuPageObject) homePage.openMenuPage(driver, "Computers");
 		subMenuPage = (SubMenuPageObject) menuPage.openSubMenuPage("Desktop");
 
 		log.info("My Product Review Step - 04: Click to Product Item");
@@ -380,7 +379,7 @@ public class MyAccount extends BaseTest {
 		productReviewPage.inputToReviewText(reviewText);
 
 		log.info("My Product Review Step - 07: Click to Submit button");
-		productReviewPage.clickButtonByText(driver, "Submit review");
+		productReviewPage.clickButtonByClass(driver, "Submit review");
 
 		log.info("My Product Review Step - 08: Verify Product Review message");
 		verifyEquals(productReviewPage.getProductReviewMessage(), "Product review is successfully added.");

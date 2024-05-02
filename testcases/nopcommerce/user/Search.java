@@ -12,10 +12,10 @@ import org.testng.annotations.Test;
 
 import com.nopcommerce.data.UserDataMapper;
 
+import pageObject.user.FootersPageObject;
 import pageObject.user.HomePageObject;
 import pageObject.user.LoginPageObject;
 import pageObject.user.RegisterPageObject;
-import pageObject.user.FootersPageObject;
 import utilities.Environment;
 
 public class Search extends BaseTest {
@@ -50,9 +50,8 @@ public class Search extends BaseTest {
 		loginPage.inputToTextboxByID(driver, "Email", emailAddress);
 		loginPage.inputToTextboxByID(driver, "Password", userData.getLoginPassword());
 
-		loginPage.clickToButtonByText("Log in");
+		homePage = loginPage.clickLoginButton();
 
-		homePage = PageGeneratorManager.getPageGeneratorManager().getHomePage(driver);
 	}
 
 	@Test

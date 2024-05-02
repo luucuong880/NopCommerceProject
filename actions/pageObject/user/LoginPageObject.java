@@ -2,7 +2,6 @@ package pageObject.user;
 
 import org.openqa.selenium.WebDriver;
 
-import io.qameta.allure.Step;
 import nopcommerce.admin.PageGeneraterManager;
 import nopcommerce.user.BasePage;
 import nopcommerce.user.PageGeneratorManager;
@@ -36,10 +35,11 @@ public class LoginPageObject extends BasePage {
 		clickToElement(driver, LoginPageUI.REGISTER_LINK);
 	}
 
-	@Step("Click to Login button")
-	public void clickToButtonByText(String buttonByText) {
-		waitForElementClickable(driver, LoginPageUI.BUTTON_BY_TEXT, buttonByText);
-		clickToElement(driver, LoginPageUI.BUTTON_BY_TEXT, buttonByText);
+	public HomePageObject clickLoginButton() {
+		waitForElementVisible(driver, LoginPageUI.BUTTON_DYNAMIC);
+		clickToElement(driver, LoginPageUI.BUTTON_DYNAMIC);
+		sleepInSecond(2);
+		return PageGeneratorManager.getPageGeneratorManager().getHomePage(driver);
 	}
 
 	public HomePageObject clickToLoginButton() {

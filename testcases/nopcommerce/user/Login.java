@@ -56,13 +56,14 @@ public class Login extends BaseTest {
 	@Test
 	public void Login_01_Empty_Data() {
 		log.info("Login Step - 01: Open 'Log in' page");
-		loginPage = (LoginPageObject) registerPage.openPageAtHeaderLinks(driver, "ico-login");
+		homePage = (HomePageObject) registerPage.openPageAtHeaderLinks(driver, "ico-logout");
+		loginPage = (LoginPageObject) homePage.openPageAtHeaderLinks(driver, "ico-login");
 
 		log.info("Login Step - 02: Verify 'Login' page title");
 		verifyEquals(loginPage.getMessagePageTitle(), "Welcome, Please Sign In!");
 
 		log.info("Login Step - 03: Click To 'Login' button");
-		loginPage.clickToButtonByText("Log in");
+		loginPage.clickLoginButton();
 
 		log.info("Login Step - 04: Get Error Email Message");
 		verifyEquals(loginPage.getErrorEmailMessage(), "Please enter your email");
@@ -77,7 +78,7 @@ public class Login extends BaseTest {
 		loginPage.inputToTextboxByID(driver, "Email", invalidEmail);
 
 		log.info("Login Step - 07: Click to 'Log in' button");
-		loginPage.clickToButtonByText("Log in");
+		loginPage.clickLoginButton();
 
 		log.info("Login Step - 08: Get Error Message at 'Email' textbox");
 		verifyEquals(loginPage.getErrorEmailMessage(), "Wrong email");
@@ -92,7 +93,7 @@ public class Login extends BaseTest {
 		loginPage.inputToTextboxByID(driver, "Email", unregisterEmail);
 
 		log.info("Login Step - 11: Click to 'Log in' button");
-		loginPage.clickToButtonByText("Log in");
+		loginPage.clickLoginButton();
 
 		log.info("Login Step - 12: Get Error Message Unsuccessful");
 		verifyEquals(loginPage.getMessageUnsuccessful(), "Login was unsuccessful. Please correct the errors and try again.\nNo customer account found");
@@ -111,7 +112,7 @@ public class Login extends BaseTest {
 		loginPage.inputToTextboxByID(driver, "Password", "");
 
 		log.info("Login Step - 15: Click to 'Log in' button");
-		loginPage.clickToButtonByText("Log in");
+		loginPage.clickLoginButton();
 
 		log.info("Login Step - 16: Get Error Message Unsuccessful");
 		verifyEquals(loginPage.getMessageUnsuccessful(), "Login was unsuccessful. Please correct the errors and try again.\nThe credentials provided are incorrect");
@@ -129,7 +130,7 @@ public class Login extends BaseTest {
 		loginPage.inputToTextboxByID(driver, "Password", incorrectPassword);
 
 		log.info("Login Step - 20: Click to 'Log in' button");
-		loginPage.clickToButtonByText("Log in");
+		loginPage.clickLoginButton();
 
 		log.info("Login Step - 21: Get Error Message Unsuccessful");
 		verifyEquals(loginPage.getMessageUnsuccessful(), "Login was unsuccessful. Please correct the errors and try again.\nThe credentials provided are incorrect");
@@ -147,12 +148,9 @@ public class Login extends BaseTest {
 		loginPage.inputToTextboxByID(driver, "Password", userData.getLoginPassword());
 
 		log.info("Login Step - 25: Click to 'Log in' button");
-		loginPage.clickToButtonByText("Log in");
+		homePage = loginPage.clickLoginButton();
 
-		log.info("Login Step - 26: Move to 'Home' page");
-		homePage = PageGeneratorManager.getPageGeneratorManager().getHomePage(driver);
-
-		log.info("Login Step - 27: Verify 'My Account' link is Displayed");
+		log.info("Login Step - 26: Verify 'My Account' link is Displayed");
 		verifyTrue(homePage.isMyAccountLinkDisplayed());
 	}
 

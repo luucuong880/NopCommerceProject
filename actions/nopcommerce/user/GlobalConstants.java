@@ -60,4 +60,5 @@ public class GlobalConstants {
 	private final String lambdaUsername = "luucuong880";
 	private final String lambdaKey = "4ZgaA5UeHoEtkH0coztb4E5uCyf9zpWnaPnAYfFmRn16mWfRey";
 	private final String lambdaUrl = "https://" + lambdaUsername + ":" + lambdaKey + "@hub.lambdatest.com/wd/hub";
+
 }
